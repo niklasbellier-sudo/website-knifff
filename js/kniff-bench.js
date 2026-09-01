@@ -584,8 +584,61 @@
     }, Math.max(4200 / Math.max(slotCount(), 1), 1600));
   }
 
+  /* ---------------------------------------------------------------- nav --- */
+  // Header menu: marks the current page, and drives the mobile drawer toggle.
+  function Nav() {
+    var head = document.querySelector('.kf-head');
+    var nav = document.getElementById('kf-nav');
+    if (!head || !nav) return;
+    var links = [].slice.call(nav.querySelectorAll('a'));
+
+    var here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+    if (!here) here = 'index.html';
+    links.forEach(function (a) {
+      if (a.classList.contains('kf-head__cta')) return;
+      var href = (a.getAttribute('href') || '').split('#')[0].split('/').pop().toLowerCase();
+      if (href === here) a.setAttribute('aria-current', 'page');
+    });
+
+    var burger = head.querySelector('.kf-head__burger');
+    if (!burger) return;
+    function close() {
+      head.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Menü öffnen');
+    }
+    burger.addEventListener('click', function () {
+      var open = head.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    });
+    links.forEach(function (a) { a.addEventListener('click', close); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    var wide = matchMedia('(min-width: 901px)');
+    var onWide = function (e) { if (e.matches) close(); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide);
+    else if (wide.addListener) wide.addListener(onWide);
+  }
+
+  /* -------------------------------------------------------- mobile span --- */
+  // Pinned/pan acts own several viewport-heights of scroll each; on a phone
+  // that stacks into a very long, heavy page. Shorten the spans before the
+  // engine reads them so the whole story stays swipe-able.
+  function tuneSpans() {
+    if (!matchMedia('(max-width: 768px)').matches) return;
+    [].forEach.call(document.querySelectorAll('[data-sc-act][data-sc-span]'), function (el) {
+      var s = parseFloat(el.getAttribute('data-sc-span')) || 0;
+      if (!s) return;
+      var floor = el.getAttribute('data-sc-act') === 'pan' ? 1.8 : 1.15;
+      var next = Math.max(floor, Math.round(s * 0.6 * 100) / 100);
+      if (next < s) el.setAttribute('data-sc-span', String(next));
+    });
+  }
+
   /* --------------------------------------------------------------- go ---- */
   function start() {
+    Nav();
+    tuneSpans();
     Light.init();
     HeroArt();
     Reviews();

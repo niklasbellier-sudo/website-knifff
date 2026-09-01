@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=33">
+<link rel="stylesheet" href="css/kniff.css?v=34">
 </head>
 <body>
 
@@ -39,16 +39,20 @@
   }, 6000);
 </script>
 
-<header class="kf-head">
+<header class="kf-head" data-kf-head>
   <a href="index.html" class="kf-head__mark" aria-label="Kniff, Startseite">
     <img src="assets/kniff-wortmarke-hell.png" alt="Kniff">
   </a>
-  <nav class="kf-head__nav" aria-label="Hauptnavigation">
-    <a href="3d-druck-auf-anfrage.html">Custom-Druck</a>
-    <a href="shop.html">Shop</a>
+  <button type="button" class="kf-head__burger" aria-expanded="false" aria-controls="kf-nav" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="kf-head__nav" id="kf-nav" aria-label="Hauptnavigation">
+    <a href="index.html">Home</a>
+    <a href="3d-druck-auf-anfrage.html">Dienstleistungen</a>
     <a href="ueber-uns.html">Über uns</a>
-    <a href="kontakt.html">Kontakt</a>
-    <a href="3d-druck-auf-anfrage.html" class="kf-head__cta">Projekt einreichen</a>
+    <a href="shop.html">Produkte</a>
+    <a href="kontakt.html">Support</a>
+    <a href="3d-druck-auf-anfrage.html#anfrage" class="kf-head__cta">Projekt einreichen</a>
   </nav>
 </header>
 
@@ -117,70 +121,7 @@
     </div>
   </section>
 
-  <!-- ============ ACT 2 — VERFAHREN. pin + cross-section reveal. ========= -->
-  <section data-sc-act="pin" data-sc-span="3.0" id="verfahren"
-           data-kf-obj="Verfahren" data-kf-spec="Von der Idee bis zum Teil · <b>4 Schritte</b>">
-    <div data-sc-stage class="kf-proc__stage">
-      <img class="kf-ground" src="assets/scenes/01-process.jpg" alt="" aria-hidden="true"
-           width="1920" height="1067">
-      <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
-
-      <!-- self-drawing part cross-section: a printed enclosure with wall
-           thickness, a bore and two mounting tabs. Stroke length is driven
-           from the act's --sc-p, so scrolling draws the section, then the
-           dimension lines arrive. -->
-      <svg class="kf-proc__svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <g fill="none" stroke="var(--sc-accent)" stroke-width="1.6" opacity="0.92" stroke-linejoin="round">
-          <!-- outer wall -->
-          <path class="kf-draw" d="M360 410 L360 210 Q360 190 380 190 L620 190 Q640 190 640 210 L640 410"/>
-          <!-- inner wall (cavity) -->
-          <path class="kf-draw" d="M388 410 L388 224 Q388 216 396 216 L604 216 Q612 216 612 224 L612 410"/>
-          <!-- floor -->
-          <path class="kf-draw" d="M360 410 L640 410 M388 392 L612 392"/>
-          <!-- mounting tabs + bores -->
-          <path class="kf-draw" d="M300 410 L360 410 M640 410 L700 410 M300 410 L300 392 L360 392 M700 410 L700 392 L640 392"/>
-          <circle class="kf-draw" cx="330" cy="401" r="9"/>
-          <circle class="kf-draw" cx="670" cy="401" r="9"/>
-        </g>
-        <!-- section hatching in the wall -->
-        <g stroke="var(--sc-accent)" stroke-width="1" opacity="0.4">
-          <path class="kf-draw kf-draw--late" d="M362 210 L386 234 M362 250 L386 274 M362 290 L386 314 M362 330 L386 354 M362 370 L386 394
-                                                   M614 234 L638 210 M614 274 L638 250 M614 314 L638 290 M614 354 L638 330 M614 394 L638 370"/>
-        </g>
-        <!-- dimension lines -->
-        <g stroke="var(--kf-hud-line)" stroke-width="1" opacity="0.75">
-          <path class="kf-draw kf-draw--late" d="M300 452 L700 452 M300 444 L300 460 M700 444 L700 460"/>
-          <path class="kf-draw kf-draw--late" d="M732 190 L732 410 M724 190 L740 190 M724 410 L740 410"/>
-          <path class="kf-draw kf-draw--late" d="M388 168 L612 168 M388 160 L388 176 M612 160 L612 176"/>
-        </g>
-      </svg>
-
-      <div class="kf-proc__steps">
-        <div class="kf-step" data-sc-cue="0 0.30 0">
-          <span class="n">01 / Einreichen</span>
-          <h3>Datei oder Skizze</h3>
-          <p>STL, 3MF oder STEP hochladen, oder kurz beschreiben, was du brauchst. Maße, Material und Stückzahl helfen bei der Einschätzung.</p>
-        </div>
-        <div class="kf-step" data-sc-cue="0.24 0.54">
-          <span class="n">02 / Prüfung</span>
-          <h3>Ist das so druckbar</h3>
-          <p>Wir schauen uns das Modell an: Wandstärken, Stützstrukturen, Druckzeit, Materialbedarf. Wenn etwas klemmt, melden wir uns mit einem Vorschlag.</p>
-        </div>
-        <div class="kf-step" data-sc-cue="0.48 0.78">
-          <span class="n">03 / Angebot</span>
-          <h3>Ein Festpreis, keine Überraschung</h3>
-          <p>Preis auf Basis von Material, Druckzeit, Nachbearbeitung und Stückzahl, mit voraussichtlicher Lieferzeit. Persönliche Rückmeldung, kein Callcenter.</p>
-        </div>
-        <div class="kf-step" data-sc-cue="0.72 1">
-          <span class="n">04 / Druck</span>
-          <h3>In kleiner Serie, geprüft, verpackt</h3>
-          <p>Nach deiner Freigabe drucken wir in Deutschland, prüfen jedes Teil kurz von Hand und verschicken sorgfältig verpackt. Mengenrabatt ab größeren Stückzahlen.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ ACT 3 — SORTIMENT. pan + tilt. real products. ========= -->
+  <!-- ============ ACT 2 — SORTIMENT. pan + tilt. real products. ========= -->
   <section data-sc-act="pan" data-sc-span="3.4" id="sortiment"
            data-kf-obj="Sortiment" data-kf-spec="Fünf Kniffe · fertig gedruckt">
     <div data-sc-stage>
@@ -239,6 +180,69 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ACT 3 — VERFAHREN. pin + cross-section reveal. ========= -->
+  <section data-sc-act="pin" data-sc-span="3.0" id="verfahren"
+           data-kf-obj="Verfahren" data-kf-spec="Von der Idee bis zum Teil · <b>4 Schritte</b>">
+    <div data-sc-stage class="kf-proc__stage">
+      <img class="kf-ground" src="assets/scenes/01-process.jpg" alt="" aria-hidden="true"
+           width="1920" height="1067">
+      <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
+
+      <!-- self-drawing part cross-section: a printed enclosure with wall
+           thickness, a bore and two mounting tabs. Stroke length is driven
+           from the act's --sc-p, so scrolling draws the section, then the
+           dimension lines arrive. -->
+      <svg class="kf-proc__svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="var(--sc-accent)" stroke-width="1.6" opacity="0.92" stroke-linejoin="round">
+          <!-- outer wall -->
+          <path class="kf-draw" d="M360 410 L360 210 Q360 190 380 190 L620 190 Q640 190 640 210 L640 410"/>
+          <!-- inner wall (cavity) -->
+          <path class="kf-draw" d="M388 410 L388 224 Q388 216 396 216 L604 216 Q612 216 612 224 L612 410"/>
+          <!-- floor -->
+          <path class="kf-draw" d="M360 410 L640 410 M388 392 L612 392"/>
+          <!-- mounting tabs + bores -->
+          <path class="kf-draw" d="M300 410 L360 410 M640 410 L700 410 M300 410 L300 392 L360 392 M700 410 L700 392 L640 392"/>
+          <circle class="kf-draw" cx="330" cy="401" r="9"/>
+          <circle class="kf-draw" cx="670" cy="401" r="9"/>
+        </g>
+        <!-- section hatching in the wall -->
+        <g stroke="var(--sc-accent)" stroke-width="1" opacity="0.4">
+          <path class="kf-draw kf-draw--late" d="M362 210 L386 234 M362 250 L386 274 M362 290 L386 314 M362 330 L386 354 M362 370 L386 394
+                                                   M614 234 L638 210 M614 274 L638 250 M614 314 L638 290 M614 354 L638 330 M614 394 L638 370"/>
+        </g>
+        <!-- dimension lines -->
+        <g stroke="var(--kf-hud-line)" stroke-width="1" opacity="0.75">
+          <path class="kf-draw kf-draw--late" d="M300 452 L700 452 M300 444 L300 460 M700 444 L700 460"/>
+          <path class="kf-draw kf-draw--late" d="M732 190 L732 410 M724 190 L740 190 M724 410 L740 410"/>
+          <path class="kf-draw kf-draw--late" d="M388 168 L612 168 M388 160 L388 176 M612 160 L612 176"/>
+        </g>
+      </svg>
+
+      <div class="kf-proc__steps">
+        <div class="kf-step" data-sc-cue="0 0.30 0">
+          <span class="n">01 / Einreichen</span>
+          <h3>Datei oder Skizze</h3>
+          <p>STL, 3MF oder STEP hochladen, oder kurz beschreiben, was du brauchst. Maße, Material und Stückzahl helfen bei der Einschätzung.</p>
+        </div>
+        <div class="kf-step" data-sc-cue="0.24 0.54">
+          <span class="n">02 / Prüfung</span>
+          <h3>Ist das so druckbar</h3>
+          <p>Wir schauen uns das Modell an: Wandstärken, Stützstrukturen, Druckzeit, Materialbedarf. Wenn etwas klemmt, melden wir uns mit einem Vorschlag.</p>
+        </div>
+        <div class="kf-step" data-sc-cue="0.48 0.78">
+          <span class="n">03 / Angebot</span>
+          <h3>Ein Festpreis, keine Überraschung</h3>
+          <p>Preis auf Basis von Material, Druckzeit, Nachbearbeitung und Stückzahl, mit voraussichtlicher Lieferzeit. Persönliche Rückmeldung, kein Callcenter.</p>
+        </div>
+        <div class="kf-step" data-sc-cue="0.72 1">
+          <span class="n">04 / Druck</span>
+          <h3>In kleiner Serie, geprüft, verpackt</h3>
+          <p>Nach deiner Freigabe drucken wir in Deutschland, prüfen jedes Teil kurz von Hand und verschicken sorgfältig verpackt. Mengenrabatt ab größeren Stückzahlen.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -374,6 +378,6 @@
 </main>
 
 <script src="js/scrollcraft.js"></script>
-<script src="js/kniff-bench.js?v=32"></script>
+<script src="js/kniff-bench.js?v=34"></script>
 </body>
 </html>
