@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=37">
+<link rel="stylesheet" href="css/kniff.css?v=38">
 </head>
 <body>
 
@@ -68,10 +68,25 @@
   <section data-sc-act="pin" data-sc-span="2.8" id="hero"
            data-kf-obj="Getriebe" data-kf-spec="<b>Custom-Druck, 12 Teile</b> · PLA · Berlin">
     <div data-sc-stage class="kf-hero__stage" data-sc-spotlight>
-      <div class="kf-hero__art" data-kf-parallax>
-        <img id="kf-hero-img" src="assets/scenes/05-hero-anthra.jpg"
-             alt="Ein 3D-gedrucktes Getriebe aus zwölf Einzelteilen in Explosionsdarstellung, schwebend vor warmem Licht"
-             width="1920" height="1067" fetchpriority="high">
+      <div class="kf-hero__art">
+        <div class="kf-hero__zoom" data-hero-zoom>
+          <img id="kf-hero-img" src="assets/scenes/05-hero-anthra.jpg"
+               alt="Ein 3D-gedrucktes Getriebe in Explosionsdarstellung, schwebend vor dunklem Grund"
+               width="1920" height="1080" fetchpriority="high">
+          <div class="kf-hotspots" role="group" aria-label="Getriebe erkunden, Teile öffnen weitere Seiten">
+            <button type="button" class="kf-hot" style="--x:50.5%;--y:13%" data-href="3d-druck-auf-anfrage.html" data-label="Dienstleistungen" aria-label="Öffnen: Dienstleistungen"><span class="kf-hot__ring" aria-hidden="true"></span></button>
+            <button type="button" class="kf-hot" style="--x:52%;--y:39%" data-href="shop.html" data-label="Produkte" aria-label="Öffnen: Produkte"><span class="kf-hot__ring" aria-hidden="true"></span></button>
+            <button type="button" class="kf-hot" style="--x:50%;--y:53%" data-href="ueber-uns.html" data-label="Über uns" aria-label="Öffnen: Über uns"><span class="kf-hot__ring" aria-hidden="true"></span></button>
+            <button type="button" class="kf-hot" style="--x:45%;--y:71%" data-href="kontakt.html" data-label="Support" aria-label="Öffnen: Support"><span class="kf-hot__ring" aria-hidden="true"></span></button>
+            <button type="button" class="kf-hot" style="--x:50%;--y:91%" data-href="3d-druck-auf-anfrage.html#anfrage" data-label="Projekt einreichen" aria-label="Öffnen: Projekt einreichen"><span class="kf-hot__ring" aria-hidden="true"></span></button>
+          </div>
+        </div>
+        <div class="kf-hero__callout" data-hero-callout hidden>
+          <span class="kf-hero__callout-eyebrow">Getriebe</span>
+          <span class="kf-hero__callout-label"></span>
+          <a class="kf-hero__callout-go" href="#">Ansehen <span aria-hidden="true">→</span></a>
+          <button type="button" class="kf-hero__callout-x" aria-label="Schließen">×</button>
+        </div>
       </div>
       <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
 
@@ -84,14 +99,7 @@
           </a>
           <a href="shop.html" class="kf-ghost">Fertige Kniffe ansehen</a>
         </div>
-        <div class="kf-switch" role="group" aria-label="PLA-Farbe wechseln">
-          <button type="button" data-mat="schwarz" data-src="assets/scenes/05-hero-anthra.jpg" aria-pressed="true">Schwarz</button>
-          <button type="button" data-mat="grau" data-src="assets/scenes/05-hero-grey.jpg" aria-pressed="false">Grau</button>
-          <button type="button" data-mat="gruen" data-src="assets/scenes/05-hero-green.jpg" aria-pressed="false">Grün</button>
-          <button type="button" data-mat="rot" data-src="assets/scenes/05-hero-red.jpg" aria-pressed="false">Rot</button>
-          <button type="button" data-mat="blau" data-src="assets/scenes/05-hero-blue.jpg" aria-pressed="false">Blau</button>
-        </div>
-        <p class="kf-hint">Unsere PLA-Farben ab Lager. Beweg die Maus, um Licht und Blickwinkel zu führen.</p>
+        <p class="kf-hint kf-hint--tap">Tipp: Tipp oder klick ein Bauteil des Getriebes an.</p>
       </div>
     </div>
   </section>
@@ -102,7 +110,7 @@
     <div class="sc-wrap" data-sc-in data-sc-stagger="60">
       <p class="kf-eyebrow">Was wir machen</p>
       <h2 class="kf-h2">Zwei Wege zu deinem Teil.</h2>
-      <p class="kf-lede">Kniff ist eine kleine Druckerei aus Berlin. Wir entwerfen und drucken so ziemlich alles, was ein 3D-Drucker hergibt: Alltagshelfer, Ersatzteile, handwerkliche Bauteile, bald auch Architektur-Grundrisse. Jedes Teil geht einzeln durch unsere Hand, bevor es verschickt wird.</p>
+      <p class="kf-lede">Kniff ist eine kleine Druckerei aus Berlin. Wir entwerfen und drucken so ziemlich alles, was ein 3D-Drucker hergibt: Alltagshelfer, Ersatzteile, handwerkliche Bauteile, Modelle für Architektur- und Planungsbüros. Jedes Teil geht einzeln durch unsere Hand, bevor es verschickt wird.</p>
 
       <div class="kf-services">
         <article>
@@ -258,6 +266,37 @@
     </div>
   </section>
 
+  <!-- ============ BEWERTUNGEN. flow, vor dem Close. ==================== -->
+  <section class="sc-section" data-sc-act="flow" id="bewertungen"
+           data-kf-obj="Bewertungen" data-kf-spec="Was Kundinnen und Kunden sagen">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Rückmeldungen</p>
+      <h2 class="kf-h2">Was Kundinnen und Kunden sagen.</h2>
+
+      <div class="kf-reviews" id="kf-reviews" aria-live="polite"></div>
+      <noscript>
+        <div class="kf-reviews">
+          <figure class="kf-review"><blockquote>Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt.</blockquote><figcaption>Daniel K.</figcaption></figure>
+          <figure class="kf-review"><blockquote>Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.</blockquote><figcaption>Sophie R.</figcaption></figure>
+          <figure class="kf-review"><blockquote>Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich.</blockquote><figcaption>Marcel W.</figcaption></figure>
+        </div>
+      </noscript>
+
+      <p class="kf-reviews__disclaim">Alle Bewertungen stammen von Kundinnen und Kunden, die ein Produkt oder eine individuelle Anfertigung bei Kniff erhalten haben. Die Rückmeldungen wurden persönlich eingeholt und keiner Bewertung liegt eine Gegenleistung zugrunde.</p>
+
+      <script type="application/json" id="kf-reviews-data">
+      [
+        {"name":"Daniel K.","rating":5,"text":"Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt."},
+        {"name":"Sophie R.","rating":5,"text":"Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte."},
+        {"name":"Marcel W.","rating":5,"text":"Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich."},
+        {"name":"Nadine B.","rating":5,"text":"Besonders gut finde ich, dass umweltbewusstes Material verwendet wird. Das Produkt wirkt hochwertig und die individuelle Gestaltung wurde sehr schön umgesetzt."},
+        {"name":"Tobias F.","rating":5,"text":"Hat alles problemlos funktioniert. Auf meine Sonderwünsche wurde eingegangen und man hatte nicht das Gefühl, einfach nur eine Bestellnummer zu sein."}
+      ]
+      </script>
+    </div>
+  </section>
+
+  <!-- ============ ACT 6 — DEIN ZUG. pin close, holds. LAST element. ===== -->
   <!-- ============ KNIFF-TIPPS. vertikale Sektion, seitlich scrollbare Reihe. -->
   <section class="sc-section" data-sc-act="flow" id="tipps"
            data-kf-obj="Kniff-Tipps" data-kf-spec="Kleine Handgriffe, die etwas bringen">
@@ -299,37 +338,6 @@
     </div>
   </section>
 
-  <!-- ============ BEWERTUNGEN. flow, vor dem Close. ==================== -->
-  <section class="sc-section" data-sc-act="flow" id="bewertungen"
-           data-kf-obj="Bewertungen" data-kf-spec="Was Kundinnen und Kunden sagen">
-    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
-      <p class="kf-eyebrow">Rückmeldungen</p>
-      <h2 class="kf-h2">Was Kundinnen und Kunden sagen.</h2>
-
-      <div class="kf-reviews" id="kf-reviews" aria-live="polite"></div>
-      <noscript>
-        <div class="kf-reviews">
-          <figure class="kf-review"><blockquote>Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt.</blockquote><figcaption>Daniel K.</figcaption></figure>
-          <figure class="kf-review"><blockquote>Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.</blockquote><figcaption>Sophie R.</figcaption></figure>
-          <figure class="kf-review"><blockquote>Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich.</blockquote><figcaption>Marcel W.</figcaption></figure>
-        </div>
-      </noscript>
-
-      <p class="kf-reviews__disclaim">Alle Bewertungen stammen von Kundinnen und Kunden, die ein Produkt oder eine individuelle Anfertigung bei Kniff erhalten haben. Die Rückmeldungen wurden persönlich eingeholt und keiner Bewertung liegt eine Gegenleistung zugrunde.</p>
-
-      <script type="application/json" id="kf-reviews-data">
-      [
-        {"name":"Daniel K.","rating":5,"text":"Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt."},
-        {"name":"Sophie R.","rating":5,"text":"Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte."},
-        {"name":"Marcel W.","rating":5,"text":"Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich."},
-        {"name":"Nadine B.","rating":5,"text":"Besonders gut finde ich, dass umweltbewusstes Material verwendet wird. Das Produkt wirkt hochwertig und die individuelle Gestaltung wurde sehr schön umgesetzt."},
-        {"name":"Tobias F.","rating":5,"text":"Hat alles problemlos funktioniert. Auf meine Sonderwünsche wurde eingegangen und man hatte nicht das Gefühl, einfach nur eine Bestellnummer zu sein."}
-      ]
-      </script>
-    </div>
-  </section>
-
-  <!-- ============ ACT 6 — DEIN ZUG. pin close, holds. LAST element. ===== -->
   <section data-sc-act="pin" data-sc-span="1.25" id="dein-zug"
            data-kf-obj="Deine Idee" data-kf-spec="Die Bank ist frei">
     <div data-sc-stage class="kf-close__stage" data-sc-spotlight>
@@ -370,6 +378,6 @@
 </main>
 
 <script src="js/scrollcraft.js"></script>
-<script src="js/kniff-bench.js?v=37"></script>
+<script src="js/kniff-bench.js?v=38"></script>
 </body>
 </html>
