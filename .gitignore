@@ -1,0 +1,14 @@
+# secrets & local-only
+.env
+.env.*
+# build output — Netlify regenerates this via netlify.toml
+_site/
+# work logs & scratch
+lab/
+out/
+out2/
+out3/
+node_modules/
+# macOS
+.DS_Store
+**/.DS_Store

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kontakt — Kniff</title>
+<meta name="description" content="Fragen zu einem Produkt, einer Bestellung oder eine eigene 3D-Druck-Idee? Schreib uns. Übliche Antwortzeit innerhalb von 48 Stunden.">
+<link rel="icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
+<link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
+<link rel="stylesheet" href="css/scrollcraft.css">
+<link rel="stylesheet" href="css/kniff.css?v=25">
+</head>
+<body>
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+<div class="kf-room" aria-hidden="true"></div>
+
+<header class="kf-head">
+  <a href="index.html" class="kf-head__mark" aria-label="Kniff, Startseite"><img src="assets/kniff-wortmarke-hell.png" alt="Kniff"></a>
+  <nav class="kf-head__nav" aria-label="Hauptnavigation">
+    <a href="3d-druck-auf-anfrage.html">Custom-Druck</a>
+    <a href="shop.html">Shop</a>
+    <a href="ueber-uns.html">Über uns</a>
+    <a href="kontakt.html" aria-current="page">Kontakt</a>
+    <a href="3d-druck-auf-anfrage.html" class="kf-head__cta">Projekt einreichen</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="kf-phero" data-sc-act="pin" data-sc-span="1.6">
+    <div data-sc-stage class="kf-phero__stage" data-sc-spotlight>
+      <img class="kf-ground kf-ground--full" src="assets/scenes/04-close.jpg" alt="" aria-hidden="true" width="1920" height="1067">
+      <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
+      <div class="kf-phero__copy" data-sc-cue="0 0.85 0">
+        <p class="kf-eyebrow">Kontakt</p>
+        <h1 class="kf-h1" data-sc-kinetic="lines">Schreib uns.</h1>
+        <p class="kf-lede">Fragen zu einem Produkt, einer Bestellung oder eine eigene Idee für ein 3D-Druck-Projekt? Wir schauen uns jede Nachricht persönlich an.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="kf-sec">
+    <div class="kf-wrap" data-sc-in data-sc-stagger="50">
+      <div class="kf-contact">
+        <form class="kf-form" name="kontakt" method="POST" action="/danke.html"
+              data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="kontakt">
+          <p class="kf-hp"><label>Nicht ausfüllen: <input name="bot-field"></label></p>
+          <div class="kf-field">
+            <label for="k-name">Name</label>
+            <input id="k-name" type="text" name="name" autocomplete="name" required>
+          </div>
+          <div class="kf-field">
+            <label for="k-mail">E-Mail</label>
+            <input id="k-mail" type="email" name="email" autocomplete="email" required>
+          </div>
+          <div class="kf-field">
+            <label for="k-msg">Nachricht</label>
+            <textarea id="k-msg" name="nachricht" required></textarea>
+          </div>
+          <button type="submit" class="kf-cta">Absenden <span class="kf-cta__arrow" aria-hidden="true">→</span></button>
+        </form>
+
+        <aside>
+          <dl>
+            <dt>E-Mail</dt>
+            <dd><a href="mailto:kniffshop@gmail.com">kniffshop@gmail.com</a></dd>
+            <dt>Etsy</dt>
+            <dd><a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener">KniffShop auf Etsy</a></dd>
+            <dt>Antwortzeit</dt>
+            <dd>in der Regel innerhalb von 48 Stunden</dd>
+            <dt>Für Custom-Projekte</dt>
+            <dd><a href="3d-druck-auf-anfrage.html">Direkt zum Projekt-Formular</a></dd>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="kf-footer">
+  <div class="kf-wrap">
+    <div class="kf-footer__grid">
+      <div><h4>Kniff</h4><p style="font-size:var(--sc-t-sm); color:var(--sc-ink-soft); max-width:26ch; margin:0">Kleine 3D-gedruckte Kniffe für Alltag, Haushalt und unterwegs. Entworfen und gedruckt in Berlin.</p></div>
+      <div><h4>Angebot</h4><ul><li><a href="3d-druck-auf-anfrage.html">Custom-Druck</a></li><li><a href="shop.html">Shop</a></li><li><a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener">Etsy-Shop</a></li></ul></div>
+      <div><h4>Service</h4><ul><li><a href="versand-zahlung.html">Versand &amp; Zahlung</a></li><li><a href="kontakt.html">Kontakt</a></li><li><a href="widerruf.html">Widerrufsrecht</a></li></ul></div>
+      <div><h4>Rechtliches</h4><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="agb.html">AGB</a></li></ul></div>
+    </div>
+    <div class="kf-footer__base"><span>© 2026 Kniff · Berlin</span><span>kniff.shop</span></div>
+  </div>
+</footer>
+
+<script src="js/scrollcraft.js"></script>
+<script src="js/kniff-bench.js?v=25"></script>
+</body>
+</html>
