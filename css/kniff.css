@@ -24,12 +24,19 @@
   --kf-cool-deep:   #0a4f52;
   --kf-warm-deep:   #7a4a17;
 
-  /* die fünf PLA-Farben, die als Produktvarianten angeboten werden */
-  --pla-black:  #26262a;
-  --pla-red:    #b5382f;
-  --pla-green:  #3f9150;
-  --pla-blue:   #345fa6;
-  --pla-grey:   #8c9094;
+  /* Material- / Farbvarianten (PLA), Auswahl je Produkt unterschiedlich */
+  --pla-schwarz:      #26262a;
+  --pla-mattschwarz:  #17171a;
+  --pla-weiss:        #eef0ec;
+  --pla-pastelgruen:  #bfe3cf;
+  --pla-pastelpink:   #f2ccda;
+  --pla-pastelblau:   #c4d9ec;
+  --pla-wiesengruen:  #3f9150;
+  --pla-silber:       #b6bac0;
+  /* Alt-Namen als Alias, damit bestehende Referenzen nicht brechen */
+  --pla-black: var(--pla-schwarz);
+  --pla-grey:  var(--pla-silber);
+  --pla-green: var(--pla-wiesengruen);
 
   --sc-hairline:        color-mix(in oklab, var(--sc-ink) 12%, transparent);
   --sc-hairline-strong: color-mix(in oklab, var(--sc-ink) 22%, transparent);
@@ -465,6 +472,54 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   margin-top: var(--sc-4); }
 .kf-quote--placeholder blockquote { color: var(--sc-ink-soft); }
 
+/* -------------------------------------------- side-scroll rail (kf-railx) --
+   Replaces the old pinned "pan" acts. Vertical scroll stays vertical; this
+   strip scrolls sideways on its own (swipe / trackpad / shift-wheel / drag).
+   Nothing hijacks the page scroll. */
+.kf-railx {
+  display: flex; gap: clamp(1rem, 3vw, 2rem);
+  overflow-x: auto; overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  padding: var(--sc-5) var(--sc-gutter) var(--sc-6);
+  scrollbar-width: thin;
+  scrollbar-color: var(--sc-hairline-strong) transparent;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 92%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 92%, transparent 100%);
+}
+.kf-railx::-webkit-scrollbar { height: 6px; }
+.kf-railx::-webkit-scrollbar-thumb { background: var(--sc-hairline-strong); border-radius: 3px; }
+.kf-railx::-webkit-scrollbar-track { background: transparent; }
+.kf-railx > * { flex: 0 0 auto; scroll-snap-align: start; }
+.kf-railx .kf-card { width: min(20rem, 74vw); }
+.kf-railx .kf-quote { width: min(24rem, 78vw); align-self: stretch; }
+.kf-railx--quotes { align-items: stretch; }
+
+.kf-railx__hint {
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--sc-ink-soft);
+  margin-top: var(--sc-4);
+}
+@media (min-width: 1100px) {
+  /* on wide screens the whole rail is usually visible — drop the nudge */
+  .kf-railx__hint { display: none; }
+}
+
+.kf-card--cta {
+  display: flex; flex-direction: column; justify-content: center; gap: 0.4rem;
+  width: min(15rem, 60vw); padding: var(--sc-5);
+  border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm);
+  text-decoration: none; color: var(--sc-ink);
+  background: color-mix(in oklab, var(--sc-accent) 8%, transparent);
+  transition: background var(--sc-d-fast), transform var(--sc-d-fast);
+}
+.kf-card--cta:hover { background: color-mix(in oklab, var(--sc-accent) 16%, transparent); transform: translateY(-2px); }
+.kf-card--cta__h { font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-xl); }
+.kf-card--cta .kf-cta__arrow { color: var(--sc-accent); font-size: var(--sc-t-lg); }
+
+@media (prefers-reduced-motion: reduce) { .kf-railx { scroll-behavior: auto; } }
+
 /* ------------------------------------------------ ACT: WAS WIR MACHEN --- */
 .kf-services { display: grid; grid-template-columns: 1fr 1fr;
   gap: clamp(1.5rem, 5vw, 4rem); margin-top: var(--sc-7); }
@@ -671,11 +726,32 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   align-items: start; padding-bottom: clamp(2.5rem, 6vw, 5rem);
   border-bottom: 1px solid var(--sc-hairline); }
 .kf-prod:last-child { border-bottom: 0; padding-bottom: 0; }
-.kf-prod:nth-child(even) .kf-prod__media { order: 2; }
+.kf-prod:nth-child(even) .kf-prod__media,
+.kf-prod:nth-child(even) .kf-gallery { order: 2; }
 @media (max-width: 820px) {
   .kf-prod { grid-template-columns: 1fr; }
-  .kf-prod:nth-child(even) .kf-prod__media { order: 0; }
+  .kf-prod:nth-child(even) .kf-prod__media,
+  .kf-prod:nth-child(even) .kf-gallery { order: 0; }
 }
+
+/* product image gallery: one main image + a row of thumbnails */
+.kf-gallery { display: flex; flex-direction: column; gap: var(--sc-3); }
+.kf-gallery__main { position: relative; aspect-ratio: 4 / 3; overflow: hidden;
+  border: 1px solid var(--sc-hairline); border-radius: var(--sc-r-sm);
+  background: color-mix(in oklab, var(--sc-surface) 60%, transparent); }
+.kf-gallery__main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.kf-gallery__thumbs { display: flex; gap: var(--sc-2); flex-wrap: wrap; }
+.kf-gallery__thumb { width: 64px; height: 48px; padding: 0; cursor: pointer;
+  border: 1px solid var(--sc-hairline); border-radius: 6px; overflow: hidden;
+  background: none; transition: border-color var(--sc-d-fast), transform var(--sc-d-fast); }
+.kf-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.kf-gallery__thumb:hover { transform: translateY(-1px); }
+.kf-gallery__thumb.is-active { border-color: var(--sc-accent);
+  box-shadow: 0 0 0 1px var(--sc-accent); }
+
+.kf-prod__variant { margin: var(--sc-3) 0 0; font-family: var(--sc-font-mono);
+  font-size: var(--sc-t-xs); letter-spacing: 0.04em; color: var(--sc-ink-soft); }
+.kf-prod__variant b { color: var(--sc-ink); font-weight: 500; }
 .kf-prod__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden;
   border: 1px solid var(--sc-hairline); border-radius: var(--sc-r-sm);
   background: color-mix(in oklab, var(--sc-surface) 60%, transparent); }

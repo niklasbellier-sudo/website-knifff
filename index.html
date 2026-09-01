@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=35">
+<link rel="stylesheet" href="css/kniff.css?v=36">
 </head>
 <body>
 
@@ -102,7 +102,7 @@
     <div class="sc-wrap" data-sc-in data-sc-stagger="60">
       <p class="kf-eyebrow">Was wir machen</p>
       <h2 class="kf-h2">Zwei Wege zu deinem Teil.</h2>
-      <p class="kf-lede">Kniff ist eine kleine Druckerei aus Berlin. Wir entwerfen eigene Alltagsteile und drucken das, was du selbst brauchst. Jedes Teil geht einzeln durch unsere Hand, bevor es verschickt wird.</p>
+      <p class="kf-lede">Kniff ist eine kleine Druckerei aus Berlin. Wir entwerfen und drucken so ziemlich alles, was ein 3D-Drucker hergibt: Alltagshelfer, Ersatzteile, handwerkliche Bauteile, bald auch Architektur-Grundrisse. Jedes Teil geht einzeln durch unsere Hand, bevor es verschickt wird.</p>
 
       <div class="kf-services">
         <article>
@@ -114,73 +114,64 @@
         <article>
           <p class="kf-eyebrow">Shop</p>
           <h3 class="kf-h3">Fertige Kniffe</h3>
-          <p>Fünf durchdachte Teile für Auto, Reise, Zuhause und Büro. Selbst entworfen, im Alltag getestet, in fünf Farben. Direkt bestellbar über unseren Etsy-Shop.</p>
+          <p>Durchdachte Teile für Auto, Reise, Zuhause und Büro. Selbst entworfen, im Alltag getestet, in über zehn Farb- und Materialvarianten. Das Sortiment wächst laufend. Direkt bestellbar über unseren Etsy-Shop.</p>
           <a class="kf-cta" href="shop.html">Zum Sortiment <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ============ ACT 2 — SORTIMENT. pan + tilt. real products. ========= -->
-  <section data-sc-act="pan" data-sc-span="3.4" id="sortiment"
-           data-kf-obj="Sortiment" data-kf-spec="Fünf Kniffe · fertig gedruckt">
-    <div data-sc-stage>
-      <img class="kf-ground" src="assets/scenes/02-proof.jpg?v=2" alt="" aria-hidden="true"
-           width="1920" height="1067">
-      <div class="kf-rail" data-sc-pan="0.06">
+  <!-- ============ SORTIMENT. normale vertikale Sektion, seitlich scrollbare Reihe. -->
+  <section class="sc-section" data-sc-act="flow" id="sortiment"
+           data-kf-obj="Sortiment" data-kf-spec="Fertige Kniffe · direkt bestellbar">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Sortiment</p>
+      <h2 class="kf-h2">Kniffe für den Alltag.</h2>
+      <p class="kf-lede">Für Auto, Reise, Zuhause und Büro. Über zehn Farb- und Materialvarianten, gedruckt in Berlin. Das Sortiment wächst laufend.</p>
+      <p class="kf-railx__hint" aria-hidden="true">Seitlich wischen für mehr →</p>
+    </div>
 
-        <div class="kf-rail__lead">
-          <p class="kf-eyebrow">Sortiment</p>
-          <h2>Fünf Kniffe für den Alltag.</h2>
-          <p class="kf-lede">Für Auto, Reise, Zuhause und Büro. Jedes Teil in Schwarz, Rot, Grün, Blau und Grau, gedruckt in Berlin.</p>
+    <div class="kf-railx" role="list" aria-label="Produkte, seitlich scrollbar">
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="shop.html#stiftehalter-auto"><img src="assets/stiftehalter-auto.jpg" alt="Kniff Stiftehalter fürs Auto" width="1600" height="1200"></a>
+        <div class="kf-card__label">
+          <span class="name">Stiftehalter fürs Auto</span>
+          <span class="row"><span>Auto &amp; Fahrrad</span><b>ab 15,00 €</b></span>
         </div>
-
-        <article class="kf-card">
-          <a class="kf-card__view" data-sc-tilt="6" href="shop.html#stiftehalter-auto"><img src="assets/stiftehalter-auto.jpg" alt="Kniff Stiftehalter fürs Auto" width="1600" height="1200"></a>
-          <div class="kf-card__label">
-            <span class="name">Stiftehalter fürs Auto</span>
-            <span class="row"><span>Auto &amp; Fahrrad</span><b>ab 15,00 €</b></span>
-          </div>
-        </article>
-        <article class="kf-card">
-          <a class="kf-card__view" data-sc-tilt="6" href="shop.html#spiegel-clip-auto"><img src="assets/spiegel-clip-auto.jpg" alt="Kniff Spiegel-Clip fürs Auto" width="1600" height="1200"></a>
-          <div class="kf-card__label">
-            <span class="name">Spiegel-Clip fürs Auto</span>
-            <span class="row"><span>Auto &amp; Fahrrad</span><b>ab 12,00 €</b></span>
-          </div>
-        </article>
-        <article class="kf-card">
-          <a class="kf-card__view" data-sc-tilt="6" href="shop.html#reisedose-wattestaebchen"><img src="assets/reisedose-wattestaebchen.jpg" alt="Kniff Reisedose für Wattestäbchen" width="1600" height="1200"></a>
-          <div class="kf-card__label">
-            <span class="name">Reisedose für Wattestäbchen</span>
-            <span class="row"><span>Urlaub &amp; Reisen</span><b>ab 22,00 €</b></span>
-          </div>
-        </article>
-        <article class="kf-card">
-          <a class="kf-card__view" data-sc-tilt="6" href="shop.html#kartenhalter-10-decks"><img src="assets/kartenhalter-10-decks.jpg" alt="Kniff Kartenhalter für 10 Kartendecks" width="1600" height="1200"></a>
-          <div class="kf-card__label">
-            <span class="name">Kartenhalter für 10 Decks</span>
-            <span class="row"><span>Zuhause</span><b>42,00 €</b></span>
-          </div>
-        </article>
-        <article class="kf-card">
-          <a class="kf-card__view" data-sc-tilt="6" href="shop.html#handystaender-minimal"><img src="assets/handystaender-minimal.jpg" alt="Kniff minimalistischer Handyständer" width="1600" height="1200"></a>
-          <div class="kf-card__label">
-            <span class="name">Minimalistischer Handyständer</span>
-            <span class="row"><span>Büro &amp; Organisation</span><b>ab 20,00 €</b></span>
-          </div>
-        </article>
-
-        <div class="kf-rail__end">
-          <p class="kf-eyebrow">Alle Details</p>
-          <h2>Im Shop.</h2>
-          <div class="kf-actions">
-            <a href="shop.html" class="kf-cta">Zum Shop <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
-            <a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener" class="kf-ghost">Etsy-Shop</a>
-          </div>
+      </article>
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="shop.html#spiegel-clip-auto"><img src="assets/spiegel-clip-auto.jpg" alt="Kniff Spiegel-Clip fürs Auto" width="1600" height="1200"></a>
+        <div class="kf-card__label">
+          <span class="name">Spiegel-Clip fürs Auto</span>
+          <span class="row"><span>Auto &amp; Fahrrad</span><b>ab 12,00 €</b></span>
         </div>
-
-      </div>
+      </article>
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="shop.html#reisedose-wattestaebchen"><img src="assets/reisedose-wattestaebchen.jpg" alt="Kniff Reisedose für Wattestäbchen" width="1600" height="1200"></a>
+        <div class="kf-card__label">
+          <span class="name">Reisedose für Wattestäbchen</span>
+          <span class="row"><span>Urlaub &amp; Reisen</span><b>ab 22,00 €</b></span>
+        </div>
+      </article>
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="shop.html#kartenhalter-10-decks"><img src="assets/kartenhalter-10-decks.jpg" alt="Kniff Kartenhalter für 10 Kartendecks" width="1600" height="1200"></a>
+        <div class="kf-card__label">
+          <span class="name">Kartenhalter für 10 Decks</span>
+          <span class="row"><span>Zuhause</span><b>42,00 €</b></span>
+        </div>
+      </article>
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="shop.html#handystaender-minimal"><img src="assets/handystaender-minimal.jpg" alt="Kniff minimalistischer Handyständer" width="1600" height="1200"></a>
+        <div class="kf-card__label">
+          <span class="name">Minimalistischer Handyständer</span>
+          <span class="row"><span>Büro &amp; Organisation</span><b>ab 20,00 €</b></span>
+        </div>
+      </article>
+      <a class="kf-card kf-card--cta" role="listitem" href="shop.html">
+        <span class="kf-eyebrow">Alle Details</span>
+        <span class="kf-card--cta__h">Zum Shop</span>
+        <span class="kf-cta__arrow" aria-hidden="true">→</span>
+      </a>
     </div>
   </section>
 
@@ -267,44 +258,43 @@
     </div>
   </section>
 
-  <!-- ============ ACT 5 — KNIFF-TIPPS. pan, editorial. ================== -->
-  <section data-sc-act="pan" data-sc-span="3.2" id="tipps"
+  <!-- ============ KNIFF-TIPPS. vertikale Sektion, seitlich scrollbare Reihe. -->
+  <section class="sc-section" data-sc-act="flow" id="tipps"
            data-kf-obj="Kniff-Tipps" data-kf-spec="Kleine Handgriffe, die etwas bringen">
-    <div data-sc-stage>
-      <div class="kf-rail" data-sc-pan="0.06">
-        <div class="kf-rail__lead">
-          <p class="kf-eyebrow">Kniff-Tipps</p>
-          <h2>Kleine Handgriffe, die etwas bringen.</h2>
-          <p class="kf-lede">Zu jedem Kniff gibt es einen. Hier eine Auswahl.</p>
-        </div>
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Kniff-Tipps</p>
+      <h2 class="kf-h2">Kleine Handgriffe, die etwas bringen.</h2>
+      <p class="kf-lede">Zu jedem Kniff gibt es einen. Hier eine Auswahl.</p>
+      <p class="kf-railx__hint" aria-hidden="true">Seitlich wischen für mehr →</p>
+    </div>
 
-        <figure class="kf-quote">
-          <blockquote>Steck den Stift mit der Kappe nach unten in den Halter. So läuft die Mine bei Sommerhitze im Auto nicht aus.</blockquote>
-          <figcaption>Stiftehalter fürs Auto</figcaption>
-        </figure>
-        <figure class="kf-quote">
-          <blockquote>Zettel quer statt längs einklemmen. So verdeckt er weniger vom Sichtfeld, und du erfüllst die Sichtfreiheit nach § 23 StVO.</blockquote>
-          <figcaption>Spiegel-Clip fürs Auto</figcaption>
-        </figure>
-        <figure class="kf-quote">
-          <blockquote>Die Reisedose ist nicht nur für Wattestäbchen gut. Ohrstöpsel, Haargummis, Tabletten oder Ersatzknöpfe finden darin genauso Platz.</blockquote>
-          <figcaption>Reisedose für Wattestäbchen</figcaption>
-        </figure>
-        <figure class="kf-quote">
-          <blockquote>Sortier die Decks nach Spiel statt nach Optik. Skat links, Rommé rechts, Sammlerstücke hinten. Wenn Besuch da ist, greifst du blind zum richtigen.</blockquote>
-          <figcaption>Kartenhalter für 10 Decks</figcaption>
-        </figure>
-        <figure class="kf-quote">
-          <blockquote>Steck das Ladekabel durch den hinteren Schlitz, bevor du das Handy einsetzt. Dann liegt es beim Abnehmen schon richtig.</blockquote>
-          <figcaption>Minimalistischer Handyständer</figcaption>
-        </figure>
+    <div class="kf-railx kf-railx--quotes" role="list" aria-label="Kniff-Tipps, seitlich scrollbar">
+      <figure class="kf-quote" role="listitem">
+        <blockquote>Steck den Stift mit der Kappe nach unten in den Halter. So läuft die Mine bei Sommerhitze im Auto nicht aus.</blockquote>
+        <figcaption>Stiftehalter fürs Auto</figcaption>
+      </figure>
+      <figure class="kf-quote" role="listitem">
+        <blockquote>Zettel quer statt längs einklemmen. So verdeckt er weniger vom Sichtfeld, und du erfüllst die Sichtfreiheit nach § 23 StVO.</blockquote>
+        <figcaption>Spiegel-Clip fürs Auto</figcaption>
+      </figure>
+      <figure class="kf-quote" role="listitem">
+        <blockquote>Die Reisedose ist nicht nur für Wattestäbchen gut. Ohrstöpsel, Haargummis, Tabletten oder Ersatzknöpfe finden darin genauso Platz.</blockquote>
+        <figcaption>Reisedose für Wattestäbchen</figcaption>
+      </figure>
+      <figure class="kf-quote" role="listitem">
+        <blockquote>Sortier die Decks nach Spiel statt nach Optik. Skat links, Rommé rechts, Sammlerstücke hinten. Wenn Besuch da ist, greifst du blind zum richtigen.</blockquote>
+        <figcaption>Kartenhalter für 10 Decks</figcaption>
+      </figure>
+      <figure class="kf-quote" role="listitem">
+        <blockquote>Steck das Ladekabel durch den hinteren Schlitz, bevor du das Handy einsetzt. Dann liegt es beim Abnehmen schon richtig.</blockquote>
+        <figcaption>Minimalistischer Handyständer</figcaption>
+      </figure>
+    </div>
 
-        <div class="kf-rail__end">
-          <div class="kf-actions">
-            <a href="shop.html" class="kf-ghost">Alle Kniffe im Shop</a>
-            <a href="3d-druck-auf-anfrage.html" class="kf-ghost">Custom-Druck</a>
-          </div>
-        </div>
+    <div class="sc-wrap">
+      <div class="kf-actions">
+        <a href="shop.html" class="kf-ghost">Alle Kniffe im Shop</a>
+        <a href="3d-druck-auf-anfrage.html" class="kf-ghost">Custom-Druck</a>
       </div>
     </div>
   </section>
@@ -366,6 +356,8 @@
           <a href="ueber-uns.html">Über uns</a>
           <a href="versand-zahlung.html">Versand &amp; Zahlung</a>
           <a href="kontakt.html">Kontakt</a>
+          <a href="https://instagram.com/kniffshop" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener">Etsy</a>
           <a href="impressum.html">Impressum</a>
           <a href="datenschutz.html">Datenschutz</a>
           <a href="agb.html">AGB</a>
@@ -378,6 +370,6 @@
 </main>
 
 <script src="js/scrollcraft.js"></script>
-<script src="js/kniff-bench.js?v=35"></script>
+<script src="js/kniff-bench.js?v=36"></script>
 </body>
 </html>
