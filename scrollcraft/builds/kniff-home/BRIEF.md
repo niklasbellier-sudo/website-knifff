@@ -268,3 +268,27 @@ pastel blue. Done:
   treatment as homepage/custom-druck/shop. Legal pages: styled `.kf-longform h1`
   + the room glow, stay documents (appropriate). Whole site now consistent.
 - `_site` 5.6 MB. KIE total ~364 cr list (~€0.75 effective).
+
+**2026-09-01 (Abend) — "sieht fertig aus" + echte Produkte + Bewertungen.**
+- 5 echte Produkte (Stiftehalter Auto, Spiegel-Clip Auto, Reisedose Wattestäbchen,
+  Kartenhalter 10 Decks, Handyständer) mit Fotos, Beschreibungen, Kniff-Tipps,
+  Staffelpreisen, Farb-Swatches (Schwarz/Rot/Grün/Blau/Grau) und Lizenzhinweisen
+  (3 CC-BY/BY-SA). Fotos: assets/<slug>.jpg (Schwarz-Variante). 40 Rohfotos in
+  assets/products/ (nicht deployed).
+- Startseite: 8 Akte. Neu: "Was wir machen" (flow, nach Hero, die 2 Angebote)
+  und "Was Kundinnen und Kunden sagen" (5 echte Bewertungen, rotieren einzeln
+  durch, § 5b Abs. 3 UWG-Hinweis darunter, Petrol-Sterne). Akt 3 = echtes
+  Sortiment, Akt 5 = Kniff-Tipps. Alle Platzhalter/WIP-Formulierungen raus,
+  auch Entwurfs-Hinweise auf den Rechtsseiten.
+- Farbtokens Schwarz/Rot/Grün/Blau/Grau; Hero-Chips passend (7 Hero-Renders).
+- Git-Repo eingerichtet (main), SETUP-GIT.md für Netlify-Auto-Deploy.
+  Netlify-Deploy von hier NICHT möglich (kein Token, Node 10 bricht die CLI).
+
+**Offen (Aufgaben von Niklas):**
+- Bewertungs-Daten (echte Daten) in index.html #kf-reviews-data eintragen
+  (aktuell keine Daten angezeigt).
+- Git-Repo zu GitHub + mit Netlify verbinden (SETUP-GIT.md).
+- Produkt: echte Gewichte, Handyständer-Material prüfen, Kartenhalter-Versandgröße
+  (siehe kniff-produkte-fuer-claude-code.md "Noch zu prüfen").
+- Farbfotos Rot/Grün/Blau/Grau der Produkte (nur Schwarz hat echtes Foto).
+- Rechtstexte fachkundig prüfen lassen vor echtem Verkaufsstart.
