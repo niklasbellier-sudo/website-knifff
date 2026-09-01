@@ -22,7 +22,8 @@ cp -R assets "$OUT"/assets
 
 # never ship these even if they slipped into a tree
 rm -f  "$OUT"/.env "$OUT"/*/.env "$OUT"/assets/ref-* 2>/dev/null || true
-rm -rf "$OUT"/scripts "$OUT"/scrollcraft "$OUT"/lab "$OUT"/node_modules 2>/dev/null || true
+rm -rf "$OUT"/scripts "$OUT"/scrollcraft "$OUT"/lab "$OUT"/node_modules "$OUT"/assets/products 2>/dev/null || true
+rm -f "$OUT"/_fotos-index.html 2>/dev/null || true
 find "$OUT" -name '*.mjs' -delete 2>/dev/null || true
 
 date -u +"%Y-%m-%d %H:%M UTC  neues Kniff-Design (Commercial-Style, echte PLA-Farben)" > "$OUT/build.txt"

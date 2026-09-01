@@ -9,7 +9,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=27">
+<link rel="stylesheet" href="css/kniff.css?v=32">
 </head>
 <body>
 
@@ -88,6 +88,31 @@
           <button type="button" data-mat="blau" data-src="assets/scenes/05-hero-blue.jpg" aria-pressed="false">Blau</button>
         </div>
         <p class="kf-hint">Unsere PLA-Farben ab Lager. Beweg die Maus, um Licht und Blickwinkel zu führen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WAS WIR MACHEN. flow intro, two offers. =============== -->
+  <section class="sc-section" data-sc-act="flow" id="was-wir-machen"
+           data-kf-obj="Was wir machen" data-kf-spec="Zwei Wege zu deinem Teil">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Was wir machen</p>
+      <h2 class="kf-h2">Zwei Wege zu deinem Teil.</h2>
+      <p class="kf-lede">Kniff ist eine kleine Druckerei aus Berlin. Wir entwerfen eigene Alltagsteile und drucken das, was du selbst brauchst. Jedes Teil geht einzeln durch unsere Hand, bevor es verschickt wird.</p>
+
+      <div class="kf-services">
+        <article>
+          <p class="kf-eyebrow">Custom-Druck</p>
+          <h3 class="kf-h3">3D-Druck auf Anfrage</h3>
+          <p>Du hast eine Idee, eine Skizze oder eine fertige Datei? Schick sie uns. Wir prüfen Druckbarkeit und Aufwand und melden uns mit einem Festpreis, bevor irgendetwas auf den Drucker geht. Vom Einzelstück bis zur Kleinserie.</p>
+          <a class="kf-cta" href="3d-druck-auf-anfrage.html">So funktioniert's <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
+        </article>
+        <article>
+          <p class="kf-eyebrow">Shop</p>
+          <h3 class="kf-h3">Fertige Kniffe</h3>
+          <p>Fünf durchdachte Teile für Auto, Reise, Zuhause und Büro. Selbst entworfen, im Alltag getestet, in fünf Farben. Direkt bestellbar über unseren Etsy-Shop.</p>
+          <a class="kf-cta" href="shop.html">Zum Sortiment <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
+        </article>
       </div>
     </div>
   </section>
@@ -280,6 +305,36 @@
     </div>
   </section>
 
+  <!-- ============ BEWERTUNGEN. flow, vor dem Close. ==================== -->
+  <section class="sc-section" data-sc-act="flow" id="bewertungen"
+           data-kf-obj="Bewertungen" data-kf-spec="Was Kundinnen und Kunden sagen">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Rückmeldungen</p>
+      <h2 class="kf-h2">Was Kundinnen und Kunden sagen.</h2>
+
+      <div class="kf-reviews" id="kf-reviews" aria-live="polite"></div>
+      <noscript>
+        <div class="kf-reviews">
+          <figure class="kf-review"><blockquote>Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt.</blockquote><figcaption>Daniel K.</figcaption></figure>
+          <figure class="kf-review"><blockquote>Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.</blockquote><figcaption>Sophie R.</figcaption></figure>
+          <figure class="kf-review"><blockquote>Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich.</blockquote><figcaption>Marcel W.</figcaption></figure>
+        </div>
+      </noscript>
+
+      <p class="kf-reviews__disclaim">Alle Bewertungen stammen von Kundinnen und Kunden, die ein Produkt oder eine individuelle Anfertigung bei Kniff erhalten haben. Die Rückmeldungen wurden persönlich eingeholt und keiner Bewertung liegt eine Gegenleistung zugrunde.</p>
+
+      <script type="application/json" id="kf-reviews-data">
+      [
+        {"name":"Daniel K.","rating":5,"text":"Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt."},
+        {"name":"Sophie R.","rating":5,"text":"Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte."},
+        {"name":"Marcel W.","rating":5,"text":"Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich."},
+        {"name":"Nadine B.","rating":5,"text":"Besonders gut finde ich, dass umweltbewusstes Material verwendet wird. Das Produkt wirkt hochwertig und die individuelle Gestaltung wurde sehr schön umgesetzt."},
+        {"name":"Tobias F.","rating":5,"text":"Hat alles problemlos funktioniert. Auf meine Sonderwünsche wurde eingegangen und man hatte nicht das Gefühl, einfach nur eine Bestellnummer zu sein."}
+      ]
+      </script>
+    </div>
+  </section>
+
   <!-- ============ ACT 6 — DEIN ZUG. pin close, holds. LAST element. ===== -->
   <section data-sc-act="pin" data-sc-span="1.25" id="dein-zug"
            data-kf-obj="Deine Idee" data-kf-spec="Die Bank ist frei">
@@ -319,6 +374,6 @@
 </main>
 
 <script src="js/scrollcraft.js"></script>
-<script src="js/kniff-bench.js?v=27"></script>
+<script src="js/kniff-bench.js?v=32"></script>
 </body>
 </html>

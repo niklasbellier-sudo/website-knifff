@@ -510,10 +510,85 @@
     });
   }
 
+  /* ---------------------------------------------------------- reviews ---- */
+  // A few visible slots that cross-fade through the review pool, one slot at a
+  // time, staggered. Pauses on hover, off-screen and hidden tab; static under
+  // reduced motion.
+  function Reviews() {
+    var host = document.getElementById('kf-reviews');
+    var data = document.getElementById('kf-reviews-data');
+    if (!host || !data) return;
+    var pool;
+    try { pool = JSON.parse(data.textContent); } catch (e) { return; }
+    if (!pool.length) return;
+
+    var STAR = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.47 5 5.53.8-4 3.9.94 5.5L10 15.2 5.06 16.8 6 11.3l-4-3.9 5.53-.8z"/></svg>';
+    function stars(n) {
+      var s = ''; for (var i = 0; i < n; i++) s += STAR;
+      return '<span class="kf-stars" role="img" aria-label="' + n + ' von 5 Sternen">' + s + '</span>';
+    }
+    function fill(fig, r) {
+      fig.innerHTML = stars(r.rating || 5) +
+        '<blockquote></blockquote><figcaption></figcaption>';
+      fig.querySelector('blockquote').textContent = r.text;
+      fig.querySelector('figcaption').textContent = r.name;
+    }
+
+    function slotCount() {
+      return matchMedia('(min-width: 1000px)').matches ? Math.min(3, pool.length)
+           : matchMedia('(min-width: 620px)').matches ? Math.min(2, pool.length) : 1;
+    }
+    var figs = [], idx = [], n = 0;
+    function build() {
+      host.innerHTML = ''; figs = []; idx = [];
+      n = slotCount();
+      for (var i = 0; i < n; i++) {
+        var f = document.createElement('figure');
+        f.className = 'kf-review';
+        fill(f, pool[i % pool.length]);
+        host.appendChild(f);
+        figs.push(f); idx.push(i % pool.length);
+      }
+    }
+    build();
+    addEventListener('resize', function () {
+      if (slotCount() !== n) build();
+    }, { passive: true });
+
+    if (reduce) return;                       // no rotation under reduced motion
+
+    var turn = 0, hover = false;
+    host.addEventListener('mouseenter', function () { hover = true; });
+    host.addEventListener('mouseleave', function () { hover = false; });
+    function visible() {
+      var r = host.getBoundingClientRect();
+      return r.bottom > 0 && r.top < (innerHeight || 800);
+    }
+
+    setInterval(function () {
+      if (document.hidden || hover || !visible() || pool.length < 2) return;
+      var slot = turn % figs.length; turn++;
+      // step to the next review not currently shown in another slot
+      var next = idx[slot], step = Math.max(figs.length, 1);
+      for (var guard = 0; guard < pool.length; guard++) {
+        next = (next + step) % pool.length;
+        if (figs.length === 1 || idx.indexOf(next) === -1) break;
+      }
+      idx[slot] = next;
+      var f = figs[slot];
+      f.classList.add('is-swap');
+      setTimeout(function () {
+        fill(f, pool[next]);
+        requestAnimationFrame(function () { f.classList.remove('is-swap'); });
+      }, 420);
+    }, Math.max(4200 / Math.max(slotCount(), 1), 1600));
+  }
+
   /* --------------------------------------------------------------- go ---- */
   function start() {
     Light.init();
     HeroArt();
+    Reviews();
     var rail = RailCubes();
     HUD();
     var hero = null;

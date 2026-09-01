@@ -418,6 +418,43 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   margin-top: var(--sc-4); }
 .kf-quote--placeholder blockquote { color: var(--sc-ink-soft); }
 
+/* ------------------------------------------------ ACT: WAS WIR MACHEN --- */
+.kf-services { display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 5vw, 4rem); margin-top: var(--sc-7); }
+@media (max-width: 780px) { .kf-services { grid-template-columns: 1fr; } }
+.kf-services article { display: flex; flex-direction: column; gap: var(--sc-3);
+  padding-top: var(--sc-5); border-top: 2px solid var(--sc-accent); }
+.kf-services .kf-h3 { font-size: var(--sc-t-2xl); margin: 0.2rem 0 0; }
+.kf-services p { color: var(--sc-ink-soft); margin: 0; max-width: 46ch; }
+.kf-services .kf-cta { margin-top: var(--sc-4); align-self: start; }
+
+/* --------------------------------------------------- ACT: BEWERTUNGEN --- */
+.kf-reviews { display: grid; gap: clamp(1rem, 2.5vw, 1.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: var(--sc-7); }
+@media (max-width: 640px) {
+  .kf-reviews { grid-auto-flow: column; grid-auto-columns: 78%;
+    grid-template-columns: none; overflow-x: auto; scroll-snap-type: x proximity;
+    padding-bottom: 0.5rem; overscroll-behavior-x: contain; }
+  .kf-review { scroll-snap-align: start; }
+}
+.kf-review { border: 1px solid var(--sc-hairline); border-radius: var(--sc-r-sm);
+  padding: var(--sc-5); display: flex; flex-direction: column; gap: var(--sc-3);
+  background: color-mix(in oklab, var(--sc-surface) 45%, transparent);
+  transition: opacity 400ms var(--sc-ease-out), transform 400ms var(--sc-ease-out); }
+.kf-review.is-swap { opacity: 0; transform: translateY(8px); }
+.kf-stars { display: inline-flex; gap: 2px; }
+.kf-stars svg { width: 15px; height: 15px; fill: var(--kf-cool); display: block; }
+.kf-review blockquote { margin: 0; color: var(--sc-ink); font-size: var(--sc-t-base);
+  line-height: 1.5; text-wrap: pretty; }
+.kf-review figcaption { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--sc-ink-soft);
+  margin-top: auto; padding-top: var(--sc-3); border-top: 1px solid var(--sc-hairline); }
+.kf-review time { display: block; margin-top: 0.2rem; letter-spacing: 0.04em;
+  text-transform: none; color: var(--sc-ink-soft); }
+.kf-reviews__disclaim { margin: var(--sc-6) 0 0; max-width: 70ch;
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); line-height: 1.6;
+  letter-spacing: 0.02em; color: var(--sc-ink-soft); }
+
 /* ------------------------------------------------------------ ACT 4 story */
 .kf-story { display: grid; gap: clamp(2rem, 6vw, 5rem);
   grid-template-columns: 1.1fr 0.9fr; align-items: center; }
