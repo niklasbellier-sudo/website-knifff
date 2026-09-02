@@ -1,79 +1,136 @@
-# Kniff auf Netlify aktualisieren
+# Kniff-Website: Deployment
 
-**Wichtig:** Es wird IMMER der Ordner **`_site/`** deployed — nicht der
-Projektordner `kniff-website_11`. `_site/` enthält nur die fertige Live-Seite
-(11 HTML-Seiten inkl. Über uns, `css/`, `js/`, `assets/`, `robots.txt`,
-`sitemap.xml`). Skripte, Planungsnotizen, der KIE-Key und die Roh-Bilder sind
-NICHT drin.
+Projektordner: **`~/Desktop/Kniff/website`** (Git-Repo, Branch `main`).
+Live-Domain: **kniff.shop** (Netlify).
 
-## Schritt 1 — bauen
+Ziel: **`git push` → Netlify baut & stellt live**. Kein Ordner-Ziehen mehr,
+kein „welchen Ordner denn jetzt".
 
+---
+
+## Einmalige Einrichtung (danach nie wieder)
+
+Das lokale Repo ist fertig. Es fehlt nur: zu GitHub bringen, in Netlify
+verbinden.
+
+### 1 — Repo zu GitHub
+
+**Ohne Terminal (GitHub Desktop, empfohlen):**
+1. GitHub Desktop laden (desktop.github.com), mit GitHub-Account anmelden.
+2. *File → Add Local Repository…* → `~/Desktop/Kniff/website` wählen.
+3. *Publish repository* klicken. Haken **„Keep this code private"** lassen.
+   Name z. B. `kniff-website`. → *Publish*.
+
+**Mit Terminal:**
+1. Auf github.com ein **leeres** privates Repo `kniff-website` anlegen
+   (ohne README, ohne .gitignore, ohne Lizenz).
+2. ```bash
+   cd ~/Desktop/Kniff/website
+   git remote add origin https://github.com/DEIN-USER/kniff-website.git
+   git push -u origin main
+   ```
+   Beim Passwort-Prompt einen **Personal Access Token** eingeben
+   (github.com → Settings → Developer settings → Personal access tokens,
+   Scope `repo`).
+
+### 2 — Netlify mit dem Repo verbinden
+
+Damit die **bestehende** Site mit der Domain kniff.shop weiterläuft:
+
+1. Netlify → deine Kniff-Site → **Site configuration → Build & deploy →
+   Continuous deployment → „Link repository"**.
+2. **GitHub** wählen, Netlify Zugriff auf `kniff-website` geben, Branch **`main`**.
+3. Build command und Publish directory zieht Netlify aus `netlify.toml`:
+   - Build command: `bash scripts/netlify-build.sh`
+   - Publish directory: `_site`
+4. Speichern → Netlify baut sofort einen ersten Deploy aus dem Repo.
+
+Falls „Link repository" fehlt: **Add new site → Import an existing project →
+GitHub → kniff-website**, danach unter *Domain settings* die Domain `kniff.shop`
+auf diese Site umhängen und die alte drag-and-drop-Site löschen.
+
+---
+
+## Ab jetzt: aktualisieren
+
+**Wenn Claude die Änderungen macht:** einfach sagen, was geändert werden soll.
+Claude committet und pusht, Netlify deployt in ~1 Minute.
+
+**Selbst:**
 ```bash
-cd ~/Downloads/kniff-website_11
+cd ~/Desktop/Kniff/website
+# ... Änderungen ...
+git add -A
+git commit -m "kurze Beschreibung"
+git push
+```
+
+Fortschritt: Netlify → **Deploys**. Prüfen, dass live: `https://kniff.shop/build.txt`
+zeigt aktuelles Datum.
+
+`_site/` wird von Netlify selbst gebaut und ist bewusst **nicht** im Repo.
+Lokal testen geht trotzdem:
+```bash
+cd ~/Desktop/Kniff/website
 bash scripts/netlify-build.sh
+python3 -m http.server 4507   # dann http://127.0.0.1:4507
 ```
 
-Danach in `_site/build.txt` prüfen, dass Datum + „neues Kniff-Design" stimmt.
+---
 
-## Schritt 2 — deployen (eine Variante wählen)
+## Notfall-Fallback: Drag & Drop
 
-### A) Drag & Drop (am einfachsten)
-1. app.netlify.com öffnen → **dein bestehendes Kniff-Projekt** anklicken
-   (nicht ein neues anlegen, sonst bekommst du eine zweite URL).
-2. Tab **Deploys** → unten das Feld „Drag and drop your site output folder here".
-3. Aus dem Finder den Ordner **`_site`** dort hineinziehen
-   (Pfad: `~/Downloads/kniff-website_11/_site`). **Nicht** `kniff-website_11`.
-4. Netlify baut den Deploy und zeigt dir oben die Live-URL. Nach ~30 Sekunden ist
-   die neue Seite live.
+Nur wenn Git/Netlify mal klemmt.
+1. `cd ~/Desktop/Kniff/website && bash scripts/netlify-build.sh`
+2. app.netlify.com → **bestehende** Kniff-Site → Tab **Deploys** → den Ordner
+   **`~/Desktop/Kniff/website/_site`** ins Drop-Feld ziehen. **Nicht** `website`,
+   nur `_site`.
 
-### B) Netlify CLI
-```bash
-cd ~/Downloads/kniff-website_11
-npx netlify deploy --dir=_site --prod
-```
+## Seite sieht nach dem Deploy noch alt aus?
 
-### C) Git (falls dein Projekt mit einem Repo verbunden ist)
-`netlify.toml` ist konfiguriert (`command = "bash scripts/netlify-build.sh"`,
-`publish = "_site"`). Änderungen committen und pushen, Netlify baut selbst.
+1. **Hard-Reload** (Cmd+Shift+R).
+2. Netlify → Deploys: neuster Deploy als **„Published"** markiert? Sonst
+   „Publish deploy".
+3. `kniff.shop/build.txt` öffnen — steht dort das neue Datum, ist der Stand live
+   und nur der Browser cacht.
+4. Nicht versehentlich **zwei Netlify-Sites** (alt + neu). Domain kniff.shop muss
+   auf die richtige zeigen.
 
-## Wenn die Seite nach dem Deploy noch alt aussieht
+---
 
-1. **Hard-Reload** im Browser (Cmd+Shift+R) — Netlify/Browser cachen aggressiv.
-2. Netlify → **Deploys**: ist der neuste Deploy als **„Published"** markiert?
-   Sonst „Publish deploy" klicken.
-3. Öffne `deine-url/build.txt` — steht dort das aktuelle Datum, ist der neue
-   Stand live und dein Browser cacht nur.
-4. Prüfe, ob du versehentlich **zwei Netlify-Sites** hast (eine alte, eine neue).
-   Die Domain `kniff.shop` muss auf die richtige zeigen (Site → Domain settings).
-5. Bei Git-Anbindung: ist der Push auf dem Branch gelandet, den Netlify baut?
-
-## Kontaktformular mit Kniffshop@gmail.com verknüpfen
+## Kontaktformular → Kniffshop@gmail.com
 
 Beide Formulare (`kontakt` auf `kontakt.html`, `custom-druck` auf
-`3d-druck-auf-anfrage.html`) laufen über **Netlify Forms**. Wohin die
-Einsendungen als E-Mail gehen, lässt sich **nicht** im HTML festlegen, sondern
-nur einmalig im Netlify-Dashboard:
+`3d-druck-auf-anfrage.html`) laufen über **Netlify Forms**. Wohin die Mails
+gehen, wird **nicht** im Code gesetzt, sondern einmal im Dashboard:
 
-1. Einmal deployen (Schritt 1 + 2). Danach erscheinen die Formulare unter
-   **Netlify → deine Site → Forms**.
-2. Ein Formular öffnen (oder `Form notifications` unter **Forms → Settings**).
-3. **Add notification → Email notification**.
-4. Bei „Email to notify" **`Kniffshop@gmail.com`** eintragen, für beide
-   Formulare (`kontakt` und `custom-druck`).
-5. Testeinsendung über die Live-Seite schicken und prüfen, dass die Mail
-   ankommt (ggf. Spam-Ordner). Einsendungen stehen zusätzlich immer unter
-   **Forms** im Dashboard.
+1. Einmal deployen. Danach erscheinen die Formulare unter **Netlify → Site →
+   Forms**.
+2. **Forms → Settings → Form notifications → Add notification → Email
+   notification**.
+3. „Email to notify": **`Kniffshop@gmail.com`** — für **beide** Formulare.
+4. Testeinsendung über die Live-Seite, Ankunft prüfen (ggf. Spam). Einsendungen
+   stehen zusätzlich immer unter **Forms** im Dashboard.
 
-Die Bestätigungsseite nach dem Absenden ist `danke.html`.
+Bestätigungsseite nach dem Absenden: `danke.html`.
 
-## Nach dem Go-Live noch zu erledigen
+---
 
-- **Rechtstexte** (Impressum, Datenschutz, AGB, Widerruf) sind aus dem alten
-  Stand übernommen und nur neu gestylt — Inhalt unverändert. Vor echtem
-  Verkaufsstart von fachkundiger Stelle prüfen lassen.
+## Nach dem Go-Live noch offen
+
+- **Rechtstexte** (Impressum, Datenschutz, AGB, Widerruf) sind vom alten Stand
+  übernommen, nur neu gestylt — Inhalt unverändert. Vor echtem Verkaufsstart
+  fachkundig prüfen lassen.
+- **GPSR-Pflichtangaben** an den Produkten (Herstelleradresse, Modellnummer,
+  Kleinteile-Warnhinweis), sobald direkt über die Seite bestellt werden kann.
+- **Etsy-Buttons**: zeigen aktuell auf das Kontaktformular. Wenn die Etsy-Listings
+  online sind, zurückbauen (siehe `~/Desktop/Kniff/02-produkt-infos/
+  kniff-aenderungsauftrag-website.md`, Block 2).
+- **Netlify Forms** wie oben auf Kniffshop@gmail.com stellen.
 
 ## Assets neu generieren (optional)
 
-`bash scripts/gen-commercial.sh` / `scripts/kie.sh still "..." out/x.png --ar 16:9`.
-Key kommt automatisch aus `~/.config/kniff/.env`. Danach mit `sips` auf Webgröße,
-nach `assets/scenes/`, `?v=` in den HTML-Dateien hochzählen, `_site` neu bauen.
+KIE-Key liegt in `~/.config/kniff/.env` (außerhalb des Repos). Skripte in
+`scripts/` (`kie.sh`, `gen-*.sh`). Danach mit `sips` auf Webgröße nach
+`assets/scenes/`, `?v=` in den HTML-Dateien hochzählen, committen, pushen.
+Render-Master liegen in `~/Desktop/Kniff/03-bild-quellen/render-masters/`.
