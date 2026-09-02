@@ -121,8 +121,14 @@ Bestätigungsseite nach dem Absenden: `danke.html`.
 - **Rechtstexte** (Impressum, Datenschutz, AGB, Widerruf) sind vom alten Stand
   übernommen, nur neu gestylt — Inhalt unverändert. Vor echtem Verkaufsstart
   fachkundig prüfen lassen.
-- **GPSR-Pflichtangaben** an den Produkten (Herstelleradresse, Modellnummer,
-  Kleinteile-Warnhinweis), sobald direkt über die Seite bestellt werden kann.
+- **GPSR-Pflichtangaben** an den Produkten, sobald direkt über die Seite (nicht
+  nur Etsy) bestellt werden kann. Pro Produkt sichtbar:
+  - Hersteller: Niklas-Amoah Alotey, Württembergallee 27, 14052 Berlin,
+    kniffshop@gmail.com — Herkunftsland Deutschland
+  - Modellnummern: `KNF-STA-01` Stiftehalter, `KNF-SPC-01` Spiegel-Clip,
+    `KNF-RWD-01` Reisedose, `KNF-KH10-01` Kartenhalter, `KNF-HST-01` Handyständer
+  - Bei Spiegel-Clip und Stiftehalter (Kleinteile): „Kein Spielzeug. Enthält
+    Kleinteile — nicht geeignet für Kinder unter 3 Jahren."
 - **Etsy-Buttons**: zeigen aktuell auf das Kontaktformular. Wenn die Etsy-Listings
   online sind, zurückbauen (siehe `~/Desktop/Kniff/02-produkt-infos/
   kniff-aenderungsauftrag-website.md`, Block 2).

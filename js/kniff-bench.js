@@ -222,6 +222,12 @@
     var pool;
     try { pool = JSON.parse(data.textContent); } catch (e) { return; }
     if (!pool.length) return;
+    // shuffle once so the first shown reviews vary between visits (all rotate
+    // through anyway) — no visitor sees "only the same three"
+    for (var si = pool.length - 1; si > 0; si--) {
+      var sj = Math.floor(Math.random() * (si + 1));
+      var st = pool[si]; pool[si] = pool[sj]; pool[sj] = st;
+    }
 
     var STAR = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.6l2.47 5 5.53.8-4 3.9.94 5.5L10 15.2 5.06 16.8 6 11.3l-4-3.9 5.53-.8z"/></svg>';
     function stars(n) {
@@ -236,7 +242,8 @@
     }
 
     function slotCount() {
-      return matchMedia('(min-width: 1000px)').matches ? Math.min(3, pool.length)
+      return matchMedia('(min-width: 1180px)').matches ? Math.min(4, pool.length)
+           : matchMedia('(min-width: 1000px)').matches ? Math.min(3, pool.length)
            : matchMedia('(min-width: 620px)').matches ? Math.min(2, pool.length) : 1;
     }
     var figs = [], idx = [], n = 0;
