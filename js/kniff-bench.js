@@ -378,54 +378,80 @@
     var THREE = window.THREE;
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    if (THREE.ACESFilmicToneMapping) renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    if ('outputColorSpace' in renderer) renderer.outputColorSpace = THREE.SRGBColorSpace;
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
     camera.position.set(0, 0.05, 8.6);
 
-    // --- bulb: a lathed silhouette, then fluted by pushing the radius with a
-    //     cosine around the angle, masked to fade out at neck and crown.
-    var profile = [
-      [0.00, -2.10], [0.14, -2.10], [0.15, -2.00], [0.40, -1.94],
-      [0.44, -1.86], [0.40, -1.78], [0.44, -1.66], [0.40, -1.58],
-      [0.44, -1.46], [0.40, -1.38], [0.34, -1.20], [0.30, -1.02],
-      [0.34, -0.88], [0.52, -0.60], [0.80, -0.24], [1.00, 0.14],
-      [1.09, 0.52], [1.06, 0.92], [0.94, 1.28], [0.74, 1.60],
-      [0.48, 1.86], [0.24, 2.04], [0.08, 2.14], [0.00, 2.18]
-    ].map(function (p) { return new THREE.Vector2(p[0], p[1]); });
-
-    var geo = new THREE.LatheGeometry(profile, 120);
-    var pos = geo.attributes.position;
-    var FLUTES = 18, AMP = 0.05;
-    var v = new THREE.Vector3();
-    for (var i = 0; i < pos.count; i++) {
-      v.fromBufferAttribute(pos, i);
-      var y = v.y, r = Math.hypot(v.x, v.z);
-      if (r > 0.02) {
-        var th = Math.atan2(v.z, v.x);
-        // fade the fluting near the very base (< -1.7) and the crown (> 1.5)
-        var mask = 1;
-        if (y < -1.55) mask = Math.max(0, (y + 2.05) / 0.5);
-        if (y > 1.35) mask = Math.max(0, (2.0 - y) / 0.65);
-        var nr = r + AMP * mask * (0.5 + 0.5 * Math.cos(FLUTES * th));
-        var s = nr / r;
-        pos.setX(i, v.x * s); pos.setZ(i, v.z * s);
-      }
-    }
-    geo.computeVertexNormals();
-
-    var mat = new THREE.MeshStandardMaterial({
-      color: 0x1c1a12, roughness: 0.48, metalness: 0.18, emissive: 0x120a02, emissiveIntensity: 0.85
-    });
-    var bulb = new THREE.Mesh(geo, mat);
     var group = new THREE.Group();
-    group.add(bulb);
     group.rotation.x = 0.09;
     scene.add(group);
 
-    scene.add(new THREE.HemisphereLight(0x352c1a, 0x050403, 0.75));
-    var key = new THREE.DirectionalLight(0xfff1dd, 2.7); key.position.set(-3.5, 4, 3); scene.add(key);
-    var rim = new THREE.PointLight(0xf2a63b, 55, 26, 2); rim.position.set(3.4, -1.0, 2.4); scene.add(rim);
-    var fill = new THREE.DirectionalLight(0xf0b45a, 0.6); fill.position.set(2.5, -2, -2); scene.add(fill);
+    // --- classic A19 bulb: glass envelope (lathe) + glass stem + glowing
+    //     filament coil + brass Edison screw base. Reads as a real light bulb.
+    var env = [
+      [0.00, -1.30], [0.30, -1.30], [0.30, -1.16], [0.24, -0.96],
+      [0.30, -0.74], [0.52, -0.44], [0.82, -0.06], [1.00, 0.34],
+      [1.06, 0.72], [1.02, 1.10], [0.88, 1.46], [0.64, 1.78],
+      [0.36, 2.00], [0.12, 2.12], [0.00, 2.15]
+    ].map(function (p) { return new THREE.Vector2(p[0], p[1]); });
+    var glassMat = new THREE.MeshPhysicalMaterial({
+      color: 0xfff4e2, roughness: 0.03, metalness: 0,
+      transparent: true, opacity: 0.22, transmission: 0.6, ior: 1.5,
+      side: THREE.DoubleSide, depthWrite: false,
+      clearcoat: 1, clearcoatRoughness: 0.04, reflectivity: 0.6
+    });
+    var envelope = new THREE.Mesh(new THREE.LatheGeometry(env, 96), glassMat);
+    envelope.renderOrder = 3;
+    group.add(envelope);
+    // a faint inner shell so the glass has visible thickness / a rim
+    var innerShell = new THREE.Mesh(new THREE.LatheGeometry(env, 96),
+      new THREE.MeshBasicMaterial({ color: 0x1a1206, transparent: true, opacity: 0.12, side: THREE.BackSide, depthWrite: false }));
+    innerShell.scale.setScalar(0.965); innerShell.renderOrder = 0; group.add(innerShell);
+
+    // filament: a horizontal coil on two little support posts, self-lit
+    var fPts = [], COILS = 9, FR = 0.28;
+    for (var t = 0; t <= 1; t += 1 / 120) {
+      var a = t * Math.PI * 2 * COILS;
+      fPts.push(new THREE.Vector3(Math.cos(a) * FR, 0.30 + Math.sin(a) * 0.05, (t - 0.5) * 0.9));
+    }
+    var filament = new THREE.Mesh(
+      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(fPts), 160, 0.016, 8, false),
+      new THREE.MeshStandardMaterial({ color: 0xffd9a0, emissive: 0xffb257, emissiveIntensity: 4.2, roughness: 0.4 })
+    );
+    filament.renderOrder = 1;
+    group.add(filament);
+    var posts = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.02, 0.02, 1.0, 8),
+      new THREE.MeshStandardMaterial({ color: 0x2a2a2a, metalness: 0.8, roughness: 0.4 })
+    );
+    posts.position.y = -0.2; posts.renderOrder = 1; group.add(posts);
+    var glow = new THREE.PointLight(0xffca80, 6, 8, 2); glow.position.set(0, 0.32, 0); group.add(glow);
+
+    // dark Edison screw base ("Stumpf kann schwarz bleiben")
+    var dark = new THREE.MeshStandardMaterial({ color: 0x181613, metalness: 0.7, roughness: 0.38 });
+    var base = new THREE.Group();
+    var cap = new THREE.Mesh(new THREE.CylinderGeometry(0.30, 0.27, 0.5, 40), dark);
+    cap.position.y = -1.02; base.add(cap);
+    for (var k = 0; k < 4; k++) {
+      var ring = new THREE.Mesh(new THREE.TorusGeometry(0.285, 0.035, 10, 40), dark);
+      ring.rotation.x = Math.PI / 2; ring.position.y = -0.88 - k * 0.11; base.add(ring);
+    }
+    var neck = new THREE.Mesh(new THREE.CylinderGeometry(0.27, 0.15, 0.22, 32),
+      new THREE.MeshStandardMaterial({ color: 0x0e0e0e, roughness: 0.65, metalness: 0.3 }));
+    neck.position.y = -1.36; base.add(neck);
+    var tip = new THREE.Mesh(new THREE.SphereGeometry(0.11, 20, 16),
+      new THREE.MeshStandardMaterial({ color: 0x0b0b0b, roughness: 0.5, metalness: 0.4 }));
+    tip.position.y = -1.5; base.add(tip);
+    group.add(base);
+
+    scene.add(new THREE.HemisphereLight(0x3a2f1c, 0x0a0806, 0.9));
+    var key = new THREE.DirectionalLight(0xffffff, 3.2); key.position.set(-3.2, 3.6, 4); scene.add(key);
+    var rim = new THREE.PointLight(0xf2a63b, 42, 26, 2); rim.position.set(3.4, -0.6, 2.6); scene.add(rim);
+    var fill = new THREE.DirectionalLight(0xffcf8a, 0.5); fill.position.set(2.5, -2, -2); scene.add(fill);
+    var spec = new THREE.PointLight(0xffffff, 22, 14, 2); spec.position.set(-1.6, 2.4, 3.2); scene.add(spec);
 
     function resize() {
       var w = canvas.clientWidth || host.clientWidth || 1;
