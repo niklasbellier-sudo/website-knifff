@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="assets/fonts/inter-tight-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo-800-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo-700-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <title>Versand &amp; Zahlung — Kniff</title>
 <meta name="description" content="Versand innerhalb Deutschlands per DHL, 1 bis 2 Werktage nach Versand. Zahlung per Karte, Apple Pay und Google Pay über Revolut Business.">
 <!-- og -->
@@ -21,13 +28,13 @@
 <meta name="twitter:description" content="Versand innerhalb Deutschlands per DHL, 1 bis 2 Werktage nach Versand. Zahlung per Karte, Apple Pay und Google Pay über Revolut Business.">
 <meta name="twitter:image" content="https://kniff.shop/assets/og.jpg">
 <!-- /og -->
-<link rel="icon" href="assets/favicon.ico">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
 <link rel="stylesheet" href="css/kniff.css?v=49">
 </head>
 <body>
+<a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
 
 <span data-sc-progress></span>
 <div class="sc-grain" aria-hidden="true"></div>
@@ -50,7 +57,7 @@
   </nav>
 </header>
 
-<main id="top">
+<main id="inhalt" tabindex="-1">
   <section class="kf-phero" data-sc-act="pin" data-sc-span="1.1">
     <div data-sc-stage class="kf-phero__stage" data-sc-spotlight>
       <img class="kf-ground kf-ground--full" src="assets/scenes/11-shop-hero.jpg" alt="" aria-hidden="true" width="1920" height="1067" srcset="assets/scenes/11-shop-hero-m.jpg 1200w, assets/scenes/11-shop-hero.jpg 1920w" sizes="100vw">
@@ -97,7 +104,7 @@
   </div>
 </footer>
 
-<script src="js/scrollcraft.js"></script>
-<script src="js/kniff-bench.js?v=49"></script>
+<script src="js/scrollcraft.js" defer></script>
+<script src="js/kniff-bench.js?v=49" defer></script>
 </body>
 </html>

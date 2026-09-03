@@ -11,7 +11,7 @@ mkdir -p "$OUT"
 
 # top-level pages + site metadata
 cp -p ./*.html "$OUT"/ 2>/dev/null || true
-for f in robots.txt sitemap.xml favicon.ico _redirects _headers; do
+for f in robots.txt sitemap.xml favicon.ico site.webmanifest _redirects _headers; do
   [ -f "$f" ] && cp -p "$f" "$OUT"/
 done
 

@@ -68,6 +68,34 @@
 html { background: var(--sc-canvas); }
 body { background: var(--sc-canvas); color: var(--sc-ink); }
 
+/* --- accessibility baseline ------------------------------------------------ */
+/* skip link: off-screen until focused, then a solid chip top-left */
+.kf-skip {
+  position: fixed; top: 0; left: 0; z-index: 200;
+  transform: translateY(-120%);
+  background: var(--sc-accent); color: var(--sc-accent-ink);
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-sm);
+  letter-spacing: 0.04em; text-decoration: none;
+  padding: 0.7rem 1.1rem; border-radius: 0 0 var(--sc-r-sm) 0;
+  transition: transform var(--sc-d-fast) var(--sc-ease-out);
+}
+.kf-skip:focus { transform: translateY(0); outline: 2px solid var(--sc-ink); outline-offset: 2px; }
+
+/* one consistent keyboard-focus ring for every interactive element */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--sc-accent);
+  outline-offset: 3px;
+  border-radius: var(--sc-r-sm);
+}
+main:focus { outline: none; }
+@media (prefers-reduced-motion: reduce) { .kf-skip { transition: none; } }
+
 /* Selection / focus already themed by scrollcraft.css via tokens. Add the
    instrument underline treatment for links in prose. */
 .kf-prose a {
