@@ -302,6 +302,14 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--sc-accent);
   margin: 0 0 var(--sc-4);
+  display: flex; align-items: center; gap: 0.6em;
+}
+/* the Kniff mark — a 3D-printed idea — leads every section label */
+.kf-eyebrow::before {
+  content: ""; flex: none; width: 1.05em; height: 1.05em;
+  background: currentColor;
+  -webkit-mask: url(../assets/kniff-mark.svg) no-repeat center / contain;
+  mask: url(../assets/kniff-mark.svg) no-repeat center / contain;
 }
 .kf-lede { font-size: var(--sc-t-lg); line-height: 1.44; color: var(--sc-ink);
   max-width: 44ch; text-wrap: pretty; margin: 0; }
