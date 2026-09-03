@@ -343,48 +343,31 @@
     });
   }
 
-  /* --------------------------------------------------- interactive hero -- */
-  // The gearbox render carries 5 hotspots, one per part. Click one: the render
-  // zooms toward that part and a small card offers a jump to the matching page
-  // (ref: the clickable cans on the CIAO landing page).
-  function HeroSpots() {
-    var art = document.querySelector('.kf-hero__art');
-    var zoom = document.querySelector('[data-hero-zoom]');
-    var callout = document.querySelector('[data-hero-callout]');
-    if (!art || !zoom || !callout) return;
-    var spots = [].slice.call(art.querySelectorAll('.kf-hot'));
-    if (!spots.length) return;
-    var labelEl = callout.querySelector('.kf-hero__callout-label');
-    var goEl = callout.querySelector('.kf-hero__callout-go');
-    var closeEl = callout.querySelector('.kf-hero__callout-x');
-
-    function reset() {
-      art.classList.remove('is-zoomed');
-      spots.forEach(function (s) { s.classList.remove('is-active'); });
-      callout.hidden = true;
-    }
-    function open(spot) {
-      var x = spot.style.getPropertyValue('--x') || '50%';
-      var y = spot.style.getPropertyValue('--y') || '50%';
-      zoom.style.setProperty('--zoom-x', x);
-      zoom.style.setProperty('--zoom-y', y);
-      art.classList.add('is-zoomed');
-      spots.forEach(function (s) { s.classList.toggle('is-active', s === spot); });
-      labelEl.textContent = spot.getAttribute('data-label') || '';
-      goEl.setAttribute('href', spot.getAttribute('data-href') || '#');
-      callout.hidden = false;
-    }
-    spots.forEach(function (spot) {
-      spot.addEventListener('click', function () {
-        if (spot.classList.contains('is-active')) { reset(); }
-        else { open(spot); }
+  /* --------------------------------------------------- hero explode ------ */
+  // The hero product (Reisedose) pulls apart on hover — pure CSS. On touch
+  // devices there is no hover, so we toggle .is-open: auto-open while the hero
+  // is centred in the viewport, and let a tap flip it. One class, no rAF.
+  function HeroExplode() {
+    var art = document.querySelector('.kf-hero__art[data-explode]');
+    if (!art) return;
+    var canHover = matchMedia('(hover: hover)').matches;
+    if (!canHover) {
+      art.addEventListener('click', function (e) {
+        if (e.target.closest('.kf-explode__link')) return;   // let the link work
+        art.classList.toggle('is-open');
       });
-    });
-    closeEl.addEventListener('click', reset);
-    addEventListener('keydown', function (e) { if (e.key === 'Escape') reset(); });
-    // clicking the render away from a hotspot also resets
-    zoom.addEventListener('click', function (e) {
-      if (!e.target.closest('.kf-hot')) reset();
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (en) { art.classList.toggle('is-open', en.intersectionRatio > 0.55); });
+        }, { threshold: [0, 0.55, 1] }).observe(art);
+      }
+    }
+    // keyboard: Enter/Space on the focused art follows the product link
+    art.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        var lnk = art.querySelector('.kf-explode__link');
+        if (lnk) { e.preventDefault(); location.href = lnk.getAttribute('href'); }
+      }
     });
   }
 
@@ -393,7 +376,7 @@
     Nav();
     tuneSpans();
     Light.init();
-    HeroSpots();
+    HeroExplode();
     Reviews();
     var rail = RailCubes();
     HUD();

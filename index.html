@@ -10,6 +10,7 @@
 <link rel="preload" href="assets/fonts/inter-tight-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-800-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-700-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/scenes/reisedose-body.png?v=3" as="image" fetchpriority="high">
 <title>Kniff — 3D-Druck auf Anfrage aus Berlin</title>
 <meta name="description" content="Schick uns Skizze, Maße oder STL. Wir prüfen Druckbarkeit und Aufwand und drucken dein Teil in kleiner Serie. 3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.">
 <!-- og -->
@@ -31,7 +32,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=49">
+<link rel="stylesheet" href="css/kniff.css?v=53">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -81,35 +82,32 @@
 
 <div class="kf-hud" aria-hidden="true">
   <span class="kf-hud__dot"></span>
-  <button type="button" class="kf-hud__name">Getriebe</button>
+  <button type="button" class="kf-hud__name">Reisedose</button>
   <span class="kf-hud__spec"></span>
 </div>
 
 <main id="inhalt" tabindex="-1">
 
-  <!-- ============ ACT 1 — HERO. pin + floating render + steered light. PEAK. -->
-  <section data-sc-act="pin" data-sc-span="2.8" id="hero"
-           data-kf-obj="Getriebe" data-kf-spec="<b>Custom-Druck, 12 Teile</b> · PLA · Berlin">
+  <!-- ============ ACT 1 — HERO. pin + hover-explode product. PEAK. ======= -->
+  <section data-sc-act="pin" data-sc-span="1.9" id="hero"
+           data-kf-obj="Reisedose" data-kf-spec="<b>Fertiger Kniff</b> · PLA · ab 22,00 €">
     <div data-sc-stage class="kf-hero__stage" data-sc-spotlight>
-      <div class="kf-hero__art">
-        <div class="kf-hero__zoom" data-hero-zoom>
-          <img id="kf-hero-img" src="assets/scenes/05-hero-gearbox.png?v=46"
-               alt="Ein 3D-gedrucktes Getriebe aus mattschwarzem PLA in Explosionsdarstellung"
-               width="1600" height="889" fetchpriority="high" srcset="assets/scenes/05-hero-gearbox-m.png?v=46 1000w, assets/scenes/05-hero-gearbox.png?v=46 1500w" sizes="(min-width: 900px) 60rem, 96vw">
-          <div class="kf-hotspots" role="group" aria-label="Getriebe erkunden, Teile öffnen weitere Seiten">
-            <button type="button" class="kf-hot" style="--x:50.5%;--y:13%" data-href="3d-druck-auf-anfrage.html" data-label="Dienstleistungen" aria-label="Öffnen: Dienstleistungen"><span class="kf-hot__ring" aria-hidden="true"></span></button>
-            <button type="button" class="kf-hot" style="--x:52%;--y:39%" data-href="shop.html" data-label="Produkte" aria-label="Öffnen: Produkte"><span class="kf-hot__ring" aria-hidden="true"></span></button>
-            <button type="button" class="kf-hot" style="--x:50%;--y:53%" data-href="ueber-uns.html" data-label="Über uns" aria-label="Öffnen: Über uns"><span class="kf-hot__ring" aria-hidden="true"></span></button>
-            <button type="button" class="kf-hot" style="--x:45%;--y:71%" data-href="kontakt.html" data-label="Support" aria-label="Öffnen: Support"><span class="kf-hot__ring" aria-hidden="true"></span></button>
-            <button type="button" class="kf-hot" style="--x:50%;--y:91%" data-href="3d-druck-auf-anfrage.html#anfrage" data-label="Projekt einreichen" aria-label="Öffnen: Projekt einreichen"><span class="kf-hot__ring" aria-hidden="true"></span></button>
-          </div>
+      <div class="kf-hero__art" data-explode tabindex="0" role="img"
+           aria-label="Kniff Reisedose für Wattestäbchen, 3D-gedruckt aus mattschwarzem PLA. Zeiger darüber bewegen zeigt Material, Gewicht und Preis.">
+        <div class="kf-explode">
+          <img class="kf-explode__lid" src="assets/scenes/reisedose-lid.png?v=3" alt="" aria-hidden="true"
+               width="1000" height="1000" srcset="assets/scenes/reisedose-lid-m.png?v=3 620w, assets/scenes/reisedose-lid.png?v=3 1000w" sizes="(min-width:900px) 24rem, 62vw">
+          <img class="kf-explode__body" src="assets/scenes/reisedose-body.png?v=3" alt="" aria-hidden="true" fetchpriority="high"
+               width="1000" height="1000" srcset="assets/scenes/reisedose-body-m.png?v=3 620w, assets/scenes/reisedose-body.png?v=3 1000w" sizes="(min-width:900px) 24rem, 62vw">
         </div>
-        <div class="kf-hero__callout" data-hero-callout hidden>
-          <span class="kf-hero__callout-eyebrow">Getriebe</span>
-          <span class="kf-hero__callout-label"></span>
-          <a class="kf-hero__callout-go" href="#">Ansehen <span aria-hidden="true">→</span></a>
-          <button type="button" class="kf-hero__callout-x" aria-label="Schließen">×</button>
-        </div>
+        <aside class="kf-explode__spec">
+          <dl>
+            <div><dt>Material</dt><dd>PLA, mattschwarz</dd></div>
+            <div><dt>Gewicht</dt><dd>ca.&nbsp;30&nbsp;g</dd></div>
+            <div><dt>Preis</dt><dd>ab&nbsp;22,00&nbsp;€</dd></div>
+          </dl>
+          <a class="kf-explode__link" href="shop.html#reisedose-wattestaebchen" tabindex="-1">Zum Produkt <span aria-hidden="true">→</span></a>
+        </aside>
       </div>
       <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
 
@@ -122,7 +120,7 @@
           </a>
           <a href="shop.html" class="kf-ghost">Fertige Kniffe ansehen</a>
         </div>
-        <p class="kf-hint kf-hint--tap">Tipp: Tipp oder klick ein Bauteil des Getriebes an.</p>
+        <p class="kf-hint kf-hint--tap">Fahr über die Dose &mdash; oder tipp sie an.</p>
       </div>
     </div>
   </section>
@@ -439,6 +437,6 @@
 </script>
 
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=49" defer></script>
+<script src="js/kniff-bench.js?v=53" defer></script>
 </body>
 </html>
