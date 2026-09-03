@@ -667,6 +667,29 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 }
 .kf-trust span { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); padding-left: 1.6rem; }
 
+/* shop facts band — same quiet idiom, sits between the intro and the products */
+.kf-shopfacts {
+  list-style: none; margin: var(--sc-6) 0 0; padding: var(--sc-5) 0 0;
+  border-top: 1px solid var(--sc-hairline);
+  display: grid; gap: var(--sc-5) var(--sc-6);
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 900px) { .kf-shopfacts { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 460px) { .kf-shopfacts { grid-template-columns: 1fr; } }
+.kf-shopfacts li { display: grid; gap: 0.3rem; }
+.kf-shopfacts b {
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--sc-ink);
+  padding-left: 1.6rem; position: relative;
+}
+.kf-shopfacts b::before {
+  content: ""; position: absolute; left: 0; top: 0.5em;
+  width: 1rem; height: 1px; background: var(--sc-accent);
+}
+.kf-shopfacts span { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); padding-left: 1.6rem; }
+.kf-shopfacts a { color: var(--sc-ink); text-decoration-color: var(--sc-accent); }
+@media (max-width: 899px) { .kf-shopfacts a { display: inline-block; padding: 0.35rem 0; } }
+
 /* --------------------------------------------------- ACT: BEWERTUNGEN --- */
 .kf-reviews { display: grid; gap: clamp(1rem, 2.5vw, 1.75rem);
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: var(--sc-7); }
@@ -879,6 +902,16 @@ h1, h2, h3, h4,
 .kf-field--hint small { color: var(--sc-ink-soft); font-family: var(--sc-font-mono);
   font-size: var(--sc-t-xs); }
 .kf-form button[type="submit"] { justify-self: start; }
+/* injected by ContactPrefill() when the user arrived from a product's "Jetzt
+   anfragen" button */
+.kf-form__ctx {
+  margin: 0; padding: 0.7rem 0.9rem;
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  letter-spacing: 0.04em; color: var(--sc-ink);
+  background: color-mix(in oklab, var(--sc-accent) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--sc-accent) 40%, transparent);
+  border-radius: var(--sc-r-sm);
+}
 .kf-hp { position: absolute; left: -9999px; }
 
 /* FAQ */

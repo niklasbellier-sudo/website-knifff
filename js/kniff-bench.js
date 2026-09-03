@@ -386,12 +386,48 @@
     });
   }
 
+  /* ----------------------------------------------- contact prefill ------ */
+  // A "Jetzt anfragen" button on the shop carries ?produkt=<name>. Pull it into
+  // the contact form: a visible context line, a hidden subject for the Netlify
+  // notification, and a head start in the message box. Kills the "which product
+  // was that again?" round-trip.
+  function ContactPrefill() {
+    var form = document.querySelector('form[name="kontakt"]');
+    if (!form) return;
+    var raw = new URLSearchParams(location.search).get('produkt');
+    if (!raw) return;
+    var name = raw.replace(/[\r\n\t]+/g, ' ').trim().slice(0, 90);
+    if (!name) return;
+
+    var subject = form.querySelector('input[name="betreff"]');
+    if (subject) subject.value = 'Produktanfrage: ' + name;
+
+    var msg = form.querySelector('textarea[name="nachricht"]');
+    if (msg && !msg.value) {
+      msg.value = 'Ich interessiere mich für: ' + name + '\n\nMenge: 1\n\n';
+    }
+
+    var note = document.createElement('p');
+    note.className = 'kf-form__ctx';
+    note.textContent = 'Deine Anfrage bezieht sich auf: ' + name;
+    form.insertBefore(note, form.querySelector('.kf-field'));
+
+    // arriving from a product means the form is the point of the visit — bring it
+    // into view (past the pinned hero) and put the cursor in the first field
+    var nameField = form.querySelector('#k-name');
+    setTimeout(function () {
+      try { form.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (e) { form.scrollIntoView(); }
+      if (nameField) nameField.focus({ preventScroll: true });
+    }, 400);
+  }
+
   /* --------------------------------------------------------------- go ---- */
   function start() {
     Nav();
     tuneSpans();
     Light.init();
     HeroExplode();
+    ContactPrefill();
     Reviews();
     var rail = RailCubes();
     HUD();
