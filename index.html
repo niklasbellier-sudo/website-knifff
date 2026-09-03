@@ -32,7 +32,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=53">
+<link rel="stylesheet" href="css/kniff.css?v=54">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -147,6 +147,13 @@
           <a class="kf-cta" href="shop.html">Zum Sortiment <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
         </article>
       </div>
+
+      <ul class="kf-trust" aria-label="Das kannst du erwarten">
+        <li><b>Festpreis vorab</b><span>Kein Angebot ohne konkrete Zahl.</span></li>
+        <li><b>Antwort in 48&nbsp;Stunden</b><span>Persönlich, kein Callcenter.</span></li>
+        <li><b>Gedruckt in Berlin</b><span>Kleine Serien, jedes Teil von Hand geprüft.</span></li>
+        <li><b>Pflanzenbasiertes PLA</b><span>Standardmaterial, geruchsarm und stabil.</span></li>
+      </ul>
     </div>
   </section>
 
@@ -359,6 +366,45 @@
     </div>
   </section>
 
+  <!-- ============ FAQ. Einwände direkt vor dem letzten CTA. ============= -->
+  <section class="sc-section" data-sc-act="flow" id="faq"
+           data-kf-obj="Häufige Fragen" data-kf-spec="Bevor du fragst">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="50">
+      <p class="kf-eyebrow">Häufige Fragen</p>
+      <h2 class="kf-h2">Bevor du fragst.</h2>
+      <div class="kf-faq">
+        <details>
+          <summary>Was kostet ein individueller Druck?</summary>
+          <p>Das hängt von Größe, Material, Druckzeit, Nachbearbeitung und Stückzahl ab. Deshalb bekommst du für jede Anfrage einen persönlichen Festpreis, statt eines pauschalen Tarifs. Die Einschätzung ist kostenlos und unverbindlich.</p>
+        </details>
+        <details>
+          <summary>Brauche ich eine fertige 3D-Datei?</summary>
+          <p>Nein. Eine Skizze, ein Foto mit Maßen oder eine kurze Beschreibung reichen für den Anfang. Wenn eine Datei da ist (STL, 3MF, STEP), geht es schneller. Bei Bedarf passen wir Modelle an oder gestalten sie mit dir.</p>
+        </details>
+        <details>
+          <summary>Wie lange dauert es?</summary>
+          <p>Auf deine Anfrage antworten wir in der Regel innerhalb von zwei Werktagen. Nach deiner Freigabe hängt die Druckzeit von Größe und Stückzahl ab &ndash; die konkrete Lieferzeit steht im Angebot. Versand innerhalb Deutschlands per DHL, meist 1&ndash;2 Werktage.</p>
+        </details>
+        <details>
+          <summary>Welche Materialien und Farben gibt es?</summary>
+          <p>Standard ist mattschwarzes PLA, ein pflanzenbasiertes Material. Über zehn weitere Farb- und Materialvarianten sind auf Anfrage möglich, darunter Pastelltöne, Metallic und PETG für mehr Hitzebeständigkeit. Neue Farben drucken wir vorab als Muster.</p>
+        </details>
+        <details>
+          <summary>Wem gehören die Rechte an meinem Design?</summary>
+          <p>Dir. Du bleibst Inhaber:in der Rechte an deiner eingereichten Datei. Mit der Einreichung bestätigst du, dass du zur Nutzung berechtigt bist. Fremde, urheberrechtlich geschützte Designs drucken wir nur mit nachgewiesener Erlaubnis.</p>
+        </details>
+        <details>
+          <summary>Kann ich zurückgeben, wenn es mir nicht gefällt?</summary>
+          <p>Individuell nach deinen Vorgaben angefertigte Teile sind gesetzlich vom Widerrufsrecht ausgenommen (§&nbsp;312g Abs.&nbsp;2 Nr.&nbsp;1 BGB). Bei Mängeln oder Druckfehlern unsererseits melde dich einfach &ndash; dann finden wir eine Lösung. Details in der <a href="widerruf.html">Widerrufsbelehrung</a>.</p>
+        </details>
+      </div>
+      <div class="kf-actions">
+        <a href="3d-druck-auf-anfrage.html#anfrage" class="kf-cta">Projekt einreichen <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
+        <a href="kontakt.html" class="kf-ghost">Erst kurz fragen</a>
+      </div>
+    </div>
+  </section>
+
   <section data-sc-act="pin" data-sc-span="1.25" id="dein-zug"
            data-kf-obj="Deine Idee" data-kf-spec="Die Bank ist frei">
     <div data-sc-stage class="kf-close__stage" data-sc-spotlight>
@@ -431,12 +477,30 @@
       "name": "Kniff",
       "inLanguage": "de-DE",
       "publisher": { "@id": "https://kniff.shop/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://kniff.shop/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "Was kostet ein individueller Druck?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Das hängt von Größe, Material, Druckzeit, Nachbearbeitung und Stückzahl ab. Für jede Anfrage gibt es einen persönlichen Festpreis statt eines Pauschaltarifs. Die Einschätzung ist kostenlos und unverbindlich." } },
+        { "@type": "Question", "name": "Brauche ich eine fertige 3D-Datei?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Nein. Eine Skizze, ein Foto mit Maßen oder eine kurze Beschreibung reichen für den Anfang. Mit Datei (STL, 3MF, STEP) geht es schneller. Bei Bedarf passen wir Modelle an." } },
+        { "@type": "Question", "name": "Wie lange dauert es?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Antwort auf die Anfrage in der Regel innerhalb von zwei Werktagen. Nach Freigabe richtet sich die Druckzeit nach Größe und Stückzahl; die Lieferzeit steht im Angebot. Versand innerhalb Deutschlands per DHL, meist 1–2 Werktage." } },
+        { "@type": "Question", "name": "Welche Materialien und Farben gibt es?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Standard ist mattschwarzes PLA, ein pflanzenbasiertes Material. Über zehn weitere Farb- und Materialvarianten sind auf Anfrage möglich, darunter Pastelltöne, Metallic und PETG." } },
+        { "@type": "Question", "name": "Wem gehören die Rechte an meinem Design?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Dir. Du bleibst Inhaber:in der Rechte an deiner Datei. Fremde, urheberrechtlich geschützte Designs drucken wir nur mit nachgewiesener Erlaubnis." } },
+        { "@type": "Question", "name": "Kann ich zurückgeben, wenn es mir nicht gefällt?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Individuell angefertigte Teile sind gesetzlich vom Widerrufsrecht ausgenommen (§ 312g Abs. 2 Nr. 1 BGB). Bei Mängeln oder Druckfehlern unsererseits finden wir eine Lösung." } }
+      ]
     }
   ]
 }
 </script>
 
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=53" defer></script>
+<script src="js/kniff-bench.js?v=54" defer></script>
 </body>
 </html>
