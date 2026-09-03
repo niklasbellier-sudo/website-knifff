@@ -411,8 +411,8 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 
 /* ---- mobile hero (< 900px): the dose parks in the empty zone between the
    header and the headline, sized down to an accent. The copy owns the lower
-   half. The spec is a compact card that a tap slides in directly under the
-   dose — it never crosses the words. */
+   half. The floating spec panel is HIDDEN here — it has nowhere safe to go on a
+   short screen, and the HUD chip already carries Material / Gewicht / Preis. */
 @media (max-width: 899px) {
   .kf-hero__art {
     left: 50%; top: 4.25rem; bottom: auto;
@@ -420,26 +420,11 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
     transform: translateX(calc(-50% + (var(--kf-lx, 0.5) - 0.5) * 12px));
   }
   .kf-explode { animation-duration: 12s; }
+  .kf-explode__spec { display: none; }
 
   .sc-copy.kf-hero__copy { bottom: clamp(3.5rem, 8.5vh, 5rem); max-width: min(40rem, 88vw); }
   .kf-hero__copy h1 { font-size: var(--sc-t-3xl); }
   .kf-hero__copy .kf-lede { margin-top: var(--sc-3); font-size: var(--sc-t-sm); max-width: 36ch; }
-
-  .kf-explode__spec {
-    right: auto; left: 50%; top: calc(100% + 0.55rem); bottom: auto;
-    width: min(21rem, 90vw); max-width: none;
-    padding: 0.75rem 0.95rem 0.8rem;
-    transform: translateX(-50%) translateY(10px);
-    background: color-mix(in oklab, var(--sc-canvas) 95%, transparent);
-  }
-  .kf-explode__spec dl { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; }
-  .kf-explode__spec dl > div { flex-direction: column; gap: 0.1rem; align-items: flex-start; }
-  .kf-explode__spec dt { font-size: 0.7rem; }
-  .kf-explode__spec dd { font-size: var(--sc-t-sm); white-space: normal; }
-  .kf-explode__link { margin-top: 0.4rem; padding: 0.5rem 0; }
-  .kf-hero__art:hover .kf-explode__spec,
-  .kf-hero__art:focus-visible .kf-explode__spec,
-  .kf-hero__art.is-open .kf-explode__spec { transform: translateX(-50%) translateY(0); }
 }
 
 @media (max-width: 380px) {
@@ -452,7 +437,6 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 @media (min-width: 620px) and (max-width: 899px) {
   .kf-hero__art { top: 4.75rem; width: min(15rem, 34vw); }
   .sc-copy.kf-hero__copy { bottom: clamp(2.5rem, 6vh, 4rem); }
-  .kf-explode__spec { width: min(24rem, 62vw); }
 }
 
 .kf-hero__stage .sc-scrim--band, .kf-phero__stage .sc-scrim--lead {
