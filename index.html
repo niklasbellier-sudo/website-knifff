@@ -21,18 +21,18 @@
 <meta property="og:title" content="Kniff — 3D-Druck auf Anfrage aus Berlin">
 <meta property="og:description" content="Schick uns Skizze, Maße oder STL. Wir prüfen Druckbarkeit und Aufwand und drucken dein Teil – vom Einzelstück bis zur Serie. 3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.">
 <meta property="og:url" content="https://kniff.shop/">
-<meta property="og:image" content="https://kniff.shop/assets/og.jpg">
+<meta property="og:image" content="https://kniff.shop/assets/og.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kniff — 3D-Druck auf Anfrage aus Berlin">
 <meta name="twitter:description" content="Schick uns Skizze, Maße oder STL. Wir prüfen Druckbarkeit und Aufwand und drucken dein Teil – vom Einzelstück bis zur Serie. 3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.">
-<meta name="twitter:image" content="https://kniff.shop/assets/og.jpg">
+<meta name="twitter:image" content="https://kniff.shop/assets/og.jpg?v=2">
 <!-- /og -->
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=68">
+<link rel="stylesheet" href="css/kniff.css?v=69">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -459,10 +459,14 @@
       "name": "Kniff",
       "url": "https://kniff.shop/",
       "logo": "https://kniff.shop/assets/apple-touch-icon-180.png",
-      "image": "https://kniff.shop/assets/og.jpg",
+      "image": "https://kniff.shop/assets/og.jpg?v=2",
       "email": "kniffshop@gmail.com",
       "description": "3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.",
       "founder": { "@type": "Person", "name": "Niklas-Amoah Alotey" },
+      "foundingDate": "2023",
+      "foundingLocation": { "@type": "Place", "name": "Berlin, Deutschland" },
+      "areaServed": { "@type": "Country", "name": "Deutschland" },
+      "knowsAbout": ["3D-Druck", "FDM-Druck", "Rapid Prototyping", "Ersatzteile", "Kleinserienfertigung", "PLA", "PETG"],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Württembergallee 27",
@@ -470,10 +474,26 @@
         "addressLocality": "Berlin",
         "addressCountry": "DE"
       },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "kniffshop@gmail.com",
+        "contactType": "customer service",
+        "availableLanguage": ["de"]
+      },
       "sameAs": [
         "https://instagram.com/kniffshop",
         "https://www.etsy.com/shop/KniffShop"
       ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://kniff.shop/#service-3d-druck",
+      "name": "3D-Druck auf Anfrage",
+      "serviceType": "3D-Druck / Auftragsfertigung",
+      "provider": { "@id": "https://kniff.shop/#organization" },
+      "areaServed": { "@type": "Country", "name": "Deutschland" },
+      "description": "Vom Einzelstück bis zur Serie: Skizze, Maße oder STL einreichen, wir prüfen Druckbarkeit und Aufwand und liefern einen Festpreis. Gedruckt und von Hand geprüft in Berlin.",
+      "url": "https://kniff.shop/3d-druck-auf-anfrage.html"
     },
     {
       "@type": "WebSite",
@@ -506,6 +526,6 @@
 </script>
 
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=68" defer></script>
+<script src="js/kniff-bench.js?v=69" defer></script>
 </body>
 </html>
