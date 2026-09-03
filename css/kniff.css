@@ -156,7 +156,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   pointer-events: none; z-index: -1;
 }
 .kf-head a { color: var(--sc-ink); text-decoration: none; }
-.kf-head__mark { display: flex; align-items: center; gap: 0.6rem; }
+.kf-head__mark { display: flex; align-items: center; gap: 0.6rem; padding-block: 0.7rem; margin-block: -0.7rem; }
 .kf-head__mark img { height: 20px; width: auto; }
 .kf-head__nav {
   display: flex; align-items: center; gap: clamp(0.9rem, 2.4vw, 2rem);
@@ -171,6 +171,9 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 
 /* burger: hidden on desktop, shown on narrow screens */
 .kf-head__burger { display: none; }
+
+/* page scroll is frozen while the mobile drawer is open */
+.kf-nav-open, .kf-nav-open body { overflow: hidden; touch-action: none; }
 
 @media (max-width: 900px) {
   .kf-head__burger {
@@ -198,6 +201,14 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
     transition: transform 200ms var(--sc-ease-out), opacity 160ms linear;
   }
   .kf-head.is-open .kf-head__nav { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  /* dim the page behind the open drawer; a tap on it closes the menu (JS) */
+  .kf-head::after {
+    content: ""; position: fixed; inset: 0; z-index: 0;
+    background: color-mix(in oklab, var(--sc-canvas) 60%, transparent);
+    opacity: 0; pointer-events: none; transition: opacity 200ms linear;
+  }
+  .kf-head.is-open::after { opacity: 1; pointer-events: auto; }
+  .kf-head__mark { position: relative; z-index: 2; }   /* stay above the scrim */
   .kf-head__nav a {
     padding: 0.95rem 0.1rem; font-size: var(--sc-t-sm);
     border-top: 1px solid var(--sc-hairline);
@@ -375,11 +386,43 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   color: var(--sc-ink); text-decoration-color: var(--sc-accent); pointer-events: auto;
 }
 .kf-explode__link:hover { color: var(--sc-accent); }
-@media (max-width: 860px) {
-  .kf-explode__spec { right: auto; left: 50%; top: auto; bottom: -6%;
-    transform: translateX(-50%) translateY(14px); }
+
+/* ---- mobile hero (< 900px): the dose parks in the empty zone between the
+   header and the headline, sized down to an accent. The copy owns the lower
+   half. The spec is a compact card that a tap slides in directly under the
+   dose — it never crosses the words. */
+@media (max-width: 899px) {
+  .kf-hero__art {
+    left: 50%; top: 4.25rem; bottom: auto;
+    width: min(13rem, 52vw); aspect-ratio: 1 / 1;
+    transform: translateX(-50%);
+  }
+  .kf-explode { animation-duration: 11s; }
+
+  .sc-copy.kf-hero__copy { bottom: clamp(3.5rem, 8.5vh, 5rem); max-width: min(40rem, 88vw); }
+  .kf-hero__copy h1 { font-size: var(--sc-t-3xl); }
+  .kf-hero__copy .kf-lede { margin-top: var(--sc-3); font-size: var(--sc-t-sm); max-width: 36ch; }
+
+  .kf-explode__spec {
+    right: auto; left: 50%; top: calc(100% + 0.55rem); bottom: auto;
+    width: min(21rem, 90vw); max-width: none;
+    padding: 0.75rem 0.95rem 0.8rem;
+    transform: translateX(-50%) translateY(10px);
+    background: color-mix(in oklab, var(--sc-canvas) 95%, transparent);
+  }
+  .kf-explode__spec dl { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; }
+  .kf-explode__spec dl > div { flex-direction: column; gap: 0.1rem; align-items: flex-start; }
+  .kf-explode__spec dt { font-size: 0.7rem; }
+  .kf-explode__spec dd { font-size: var(--sc-t-sm); white-space: normal; }
+  .kf-explode__link { margin-top: 0.4rem; padding: 0.5rem 0; }
   .kf-hero__art:hover .kf-explode__spec,
+  .kf-hero__art:focus-visible .kf-explode__spec,
   .kf-hero__art.is-open .kf-explode__spec { transform: translateX(-50%) translateY(0); }
+}
+
+@media (max-width: 380px) {
+  .kf-hero__art { top: 3.25rem; width: min(10rem, 44vw); }
+  .kf-hero__copy h1 { font-size: var(--sc-t-2xl); }
 }
 
 .kf-hero__stage .sc-scrim--band, .kf-phero__stage .sc-scrim--lead {
@@ -439,6 +482,12 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   content: ""; width: 22px; height: 1px; background: var(--sc-accent);
 }
 @media (hover: none) { .kf-hint:not(.kf-hint--tap) { display: none; } }
+/* the hint has a hover phrasing and a tap phrasing — show the one that fits */
+.kf-hint [data-hint-tap] { display: none; }
+@media (hover: none) {
+  .kf-hint [data-hint-hover] { display: none; }
+  .kf-hint [data-hint-tap] { display: inline; }
+}
 
 /* ------------------------------------------------------------ ACT 2 proc  */
 .kf-proc__stage { display: grid; }
@@ -684,6 +733,33 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 .kf-foot a { color: var(--sc-ink-soft); text-decoration: none; }
 .kf-foot a:hover { color: var(--sc-accent); }
 
+/* ---- mobile close act: the stage is locked to 100svh by the engine, and the
+   footer is pinned to its floor. Top-align the copy, shrink the headline and
+   trim the footer's padding so the two never meet, and give every footer link
+   a finger-sized hit area. */
+@media (max-width: 899px) {
+  .kf-close__stage { place-items: start; }
+  .kf-close__inner { width: auto; padding: 3.5rem var(--sc-gutter) 0; }
+  .kf-close__inner h2 { font-size: var(--sc-t-3xl); }
+  .kf-close__inner p { margin-top: var(--sc-4); }
+
+  .kf-foot { padding: var(--sc-4) var(--sc-gutter) var(--sc-5); gap: var(--sc-3) var(--sc-5);
+    flex-direction: column; align-items: stretch; }
+  /* two roomy columns: each link gets a half-width cell, comfortably tappable,
+     and the whole block still fits above the pinned stage's floor */
+  .kf-foot nav { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--sc-4); }
+  .kf-foot nav a { display: block; padding: 0.6rem 0; }
+
+  .kf-prose p > a:only-child { display: inline-block; padding: 0.45rem 0; }
+}
+
+/* sub-page footer: same finger-sized links on touch layouts */
+@media (max-width: 899px) {
+  .kf-footer ul { gap: 0; }
+  .kf-footer li a { display: block; padding: 0.7rem 0; }
+  .kf-footer__base { margin-top: var(--sc-6); }
+}
+
 /* ---------------------------------------------------------- atmosphere --- */
 /* Steered-light bloom: a soft warm pool that follows --kf-lx/--kf-ly, sits
    under everything, and brightens with scroll energy. Not decoration — it is
@@ -732,6 +808,16 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   text-wrap: balance; margin: 0 0 var(--sc-5); }
 .kf-h3 { font-family: var(--sc-font-display); font-weight: 700;
   font-size: var(--sc-t-xl); line-height: 1.05; margin: 0 0 var(--sc-2); }
+
+/* German compounds run long — "Allgemeine Geschäftsbedingungen" is wider than a
+   phone at display size. Let any word break rather than push a page-wide
+   horizontal scrollbar. */
+h1, h2, h3, h4,
+.kf-h1, .kf-h2, .kf-h3,
+.kf-hero__copy h1, .kf-close__inner h2,
+.kf-longform > h1, .kf-longform h2, .kf-longform h3,
+.kf-prose h2, .kf-prose h3 { overflow-wrap: break-word; }
+.kf-longform p, .kf-prose p, .kf-longform li { hyphens: auto; }
 
 /* page hero: image ground + kinetic headline, no WebGL */
 .kf-phero__stage { position: relative; display: grid; align-content: end;
@@ -874,6 +960,15 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   color: var(--sc-ink-soft); text-decoration-color: var(--sc-accent); }
 .kf-tiers__more:hover { color: var(--sc-accent); }
 
+/* touch: keep the swatch dots visually small but give each a finger-sized hit
+   area, and pad the "höhere Stückzahl" link into a real target */
+@media (max-width: 899px) {
+  .kf-prod__swatch { gap: 1.1rem; }
+  .kf-prod__swatch .dot { position: relative; }
+  .kf-prod__swatch .dot::after { content: ""; position: absolute; inset: -9px; border-radius: 50%; }
+  .kf-tiers__more { padding: 0.5rem 0; }
+}
+
 .kf-tip { margin: var(--sc-5) 0 0; padding: var(--sc-4);
   border-left: 2px solid var(--sc-accent);
   background: color-mix(in oklab, var(--sc-accent) 7%, transparent);
@@ -910,6 +1005,10 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   font-size: var(--sc-t-xs); margin-top: var(--sc-4); }
 .kf-contact dd { margin: 0.3rem 0 0; color: var(--sc-ink); }
 .kf-contact dd a { color: var(--sc-accent); }
+@media (max-width: 899px) {
+  .kf-contact dd { margin-top: 0.15rem; }
+  .kf-contact dd a { display: inline-block; padding: 0.45rem 0; }
+}
 
 /* long-form prose (über-uns, legal) */
 .kf-longform { max-width: 66ch; }

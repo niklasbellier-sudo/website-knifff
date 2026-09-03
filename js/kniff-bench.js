@@ -310,18 +310,23 @@
 
     var burger = head.querySelector('.kf-head__burger');
     if (!burger) return;
-    function close() {
-      head.classList.remove('is-open');
-      burger.setAttribute('aria-expanded', 'false');
-      burger.setAttribute('aria-label', 'Menü öffnen');
-    }
-    burger.addEventListener('click', function () {
-      var open = head.classList.toggle('is-open');
+    var root = document.documentElement;
+    function setOpen(open) {
+      head.classList.toggle('is-open', open);
+      root.classList.toggle('kf-nav-open', open);   // locks page scroll (CSS)
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    }
+    function close() { setOpen(false); }
+    burger.addEventListener('click', function () {
+      setOpen(!head.classList.contains('is-open'));
     });
     links.forEach(function (a) { a.addEventListener('click', close); });
     addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    // tap anywhere off the header (the dimmed page) closes the menu
+    document.addEventListener('click', function (e) {
+      if (head.classList.contains('is-open') && !e.target.closest('.kf-head')) close();
+    });
     var wide = matchMedia('(min-width: 901px)');
     var onWide = function (e) { if (e.matches) close(); };
     if (wide.addEventListener) wide.addEventListener('change', onWide);
@@ -345,8 +350,9 @@
 
   /* --------------------------------------------------- hero explode ------ */
   // The hero product (Reisedose) pulls apart on hover — pure CSS. On touch
-  // devices there is no hover, so we toggle .is-open: auto-open while the hero
-  // is centred in the viewport, and let a tap flip it. One class, no rAF.
+  // devices there is no hover: default is assembled (clean, never over the
+  // copy), a tap flips it, and it plays one short auto-peek the first time it
+  // scrolls into view so the interaction is discoverable. One class, no rAF.
   function HeroExplode() {
     var art = document.querySelector('.kf-hero__art[data-explode]');
     if (!art) return;
@@ -357,9 +363,18 @@
         art.classList.toggle('is-open');
       });
       if ('IntersectionObserver' in window) {
+        var peeked = false;
         new IntersectionObserver(function (es) {
-          es.forEach(function (en) { art.classList.toggle('is-open', en.intersectionRatio > 0.55); });
-        }, { threshold: [0, 0.55, 1] }).observe(art);
+          es.forEach(function (en) {
+            if (en.intersectionRatio > 0.6 && !peeked) {
+              peeked = true;
+              setTimeout(function () { art.classList.add('is-open'); }, 620);
+              setTimeout(function () { art.classList.remove('is-open'); }, 3000);
+            } else if (en.intersectionRatio === 0) {
+              art.classList.remove('is-open');           // reset once fully gone
+            }
+          });
+        }, { threshold: [0, 0.6, 1] }).observe(art);
       }
     }
     // keyboard: Enter/Space on the focused art follows the product link
