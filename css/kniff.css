@@ -117,13 +117,52 @@ main:focus { outline: none; }
 }
 html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; }
 .kf-boot__inner { width: min(78vw, 30rem); text-align: left; color: var(--sc-accent); }
-.kf-boot__art { width: 100%; aspect-ratio: 16 / 11; display: block; overflow: visible; }
-.kf-boot__p { stroke-dasharray: 620; stroke-dashoffset: 620;
-  animation: kf-boot-draw 1.8s var(--sc-ease-out) forwards; }
-.kf-boot__p:nth-child(2) { animation-delay: 0.5s; }
-.kf-boot__p:nth-child(3) { animation-delay: 0.9s; }
-@keyframes kf-boot-draw { to { stroke-dashoffset: 0; } }
-@media (prefers-reduced-motion: reduce) { .kf-boot__p { animation: none; stroke-dashoffset: 0; } }
+
+/* the wordmark breathes an amber glow, and a specular highlight sweeps across
+   it — the workshop coming to light (ref: ciaoenergy.com loading screen). */
+.kf-boot__logo { position: relative; width: min(62vw, 17rem); }
+.kf-boot__mark {
+  display: block; width: 100%; height: auto;
+  /* the wordmark asset is dark ("für helle Flächen") — force it to glowing
+     white so it reads on the near-black boot screen */
+  filter: brightness(0) invert(1)
+    drop-shadow(0 0 5px color-mix(in oklab, var(--sc-accent) 22%, transparent));
+  animation: kf-boot-glow 2.6s var(--sc-ease-in-out) infinite;
+}
+@keyframes kf-boot-glow {
+  0%, 100% { filter: brightness(0) invert(1)
+    drop-shadow(0 0 5px color-mix(in oklab, var(--sc-accent) 22%, transparent))
+    drop-shadow(0 0 1px color-mix(in oklab, var(--sc-accent) 40%, transparent)); }
+  50% { filter: brightness(0) invert(1)
+    drop-shadow(0 0 26px color-mix(in oklab, var(--sc-accent) 60%, transparent))
+    drop-shadow(0 0 8px color-mix(in oklab, var(--sc-accent) 75%, transparent)); }
+}
+.kf-boot__logo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg,
+    transparent 40%,
+    color-mix(in oklab, var(--sc-accent) 80%, #fff) 47%,
+    rgba(255, 255, 255, 0.92) 50%,
+    color-mix(in oklab, var(--sc-accent) 80%, #fff) 53%,
+    transparent 60%);
+  -webkit-mask: url(../assets/kniff-wortmarke-hell.png) no-repeat 0 0 / 100% 100%;
+  mask: url(../assets/kniff-wortmarke-hell.png) no-repeat 0 0 / 100% 100%;
+  mix-blend-mode: screen;
+  transform: translateX(-130%); opacity: 0;
+  animation: kf-boot-sweep 2.9s var(--sc-ease-in-out) infinite;
+}
+@keyframes kf-boot-sweep {
+  0%, 52%   { transform: translateX(-130%); opacity: 0; }
+  56%       { opacity: 1; }
+  78%       { opacity: 1; }
+  82%, 100% { transform: translateX(130%); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kf-boot__mark { animation: none;
+    filter: brightness(0) invert(1)
+      drop-shadow(0 0 14px color-mix(in oklab, var(--sc-accent) 42%, transparent)); }
+  .kf-boot__logo::after { display: none; }
+}
 .kf-boot__row {
   display: flex; justify-content: space-between; align-items: baseline;
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);

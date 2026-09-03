@@ -32,7 +32,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=70">
+<link rel="stylesheet" href="css/kniff.css?v=73">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -41,17 +41,13 @@
 <div class="sc-grain" aria-hidden="true"></div>
 <div class="kf-room" aria-hidden="true"></div>
 
-<!-- boot: authored silence. The object assembles while assets + fonts load. -->
+<!-- boot: authored silence. The wordmark glows while assets + fonts load. -->
 <div class="kf-boot" role="status" aria-label="Seite wird geladen">
   <div class="kf-boot__inner" aria-hidden="true">
-    <svg class="kf-boot__art" viewBox="0 0 200 130" aria-hidden="true">
-      <g fill="none" stroke="currentColor" stroke-width="1.5">
-        <path class="kf-boot__p" d="M40 92 L40 44 L100 20 L160 44 L160 92 L100 116 Z"/>
-        <path class="kf-boot__p" d="M40 44 L100 68 L160 44"/>
-        <path class="kf-boot__p" d="M100 68 L100 116"/>
-      </g>
-    </svg>
-    <div class="kf-boot__row"><span>Kniff / Werkbank</span><span><span class="kf-boot__pct">000</span> %</span></div>
+    <div class="kf-boot__logo">
+      <img class="kf-boot__mark" src="assets/kniff-wortmarke-hell.png" alt="" width="439" height="188">
+    </div>
+    <div class="kf-boot__row"><span>Werkbank</span><span><span class="kf-boot__pct">000</span> %</span></div>
     <div class="kf-boot__track"><div class="kf-boot__bar"></div></div>
   </div>
 </div>
@@ -89,7 +85,7 @@
 <main id="inhalt" tabindex="-1">
 
   <!-- ============ ACT 1 — HERO. pin + hover-explode product. PEAK. ======= -->
-  <section data-sc-act="pin" data-sc-span="1.9" id="hero"
+  <section data-sc-act="pin" data-sc-span="1.05" id="hero"
            data-kf-obj="Reisedose" data-kf-spec="<b>Fertiger Kniff</b> · PLA · ca. 30 g · ab 19,90 €">
     <div data-sc-stage class="kf-hero__stage" data-sc-spotlight>
       <div class="kf-hero__art" data-explode tabindex="0" role="img"
@@ -111,7 +107,7 @@
       </div>
       <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
 
-      <div class="sc-copy sc-copy--lead kf-hero__copy" data-sc-cue="0 0.82 0">
+      <div class="sc-copy sc-copy--lead kf-hero__copy" data-sc-cue="0 1 0 0">
         <h1 data-sc-kinetic="lines">Leg deine Idee auf die Bank.</h1>
         <p class="kf-lede">3D-Druck auf Anfrage aus Berlin. Du schickst Skizze, Maße oder STL, wir prüfen Druckbarkeit und Aufwand und drucken dein Teil &ndash; vom Einzelstück bis zur Serie.</p>
         <div class="kf-actions">
@@ -248,7 +244,7 @@
   </section>
 
   <!-- ============ ACT 3 — VERFAHREN. pin + cross-section reveal. ========= -->
-  <section data-sc-act="pin" data-sc-span="3.0" id="verfahren"
+  <section data-sc-act="pin" data-sc-span="1.2" id="verfahren"
            data-kf-obj="Verfahren" data-kf-spec="Von der Idee bis zum Teil · <b>4 Schritte</b>">
     <div data-sc-stage class="kf-proc__stage">
       <img class="kf-ground" src="assets/scenes/01-process.jpg?v=2" alt="" aria-hidden="true"
@@ -410,7 +406,7 @@
     </div>
   </section>
 
-  <section data-sc-act="pin" data-sc-span="1.25" id="dein-zug"
+  <section data-sc-act="pin" data-sc-span="1.05" id="dein-zug"
            data-kf-obj="Deine Idee" data-kf-spec="Die Bank ist frei">
     <div data-sc-stage class="kf-close__stage" data-sc-spotlight>
       <img class="kf-ground kf-ground--full" src="assets/scenes/04-close.jpg?v=2" alt="" aria-hidden="true"
@@ -526,6 +522,6 @@
 </script>
 
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=70" defer></script>
+<script src="js/kniff-bench.js?v=73" defer></script>
 </body>
 </html>
