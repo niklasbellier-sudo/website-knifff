@@ -32,7 +32,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=61">
+<link rel="stylesheet" href="css/kniff.css?v=62">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -133,6 +133,12 @@
       <h2 class="kf-h2">Zwei Wege zu deinem Teil.</h2>
       <p class="kf-lede">Kniff ist eine kleine Druckerei aus Berlin. Wir drucken so ziemlich alles, was ein 3D-Drucker hergibt: Alltagshelfer, Ersatzteile, handwerkliche Bauteile, Modelle für Architektur- und Planungsbüros. Auf Wunsch passen wir Modelle an. Jedes Teil geht einzeln durch unsere Hand, bevor es verschickt wird.</p>
 
+      <a class="kf-proofbar" href="#bewertungen">
+        <span class="kf-proofbar__stars" aria-hidden="true">★★★★★</span>
+        <span class="kf-proofbar__txt"><b>Fünf von fünf Sternen</b> aus fünf Kundenrückmeldungen</span>
+        <span class="kf-proofbar__go">Rückmeldungen lesen <span aria-hidden="true">→</span></span>
+      </a>
+
       <div class="kf-services">
         <article>
           <p class="kf-eyebrow">Custom-Druck</p>
@@ -151,7 +157,7 @@
       <ul class="kf-trust" aria-label="Das kannst du erwarten">
         <li><b>Festpreis vorab</b><span>Kein Angebot ohne konkrete Zahl.</span></li>
         <li><b>Antwort in 48&nbsp;Stunden</b><span>Persönlich, kein Callcenter.</span></li>
-        <li><b>Gedruckt in Berlin</b><span>Kleine Serien, jedes Teil von Hand geprüft.</span></li>
+        <li><b>Gedruckt in Berlin</b><span>Eigene Fertigung, jedes Teil von Hand geprüft.</span></li>
         <li><b>Pflanzenbasiertes PLA</b><span>Standardmaterial, geruchsarm und stabil.</span></li>
       </ul>
     </div>
@@ -208,6 +214,36 @@
         <span class="kf-card--cta__h">Zum Shop</span>
         <span class="kf-cta__arrow" aria-hidden="true">→</span>
       </a>
+    </div>
+  </section>
+
+  <!-- ============ BEWERTUNGEN. flow, direkt nach dem Sortiment. ===== -->
+  <section class="sc-section" data-sc-act="flow" id="bewertungen"
+           data-kf-obj="Bewertungen" data-kf-spec="Was Kundinnen und Kunden sagen">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Rückmeldungen</p>
+      <h2 class="kf-h2">Was Kundinnen und Kunden sagen.</h2>
+
+      <div class="kf-reviews" id="kf-reviews" aria-live="polite"></div>
+      <noscript>
+        <div class="kf-reviews">
+          <figure class="kf-review"><blockquote>Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt.</blockquote><figcaption>Daniel K.</figcaption></figure>
+          <figure class="kf-review"><blockquote>Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.</blockquote><figcaption>Sophie R.</figcaption></figure>
+          <figure class="kf-review"><blockquote>Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich.</blockquote><figcaption>Marcel W.</figcaption></figure>
+        </div>
+      </noscript>
+
+      <p class="kf-reviews__disclaim">Alle Bewertungen stammen von Kundinnen und Kunden, die ein Produkt oder eine individuelle Anfertigung bei Kniff erhalten haben. Die Rückmeldungen wurden persönlich eingeholt und keiner Bewertung liegt eine Gegenleistung zugrunde.</p>
+
+      <script type="application/json" id="kf-reviews-data">
+      [
+        {"name":"Daniel K.","rating":5,"text":"Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt."},
+        {"name":"Sophie R.","rating":5,"text":"Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte."},
+        {"name":"Marcel W.","rating":5,"text":"Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich."},
+        {"name":"Nadine B.","rating":5,"text":"Besonders gut finde ich, dass umweltbewusstes Material verwendet wird. Das Produkt wirkt hochwertig und die individuelle Gestaltung wurde sehr schön umgesetzt."},
+        {"name":"Tobias F.","rating":5,"text":"Hat alles problemlos funktioniert. Auf meine Sonderwünsche wurde eingegangen und man hatte nicht das Gefühl, einfach nur eine Bestellnummer zu sein."}
+      ]
+      </script>
     </div>
   </section>
 
@@ -294,37 +330,6 @@
     </div>
   </section>
 
-  <!-- ============ BEWERTUNGEN. flow, vor dem Close. ==================== -->
-  <section class="sc-section" data-sc-act="flow" id="bewertungen"
-           data-kf-obj="Bewertungen" data-kf-spec="Was Kundinnen und Kunden sagen">
-    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
-      <p class="kf-eyebrow">Rückmeldungen</p>
-      <h2 class="kf-h2">Was Kundinnen und Kunden sagen.</h2>
-
-      <div class="kf-reviews" id="kf-reviews" aria-live="polite"></div>
-      <noscript>
-        <div class="kf-reviews">
-          <figure class="kf-review"><blockquote>Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt.</blockquote><figcaption>Daniel K.</figcaption></figure>
-          <figure class="kf-review"><blockquote>Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.</blockquote><figcaption>Sophie R.</figcaption></figure>
-          <figure class="kf-review"><blockquote>Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich.</blockquote><figcaption>Marcel W.</figcaption></figure>
-        </div>
-      </noscript>
-
-      <p class="kf-reviews__disclaim">Alle Bewertungen stammen von Kundinnen und Kunden, die ein Produkt oder eine individuelle Anfertigung bei Kniff erhalten haben. Die Rückmeldungen wurden persönlich eingeholt und keiner Bewertung liegt eine Gegenleistung zugrunde.</p>
-
-      <script type="application/json" id="kf-reviews-data">
-      [
-        {"name":"Daniel K.","rating":5,"text":"Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt."},
-        {"name":"Sophie R.","rating":5,"text":"Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte."},
-        {"name":"Marcel W.","rating":5,"text":"Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich."},
-        {"name":"Nadine B.","rating":5,"text":"Besonders gut finde ich, dass umweltbewusstes Material verwendet wird. Das Produkt wirkt hochwertig und die individuelle Gestaltung wurde sehr schön umgesetzt."},
-        {"name":"Tobias F.","rating":5,"text":"Hat alles problemlos funktioniert. Auf meine Sonderwünsche wurde eingegangen und man hatte nicht das Gefühl, einfach nur eine Bestellnummer zu sein."}
-      ]
-      </script>
-    </div>
-  </section>
-
-  <!-- ============ ACT 6 — DEIN ZUG. pin close, holds. LAST element. ===== -->
   <!-- ============ KNIFF-TIPPS. vertikale Sektion, seitlich scrollbare Reihe. -->
   <section class="sc-section" data-sc-act="flow" id="tipps"
            data-kf-obj="Kniff-Tipps" data-kf-spec="Kleine Handgriffe, die etwas bringen">
@@ -501,6 +506,6 @@
 </script>
 
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=61" defer></script>
+<script src="js/kniff-bench.js?v=62" defer></script>
 </body>
 </html>

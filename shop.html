@@ -31,7 +31,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=61">
+<link rel="stylesheet" href="css/kniff.css?v=62">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -270,6 +270,31 @@
     </div>
   </section>
 
+  <section class="kf-sec" id="bewertungen">
+    <div class="kf-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Rückmeldungen</p>
+      <h2 class="kf-h2">Was Kundinnen und Kunden sagen.</h2>
+      <div class="kf-reviews" id="kf-reviews" aria-live="polite"></div>
+      <noscript>
+        <div class="kf-reviews">
+          <figure class="kf-review"><blockquote>Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt.</blockquote><figcaption>Daniel K.</figcaption></figure>
+          <figure class="kf-review"><blockquote>Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.</blockquote><figcaption>Sophie R.</figcaption></figure>
+          <figure class="kf-review"><blockquote>Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich.</blockquote><figcaption>Marcel W.</figcaption></figure>
+        </div>
+      </noscript>
+      <p class="kf-reviews__disclaim">Alle Bewertungen stammen von Kundinnen und Kunden, die ein Produkt oder eine individuelle Anfertigung bei Kniff erhalten haben. Die Rückmeldungen wurden persönlich eingeholt und keiner Bewertung liegt eine Gegenleistung zugrunde.</p>
+      <script type="application/json" id="kf-reviews-data">
+      [
+        {"name":"Daniel K.","rating":5,"text":"Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt."},
+        {"name":"Sophie R.","rating":5,"text":"Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte."},
+        {"name":"Marcel W.","rating":5,"text":"Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich."},
+        {"name":"Nadine B.","rating":5,"text":"Besonders gut finde ich, dass umweltbewusstes Material verwendet wird. Das Produkt wirkt hochwertig und die individuelle Gestaltung wurde sehr schön umgesetzt."},
+        {"name":"Tobias F.","rating":5,"text":"Hat alles problemlos funktioniert. Auf meine Sonderwünsche wurde eingegangen und man hatte nicht das Gefühl, einfach nur eine Bestellnummer zu sein."}
+      ]
+      </script>
+    </div>
+  </section>
+
   <section class="kf-sec kf-sec--paper" id="mehr">
     <div class="kf-wrap kf-split" data-sc-in data-sc-stagger="60">
       <div>
@@ -296,7 +321,7 @@
 </footer>
 
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=61" defer></script>
+<script src="js/kniff-bench.js?v=62" defer></script>
 <script>
   /* Bildergalerie + Farbvariante je Produkt */
   document.querySelectorAll('.kf-prod').forEach(function (prod) {

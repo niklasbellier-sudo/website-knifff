@@ -691,6 +691,26 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 @media (max-width: 899px) { .kf-shopfacts a { display: inline-block; padding: 0.35rem 0; } }
 
 /* --------------------------------------------------- ACT: BEWERTUNGEN --- */
+/* early social-proof cue: a slim clickable bar high on the homepage that
+   jumps to the full review section */
+.kf-proofbar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.9rem;
+  margin: var(--sc-5) 0 0; padding: 0.75rem 1rem;
+  border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm);
+  background: color-mix(in oklab, var(--sc-accent) 8%, transparent);
+  text-decoration: none; color: var(--sc-ink);
+  transition: border-color var(--sc-d-fast), background var(--sc-d-fast);
+}
+.kf-proofbar:hover { border-color: var(--sc-accent);
+  background: color-mix(in oklab, var(--sc-accent) 14%, transparent); }
+.kf-proofbar__stars { color: var(--sc-accent); letter-spacing: 2px; font-size: var(--sc-t-sm); }
+.kf-proofbar__txt { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+.kf-proofbar__txt b { color: var(--sc-ink); font-weight: 600; }
+.kf-proofbar__go { margin-left: auto; font-family: var(--sc-font-mono);
+  font-size: var(--sc-t-xs); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--sc-accent); white-space: nowrap; }
+@media (max-width: 560px) { .kf-proofbar__go { margin-left: 0; } }
+
 .kf-reviews { display: grid; gap: clamp(1rem, 2.5vw, 1.75rem);
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); margin-top: var(--sc-7); }
 @media (max-width: 640px) {
