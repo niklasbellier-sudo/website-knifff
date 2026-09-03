@@ -1014,6 +1014,21 @@ h1, h2, h3, h4,
 .kf-license { margin: var(--sc-4) 0 0; font-family: var(--sc-font-mono);
   font-size: var(--sc-t-xs); color: var(--sc-ink-soft); letter-spacing: 0.03em; }
 
+/* product now sold through Etsy: primary buy button + a quiet direct-ask link */
+.kf-prod__etsynote {
+  margin: var(--sc-4) 0 0; font-family: var(--sc-font-mono);
+  font-size: var(--sc-t-xs); letter-spacing: 0.03em; color: var(--sc-ink-soft);
+}
+.kf-prod__etsynote b { color: var(--sc-ink); font-weight: 500; }
+.kf-prod__buy { margin-top: var(--sc-6); display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.4rem; }
+.kf-prod__buy .kf-cta { margin-top: 0; }
+.kf-prod__buy .kf-ghost {
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  border: 0; padding: 0.4rem 0; color: var(--sc-ink-soft);
+}
+.kf-prod__buy .kf-ghost:hover { color: var(--sc-accent); border: 0; }
+
 /* product grid — asymmetric, never three equal columns */
 .kf-grid { display: grid; gap: clamp(1rem, 3vw, 2rem); margin-top: var(--sc-7);
   grid-template-columns: repeat(2, 1fr); }
