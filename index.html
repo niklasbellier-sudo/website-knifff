@@ -33,7 +33,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=74">
+<link rel="stylesheet" href="css/kniff.css?v=79">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -85,26 +85,35 @@
 
 <main id="inhalt" tabindex="-1">
 
-  <!-- ============ ACT 1 — HERO. pin + hover-explode product. PEAK. ======= -->
+  <!-- ============ ACT 1 — HERO. pin + rotatable Kniff bulb. PEAK. ======== -->
   <section data-sc-act="pin" data-sc-span="1.05" id="hero"
-           data-kf-obj="Reisedose" data-kf-spec="<b>Fertiger Kniff</b> · PLA · ca. 30 g · ab 19,90 €">
+           data-kf-obj="Kniff" data-kf-spec="<b>Dreh die Glühbirne</b> · Angebot · Ablauf · Material · Preis">
     <div data-sc-stage class="kf-hero__stage" data-sc-spotlight>
-      <div class="kf-hero__art" data-explode tabindex="0" role="img"
-           aria-label="Kniff Reisedose für Wattestäbchen, 3D-gedruckt aus mattschwarzem PLA. Zeiger darüber bewegen zeigt Material, Gewicht und Preis.">
-        <div class="kf-explode">
-          <img class="kf-explode__lid" src="assets/scenes/reisedose-lid.png?v=4" alt="" aria-hidden="true"
-               width="514" height="496" srcset="assets/scenes/reisedose-lid-m.png?v=4 316w, assets/scenes/reisedose-lid.png?v=4 514w" sizes="(min-width:900px) 11rem, 21vw">
-          <img class="kf-explode__body" src="assets/scenes/reisedose-body.png?v=4" alt="" aria-hidden="true" fetchpriority="high"
-               width="303" height="516" srcset="assets/scenes/reisedose-body-m.png?v=4 187w, assets/scenes/reisedose-body.png?v=4 303w" sizes="(min-width:900px) 10rem, 20vw">
+      <div class="kf-bulb" data-bulb tabindex="0" role="group"
+           aria-label="Drehbare Kniff-Glühbirne. Dreh sie für Infos zu Angebot, Ablauf, Material und Preis.">
+        <canvas class="kf-bulb__canvas" aria-hidden="true"></canvas>
+        <div class="kf-bulb__info" aria-live="polite">
+          <a class="kf-bulb__face is-on" data-face="0" href="#was-wir-machen">
+            <span class="kf-bulb__k">Was wir machen</span>
+            <span class="kf-bulb__t">3D-Druck auf Anfrage und fertige Kniffe.</span>
+            <span class="kf-bulb__go" aria-hidden="true">→</span>
+          </a>
+          <a class="kf-bulb__face" data-face="1" href="3d-druck-auf-anfrage.html#ablauf">
+            <span class="kf-bulb__k">Ablauf</span>
+            <span class="kf-bulb__t">Vier Schritte, kostenlose Einschätzung.</span>
+            <span class="kf-bulb__go" aria-hidden="true">→</span>
+          </a>
+          <a class="kf-bulb__face" data-face="2" href="3d-druck-auf-anfrage.html#briefing">
+            <span class="kf-bulb__k">Material</span>
+            <span class="kf-bulb__t">PLA, über 10 Farben, gedruckt in Berlin.</span>
+            <span class="kf-bulb__go" aria-hidden="true">→</span>
+          </a>
+          <a class="kf-bulb__face" data-face="3" href="3d-druck-auf-anfrage.html#preis">
+            <span class="kf-bulb__k">Preis &amp; Lieferung</span>
+            <span class="kf-bulb__t">Festpreis vorab, Versand 1–2 Werktage.</span>
+            <span class="kf-bulb__go" aria-hidden="true">→</span>
+          </a>
         </div>
-        <aside class="kf-explode__spec">
-          <dl>
-            <div><dt>Material</dt><dd>PLA, mattschwarz</dd></div>
-            <div><dt>Gewicht</dt><dd>ca.&nbsp;30&nbsp;g</dd></div>
-            <div><dt>Preis</dt><dd>ab&nbsp;19,90&nbsp;€</dd></div>
-          </dl>
-          <a class="kf-explode__link" href="shop.html#reisedose-wattestaebchen" tabindex="-1">Zum Produkt <span aria-hidden="true">→</span></a>
-        </aside>
       </div>
       <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
 
@@ -117,7 +126,7 @@
           </a>
           <a href="shop.html" class="kf-ghost">Fertige Kniffe ansehen</a>
         </div>
-        <p class="kf-hint kf-hint--tap"><span data-hint-hover>Fahr über die Dose &mdash; sie geht auf.</span><span data-hint-tap>Tipp die Dose an &mdash; sie geht auf.</span></p>
+        <p class="kf-hint kf-hint--tap"><span data-hint-hover>Dreh die Glühbirne &mdash; vier Seiten, vier Infos.</span><span data-hint-tap>Wisch über die Glühbirne &mdash; vier Seiten, vier Infos.</span></p>
       </div>
     </div>
   </section>
@@ -522,7 +531,8 @@
 }
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js" defer></script>
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=74" defer></script>
+<script src="js/kniff-bench.js?v=79" defer></script>
 </body>
 </html>

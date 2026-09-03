@@ -348,42 +348,174 @@
     });
   }
 
-  /* --------------------------------------------------- hero explode ------ */
-  // The hero product (Reisedose) pulls apart on hover — pure CSS. On touch
-  // devices there is no hover: default is assembled (clean, never over the
-  // copy), a tap flips it, and it plays one short auto-peek the first time it
-  // scrolls into view so the interaction is discoverable. One class, no rAF.
-  function HeroExplode() {
-    var art = document.querySelector('.kf-hero__art[data-explode]');
-    if (!art) return;
-    var canHover = matchMedia('(hover: hover)').matches;
-    if (!canHover) {
-      art.addEventListener('click', function (e) {
-        if (e.target.closest('.kf-explode__link')) return;   // let the link work
-        art.classList.toggle('is-open');
-      });
-      if ('IntersectionObserver' in window) {
-        var peeked = false;
-        new IntersectionObserver(function (es) {
-          es.forEach(function (en) {
-            if (en.intersectionRatio > 0.6 && !peeked) {
-              peeked = true;
-              setTimeout(function () { art.classList.add('is-open'); }, 620);
-              setTimeout(function () { art.classList.remove('is-open'); }, 3000);
-            } else if (en.intersectionRatio === 0) {
-              art.classList.remove('is-open');           // reset once fully gone
-            }
-          });
-        }, { threshold: [0, 0.6, 1] }).observe(art);
+  /* ------------------------------------------------- rotatable bulb ------ */
+  // The Kniff symbol: a 3D-printed "idea". A procedural fluted light bulb in
+  // three.js the visitor drags / swipes / arrows to turn. It snaps to four
+  // faces, each surfacing one line about Kniff (Angebot / Ablauf / Material /
+  // Preis) that deep-links into the site. Idle = slow auto-spin. No WebGL or
+  // reduced motion -> a flat list of the same four links.
+  var HALF_PI = Math.PI / 2;
+  function snapAngle(v) { return Math.round(v / HALF_PI) * HALF_PI; }
+
+  function BulbHero() {
+    var host = document.querySelector('[data-bulb]');
+    if (!host) return;
+    var faces = [].slice.call(host.querySelectorAll('.kf-bulb__face'));
+    var canvas = host.querySelector('.kf-bulb__canvas');
+
+    function showFace(i) {
+      faces.forEach(function (f, k) { f.classList.toggle('is-on', k === i); });
+    }
+
+    var gl = null;
+    try { gl = canvas && canvas.getContext('webgl2') || canvas && canvas.getContext('webgl'); } catch (e) {}
+    if (reduce || !window.THREE || !gl) {
+      host.classList.add('kf-bulb--flat');           // static: all four links listed
+      return;
+    }
+    host.classList.add('kf-bulb--3d');
+
+    var THREE = window.THREE;
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+    camera.position.set(0, 0.05, 8.6);
+
+    // --- bulb: a lathed silhouette, then fluted by pushing the radius with a
+    //     cosine around the angle, masked to fade out at neck and crown.
+    var profile = [
+      [0.00, -2.10], [0.14, -2.10], [0.15, -2.00], [0.40, -1.94],
+      [0.44, -1.86], [0.40, -1.78], [0.44, -1.66], [0.40, -1.58],
+      [0.44, -1.46], [0.40, -1.38], [0.34, -1.20], [0.30, -1.02],
+      [0.34, -0.88], [0.52, -0.60], [0.80, -0.24], [1.00, 0.14],
+      [1.09, 0.52], [1.06, 0.92], [0.94, 1.28], [0.74, 1.60],
+      [0.48, 1.86], [0.24, 2.04], [0.08, 2.14], [0.00, 2.18]
+    ].map(function (p) { return new THREE.Vector2(p[0], p[1]); });
+
+    var geo = new THREE.LatheGeometry(profile, 120);
+    var pos = geo.attributes.position;
+    var FLUTES = 18, AMP = 0.05;
+    var v = new THREE.Vector3();
+    for (var i = 0; i < pos.count; i++) {
+      v.fromBufferAttribute(pos, i);
+      var y = v.y, r = Math.hypot(v.x, v.z);
+      if (r > 0.02) {
+        var th = Math.atan2(v.z, v.x);
+        // fade the fluting near the very base (< -1.7) and the crown (> 1.5)
+        var mask = 1;
+        if (y < -1.55) mask = Math.max(0, (y + 2.05) / 0.5);
+        if (y > 1.35) mask = Math.max(0, (2.0 - y) / 0.65);
+        var nr = r + AMP * mask * (0.5 + 0.5 * Math.cos(FLUTES * th));
+        var s = nr / r;
+        pos.setX(i, v.x * s); pos.setZ(i, v.z * s);
       }
     }
-    // keyboard: Enter/Space on the focused art follows the product link
-    art.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        var lnk = art.querySelector('.kf-explode__link');
-        if (lnk) { e.preventDefault(); location.href = lnk.getAttribute('href'); }
+    geo.computeVertexNormals();
+
+    var mat = new THREE.MeshStandardMaterial({
+      color: 0x1c1a12, roughness: 0.48, metalness: 0.18, emissive: 0x120a02, emissiveIntensity: 0.85
+    });
+    var bulb = new THREE.Mesh(geo, mat);
+    var group = new THREE.Group();
+    group.add(bulb);
+    group.rotation.x = 0.09;
+    scene.add(group);
+
+    scene.add(new THREE.HemisphereLight(0x352c1a, 0x050403, 0.75));
+    var key = new THREE.DirectionalLight(0xfff1dd, 2.7); key.position.set(-3.5, 4, 3); scene.add(key);
+    var rim = new THREE.PointLight(0xf2a63b, 55, 26, 2); rim.position.set(3.4, -1.0, 2.4); scene.add(rim);
+    var fill = new THREE.DirectionalLight(0xf0b45a, 0.6); fill.position.set(2.5, -2, -2); scene.add(fill);
+
+    function resize() {
+      var w = canvas.clientWidth || host.clientWidth || 1;
+      var h = canvas.clientHeight || host.clientHeight || 1;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+    }
+    resize();
+    addEventListener('resize', resize, { passive: true });
+
+    // --- state
+    var rot = 0, vel = 0, target = null, auto = true, curFace = 0, running = false;
+    var dragging = false, lastX = 0, lastT = 0, idleTimer = 0;
+    showFace(0);
+
+    function wake() { auto = false; clearTimeout(idleTimer); idleTimer = setTimeout(function () { auto = true; }, 4500); }
+
+    host.addEventListener('pointerdown', function (e) {
+      dragging = true; lastX = e.clientX; lastT = performance.now(); vel = 0; target = null; wake();
+      if (host.setPointerCapture) { try { host.setPointerCapture(e.pointerId); } catch (x) {} }
+    });
+    host.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      var now = performance.now(), dx = e.clientX - lastX, dt = Math.max(now - lastT, 8);
+      rot += dx * 0.011;
+      vel = (dx * 0.011) / dt * 16;
+      lastX = e.clientX; lastT = now;
+    });
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      target = snapAngle(rot + vel * 9);
+      vel = 0;
+      if (host.releasePointerCapture && e && e.pointerId != null) { try { host.releasePointerCapture(e.pointerId); } catch (x) {} }
+    }
+    host.addEventListener('pointerup', endDrag);
+    host.addEventListener('pointercancel', endDrag);
+    host.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); wake(); target = snapAngle(rot - HALF_PI); }
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); wake(); target = snapAngle(rot + HALF_PI); }
+      else if (e.key === 'Enter' || e.key === ' ') {
+        var on = faces[curFace]; if (on) { e.preventDefault(); location.href = on.getAttribute('href'); }
       }
     });
+
+    var clock = 0;
+    function tick(now) {
+      if (!running) return;
+      clock = (now || 0) / 1000;
+      if (auto && !dragging) rot += 0.0045;
+      else if (target !== null) {
+        rot += (target - rot) * 0.14;
+        if (Math.abs(target - rot) < 0.002) { rot = target; target = null; }
+      } else if (!dragging) {
+        rot += vel; vel *= 0.9;
+        if (Math.abs(vel) < 0.0008) { vel = 0; target = snapAngle(rot); }
+      }
+      group.rotation.y = rot;
+      group.rotation.x = 0.09 + Math.sin(clock * 0.6) * 0.02;
+      group.position.y = Math.sin(clock * 0.8) * 0.04;
+
+      // swap the caption only when the bulb is settled on a face or drifting
+      // slowly (auto-spin) — never mid-drag / mid-snap, so it doesn't flicker
+      // through all four while you throw it.
+      if (!dragging && target === null) {
+        var f = ((Math.round(rot / HALF_PI) % 4) + 4) % 4;
+        if (f !== curFace) { curFace = f; showFace(f); }
+      }
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    function setRunning(on) {
+      if (on === running) return;
+      running = on;
+      if (on) requestAnimationFrame(tick);
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (en) { setRunning(en.isIntersecting && !document.hidden); });
+      }, { threshold: 0.05 }).observe(host);
+    } else { setRunning(true); }
+    document.addEventListener('visibilitychange', function () { setRunning(running && !document.hidden || (!document.hidden && isOnScreen(host))); });
+
+    function isOnScreen(el) {
+      var r = el.getBoundingClientRect();
+      return r.bottom > 0 && r.top < (innerHeight || 800);
+    }
+    // canvas may have zero size until the pinned stage lays out — re-measure
+    setTimeout(resize, 200); setTimeout(resize, 800);
   }
 
   /* ----------------------------------------------- contact prefill ------ */
@@ -426,7 +558,7 @@
     Nav();
     tuneSpans();
     Light.init();
-    HeroExplode();
+    BulbHero();
     ContactPrefill();
     Reviews();
     var rail = RailCubes();

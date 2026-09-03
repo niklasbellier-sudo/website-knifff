@@ -373,116 +373,117 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
    assembled. Hover / keyboard-focus / .is-open pulls them apart and slides in a
    spec panel (Material / Gewicht / Preis). Pure CSS transitions — nothing per
    frame, nothing that hijacks the scroll. */
-.kf-hero__art {
-  position: absolute; z-index: 3; left: 50%; top: 49%;
-  width: min(26rem, 82vw); aspect-ratio: 1 / 1;
-  /* gentle pointer parallax: the whole dose drifts with the steered light */
-  transform: translate(
-    calc(-50% + (var(--kf-lx, 0.5) - 0.5) * 26px),
-    calc(-50% + (var(--kf-ly, 0.5) - 0.5) * 18px));
-  transition: transform 260ms var(--sc-ease-out);
-  cursor: pointer; -webkit-tap-highlight-color: transparent;
+/* ---- ACT 1 hero object: the rotatable Kniff bulb. A procedural fluted
+   light bulb (three.js) the visitor drags / swipes / arrows to turn; it snaps
+   to four faces, each surfacing one line about Kniff. No WebGL / reduced
+   motion -> the four lines as a flat list. */
+.kf-bulb {
+  position: absolute; z-index: 3; left: 50%; top: 50%;
+  width: min(24rem, 82vw); aspect-ratio: 3 / 4;
+  transform: translate(-50%, -50%);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: pan-y;                 /* vertical page scroll stays free */
 }
-@media (min-width: 900px) {
-  .kf-hero__art { left: 61%; top: 50%; width: min(31rem, 38vw); }
-}
+@media (min-width: 900px) { .kf-bulb { left: 62%; width: min(30rem, 40vw); } }
 
-/* headline layer sits above the art (z 20); the engine writes inline
-   pointer-events:auto on it — override so hovering the empty headline area
-   still reaches the product; its own links/buttons stay live. */
-.kf-hero__copy { pointer-events: none !important; }
-.kf-hero__copy a, .kf-hero__copy button { pointer-events: auto; }
-
-.kf-explode { position: absolute; inset: 0; animation: kf-float 11s var(--sc-ease-in-out) infinite; }
-/* amber pool the dose floats in — same light language as the shop heroes */
-.kf-explode::before {
-  content: ""; position: absolute; left: 50%; top: 52%; z-index: 0;
-  width: 92%; height: 78%; transform: translate(-50%, -50%);
+.kf-bulb::before {                      /* amber pool the bulb floats in */
+  content: ""; position: absolute; left: 50%; top: 46%; z-index: 0;
+  width: 112%; height: 94%; transform: translate(-50%, -50%);
   background: radial-gradient(closest-side,
-    color-mix(in oklab, var(--sc-accent) 46%, transparent) 0%,
-    color-mix(in oklab, var(--sc-accent) 16%, transparent) 46%,
+    color-mix(in oklab, var(--sc-accent) 40%, transparent) 0%,
+    color-mix(in oklab, var(--sc-accent) 13%, transparent) 48%,
     transparent 74%);
   pointer-events: none;
 }
-.kf-explode__body, .kf-explode__lid {
-  position: absolute; left: 50%; height: auto;
-  filter: drop-shadow(0 24px 50px rgba(0,0,0,0.6));
-  transition: transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+.kf-bulb__canvas {
+  position: relative; z-index: 1; display: block; width: 100%; height: 100%;
+  cursor: grab;
+  filter: drop-shadow(0 30px 55px rgba(0,0,0,0.55));
 }
-/* lean is baked into the pixels now — CSS only translates, never rotates.
-   --dose-nudge shifts the lid onto the body's (off-centre) opening; it scales
-   up on the larger desktop art. */
-.kf-explode { --dose-nudge: 6px; }
-@media (min-width: 900px) { .kf-explode { --dose-nudge: 14px; } }
-.kf-explode__body { width: 34%; bottom: 3%; z-index: 1; transform: translateX(-50%); }
-.kf-explode__lid  { width: 35%; top: 19%;   z-index: 2;
-  transform: translate(calc(-50% + var(--dose-nudge)), 0); }
+.kf-bulb__canvas:active { cursor: grabbing; }
+.kf-bulb:focus-visible { outline: none; }
+.kf-bulb:focus-visible .kf-bulb__canvas {
+  outline: 2px solid var(--sc-accent); outline-offset: 6px; border-radius: 12px;
+}
 
-.kf-hero__art:hover  .kf-explode__lid,
-.kf-hero__art:focus-visible .kf-explode__lid,
-.kf-hero__art.is-open .kf-explode__lid  { transform: translate(calc(-50% + var(--dose-nudge)), -44%); }
-.kf-hero__art:hover  .kf-explode__body,
-.kf-hero__art:focus-visible .kf-explode__body,
-.kf-hero__art.is-open .kf-explode__body { transform: translate(-50%, 6%); }
-
-.kf-explode__spec {
-  position: absolute; z-index: 4;
-  right: -2%; top: 50%;
-  transform: translateY(-50%) translateX(14px);
-  width: max-content; max-width: min(18rem, 58vw);
-  padding: 1rem 1.15rem 1.1rem;
-  background: color-mix(in oklab, var(--sc-canvas) 84%, transparent);
+/* the four faces share one spot; only .is-on shows */
+.kf-bulb__info {
+  position: absolute; z-index: 2; left: 50%; bottom: -0.25rem;
+  width: max-content; max-width: min(22rem, 74vw);
+  transform: translateX(-50%);
+}
+@media (min-width: 900px) {
+  .kf-bulb__info { left: auto; right: -6%; bottom: 14%; transform: none; max-width: 17rem; }
+}
+.kf-bulb__face {
+  position: absolute; inset: 0; display: grid; gap: 0.15rem;
+  padding: 0.7rem 0.9rem; text-decoration: none; color: var(--sc-ink);
+  background: color-mix(in oklab, var(--sc-canvas) 82%, transparent);
   border: 1px solid var(--sc-hairline-strong); border-radius: var(--sc-r-sm);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-  opacity: 0; visibility: hidden;
-  transition: opacity 340ms var(--sc-ease-out), transform 340ms var(--sc-ease-out), visibility 340ms;
+  -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 220ms var(--sc-ease-out), transform 220ms var(--sc-ease-out), visibility 220ms;
 }
-.kf-hero__art:hover .kf-explode__spec,
-.kf-hero__art:focus-visible .kf-explode__spec,
-.kf-hero__art.is-open .kf-explode__spec { opacity: 1; visibility: visible; transform: translateY(-50%) translateX(0); }
-.kf-explode__spec dl { margin: 0; display: grid; gap: 0.5rem; }
-.kf-explode__spec dl > div { display: flex; justify-content: space-between; gap: 1.5rem; align-items: baseline; }
-.kf-explode__spec dt {
+.kf-bulb__face.is-on {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateY(0); position: relative;
+}
+.kf-bulb__k {
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
-  letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-ink-soft);
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--sc-accent);
 }
-.kf-explode__spec dd { margin: 0; font-family: var(--sc-font-text); font-size: var(--sc-t-sm); color: var(--sc-ink); white-space: nowrap; }
-.kf-explode__link {
-  display: inline-block; margin-top: 0.9rem;
+.kf-bulb__t { font-size: var(--sc-t-sm); color: var(--sc-ink); text-wrap: pretty; }
+.kf-bulb__go {
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--sc-ink); text-decoration-color: var(--sc-accent); pointer-events: auto;
+  color: var(--sc-ink-soft); margin-top: 0.1rem;
 }
-.kf-explode__link:hover { color: var(--sc-accent); }
+.kf-bulb__face:hover .kf-bulb__go, .kf-bulb__face:focus-visible .kf-bulb__go { color: var(--sc-accent); }
 
-/* ---- mobile hero (< 900px): the dose parks in the empty zone between the
-   header and the headline, sized down to an accent. The copy owns the lower
-   half. The floating spec panel is HIDDEN here — it has nowhere safe to go on a
-   short screen, and the HUD chip already carries Material / Gewicht / Preis. */
+/* fallback: no WebGL / reduced motion -> a plain stacked list */
+.kf-bulb--flat { position: static; width: 100%; aspect-ratio: auto; transform: none; margin-top: var(--sc-4); }
+.kf-bulb--flat .kf-bulb__canvas, .kf-bulb--flat::before { display: none; }
+.kf-bulb--flat .kf-bulb__info { position: static; transform: none; width: 100%; max-width: 34rem; }
+.kf-bulb--flat .kf-bulb__face {
+  position: relative; inset: auto; opacity: 1; visibility: visible; pointer-events: auto;
+  transform: none; margin-bottom: 0.5rem;
+  background: color-mix(in oklab, var(--sc-surface) 40%, transparent);
+}
+
+/* headline layer above the object */
+.kf-hero__copy { pointer-events: none !important; }
+.kf-hero__copy a, .kf-hero__copy button { pointer-events: auto; }
+
+/* ---- mobile hero (< 900px): the bulb parks in the top zone, small; the
+   caption is one compact line right under it, clear of the headline. */
 @media (max-width: 899px) {
-  .kf-hero__art {
-    left: 50%; top: 4.25rem; bottom: auto;
-    width: min(13rem, 52vw); aspect-ratio: 1 / 1;
-    transform: translateX(calc(-50% + (var(--kf-lx, 0.5) - 0.5) * 12px));
+  .kf-bulb {
+    left: 50%; top: 3.25rem; bottom: auto;
+    width: min(9rem, 42vw); aspect-ratio: 3 / 4;
+    transform: translateX(-50%);
   }
-  .kf-explode { animation-duration: 12s; }
-  .kf-explode__spec { display: none; }
-
-  .sc-copy.kf-hero__copy { bottom: clamp(3.5rem, 8.5vh, 5rem); max-width: min(40rem, 88vw); }
+  .kf-bulb__info { left: 50%; right: auto; bottom: auto; top: calc(100% + 0.3rem);
+    transform: translateX(-50%); max-width: 92vw; }
+  /* one compact line on a phone — the sentence carries it, drop the eyebrow */
+  .kf-bulb__face {
+    display: flex; align-items: baseline; gap: 0.5rem;
+    padding: 0.45rem 0.75rem; box-shadow: 0 12px 34px rgba(0,0,0,0.4);
+  }
+  .kf-bulb__k { display: none; }
+  .kf-bulb__t { font-size: var(--sc-t-xs); }
+  .kf-bulb__go { margin-top: 0; }
+  .sc-copy.kf-hero__copy { bottom: clamp(3rem, 7vh, 4.5rem); max-width: min(40rem, 88vw); }
   .kf-hero__copy h1 { font-size: var(--sc-t-3xl); }
   .kf-hero__copy .kf-lede { margin-top: var(--sc-3); font-size: var(--sc-t-sm); max-width: 36ch; }
 }
-
 @media (max-width: 380px) {
-  .kf-hero__art { top: 3.25rem; width: min(10rem, 44vw); }
+  .kf-bulb { top: 3rem; width: min(8rem, 40vw); }
   .kf-hero__copy h1 { font-size: var(--sc-t-2xl); }
+  .kf-bulb__t { font-size: 0.66rem; }
 }
-
-/* wide "mobile" (large phone landscape / small tablet, 620–899px): more room,
-   so grow the dose and give the copy a little more breathing space above it. */
 @media (min-width: 620px) and (max-width: 899px) {
-  .kf-hero__art { top: 4.75rem; width: min(15rem, 34vw); }
+  .kf-bulb { top: 3.25rem; width: min(10rem, 22vw); }
   .sc-copy.kf-hero__copy { bottom: clamp(2.5rem, 6vh, 4rem); }
 }
 
@@ -494,13 +495,8 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
     color-mix(in oklab, var(--sc-canvas) 38%, transparent) 52%,
     transparent 72%);
 }
-@keyframes kf-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @media (prefers-reduced-motion: reduce) {
-  .kf-explode { animation: none; }
-  .kf-hero__art { transition: none; }
-  .kf-explode__body, .kf-explode__lid, .kf-explode__spec { transition-duration: 1ms; }
-  /* rest slightly ajar so it still reads as openable */
-  .kf-explode__lid { transform: translate(calc(-50% + var(--dose-nudge)), -16%); }
+  .kf-bulb__face { transition-duration: 1ms; }
 }
 
 .kf-hero__copy { max-width: min(38rem, 82vw); }
