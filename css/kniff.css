@@ -758,6 +758,25 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 .kf-shopfacts a { color: var(--sc-ink); text-decoration-color: var(--sc-accent); }
 @media (max-width: 899px) { .kf-shopfacts a { display: inline-block; padding: 0.35rem 0; } }
 
+/* shop category filter — progressive: without JS all products stay visible */
+.kf-shopfilter { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--sc-5); }
+.kf-shopfilter__btn {
+  font: inherit; font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.42rem 0.9rem; border-radius: 999px; cursor: pointer;
+  color: var(--sc-ink-soft);
+  background: color-mix(in oklab, var(--sc-canvas) 84%, transparent);
+  border: 1px solid var(--sc-hairline-strong);
+  transition: color 150ms var(--sc-ease-out), border-color 150ms var(--sc-ease-out), background 150ms var(--sc-ease-out);
+}
+.kf-shopfilter__btn:hover { color: var(--sc-ink); border-color: color-mix(in oklab, var(--sc-accent) 45%, transparent); }
+.kf-shopfilter__btn.is-active {
+  color: var(--sc-canvas); background: var(--sc-accent);
+  border-color: var(--sc-accent); font-weight: 600;
+}
+.kf-shopfilter__btn:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 2px; }
+.kf-prod.is-filtered { display: none; }
+
 /* --------------------------------------------------- ACT: BEWERTUNGEN --- */
 /* early social-proof cue: a slim clickable bar high on the homepage that
    jumps to the full review section */

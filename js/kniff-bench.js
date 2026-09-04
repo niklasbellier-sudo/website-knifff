@@ -387,9 +387,37 @@
     }, 400);
   }
 
+  /* -------------------------------------------------- shop category ------ */
+  // Shop filter chips: Alle / Aufbewahrung / Gadgets. Progressive — without JS
+  // every product stays visible. Toggles .is-filtered on non-matching articles.
+  function ShopFilter() {
+    var bar = document.querySelector('[data-shopfilter]');
+    if (!bar) return;
+    var btns = [].slice.call(bar.querySelectorAll('.kf-shopfilter__btn'));
+    var prods = [].slice.call(document.querySelectorAll('.kf-prod[data-cat]'));
+    if (btns.length < 2 || prods.length < 2) return;
+    bar.hidden = false;
+
+    function apply(filter) {
+      prods.forEach(function (p) {
+        p.classList.toggle('is-filtered', filter !== 'alle' && p.getAttribute('data-cat') !== filter);
+      });
+      btns.forEach(function (b) {
+        var on = b.getAttribute('data-filter') === filter;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    }
+    bar.addEventListener('click', function (e) {
+      var b = e.target.closest('.kf-shopfilter__btn');
+      if (b) apply(b.getAttribute('data-filter') || 'alle');
+    });
+  }
+
   /* --------------------------------------------------------------- go ---- */
   function start() {
     Nav();
+    ShopFilter();
     tuneSpans();
     Light.init();
     ContactPrefill();

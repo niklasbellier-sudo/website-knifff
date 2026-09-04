@@ -32,7 +32,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=114">
+<link rel="stylesheet" href="css/kniff.css?v=116">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -88,11 +88,17 @@
         <li><b>Zahlung</b><span>Karte, Apple&nbsp;Pay, Google&nbsp;Pay</span></li>
         <li><b>Antwort in 48&nbsp;Stunden</b><span>persönlich, <a href="versand-zahlung.html">alle Details</a></span></li>
       </ul>
+
+      <div class="kf-shopfilter" role="group" aria-label="Sortiment filtern" hidden data-shopfilter>
+        <button type="button" class="kf-shopfilter__btn is-active" data-filter="alle" aria-pressed="true">Alle</button>
+        <button type="button" class="kf-shopfilter__btn" data-filter="aufbewahrung" aria-pressed="false">Aufbewahrung</button>
+        <button type="button" class="kf-shopfilter__btn" data-filter="gadget" aria-pressed="false">Gadgets</button>
+      </div>
     </div>
 
     <div class="kf-wrap kf-prods" data-sc-in data-sc-stagger="70">
 
-      <article class="kf-prod" id="stiftehalter-auto">
+      <article class="kf-prod" id="stiftehalter-auto" data-cat="gadget">
         <div class="kf-gallery" data-sc-tilt="4">
           <div class="kf-gallery__main">
             <img src="assets/stiftehalter-auto.jpg" alt="Kniff Stiftehalter fürs Auto, mattschwarz 3D-gedruckt" width="1600" height="1200" data-gallery-main loading="lazy" decoding="async">
@@ -127,7 +133,7 @@
         </div>
       </article>
 
-      <article class="kf-prod" id="spiegel-clip-auto">
+      <article class="kf-prod" id="spiegel-clip-auto" data-cat="gadget">
         <div class="kf-gallery" data-sc-tilt="4">
           <div class="kf-gallery__main">
             <img src="assets/spiegel-clip-auto.jpg" alt="Kniff Spiegel-Clip fürs Auto, mattschwarz 3D-gedruckt" width="1600" height="1200" data-gallery-main loading="lazy" decoding="async">
@@ -164,7 +170,7 @@
         </div>
       </article>
 
-      <article class="kf-prod" id="reisedose-wattestaebchen">
+      <article class="kf-prod" id="reisedose-wattestaebchen" data-cat="aufbewahrung">
         <div class="kf-gallery" data-sc-tilt="4">
           <div class="kf-gallery__main">
             <img src="assets/reisedose-wattestaebchen.jpg" alt="Kniff Reisedose für Wattestäbchen, geriffelte 3D-gedruckte Dose mit Schraubdeckel" width="1600" height="1200" data-gallery-main loading="lazy" decoding="async">
@@ -202,7 +208,7 @@
         </div>
       </article>
 
-      <article class="kf-prod" id="kartenhalter-10-decks">
+      <article class="kf-prod" id="kartenhalter-10-decks" data-cat="aufbewahrung">
         <div class="kf-gallery" data-sc-tilt="4">
           <div class="kf-gallery__main">
             <img src="assets/kartenhalter-10-decks.jpg" alt="Kniff Kartenhalter für 10 Kartendecks, mattschwarz 3D-gedruckt" width="1600" height="1200" data-gallery-main loading="lazy" decoding="async">
@@ -233,7 +239,7 @@
         </div>
       </article>
 
-      <article class="kf-prod" id="handystaender-minimal">
+      <article class="kf-prod" id="handystaender-minimal" data-cat="gadget">
         <div class="kf-gallery" data-sc-tilt="4">
           <div class="kf-gallery__main">
             <img src="assets/handystaender-minimal.jpg" alt="Kniff minimalistischer Handyständer, mattschwarz 3D-gedruckt" width="1600" height="1200" data-gallery-main loading="lazy" decoding="async">
@@ -322,7 +328,7 @@
 </footer>
 
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=114" defer></script>
+<script src="js/kniff-bench.js?v=116" defer></script>
 <script>
   /* Bildergalerie + Farbvariante je Produkt */
   document.querySelectorAll('.kf-prod').forEach(function (prod) {
