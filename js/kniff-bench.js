@@ -347,52 +347,9 @@
       if (next < s) el.setAttribute('data-sc-span', String(next));
     });
   }
-  /* ---------------------------------------------------- hero bulb -------- */
-  // The Kniff symbol: a photoreal clear-glass "idea" bulb (a still render with a
-  // slow float + specular sheen in CSS). Four captions cycle beneath it —
-  // Angebot, Ablauf, Material, Preis — each a deep link into the site. Reduced
-  // motion -> the still plus the four lines as a plain stacked list, no cycling.
-  function BulbHero() {
-    var host = document.querySelector('[data-bulb]');
-    if (!host) return;
-    var faces = [].slice.call(host.querySelectorAll('.kf-bulb__face'));
-    var n = faces.length || 1;
-    var cur = 0;
-
-    function showFace(i) {
-      faces.forEach(function (f, k) { f.classList.toggle('is-on', k === i); });
-    }
-    showFace(0);
-
-    if (reduce) {
-      host.classList.add('kf-bulb--flat');            // still + stacked list
-      return;
-    }
-
-    var timer = 0, running = false;
-    function step() { cur = (cur + 1) % n; showFace(cur); }
-    function setRunning(on) {
-      if (on === running) return;
-      running = on;
-      if (on) { timer = setInterval(step, 4200); }
-      else { clearInterval(timer); }
-    }
-
-    function isOnScreen(el) {
-      var r = el.getBoundingClientRect();
-      return r.bottom > 0 && r.top < (innerHeight || 800);
-    }
-    if ('IntersectionObserver' in window) {
-      new IntersectionObserver(function (es) {
-        es.forEach(function (en) { setRunning(en.isIntersecting && !document.hidden); });
-      }, { threshold: 0.05 }).observe(host);
-    } else {
-      setRunning(true);
-    }
-    document.addEventListener('visibilitychange', function () {
-      setRunning(!document.hidden && isOnScreen(host));
-    });
-  }
+  // The hero "Kniff idea" bulb — a photoreal still (float + specular sheen in
+  // CSS) with four always-visible deep-link cards under it. Fully declarative;
+  // no JS needed.
 
 
   /* ----------------------------------------------- contact prefill ------ */
@@ -435,7 +392,6 @@
     Nav();
     tuneSpans();
     Light.init();
-    BulbHero();
     ContactPrefill();
     Reviews();
     var rail = RailCubes();
