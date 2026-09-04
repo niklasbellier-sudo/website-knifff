@@ -379,14 +379,15 @@
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     if (THREE.ACESFilmicToneMapping) renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.94;
+    renderer.toneMappingExposure = 1.06;
     if ('outputColorSpace' in renderer) renderer.outputColorSpace = THREE.SRGBColorSpace;
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
-    camera.position.set(0, 0.05, 8.6);
+    camera.position.set(0, 0.05, 9.2);
 
     var group = new THREE.Group();
-    group.rotation.x = 0.06;
+    group.rotation.x = 0.05;
+    group.rotation.z = 0.14;        // leans slightly to the left, floating
     scene.add(group);
 
     // --- environment: a compact studio room baked to a PMREM cube. This is the
@@ -405,33 +406,37 @@
       mesh.scale.set(w, h, d); mesh.position.set(x, y, z);
       roomScene.add(mesh);
     }
-    emitBox(24, 16, 24, 0, 4, 0, 0x080a0e, 0.25);       // room shell, near-black so glass stays clear
-    emitBox(3.4, 4.6, 0.1, -4.8, 4.4, 7.6, 0xfff4e6, 22); // compact bright key glint, front-left
-    emitBox(2.6, 3.4, 0.1, 6.8, 2.2, 4.8, 0xd6e2ff, 5);   // cool counter-glint, right
-    emitBox(0.5, 0.1, 13, -1.8, 9.6, 0.4, 0xffffff, 34); // tight ceiling strip -> sharp streak
-    emitBox(0.5, 0.1, 13, 2.0, 9.6, -0.6, 0xffffff, 18); // second streak, offset
-    emitBox(15, 0.1, 15, 0, -4.0, 0, 0xd98a3c, 0.8);    // faint warm floor bounce
+    emitBox(26, 18, 26, 0, 4, 0, 0x161b24, 0.7);        // room shell — dark blue-grey, gives glass a body
+    emitBox(2.0, 3.0, 0.1, -4.2, 3.6, 8.0, 0xfff2e0, 14); // soft key window, front-left -> main glint
+    emitBox(0.5, 4.5, 0.1, -3.0, 3.0, 7.4, 0xffffff, 10); // vertical strip -> edge streak, left
+    emitBox(1.1, 1.6, 0.1, 6.4, 1.6, 5.6, 0xccdaf4, 6);  // cool counter-glint, right
+    emitBox(11, 0.1, 11, 0, -4.6, 0, 0xcf8438, 0.35);   // warm floor bounce
     var pmrem = new THREE.PMREMGenerator(renderer);
-    pmrem.compileEquirectangularShader();
-    var envRT = pmrem.fromScene(roomScene, 0.02);
+    var envRT = pmrem.fromScene(roomScene, 0.035);
     scene.environment = envRT.texture;
     pmrem.dispose(); roomBox.dispose();
 
     // --- classic A19 glass envelope — one clean thin shell, double-sided so the
     //     rim reads without a second milky mesh.
+    // round A-shape: near-spherical belly (widest ~1.33) tapering into a short
+    // neck at the base — matches a classic clear incandescent bulb.
     var envPts = [
-      [0.00, -1.28], [0.28, -1.28], [0.29, -1.08], [0.22, -0.86],
-      [0.30, -0.58], [0.55, -0.28], [0.83, 0.10], [1.00, 0.50],
-      [1.05, 0.86], [0.99, 1.20], [0.85, 1.52], [0.62, 1.80],
-      [0.38, 2.00], [0.18, 2.11], [0.05, 2.15], [0.00, 2.16]
+      [0.00, -1.30], [0.30, -1.30], [0.30, -1.10], [0.25, -0.90],
+      [0.36, -0.62], [0.64, -0.30], [0.95, 0.06], [1.18, 0.42],
+      [1.31, 0.76], [1.335, 1.04], [1.29, 1.34], [1.14, 1.60],
+      [0.92, 1.82], [0.64, 2.00], [0.36, 2.12], [0.13, 2.18], [0.00, 2.19]
     ].map(function (p) { return new THREE.Vector2(p[0], p[1]); });
+    // A thin, mostly see-through shell: no refraction (transmission would turn
+    // the envelope into a lens that smears the hot filament across the back
+    // wall — the milky-bulb bug). Fresnel rim + sharp env reflections carry the
+    // "this is curved glass" read; low opacity keeps the filament crisp.
     var glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff, roughness: 0.012, metalness: 0,
-      transmission: 1, thickness: 0.12, ior: 1.46,
-      attenuationColor: 0xfff6ec, attenuationDistance: 14.0,
-      clearcoat: 1, clearcoatRoughness: 0.015,
-      envMapIntensity: 1.35, transparent: true, depthWrite: false,
-      side: THREE.FrontSide
+      color: 0xe4ecf5, roughness: 0.04, metalness: 0,
+      transmission: 0, ior: 1.6,
+      transparent: true, opacity: 0.17, depthWrite: false,
+      clearcoat: 1, clearcoatRoughness: 0.03,
+      envMapIntensity: 2.0,
+      side: THREE.DoubleSide
     });
     var envGeo = new THREE.LatheGeometry(envPts, 160);
     var envelope = new THREE.Mesh(envGeo, glassMat);
@@ -465,27 +470,33 @@
       var a = t * Math.PI * 2 * COILS;
       fPts.push(new THREE.Vector3((t - 0.5) * SPAN, 0.52 + Math.sin(a) * FR, Math.cos(a) * FR));
     }
+    // NOTE: keep the filament tone-mapped and only moderately bright. A very hot
+    // (toneMapped:false, emissive > 3) filament smears through the transmissive
+    // glass and turns the whole envelope milky — that was the "sieht schlecht
+    // aus" bug. Moderate glow + a small additive sprite reads as "lit" without
+    // flooding the glass.
     var filMat = new THREE.MeshStandardMaterial({
-      color: 0xffd9a0, emissive: 0xff9d38, emissiveIntensity: 3.4,
-      roughness: 0.5, metalness: 0.1, toneMapped: false
+      color: 0xffd9a0, emissive: 0xff9d38, emissiveIntensity: 2.2,
+      roughness: 0.5, metalness: 0.1
     });
     var filament = new THREE.Mesh(
       new THREE.TubeGeometry(new THREE.CatmullRomCurve3(fPts), 300, 0.016, 8, false), filMat);
     filament.renderOrder = 2; group.add(filament);
-    var glow = new THREE.PointLight(0xffc37a, 5, 7, 2); glow.position.set(0, 0.52, 0); group.add(glow);
+    var glow = new THREE.PointLight(0xffb066, 1.6, 7, 2); glow.position.set(0, 0.52, 0); group.add(glow);
     // additive sprite so the hot filament blooms softly through the glass
     var gc = document.createElement('canvas'); gc.width = gc.height = 128;
     var gx = gc.getContext('2d');
     var gg = gx.createRadialGradient(64, 64, 0, 64, 64, 64);
-    gg.addColorStop(0.00, 'rgba(255,220,160,0.90)');
-    gg.addColorStop(0.35, 'rgba(255,175,90,0.34)');
+    gg.addColorStop(0.00, 'rgba(255,224,170,0.95)');
+    gg.addColorStop(0.28, 'rgba(255,180,95,0.30)');
+    gg.addColorStop(0.70, 'rgba(255,165,85,0.05)');
     gg.addColorStop(1.00, 'rgba(255,160,80,0)');
     gx.fillStyle = gg; gx.fillRect(0, 0, 128, 128);
     var glowSprite = new THREE.Sprite(new THREE.SpriteMaterial({
       map: new THREE.CanvasTexture(gc), color: 0xffffff,
-      transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0.5
+      transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0.28
     }));
-    glowSprite.scale.set(1.7, 1.7, 1);
+    glowSprite.scale.set(0.8, 0.8, 1);
     glowSprite.position.set(0, 0.52, 0);
     glowSprite.renderOrder = 4; group.add(glowSprite);
 
@@ -508,9 +519,9 @@
     group.add(base);
 
     // env map carries most of the light now — keep direct lights subtle
-    scene.add(new THREE.HemisphereLight(0x2c2e35, 0x0a0806, 0.22));
-    var key = new THREE.DirectionalLight(0xffffff, 1.7); key.position.set(-3.2, 4.0, 5.0); scene.add(key);
-    var rim = new THREE.DirectionalLight(0xf2a63b, 1.2); rim.position.set(3.6, -0.6, -1.6); scene.add(rim);
+    scene.add(new THREE.HemisphereLight(0x2c2e35, 0x0a0806, 0.14));
+    var key = new THREE.DirectionalLight(0xffffff, 1.0); key.position.set(-3.2, 4.0, 5.0); scene.add(key);
+    var rim = new THREE.DirectionalLight(0xf2a63b, 0.7); rim.position.set(3.6, -0.6, -1.6); scene.add(rim);
 
     function resize() {
       var w = canvas.clientWidth || host.clientWidth || 1;
@@ -569,8 +580,10 @@
         if (Math.abs(vel) < 0.0008) { vel = 0; target = snapAngle(rot); }
       }
       group.rotation.y = rot;
-      group.rotation.x = 0.09 + Math.sin(clock * 0.6) * 0.02;
-      group.position.y = Math.sin(clock * 0.8) * 0.04;
+      group.rotation.x = 0.08 + Math.sin(clock * 0.6) * 0.02;
+      group.rotation.z = 0.14 + Math.sin(clock * 0.5) * 0.02;   // keeps the left lean, gently breathing
+      group.position.y = Math.sin(clock * 0.8) * 0.06;
+      group.position.x = Math.sin(clock * 0.42) * 0.05;          // slow drift -> floating
 
       // swap the caption only when the bulb is settled on a face or drifting
       // slowly (auto-spin) — never mid-drag / mid-snap, so it doesn't flicker
