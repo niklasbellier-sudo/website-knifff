@@ -347,9 +347,43 @@
       if (next < s) el.setAttribute('data-sc-span', String(next));
     });
   }
-  // The hero "Kniff idea" bulb — a photoreal still (float + specular sheen in
-  // CSS) with four always-visible deep-link cards under it. Fully declarative;
-  // no JS needed.
+  /* ---------------------------------------------------- hero bulb -------- */
+  // The Kniff "idea" bulb: a photoreal still that reads as polished glass. The
+  // specular highlight follows the pointer — as you move over it from a
+  // different angle, the reflection shifts, like turning a real bulb under a
+  // lamp. Published as --bx / --by (0..1, eased) on [data-bulb]. Coarse pointer
+  // or reduced motion -> a slow CSS drift (.kf-bulb--drift) instead.
+  function BulbReflection() {
+    var host = document.querySelector('[data-bulb]');
+    if (!host) return;
+
+    var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!fine || reduced) {
+      if (!reduced) host.classList.add('kf-bulb--drift');
+      return;
+    }
+
+    var tx = 0.5, ty = 0.3, x = 0.5, y = 0.3, raf = 0;
+    function frame() {
+      x += (tx - x) * 0.12;
+      y += (ty - y) * 0.12;
+      host.style.setProperty('--bx', x.toFixed(4));
+      host.style.setProperty('--by', y.toFixed(4));
+      if (Math.abs(tx - x) > 0.0006 || Math.abs(ty - y) > 0.0006) {
+        raf = requestAnimationFrame(frame);
+      } else { raf = 0; }
+    }
+    addEventListener('pointermove', function (e) {
+      if (e.pointerType && e.pointerType !== 'mouse') return;
+      var r = host.getBoundingClientRect();
+      if (!r.width) return;
+      // pointer position in the bulb's own space, allowed to run past the edges
+      // so the glint can sit right at the rim when the cursor is beside it
+      tx = clamp((e.clientX - r.left) / r.width, -0.35, 1.35);
+      ty = clamp((e.clientY - r.top) / r.height, -0.35, 1.35);
+      if (!raf) raf = requestAnimationFrame(frame);
+    }, { passive: true });
+  }
 
 
   /* ----------------------------------------------- contact prefill ------ */
@@ -418,6 +452,7 @@
   function start() {
     Nav();
     ShopFilter();
+    BulbReflection();
     tuneSpans();
     Light.init();
     ContactPrefill();

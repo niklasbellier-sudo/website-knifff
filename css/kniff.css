@@ -373,16 +373,19 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
    assembled. Hover / keyboard-focus / .is-open pulls them apart and slides in a
    spec panel (Material / Gewicht / Preis). Pure CSS transitions — nothing per
    frame, nothing that hijacks the scroll. */
-/* ---- ACT 1 hero object: the rotatable Kniff bulb. A procedural fluted
-   light bulb (three.js) the visitor drags / swipes / arrows to turn; it snaps
-   to four faces, each surfacing one line about Kniff. No WebGL / reduced
-   motion -> the four lines as a flat list. */
+/* ---- ACT 1 hero object: the Kniff "idea" bulb. A photoreal still that reads
+   as polished glass — the specular highlight tracks the pointer (JS publishes
+   --bx / --by on [data-bulb]) so the reflection shifts with the "light angle".
+   Coarse pointers / reduced motion get a slow autonomous drift instead. */
+@property --bx { syntax: "<number>"; inherits: true; initial-value: 0.5; }
+@property --by { syntax: "<number>"; inherits: true; initial-value: 0.3; }
+
 .kf-bulb {
   position: absolute; z-index: 3; left: 50%; top: 50%;
   width: min(24rem, 82vw); aspect-ratio: 3 / 4;
   transform: translate(-50%, -50%);
-  -webkit-tap-highlight-color: transparent;
-  touch-action: pan-y;                 /* vertical page scroll stays free */
+  --bx: 0.5; --by: 0.3;
+  pointer-events: none;                 /* purely decorative now */
 }
 @media (min-width: 900px) { .kf-bulb { left: 63%; width: min(23rem, 31vw); } }
 
@@ -398,101 +401,69 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 .kf-bulb__art {
   position: relative; z-index: 1; display: block; width: 100%; height: 100%;
   object-fit: cover;
-  /* the render sits on near-black; `screen` drops that ground into the page and
-     a tight elliptical mask hugs the bulb so the tile has no visible edge */
   mix-blend-mode: screen;
   -webkit-mask-image: radial-gradient(ellipse 48% 50% at 50% 45%, #000 72%, rgba(0,0,0,0.45) 88%, transparent 100%);
           mask-image: radial-gradient(ellipse 48% 50% at 50% 45%, #000 72%, rgba(0,0,0,0.45) 88%, transparent 100%);
   animation: kf-bulb-float 8s ease-in-out infinite;
 }
-/* a slow specular sweep so the glass reads as alive / turning in the light */
+/* pointer-driven glass reflection: a tight white glint + a soft warm bloom,
+   both centred on --bx / --by, plus an edge catch on the light side */
 .kf-bulb__sheen {
-  position: absolute; z-index: 2; left: 0; top: 0; width: 100%; height: 100%;
-  pointer-events: none; mix-blend-mode: screen; opacity: 0.55;
-  background: radial-gradient(60% 42% at 30% 32%,
-    rgba(255,246,232,0.5) 0%, rgba(255,246,232,0.12) 40%, transparent 70%);
-  -webkit-mask-image: radial-gradient(ellipse 46% 48% at 50% 45%, #000 60%, transparent 100%);
-          mask-image: radial-gradient(ellipse 46% 48% at 50% 45%, #000 60%, transparent 100%);
-  animation: kf-bulb-sheen 9s ease-in-out infinite;
+  position: absolute; z-index: 2; inset: 0; pointer-events: none;
+  mix-blend-mode: screen;
+  background:
+    /* hard specular hotspot */
+    radial-gradient(6.5% 5% at calc(var(--bx) * 100%) calc(var(--by) * 100%),
+      #fff, rgba(255,255,255,0.15) 58%, transparent 74%),
+    /* soft halo around it */
+    radial-gradient(30% 24% at calc(var(--bx) * 100%) calc(var(--by) * 100%),
+      rgba(255,247,232,0.55), rgba(255,240,216,0.14) 45%, transparent 72%),
+    /* broad warm wash biased to the light side */
+    radial-gradient(78% 96% at calc(var(--bx) * 128% - 14%) calc(30% + var(--by) * 30%),
+      rgba(255,232,198,0.26), transparent 58%),
+    /* faint counter-glint low on the opposite side */
+    radial-gradient(9% 7% at calc(100% - var(--bx) * 82%) calc(72% - var(--by) * 20%),
+      rgba(210,225,255,0.4), transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse 47% 49% at 50% 45%, #000 58%, transparent 100%);
+          mask-image: radial-gradient(ellipse 47% 49% at 50% 45%, #000 58%, transparent 100%);
 }
 @keyframes kf-bulb-float {
   0%, 100% { transform: translateY(0) scale(1); }
   50%      { transform: translateY(-1.6%) scale(1.012); }
 }
-@keyframes kf-bulb-sheen {
-  0%, 100% { transform: translateX(-14%) rotate(-4deg); opacity: 0.28; }
-  50%      { transform: translateX(16%) rotate(3deg);  opacity: 0.6; }
+/* fallback shimmer for touch / no pointer: drift the glint on a loop */
+.kf-bulb--drift { animation: kf-bulb-driftglint 11s ease-in-out infinite; }
+@keyframes kf-bulb-driftglint {
+  0%, 100% { --bx: 0.34; --by: 0.30; }
+  50%      { --bx: 0.66; --by: 0.40; }
 }
 @media (prefers-reduced-motion: reduce) {
   .kf-bulb__art { animation: none; }
-  .kf-bulb__sheen { display: none; }
+  .kf-bulb--drift { animation: none; }
 }
-
-/* the four options: a centred row of clickable deep-link chips under the bulb */
-.kf-bulb__info {
-  position: absolute; z-index: 4; left: 50%; top: calc(100% + 0.35rem);
-  transform: translateX(-50%);
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem;
-  width: max-content; max-width: min(34rem, 94vw);
-  list-style: none; margin: 0; padding: 0;
-}
-@media (min-width: 900px) {
-  .kf-bulb__info { top: 84%; max-width: min(30rem, 46vw); }
-}
-.kf-bulb__face {
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  padding: 0.42rem 0.8rem; text-decoration: none; color: var(--sc-ink);
-  background: color-mix(in oklab, var(--sc-canvas) 82%, transparent);
-  border: 1px solid var(--sc-hairline-strong); border-radius: 999px;
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.32);
-  white-space: nowrap;
-  transition: border-color 150ms var(--sc-ease-out),
-              transform 150ms var(--sc-ease-out),
-              background 150ms var(--sc-ease-out);
-}
-.kf-bulb__face:hover, .kf-bulb__face:focus-visible {
-  outline: none; transform: translateY(-2px);
-  border-color: color-mix(in oklab, var(--sc-accent) 60%, transparent);
-  background: color-mix(in oklab, var(--sc-canvas) 92%, transparent);
-}
-.kf-bulb__k {
-  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--sc-accent);
-}
-/* the sentence stays for context / screen readers, but the chip shows the label */
-.kf-bulb__t {
-  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-}
-.kf-bulb__go { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); color: var(--sc-ink-soft); }
-.kf-bulb__face:hover .kf-bulb__go, .kf-bulb__face:focus-visible .kf-bulb__go { color: var(--sc-accent); }
 
 /* headline layer above the object */
 .kf-hero__copy { pointer-events: none !important; }
 .kf-hero__copy a, .kf-hero__copy button { pointer-events: auto; }
 
-/* ---- mobile hero (< 900px): the bulb parks small in the top zone; the four
-   option chips wrap right under it, clear of the headline below. */
+/* ---- mobile hero (< 900px): the bulb parks in the top zone, clear of the
+   headline below. No chips any more, so it can sit a touch bigger. */
 @media (max-width: 899px) {
   .kf-bulb {
-    left: 50%; top: 1.75rem; bottom: auto;
-    width: min(11rem, 48vw); aspect-ratio: 3 / 4;
+    left: 50%; top: 2.5rem; bottom: auto;
+    width: min(13rem, 54vw); aspect-ratio: 3 / 4;
     transform: translateX(-50%);
   }
-  .kf-bulb__info { top: calc(100% + 0.35rem); max-width: min(30rem, 96vw); gap: 0.35rem; }
-  .kf-bulb__face { padding: 0.35rem 0.65rem; box-shadow: 0 8px 20px rgba(0,0,0,0.32); }
-  .kf-bulb__k { font-size: 0.66rem; }
   .sc-copy.kf-hero__copy { bottom: clamp(2rem, 5vh, 3.25rem); max-width: min(40rem, 88vw); }
   .kf-hero__copy h1 { font-size: var(--sc-t-3xl); }
   .kf-hero__copy .kf-lede { margin-top: var(--sc-3); font-size: var(--sc-t-sm); max-width: 36ch; }
 }
 @media (max-width: 380px) {
-  .kf-bulb { top: 1.5rem; width: min(10rem, 52vw); }
+  .kf-bulb { top: 2rem; width: min(11rem, 58vw); }
   .kf-hero__copy h1 { font-size: var(--sc-t-2xl); }
 }
 @media (min-width: 620px) and (max-width: 899px) {
-  .kf-bulb { top: 2.25rem; width: min(13rem, 26vw); }
+  .kf-bulb { top: 3rem; width: min(15rem, 30vw); }
   .sc-copy.kf-hero__copy { bottom: clamp(2.5rem, 6vh, 4rem); }
 }
 
@@ -503,9 +474,6 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
     color-mix(in oklab, var(--sc-canvas) 80%, transparent) 30%,
     color-mix(in oklab, var(--sc-canvas) 38%, transparent) 52%,
     transparent 72%);
-}
-@media (prefers-reduced-motion: reduce) {
-  .kf-bulb__face { transition-duration: 1ms; }
 }
 
 .kf-hero__copy { max-width: min(38rem, 82vw); }
