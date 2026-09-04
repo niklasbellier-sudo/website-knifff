@@ -406,11 +406,12 @@
       mesh.scale.set(w, h, d); mesh.position.set(x, y, z);
       roomScene.add(mesh);
     }
-    emitBox(26, 18, 26, 0, 4, 0, 0x161b24, 0.7);        // room shell — dark blue-grey, gives glass a body
-    emitBox(2.0, 3.0, 0.1, -4.2, 3.6, 8.0, 0xfff2e0, 14); // soft key window, front-left -> main glint
-    emitBox(0.5, 4.5, 0.1, -3.0, 3.0, 7.4, 0xffffff, 10); // vertical strip -> edge streak, left
-    emitBox(1.1, 1.6, 0.1, 6.4, 1.6, 5.6, 0xccdaf4, 6);  // cool counter-glint, right
-    emitBox(11, 0.1, 11, 0, -4.6, 0, 0xcf8438, 0.35);   // warm floor bounce
+    emitBox(26, 18, 26, 0, 4, 0, 0x1c222e, 1.0);        // room shell — dark blue-grey, always gives the glass a body
+    emitBox(2.0, 3.0, 0.1, -4.2, 3.6, 8.0, 0xfff2e0, 16); // soft key window, front-left -> main glint
+    emitBox(0.5, 5.0, 0.1, -3.0, 3.0, 7.4, 0xffffff, 13); // vertical strip -> edge streak, left
+    emitBox(0.5, 5.0, 0.1, 3.4, 2.6, 7.0, 0xeef4ff, 9);  // vertical strip -> edge streak, right
+    emitBox(1.1, 1.6, 0.1, 6.6, 1.4, 5.6, 0xccdaf4, 6);  // cool counter-glint, far right
+    emitBox(11, 0.1, 11, 0, -4.6, 0, 0xcf8438, 0.4);    // warm floor bounce
     var pmrem = new THREE.PMREMGenerator(renderer);
     var envRT = pmrem.fromScene(roomScene, 0.035);
     scene.environment = envRT.texture;
@@ -431,11 +432,11 @@
     // wall — the milky-bulb bug). Fresnel rim + sharp env reflections carry the
     // "this is curved glass" read; low opacity keeps the filament crisp.
     var glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0xe4ecf5, roughness: 0.04, metalness: 0,
+      color: 0xe4ecf5, roughness: 0.045, metalness: 0,
       transmission: 0, ior: 1.6,
-      transparent: true, opacity: 0.17, depthWrite: false,
+      transparent: true, opacity: 0.24, depthWrite: false,
       clearcoat: 1, clearcoatRoughness: 0.03,
-      envMapIntensity: 2.0,
+      envMapIntensity: 2.5,
       side: THREE.DoubleSide
     });
     var envGeo = new THREE.LatheGeometry(envPts, 160);
@@ -457,18 +458,21 @@
     function wire(x1, y1, x2, y2) {
       var a = new THREE.Vector3(x1, y1, 0), b = new THREE.Vector3(x2, y2, 0);
       var len = a.distanceTo(b);
-      var m = new THREE.Mesh(new THREE.CylinderGeometry(0.011, 0.011, len, 8), wireMat);
+      var m = new THREE.Mesh(new THREE.CylinderGeometry(0.009, 0.009, len, 8), wireMat);
       m.position.copy(a).lerp(b, 0.5);
       m.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), b.clone().sub(a).normalize());
       group.add(m); return b;
     }
-    wire(-0.05, 0.14, -0.34, 0.52);
-    wire(0.05, 0.14, 0.34, 0.52);
+    wire(-0.05, 0.14, -0.42, 0.52);
+    wire(0.05, 0.14, 0.42, 0.52);
 
-    var fPts = [], COILS = 13, FR = 0.052, SPAN = 0.60;
-    for (var t = 0; t <= 1.0001; t += 1 / 200) {
+    // coiled filament that also WEAVES in depth (shallow W) so it reads as a
+    // filament head-on and side-on alike — not a candle flame at the 90° faces.
+    var fPts = [], COILS = 18, FR = 0.045, SPAN = 0.82;
+    for (var t = 0; t <= 1.0001; t += 1 / 240) {
       var a = t * Math.PI * 2 * COILS;
-      fPts.push(new THREE.Vector3((t - 0.5) * SPAN, 0.52 + Math.sin(a) * FR, Math.cos(a) * FR));
+      var zc = Math.sin(t * Math.PI * 3) * 0.14;
+      fPts.push(new THREE.Vector3((t - 0.5) * SPAN, 0.52 + Math.sin(a) * FR, zc + Math.cos(a) * FR));
     }
     // NOTE: keep the filament tone-mapped and only moderately bright. A very hot
     // (toneMapped:false, emissive > 3) filament smears through the transmissive
@@ -535,9 +539,16 @@
     // --- state
     var rot = 0, vel = 0, target = null, auto = true, curFace = 0, running = false;
     var dragging = false, lastX = 0, lastT = 0, idleTimer = 0;
+    // idle = a slow carousel: rest square-on to a face (looks like a real bulb),
+    // ease 90° to the next, rest again. Never lingers at the 45° side angle
+    // where the envelope reads thin.
+    var autoStep = 0, autoDwellUntil = 0, autoInit = false;
     showFace(0);
 
-    function wake() { auto = false; clearTimeout(idleTimer); idleTimer = setTimeout(function () { auto = true; }, 4500); }
+    function wake() {
+      auto = false; clearTimeout(idleTimer);
+      idleTimer = setTimeout(function () { auto = true; autoInit = false; }, 4500);
+    }
 
     host.addEventListener('pointerdown', function (e) {
       dragging = true; lastX = e.clientX; lastT = performance.now(); vel = 0; target = null; wake();
@@ -571,7 +582,19 @@
     function tick(now) {
       if (!running) return;
       clock = (now || 0) / 1000;
-      if (auto && !dragging) rot += 0.0045;
+      if (auto && !dragging) {
+        if (!autoInit) { autoStep = snapAngle(rot); autoDwellUntil = (now || 0) + 2400; autoInit = true; }
+        var ad = autoStep - rot;
+        if (Math.abs(ad) > 0.004) {
+          rot += ad * 0.045;                         // ~1s glide to the next face
+        } else {
+          rot = autoStep;
+          if ((now || 0) >= autoDwellUntil) {        // rested long enough -> step on
+            autoStep -= HALF_PI;
+            autoDwellUntil = (now || 0) + 3400;      // ~1s glide + ~2.4s rest
+          }
+        }
+      }
       else if (target !== null) {
         rot += (target - rot) * 0.14;
         if (Math.abs(target - rot) < 0.002) { rot = target; target = null; }

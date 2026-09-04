@@ -22,3 +22,6 @@ out-heroes/
 out-scene/
 /tmp/
 out-dose/
+out-bulb/
+out-icons/
+_*.html
