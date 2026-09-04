@@ -32,7 +32,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png?v=2">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=99">
+<link rel="stylesheet" href="css/kniff.css?v=104">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -84,13 +84,15 @@
 
 <main id="inhalt" tabindex="-1">
 
-  <!-- ============ ACT 1 — HERO. pin + rotatable Kniff bulb. PEAK. ======== -->
+  <!-- ============ ACT 1 — HERO. pin + the Kniff bulb. PEAK. ============== -->
   <section data-sc-act="pin" data-sc-span="1.05" id="hero"
-           data-kf-obj="Kniff" data-kf-spec="<b>Dreh die Glühbirne</b> · Angebot · Ablauf · Material · Preis">
+           data-kf-obj="Kniff" data-kf-spec="<b>Die Kniff-Idee</b> · Angebot · Ablauf · Material · Preis">
     <div data-sc-stage class="kf-hero__stage" data-sc-spotlight>
-      <div class="kf-bulb" data-bulb tabindex="0" role="group"
-           aria-label="Drehbare Kniff-Glühbirne. Dreh sie für Infos zu Angebot, Ablauf, Material und Preis.">
-        <canvas class="kf-bulb__canvas" aria-hidden="true"></canvas>
+      <div class="kf-bulb" data-bulb role="group"
+           aria-label="Kniff-Glühbirne mit Infos zu Angebot, Ablauf, Material und Preis.">
+        <img class="kf-bulb__art" src="assets/bulb-hero.jpg?v=1" alt="" aria-hidden="true"
+             width="1100" height="1456" fetchpriority="high" decoding="async">
+        <span class="kf-bulb__sheen" aria-hidden="true"></span>
         <div class="kf-bulb__info" aria-live="polite">
           <a class="kf-bulb__face is-on" data-face="0" href="#was-wir-machen">
             <span class="kf-bulb__k">Was wir machen</span>
@@ -125,7 +127,7 @@
           </a>
           <a href="shop.html" class="kf-ghost">Fertige Kniffe ansehen</a>
         </div>
-        <p class="kf-hint kf-hint--tap"><span data-hint-hover>Dreh die Glühbirne &mdash; vier Seiten, vier Infos.</span><span data-hint-tap>Wisch über die Glühbirne &mdash; vier Seiten, vier Infos.</span></p>
+        <p class="kf-hint">Angebot &middot; Ablauf &middot; Material &middot; Preis.</p>
       </div>
     </div>
   </section>
@@ -530,8 +532,7 @@
 }
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js" defer></script>
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=99" defer></script>
+<script src="js/kniff-bench.js?v=104" defer></script>
 </body>
 </html>

@@ -125,10 +125,10 @@ case "$cmd" in
       *) shift;;
     esac; done
     head_url="$(upload_ref "$head")"
-    input="$(jq -nc --arg p "$prompt" --arg u "$head_url" --arg d "$dur" \
+    input="$(jq -nc --arg p "$prompt" --arg u "$head_url" --arg d "$dur" --arg neg "${KIE_NEG:-blur, distortion, low quality, warping, morphing, jitter, flicker, text, watermark, cut, scene change}" --arg cfg "${KIE_CFG:-0.5}" \
       '{prompt:$p, image_url:$u, duration:$d,
-        negative_prompt:"blur, distortion, low quality, warping, morphing, jitter, flicker, text, watermark, cut, scene change",
-        cfg_scale:0.5}')"
+        negative_prompt:$neg,
+        cfg_scale:($cfg|tonumber)}')"
     if [ -n "$tail" ]; then
       tail_url="$(upload_ref "$tail")"
       input="$(printf '%s' "$input" | jq -c --arg u "$tail_url" '. + {tail_image_url:$u}')"
