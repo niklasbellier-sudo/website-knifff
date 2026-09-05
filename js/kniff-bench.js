@@ -347,44 +347,10 @@
       if (next < s) el.setAttribute('data-sc-span', String(next));
     });
   }
-  /* ---------------------------------------------------- hero bulb -------- */
-  // The Kniff "idea" bulb: a photoreal still that reads as polished glass. The
-  // specular highlight follows the pointer — as you move over it from a
-  // different angle, the reflection shifts, like turning a real bulb under a
-  // lamp. Published as --bx / --by (0..1, eased) on [data-bulb]. Coarse pointer
-  // or reduced motion -> a slow CSS drift (.kf-bulb--drift) instead.
-  function BulbReflection() {
-    var host = document.querySelector('[data-bulb]');
-    if (!host) return;
-
-    var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!fine || reduced) {
-      if (!reduced) host.classList.add('kf-bulb--drift');
-      return;
-    }
-
-    var tx = 0.5, ty = 0.3, x = 0.5, y = 0.3, raf = 0;
-    function frame() {
-      x += (tx - x) * 0.12;
-      y += (ty - y) * 0.12;
-      host.style.setProperty('--bx', x.toFixed(4));
-      host.style.setProperty('--by', y.toFixed(4));
-      if (Math.abs(tx - x) > 0.0006 || Math.abs(ty - y) > 0.0006) {
-        raf = requestAnimationFrame(frame);
-      } else { raf = 0; }
-    }
-    addEventListener('pointermove', function (e) {
-      if (e.pointerType && e.pointerType !== 'mouse') return;
-      var r = host.getBoundingClientRect();
-      if (!r.width) return;
-      // pointer position in the bulb's own space, allowed to run past the edges
-      // so the glint can sit right at the rim when the cursor is beside it
-      tx = clamp((e.clientX - r.left) / r.width, -0.35, 1.35);
-      ty = clamp((e.clientY - r.top) / r.height, -0.35, 1.35);
-      if (!raf) raf = requestAnimationFrame(frame);
-    }, { passive: true });
-  }
-
+  // The homepage hero is now a full-bleed cinematic render (assets/scenes/
+  // 12-home-hero.jpg) on the shared .kf-phero treatment — the amber glow behind
+  // it already follows the pointer via Light's --kf-lx/--kf-ly. No hero-specific
+  // JS needed.
 
   /* ----------------------------------------------- contact prefill ------ */
   // A "Jetzt anfragen" button on the shop carries ?produkt=<name>. Pull it into
@@ -452,7 +418,6 @@
   function start() {
     Nav();
     ShopFilter();
-    BulbReflection();
     tuneSpans();
     Light.init();
     ContactPrefill();

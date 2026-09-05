@@ -354,12 +354,11 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 /* ------------------------------------------------------------ ACT 1 hero  */
 /* min-height so the absolutely-positioned canvas has a box to fill even
    before scrollcraft.js adds .sc-stage (which sets the real sticky height). */
-.kf-hero__stage, .kf-proc__stage, .kf-close__stage, .kf-phero__stage { min-height: 100svh; }
-.kf-hero__stage { display: block; }
-/* commercial-hero glow: a bold amber colour field behind the WebGL object,
-   following the steered light, so the piece pops off the ground like a
+.kf-proc__stage, .kf-close__stage, .kf-phero__stage { min-height: 100svh; }
+/* commercial-hero glow: a bold amber colour field behind the object, following
+   the steered light (--kf-lx/--kf-ly), so the piece pops off the ground like a
    product ad (ref: the CIAO hero shot). */
-.kf-hero__stage::before, .kf-phero__stage::before {
+.kf-phero__stage::before {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
   background:
     radial-gradient(62% 55% at calc(var(--kf-lx,0.42) * 100%) calc(var(--kf-ly,0.28) * 100% + 8%),
@@ -369,105 +368,10 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
       transparent 80%);
 }
 .kf-phero__stage::before { opacity: 0.78; }
-/* the hero product: two transparent cut-outs (fluted body + screw lid) stacked
-   assembled. Hover / keyboard-focus / .is-open pulls them apart and slides in a
-   spec panel (Material / Gewicht / Preis). Pure CSS transitions — nothing per
-   frame, nothing that hijacks the scroll. */
-/* ---- ACT 1 hero object: the Kniff "idea" bulb. A photoreal still that reads
-   as polished glass — the specular highlight tracks the pointer (JS publishes
-   --bx / --by on [data-bulb]) so the reflection shifts with the "light angle".
-   Coarse pointers / reduced motion get a slow autonomous drift instead. */
-@property --bx { syntax: "<number>"; inherits: true; initial-value: 0.5; }
-@property --by { syntax: "<number>"; inherits: true; initial-value: 0.3; }
-
-.kf-bulb {
-  position: absolute; z-index: 3; left: 50%; top: 50%;
-  width: min(24rem, 82vw); aspect-ratio: 3 / 4;
-  transform: translate(-50%, -50%);
-  --bx: 0.5; --by: 0.3;
-  pointer-events: none;                 /* purely decorative now */
-}
-@media (min-width: 900px) { .kf-bulb { left: 63%; width: min(23rem, 31vw); } }
-
-.kf-bulb::before {                      /* amber pool the bulb floats in */
-  content: ""; position: absolute; left: 50%; top: 45%; z-index: 0;
-  width: 132%; height: 118%; transform: translate(-50%, -50%);
-  background: radial-gradient(closest-side,
-    color-mix(in oklab, var(--sc-accent) 26%, transparent) 0%,
-    color-mix(in oklab, var(--sc-accent) 9%, transparent) 46%,
-    transparent 72%);
-  pointer-events: none;
-}
-.kf-bulb__art {
-  position: relative; z-index: 1; display: block; width: 100%; height: 100%;
-  object-fit: cover;
-  mix-blend-mode: screen;
-  -webkit-mask-image: radial-gradient(ellipse 48% 50% at 50% 45%, #000 72%, rgba(0,0,0,0.45) 88%, transparent 100%);
-          mask-image: radial-gradient(ellipse 48% 50% at 50% 45%, #000 72%, rgba(0,0,0,0.45) 88%, transparent 100%);
-  animation: kf-bulb-float 8s ease-in-out infinite;
-}
-/* pointer-driven glass reflection: a tight white glint + a soft warm bloom,
-   both centred on --bx / --by, plus an edge catch on the light side */
-.kf-bulb__sheen {
-  position: absolute; z-index: 2; inset: 0; pointer-events: none;
-  mix-blend-mode: screen;
-  background:
-    /* hard specular hotspot */
-    radial-gradient(6.5% 5% at calc(var(--bx) * 100%) calc(var(--by) * 100%),
-      #fff, rgba(255,255,255,0.15) 58%, transparent 74%),
-    /* soft halo around it */
-    radial-gradient(30% 24% at calc(var(--bx) * 100%) calc(var(--by) * 100%),
-      rgba(255,247,232,0.55), rgba(255,240,216,0.14) 45%, transparent 72%),
-    /* broad warm wash biased to the light side */
-    radial-gradient(78% 96% at calc(var(--bx) * 128% - 14%) calc(30% + var(--by) * 30%),
-      rgba(255,232,198,0.26), transparent 58%),
-    /* faint counter-glint low on the opposite side */
-    radial-gradient(9% 7% at calc(100% - var(--bx) * 82%) calc(72% - var(--by) * 20%),
-      rgba(210,225,255,0.4), transparent 72%);
-  -webkit-mask-image: radial-gradient(ellipse 47% 49% at 50% 45%, #000 58%, transparent 100%);
-          mask-image: radial-gradient(ellipse 47% 49% at 50% 45%, #000 58%, transparent 100%);
-}
-@keyframes kf-bulb-float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50%      { transform: translateY(-1.6%) scale(1.012); }
-}
-/* fallback shimmer for touch / no pointer: drift the glint on a loop */
-.kf-bulb--drift { animation: kf-bulb-driftglint 11s ease-in-out infinite; }
-@keyframes kf-bulb-driftglint {
-  0%, 100% { --bx: 0.34; --by: 0.30; }
-  50%      { --bx: 0.66; --by: 0.40; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .kf-bulb__art { animation: none; }
-  .kf-bulb--drift { animation: none; }
-}
-
-/* headline layer above the object */
-.kf-hero__copy { pointer-events: none !important; }
-.kf-hero__copy a, .kf-hero__copy button { pointer-events: auto; }
-
-/* ---- mobile hero (< 900px): the bulb parks in the top zone, clear of the
-   headline below. No chips any more, so it can sit a touch bigger. */
-@media (max-width: 899px) {
-  .kf-bulb {
-    left: 50%; top: 2.5rem; bottom: auto;
-    width: min(13rem, 54vw); aspect-ratio: 3 / 4;
-    transform: translateX(-50%);
-  }
-  .sc-copy.kf-hero__copy { bottom: clamp(2rem, 5vh, 3.25rem); max-width: min(40rem, 88vw); }
-  .kf-hero__copy h1 { font-size: var(--sc-t-3xl); }
-  .kf-hero__copy .kf-lede { margin-top: var(--sc-3); font-size: var(--sc-t-sm); max-width: 36ch; }
-}
-@media (max-width: 380px) {
-  .kf-bulb { top: 2rem; width: min(11rem, 58vw); }
-  .kf-hero__copy h1 { font-size: var(--sc-t-2xl); }
-}
-@media (min-width: 620px) and (max-width: 899px) {
-  .kf-bulb { top: 3rem; width: min(15rem, 30vw); }
-  .sc-copy.kf-hero__copy { bottom: clamp(2.5rem, 6vh, 4rem); }
-}
-
-.kf-hero__stage .sc-scrim--band, .kf-phero__stage .sc-scrim--lead {
+/* The homepage hero now uses the shared .kf-phero treatment (full-bleed cinematic
+   render + pointer-tracked amber glow via --kf-lx/--kf-ly on
+   .kf-phero__stage::before) — same as every other page hero. */
+.kf-phero__stage .sc-scrim--lead {
   z-index: 2;
   background: linear-gradient(to top,
     color-mix(in oklab, var(--sc-canvas) 96%, transparent) 0%,
@@ -475,15 +379,6 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
     color-mix(in oklab, var(--sc-canvas) 38%, transparent) 52%,
     transparent 72%);
 }
-
-.kf-hero__copy { max-width: min(38rem, 82vw); }
-.kf-hero__copy h1 {
-  font-family: var(--sc-font-display); font-weight: 800;
-  font-size: var(--sc-t-4xl); line-height: 0.94; letter-spacing: var(--sc-track-tight);
-  text-wrap: balance; margin: 0;
-}
-.kf-hero__copy .kf-lede { margin-top: var(--sc-4); font-size: var(--sc-t-base); max-width: 40ch; }
-@media (min-width: 1100px) { .kf-hero__copy .kf-lede { font-size: var(--sc-t-lg); } }
 
 /* the material / finish switch — a toy, not chrome */
 .kf-switch { display: flex; gap: 0.5rem; margin-top: var(--sc-4); flex-wrap: wrap; }

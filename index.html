@@ -21,18 +21,18 @@
 <meta property="og:title" content="Kniff — 3D-Druck auf Anfrage aus Berlin">
 <meta property="og:description" content="Schick uns Skizze, Maße oder STL. Wir prüfen Druckbarkeit und Aufwand und drucken dein Teil – vom Einzelstück bis zur Serie. 3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.">
 <meta property="og:url" content="https://kniff.shop/">
-<meta property="og:image" content="https://kniff.shop/assets/og.jpg?v=4">
+<meta property="og:image" content="https://kniff.shop/assets/og.jpg?v=5">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kniff — 3D-Druck auf Anfrage aus Berlin">
 <meta name="twitter:description" content="Schick uns Skizze, Maße oder STL. Wir prüfen Druckbarkeit und Aufwand und drucken dein Teil – vom Einzelstück bis zur Serie. 3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.">
-<meta name="twitter:image" content="https://kniff.shop/assets/og.jpg?v=4">
+<meta name="twitter:image" content="https://kniff.shop/assets/og.jpg?v=5">
 <!-- /og -->
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png?v=2">
 <link rel="stylesheet" href="assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="css/scrollcraft.css">
-<link rel="stylesheet" href="css/kniff.css?v=119">
+<link rel="stylesheet" href="css/kniff.css?v=121">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -84,20 +84,19 @@
 
 <main id="inhalt" tabindex="-1">
 
-  <!-- ============ ACT 1 — HERO. pin + the Kniff bulb. PEAK. ============== -->
-  <section data-sc-act="pin" data-sc-span="1.05" id="hero"
-           data-kf-obj="Kniff" data-kf-spec="<b>Die Kniff-Idee</b> · beweg das Licht">
-    <div data-sc-stage class="kf-hero__stage" data-sc-spotlight>
-      <div class="kf-bulb" data-bulb aria-hidden="true">
-        <img class="kf-bulb__art" src="assets/bulb-hero.jpg?v=1" alt=""
-             width="1100" height="1456" fetchpriority="high" decoding="async">
-        <span class="kf-bulb__sheen"></span>
-      </div>
-      <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
+  <!-- ============ ACT 1 — HERO. pin + full-bleed Kniff bulb. PEAK. ======== -->
+  <section class="kf-phero" data-sc-act="pin" data-sc-span="1.05" id="hero"
+           data-kf-obj="Kniff" data-kf-spec="<b>Die Kniff-Idee</b> · leg sie auf die Bank">
+    <div data-sc-stage class="kf-phero__stage" data-sc-spotlight>
+      <img class="kf-ground kf-ground--full" src="assets/scenes/12-home-hero.jpg?v=1" alt="" aria-hidden="true"
+           width="1920" height="1066" fetchpriority="high" decoding="async"
+           srcset="assets/scenes/12-home-hero-m.jpg?v=1 1200w, assets/scenes/12-home-hero.jpg?v=1 1920w" sizes="100vw">
+      <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
 
-      <div class="sc-copy sc-copy--lead kf-hero__copy" data-sc-cue="0 1 0 0">
-        <h1 data-sc-kinetic="lines">Leg deine Idee auf die Bank.</h1>
-        <p class="kf-lede">3D-Druck auf Anfrage aus Berlin. Du schickst Skizze, Maße oder STL, wir prüfen Druckbarkeit und Aufwand und drucken dein Teil &ndash; vom Einzelstück bis zur Serie.</p>
+      <div class="kf-phero__copy" data-sc-cue="0 0.85 0">
+        <p class="kf-eyebrow">3D-Druck aus Berlin</p>
+        <h1 class="kf-h1" data-sc-kinetic="lines">Leg deine Idee auf die Bank.</h1>
+        <p class="kf-lede">3D-Druck auf Anfrage. Du schickst Skizze, Maße oder STL, wir prüfen Druckbarkeit und Aufwand und drucken dein Teil &ndash; vom Einzelstück bis zur Serie.</p>
         <div class="kf-actions">
           <a href="3d-druck-auf-anfrage.html" class="kf-cta">
             Projekt einreichen <span class="kf-cta__arrow" aria-hidden="true">→</span>
@@ -442,7 +441,7 @@
       "name": "Kniff",
       "url": "https://kniff.shop/",
       "logo": "https://kniff.shop/assets/apple-touch-icon-180.png?v=2",
-      "image": "https://kniff.shop/assets/og.jpg?v=4",
+      "image": "https://kniff.shop/assets/og.jpg?v=5",
       "email": "kniffshop@gmail.com",
       "description": "3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.",
       "founder": { "@type": "Person", "name": "Niklas-Amoah Alotey" },
@@ -509,6 +508,6 @@
 </script>
 
 <script src="js/scrollcraft.js" defer></script>
-<script src="js/kniff-bench.js?v=119" defer></script>
+<script src="js/kniff-bench.js?v=121" defer></script>
 </body>
 </html>
