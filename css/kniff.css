@@ -598,11 +598,12 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 .kf-project__meta a { color: var(--sc-accent); text-decoration: none; }
 .kf-project__meta a:hover { text-decoration: underline; }
 
-.kf-project .kf-railx { padding-inline: 0; margin-top: var(--sc-2); }
-.kf-shot { width: min(16rem, 66vw); margin: 0; }
+.kf-project .kf-railx { padding-inline: 0; margin-top: var(--sc-4); }
+.kf-shot { width: min(15rem, 62vw); margin: 0; }
 .kf-shot > img {
-  width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block;
   border: 1px solid var(--sc-hairline); border-radius: var(--sc-r-sm);
+  background: var(--sc-surface);
 }
 .kf-shot figcaption {
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
