@@ -180,7 +180,13 @@
   function boot(hero) {
     var bar = document.querySelector('.kf-boot__bar');
     var pct = document.querySelector('.kf-boot__pct');
-    var imgs = [].slice.call(document.images).filter(function (i) { return !i.complete; });
+    // only count images actually being fetched now (eager/critical); a lazy
+    // image far below the fold may not load for seconds (or ever, if the
+    // visitor never scrolls there) and previously made the counter read
+    // "000%" for the whole 4.2s failsafe window before jumping straight to 100
+    var imgs = [].slice.call(document.images).filter(function (i) {
+      return !i.complete && i.loading !== 'lazy';
+    });
     var total = imgs.length + 2, done = 0;
     function bump() {
       done++;
