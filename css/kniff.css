@@ -1082,6 +1082,15 @@ h1, h2, h3, h4,
 .kf-longform li { margin-bottom: 0.4rem; }
 .kf-longform a { color: var(--sc-accent); }
 .kf-longform strong { color: var(--sc-ink); }
+.kf-longform__media { margin: var(--sc-6) 0; }
+.kf-longform__media img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--sc-hairline); border-radius: var(--sc-r-sm);
+}
+.kf-longform__media figcaption {
+  margin-top: 0.6rem; font-family: var(--sc-font-mono);
+  font-size: var(--sc-t-xs); color: var(--sc-ink-soft);
+}
 .kf-meta { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--sc-ink-soft); }
 
