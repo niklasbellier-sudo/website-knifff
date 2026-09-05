@@ -211,6 +211,11 @@
         setTimeout(function () {
           root.classList.remove('kf-booting');
           root.classList.add('kf-booted');
+          // once the CSS fade has run, take the overlay out entirely — a
+          // backgrounded tab can freeze the opacity transition partway and
+          // leave a faint ghost of the boot screen over the hero otherwise.
+          var b = document.querySelector('.kf-boot');
+          if (b) setTimeout(function () { b.remove(); }, 900);
         }, 260);
       }
     }, 120);
