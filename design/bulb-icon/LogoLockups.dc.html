@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --sc-canvas: #0b0d0e;
+      --sc-ink: #f3f0ea;
+      --sc-ink-soft: #9ba09f;
+      --sc-hairline: color-mix(in oklab, var(--sc-ink) 12%, transparent);
+      --sc-font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    body { margin: 0; }
+    .sheet {
+      width: 100%; height: 100%; box-sizing: border-box; background: var(--sc-canvas); color: var(--sc-ink);
+      padding: 2.4rem 2.2rem; overflow: auto; display: flex; flex-direction: column; gap: 2.2rem;
+    }
+    .sheet__title { margin: 0; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; }
+    .sheet__sub { margin: 0.3rem 0 0; font-family: var(--sc-font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sc-ink-soft); }
+    .label { font-family: var(--sc-font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sc-ink-soft); margin: 0 0 1rem; }
+    .divider { height: 1px; background: var(--sc-hairline); border: 0; margin: 0; }
+
+    .wordmark { display: block; height: 46px; width: auto; filter: brightness(0) invert(1); }
+    .lockup-h { display: inline-flex; align-items: center; gap: 0.9rem; }
+    .lockup-h .icon-box { width: 46px; height: 64px; }
+
+    .lockup-v { display: inline-flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+    .lockup-v .icon-box { width: 58px; height: 81px; }
+    .lockup-v .wordmark { height: 34px; }
+
+    .badge { display: inline-flex; align-items: center; gap: 1rem; }
+    .badge .icon-box { width: 52px; height: 52px; }
+    .badge .wordmark { height: 34px; }
+
+    .stand { display: flex; justify-content: center; padding: 1.6rem 0; }
+  </style>
+</helmet>
+<div class="sheet">
+  <div>
+    <p class="sheet__title">Logo-Lockups</p>
+    <p class="sheet__sub">Icon + Wortmarke, kombinierbar</p>
+  </div>
+
+  <div>
+    <p class="label">Horizontal</p>
+    <div class="stand">
+      <div class="lockup-h">
+        <div class="icon-box"><dc-import name="BulbIcon" tile="{{false}}" hint-size="46,64"></dc-import></div>
+        <img class="wordmark" src="kniff-wortmarke-hell.png">
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div>
+    <p class="label">Vertikal / gestapelt</p>
+    <div class="stand">
+      <div class="lockup-v">
+        <div class="icon-box"><dc-import name="BulbIcon" tile="{{false}}" hint-size="58,81"></dc-import></div>
+        <img class="wordmark" src="kniff-wortmarke-hell.png">
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div>
+    <p class="label">Icon-Badge + Wortmarke</p>
+    <div class="stand">
+      <div class="badge">
+        <div class="icon-box"><dc-import name="BulbIcon" hint-size="52,52"></dc-import></div>
+        <img class="wordmark" src="kniff-wortmarke-hell.png">
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

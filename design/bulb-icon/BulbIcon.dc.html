@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    html, body { height: 100%; margin: 0; background: #0b0d0e; }
+    .bulb-tile {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%; box-sizing: border-box;
+    }
+    .bulb-tile.is-tile { aspect-ratio: 1; border-radius: 22%; background: #08090b; }
+    .bulb-glyph {
+      display: block; overflow: visible;
+      filter:
+        drop-shadow(0 0 3px color-mix(in oklab, var(--glow, #f2a63b) 65%, transparent))
+        drop-shadow(0 0 20px color-mix(in oklab, var(--glow, #f2a63b) 42%, transparent));
+    }
+    .bulb-tile.is-tile .bulb-glyph { width: 58%; height: 58%; }
+    .bulb-tile.is-bare .bulb-glyph { width: 100%; height: 100%; }
+  </style>
+</helmet>
+<div class="bulb-tile {{modeClass}}" style="--glow: {{accent}}">
+  <svg class="bulb-glyph" viewBox="0 0 100 140" role="img" aria-label="Kniff Gluehbirnen-Marke">
+    <defs>
+      <radialGradient id="glassGrad" cx="35%" cy="26%" r="82%">
+        <stop offset="0%" stop-color="#f3f0ea" stop-opacity="0.32"/>
+        <stop offset="38%" stop-color="#f3f0ea" stop-opacity="0.08"/>
+        <stop offset="72%" stop-color="{{accent}}" stop-opacity="0.05"/>
+        <stop offset="100%" stop-color="{{accent}}" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="rimGrad" x1="15%" y1="8%" x2="88%" y2="96%">
+        <stop offset="0%" stop-color="#f3f0ea" stop-opacity="0.6"/>
+        <stop offset="45%" stop-color="#f3f0ea" stop-opacity="0.08"/>
+        <stop offset="100%" stop-color="#f3f0ea" stop-opacity="0.26"/>
+      </linearGradient>
+      <linearGradient id="metalGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#0e0e10"/>
+        <stop offset="22%" stop-color="#3c3c40"/>
+        <stop offset="48%" stop-color="#18181a"/>
+        <stop offset="76%" stop-color="#333336"/>
+        <stop offset="100%" stop-color="#0c0c0e"/>
+      </linearGradient>
+    </defs>
+
+    <path class="glass" d="M50 14 C68 14 82 30 82 52 C82 68 74 78 66 86 C62 90 60 93 60 99 L40 99 C40 93 38 90 34 86 C26 78 18 68 18 52 C18 30 32 14 50 14 Z"
+          fill="url(#glassGrad)" stroke="url(#rimGrad)" stroke-width="1.6"/>
+
+    <path class="lead" d="M48 94 L42 62 M52 94 L58 62" fill="none" stroke="#cfcac0" stroke-width="1.1" stroke-linecap="round" opacity="0.75"/>
+
+    <path class="filament-glow" d="M42 62 L47 41 L50 57 L53 41 L58 62" fill="none" stroke="{{accent}}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0.22"/>
+    <path class="filament-mid" d="M42 62 L47 41 L50 57 L53 41 L58 62" fill="none" stroke="{{accent}}" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+    <path class="filament-core" d="M42 62 L47 41 L50 57 L53 41 L58 62" fill="none" stroke="{{filamentCore}}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path class="base" d="M40 99 L60 99 L57 124 L43 124 Z" fill="url(#metalGrad)"/>
+    <path class="foot" d="M43 124 L57 124 C57 130 53 135.5 50 136.5 C47 135.5 43 130 43 124 Z" fill="url(#metalGrad)"/>
+
+    <line x1="41" y1="104" x2="59" y2="104" stroke="#000000" stroke-opacity="0.4" stroke-width="1"/>
+    <line x1="41.5" y1="109" x2="58.5" y2="109" stroke="#000000" stroke-opacity="0.4" stroke-width="1"/>
+    <line x1="42" y1="114" x2="58" y2="114" stroke="#000000" stroke-opacity="0.4" stroke-width="1"/>
+    <line x1="42.5" y1="119" x2="57.5" y2="119" stroke="#000000" stroke-opacity="0.4" stroke-width="1"/>
+  </svg>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#f2a63b","options":["#f2a63b","#0f8b8b","#f3f0ea"],"section":"Style"},"tile":{"editor":"boolean","default":true,"section":"Style"},"$preview":{"width":220,"height":300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#f2a63b';
+    const tile = this.props.tile !== false;
+    return {
+      accent,
+      filamentCore: '#fff7e8',
+      modeClass: tile ? 'is-tile' : 'is-bare',
+    };
+  }
+}
+</script>
+</body>
+</html>

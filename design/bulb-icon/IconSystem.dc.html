@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    :root {
+      --sc-canvas: #0b0d0e;
+      --sc-ink: #f3f0ea;
+      --sc-ink-soft: #9ba09f;
+      --sc-accent: #f2a63b;
+      --sc-hairline: color-mix(in oklab, var(--sc-ink) 12%, transparent);
+      --sc-font-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+      --sc-font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    body { margin: 0; }
+    .sheet {
+      width: 100%; height: 100%; box-sizing: border-box; background: var(--sc-canvas); color: var(--sc-ink);
+      font-family: var(--sc-font-display); padding: 2.4rem 2.2rem; overflow: auto;
+      display: flex; flex-direction: column; gap: 2.1rem;
+    }
+    .sheet__title {
+      margin: 0; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em;
+    }
+    .sheet__sub {
+      margin: 0.3rem 0 0; font-family: var(--sc-font-mono); font-size: 0.72rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--sc-ink-soft);
+    }
+    .row { display: flex; flex-wrap: wrap; gap: 1.6rem; align-items: flex-end; }
+    .swatch {
+      display: flex; flex-direction: column; align-items: center; gap: 0.7rem;
+    }
+    .swatch__frame { display: flex; align-items: center; justify-content: center; }
+    .swatch__label {
+      font-family: var(--sc-font-mono); font-size: 0.68rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--sc-ink-soft); text-align: center; white-space: nowrap;
+    }
+    .divider { height: 1px; background: var(--sc-hairline); border: 0; margin: 0; }
+    .accent-row .swatch__frame { width: 84px; height: 84px; }
+    .size-row .fav .swatch__frame { width: 56px; height: 56px; }
+    .size-row .app .swatch__frame { width: 132px; height: 132px; }
+    .bare-row .swatch__frame { width: 160px; height: 224px; }
+  </style>
+</helmet>
+<div class="sheet">
+  <div>
+    <p class="sheet__title">Icon-System</p>
+    <p class="sheet__sub">Ein Symbol, alle Groessen</p>
+  </div>
+
+  <div>
+    <p class="swatch__label" style="text-align:left; margin-bottom:0.9rem;">Anwendungsgroessen</p>
+    <div class="row size-row">
+      <div class="swatch fav">
+        <div class="swatch__frame"><dc-import name="BulbIcon" hint-size="56,56"></dc-import></div>
+        <p class="swatch__label">Favicon 32&ndash;56px</p>
+      </div>
+      <div class="swatch app">
+        <div class="swatch__frame"><dc-import name="BulbIcon" hint-size="132,132"></dc-import></div>
+        <p class="swatch__label">App-Icon &middot; Social</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div>
+    <p class="swatch__label" style="text-align:left; margin-bottom:0.9rem;">Freistehende Marke &middot; auf dunklem Grund</p>
+    <div class="row bare-row">
+      <div class="swatch">
+        <div class="swatch__frame"><dc-import name="BulbIcon" tile="{{false}}" hint-size="160,224"></dc-import></div>
+        <p class="swatch__label">Ohne Kachel</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div>
+    <p class="swatch__label" style="text-align:left; margin-bottom:0.9rem;">Farbvarianten</p>
+    <div class="row accent-row">
+      <div class="swatch">
+        <div class="swatch__frame"><dc-import name="BulbIcon" accent="#f2a63b" hint-size="84,84"></dc-import></div>
+        <p class="swatch__label">Amber (Standard)</p>
+      </div>
+      <div class="swatch">
+        <div class="swatch__frame"><dc-import name="BulbIcon" accent="#0f8b8b" hint-size="84,84"></dc-import></div>
+        <p class="swatch__label">Kniff-Teal</p>
+      </div>
+      <div class="swatch">
+        <div class="swatch__frame"><dc-import name="BulbIcon" accent="#f3f0ea" hint-size="84,84"></dc-import></div>
+        <p class="swatch__label">Ink / Mono</p>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

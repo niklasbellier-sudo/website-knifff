@@ -803,13 +803,17 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   font-size: var(--sc-t-xl); line-height: 1.05; margin: 0 0 var(--sc-2); }
 
 /* German compounds run long — "Allgemeine Geschäftsbedingungen" is wider than a
-   phone at display size. Let any word break rather than push a page-wide
-   horizontal scrollbar. */
+   phone at display size. Hyphenate at a real syllable break first (needs the
+   page's lang="de"); overflow-wrap is only the last-resort safety net so a
+   word with no valid break point still can't push a page-wide scrollbar. */
 h1, h2, h3, h4,
 .kf-h1, .kf-h2, .kf-h3,
-.kf-hero__copy h1, .kf-close__inner h2,
+.kf-close__inner h2,
 .kf-longform > h1, .kf-longform h2, .kf-longform h3,
-.kf-prose h2, .kf-prose h3 { overflow-wrap: break-word; }
+.kf-prose h2, .kf-prose h3 {
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto; hyphens: auto;
+}
 .kf-longform p, .kf-prose p, .kf-longform li { hyphens: auto; }
 
 /* page hero: image ground + kinetic headline, no WebGL */

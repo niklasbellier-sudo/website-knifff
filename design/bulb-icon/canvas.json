@@ -1,0 +1,12 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 900, "h": 620, "title": "Homepage-Hero" },
+    { "file": "IconSystem.dc.html", "x": 980, "y": 0, "w": 760, "h": 620, "title": "Icon-System" },
+    { "file": "BulbIcon.dc.html", "x": 0, "y": 760, "w": 420, "h": 520, "title": "Basis-Komponente" },
+    { "file": "LogoLockups.dc.html", "x": 500, "y": 760, "w": 780, "h": 520, "title": "Logo-Lockups" }
+  ],
+  "annotations": [
+    { "id": "component-note", "x": 0, "y": 680, "w": 380, "text": "Basis-Komponente — wird von allen Boards importiert, ein Symbol ueberall." }
+  ],
+  "launch": { "view": "canvas" }
+}
