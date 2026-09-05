@@ -569,8 +569,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 
 /* ---------------------------------------------- Kundenprojekt (kf-project) --
    The homepage leads with finished commissions, not the shop rail. One
-   featured project: a hero shot of the delivered part, a short write-up, and
-   a side-scrolling strip of process photos that reuses .kf-railx. */
+   featured project: a hero shot of the delivered part and a short write-up. */
 .kf-project {
   margin-top: var(--sc-6);
   border: 1px solid var(--sc-hairline);
@@ -578,8 +577,8 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   overflow: hidden;
   background: var(--sc-surface);
 }
-.kf-project__media { position: relative; aspect-ratio: 16 / 10; }
-.kf-project__media > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.kf-project__media { position: relative; }
+.kf-project__media > img { width: 100%; height: auto; display: block; }
 .kf-project__tag {
   position: absolute; left: 1rem; top: 1rem;
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
@@ -597,18 +596,6 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 .kf-project__meta { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); color: var(--sc-ink-soft); }
 .kf-project__meta a { color: var(--sc-accent); text-decoration: none; }
 .kf-project__meta a:hover { text-decoration: underline; }
-
-.kf-project .kf-railx { padding-inline: 0; margin-top: var(--sc-4); }
-.kf-shot { width: min(15rem, 62vw); margin: 0; }
-.kf-shot > img {
-  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block;
-  border: 1px solid var(--sc-hairline); border-radius: var(--sc-r-sm);
-  background: var(--sc-surface);
-}
-.kf-shot figcaption {
-  font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
-  color: var(--sc-ink-soft); margin-top: 0.55rem;
-}
 
 /* ------------------------------------------------ ACT: WAS WIR MACHEN --- */
 .kf-services { display: grid; grid-template-columns: 1fr 1fr;
