@@ -22,7 +22,7 @@ cp -R assets "$OUT"/assets
 
 # never ship these even if they slipped into a tree
 rm -f  "$OUT"/.env "$OUT"/*/.env "$OUT"/assets/ref-* 2>/dev/null || true
-rm -rf "$OUT"/scripts "$OUT"/scrollcraft "$OUT"/lab "$OUT"/node_modules "$OUT"/assets/products 2>/dev/null || true
+rm -rf "$OUT"/scripts "$OUT"/scrollcraft "$OUT"/lab "$OUT"/node_modules "$OUT"/assets/products "$OUT"/assets/social "$OUT"/assets/etsy 2>/dev/null || true
 rm -f "$OUT"/_fotos-index.html 2>/dev/null || true
 find "$OUT" -name '*.mjs' -delete 2>/dev/null || true
 find "$OUT" \( -name '.DS_Store' -o -name 'Thumbs.db' \) -delete 2>/dev/null || true
