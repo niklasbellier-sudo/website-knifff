@@ -527,13 +527,13 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   display: flex; gap: clamp(1rem, 3vw, 2rem);
   overflow-x: auto; overflow-y: hidden;
   scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--sc-gutter);
+  overflow-anchor: none;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   padding: var(--sc-5) var(--sc-gutter) var(--sc-6);
   scrollbar-width: thin;
   scrollbar-color: var(--sc-hairline-strong) transparent;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 92%, transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 92%, transparent 100%);
 }
 .kf-railx::-webkit-scrollbar { height: 6px; }
 .kf-railx::-webkit-scrollbar-thumb { background: var(--sc-hairline-strong); border-radius: 3px; }
@@ -541,7 +541,16 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 .kf-railx > * { flex: 0 0 auto; scroll-snap-align: start; }
 .kf-railx .kf-card { width: min(20rem, 74vw); }
 .kf-railx .kf-quote { width: min(24rem, 78vw); align-self: stretch; }
-.kf-railx--quotes { align-items: stretch; }
+/* quotes don't need crisp snapping; proximity-snap was resting the strip
+   mid-card on load (first tip clipped on the left on phones) */
+.kf-railx--quotes { align-items: stretch; scroll-snap-type: none; }
+@media (min-width: 1100px) {
+  /* soft edge fade only where the whole strip tends to be in view anyway */
+  .kf-railx {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 2%, #000 94%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 2%, #000 94%, transparent 100%);
+  }
+}
 
 .kf-railx__hint {
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
