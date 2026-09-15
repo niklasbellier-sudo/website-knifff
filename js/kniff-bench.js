@@ -371,22 +371,38 @@
   function ContactPrefill() {
     var form = document.querySelector('form[name="kontakt"]');
     if (!form) return;
-    var raw = new URLSearchParams(location.search).get('produkt');
-    if (!raw) return;
-    var name = raw.replace(/[\r\n\t]+/g, ' ').trim().slice(0, 90);
-    if (!name) return;
+    var params = new URLSearchParams(location.search);
+    var produkt = params.get('produkt');
+    var reorder = params.get('reorder');
+    if (!produkt && !reorder) return;
 
     var subject = form.querySelector('input[name="betreff"]');
-    if (subject) subject.value = 'Produktanfrage: ' + name;
-
     var msg = form.querySelector('textarea[name="nachricht"]');
-    if (msg && !msg.value) {
-      msg.value = 'Ich interessiere mich für: ' + name + '\n\nMenge: 1\n\n';
+    var ctxLine;
+
+    if (reorder) {
+      var name = reorder.replace(/[\r\n\t]+/g, ' ').trim().slice(0, 90);
+      if (!name) return;
+      var change = (params.get('change') || '').replace(/[\r\n\t]+/g, ' ').trim().slice(0, 400);
+      if (subject) subject.value = 'Wiederholungsauftrag: ' + name;
+      if (msg && !msg.value) {
+        msg.value = 'Ich möchte folgendes Projekt erneut beauftragen: ' + name + '\n\n'
+          + (change ? 'Änderungswünsche: ' + change + '\n\n' : '');
+      }
+      ctxLine = 'Deine Anfrage bezieht sich auf: ' + name + ' (Wiederholungsauftrag)';
+    } else {
+      var pname = produkt.replace(/[\r\n\t]+/g, ' ').trim().slice(0, 90);
+      if (!pname) return;
+      if (subject) subject.value = 'Produktanfrage: ' + pname;
+      if (msg && !msg.value) {
+        msg.value = 'Ich interessiere mich für: ' + pname + '\n\nMenge: 1\n\n';
+      }
+      ctxLine = 'Deine Anfrage bezieht sich auf: ' + pname;
     }
 
     var note = document.createElement('p');
     note.className = 'kf-form__ctx';
-    note.textContent = 'Deine Anfrage bezieht sich auf: ' + name;
+    note.textContent = ctxLine;
     form.insertBefore(note, form.querySelector('.kf-field'));
 
     // arriving from a product means the form is the point of the visit — bring it
@@ -425,10 +441,82 @@
     });
   }
 
+  /* ------------------------------------------------------- Meine Projekte */
+  // meine-projekte.html only. Data lives in that page's own #mp-data script
+  // tag (one entry per Kunde) — never in this shared file, since it's the
+  // one thing that's genuinely per-project and needs editing often. The
+  // "id" is the secret part of the link (no login, no backend): whoever has
+  // the exact link sees that one project. Add a new project by appending an
+  // object to the "projekte" array — id should NOT be guessable (title +
+  // random suffix, not a running number).
+  function Projekte() {
+    var app = document.getElementById('mp-app');
+    var dataEl = document.getElementById('mp-data');
+    if (!app || !dataEl) return;
+
+    var data;
+    try { data = JSON.parse(dataEl.textContent); } catch (e) { return; }
+    var id = new URLSearchParams(location.search).get('id');
+
+    if (!id) {
+      app.innerHTML = '<p class="kf-mp__hint">Gib oben deinen Projekt-Code ein, um den Status zu sehen.</p>';
+      return;
+    }
+    var p = (data.projekte || []).filter(function (x) { return x.id === id; })[0];
+    if (!p) {
+      app.innerHTML = '<p class="kf-mp__hint">Kein Projekt mit diesem Code gefunden. Prüf den Link aus unserer E-Mail, oder <a href="kontakt.html">schreib uns</a>.</p>';
+      return;
+    }
+
+    var stufen = data.stufen || [];
+    var steps = stufen.map(function (label, i) {
+      var state = i < p.stufe ? 'done' : (i === p.stufe ? 'now' : 'next');
+      return '<li class="is-' + state + '"><span class="kf-mp__dot" aria-hidden="true"></span>' + label + '</li>';
+    }).join('');
+
+    var facts = [];
+    if (p.material) facts.push(['Material', p.material]);
+    if (p.farbe) facts.push(['Farbe', p.farbe]);
+    if (p.gewicht) facts.push(['Gewicht', p.gewicht]);
+    if (p.druckzeit) facts.push(['Druckzeit', p.druckzeit]);
+    var factsHtml = facts.length ? '<ul class="kf-shopfacts">' + facts.map(function (f) {
+      return '<li><b>' + f[0] + '</b><span>' + f[1] + '</span></li>';
+    }).join('') + '</ul>' : '';
+
+    var img = p.bild ? '<img class="kf-mp__img" src="' + p.bild + '" alt="" loading="lazy" decoding="async">' : '';
+    var fuer = p.fuer ? '<p class="kf-mp__for">Für: ' + p.fuer + '</p>' : '';
+    var preis = p.preis ? '<p class="kf-mp__preis">Rechnung: <b>' + p.preis + '</b></p>' : '';
+    var notiz = p.notiz ? '<p class="kf-mp__notiz">' + p.notiz + '</p>' : '';
+    var titelAttr = String(p.titel).replace(/"/g, '&quot;');
+
+    app.innerHTML =
+      '<article class="kf-mp__card">' + img +
+        '<div><h2 class="kf-h2">' + p.titel + '</h2>' + fuer +
+          '<ol class="kf-mp__status">' + steps + '</ol>' +
+          factsHtml + preis + notiz +
+          '<form class="kf-mp__reorder" data-titel="' + titelAttr + '">' +
+            '<div class="kf-field"><label for="mp-change">Änderungswünsche (optional)</label>' +
+              '<textarea id="mp-change" placeholder="z. B. andere Farbe, andere Stückzahl …"></textarea></div>' +
+            '<button type="submit" class="kf-cta">Projekt erneut beauftragen <span class="kf-cta__arrow" aria-hidden="true">→</span></button>' +
+          '</form>' +
+        '</div>' +
+      '</article>';
+
+    var reorderForm = app.querySelector('.kf-mp__reorder');
+    reorderForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var change = app.querySelector('#mp-change').value;
+      var url = 'kontakt.html?reorder=' + encodeURIComponent(reorderForm.dataset.titel);
+      if (change.trim()) url += '&change=' + encodeURIComponent(change.trim());
+      location.href = url;
+    });
+  }
+
   /* --------------------------------------------------------------- go ---- */
   function start() {
     Nav();
     ShopFilter();
+    Projekte();
     tuneSpans();
     Light.init();
     ContactPrefill();

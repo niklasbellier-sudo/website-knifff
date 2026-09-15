@@ -1105,3 +1105,40 @@ h1, h2, h3, h4,
 .kf-footer__base { display: flex; flex-wrap: wrap; justify-content: space-between;
   gap: 0.5rem; margin-top: var(--sc-7); font-family: var(--sc-font-mono);
   font-size: var(--sc-t-xs); color: var(--sc-ink-soft); }
+
+/* ---- Meine Projekte: link-based Kundenbereich, kein Login/Backend ------ */
+.kf-mp__lookup { display: grid; gap: var(--sc-4); max-width: 30rem;
+  padding: var(--sc-5); border: 1px solid var(--sc-hairline-strong);
+  border-radius: var(--sc-r-sm); background: color-mix(in oklab, var(--sc-canvas) 55%, transparent); }
+.kf-mp__lookup .kf-field { gap: 0.4rem; }
+.kf-mp__hint { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); max-width: 46ch; }
+.kf-mp__hint a { color: var(--sc-accent); }
+
+.kf-mp__card { margin-top: var(--sc-7); display: grid; gap: var(--sc-6);
+  grid-template-columns: 18rem 1fr; align-items: start; }
+@media (max-width: 780px) { .kf-mp__card { grid-template-columns: 1fr; } }
+.kf-mp__img { width: 100%; border-radius: var(--sc-r-sm); aspect-ratio: 4 / 3; object-fit: cover; }
+.kf-mp__for { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
+  letter-spacing: 0.06em; color: var(--sc-ink-soft); margin: 0.2rem 0 0; }
+
+.kf-mp__status { list-style: none; margin: var(--sc-6) 0 0; padding: 0;
+  display: grid; gap: 0.6rem; }
+.kf-mp__status li { position: relative; padding-left: 1.7rem;
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
+.kf-mp__status li:not(:last-child)::after { content: ""; position: absolute;
+  left: 0.28rem; top: 1.1rem; width: 1px; height: calc(100% + 0.1rem);
+  background: var(--sc-hairline-strong); }
+.kf-mp__dot { position: absolute; left: 0; top: 0.32em; width: 0.6rem; height: 0.6rem;
+  border-radius: 50%; border: 1.5px solid var(--sc-ink-soft); background: var(--sc-canvas); }
+.kf-mp__status li.is-done { color: var(--sc-ink); }
+.kf-mp__status li.is-done .kf-mp__dot { border-color: var(--sc-accent); background: var(--sc-accent); }
+.kf-mp__status li.is-now { color: var(--sc-ink); font-weight: 600; }
+.kf-mp__status li.is-now .kf-mp__dot { border-color: var(--sc-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--sc-accent) 30%, transparent); }
+
+.kf-mp__preis { margin-top: var(--sc-5); font-size: var(--sc-t-base); }
+.kf-mp__preis b { color: var(--sc-accent); }
+.kf-mp__notiz { margin-top: var(--sc-4); color: var(--sc-ink-soft); font-size: var(--sc-t-sm); max-width: 54ch; }
+.kf-mp__reorder { margin-top: var(--sc-6); padding-top: var(--sc-5);
+  border-top: 1px solid var(--sc-hairline); display: grid; gap: var(--sc-4); max-width: 34rem; }
+.kf-mp__reorder textarea { min-height: 5rem; }

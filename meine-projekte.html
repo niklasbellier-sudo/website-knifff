@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#08090b">
+<meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="assets/favicon.svg?v=5" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=5">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png?v=5">
@@ -11,22 +12,22 @@
 <link rel="preload" href="assets/fonts/inter-tight-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-800-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/archivo-700-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
-<title>Kontakt — Kniff</title>
-<meta name="description" content="Fragen zu einem Produkt, einer Bestellung oder eine eigene 3D-Druck-Idee? Schreib uns. Übliche Antwortzeit innerhalb von 48 Stunden.">
+<title>Meine Projekte — Kniff</title>
+<meta name="description" content="Der persönliche Bereich für deine individuelle Kniff-Anfrage: Status, Material, Rechnung — und ein abgeschlossenes Projekt in wenigen Klicks erneut beauftragen.">
 <!-- og -->
-<link rel="canonical" href="https://kniff.shop/kontakt.html">
+<link rel="canonical" href="https://kniff.shop/meine-projekte.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kniff">
 <meta property="og:locale" content="de_DE">
-<meta property="og:title" content="Kontakt — Kniff">
-<meta property="og:description" content="Fragen zu einem Produkt, einer Bestellung oder eine eigene 3D-Druck-Idee? Schreib uns. Übliche Antwortzeit innerhalb von 48 Stunden.">
-<meta property="og:url" content="https://kniff.shop/kontakt.html">
+<meta property="og:title" content="Meine Projekte — Kniff">
+<meta property="og:description" content="Der persönliche Bereich für deine individuelle Kniff-Anfrage: Status, Material, Rechnung — und ein abgeschlossenes Projekt in wenigen Klicks erneut beauftragen.">
+<meta property="og:url" content="https://kniff.shop/meine-projekte.html">
 <meta property="og:image" content="https://kniff.shop/assets/og.jpg?v=5">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kontakt — Kniff">
-<meta name="twitter:description" content="Fragen zu einem Produkt, einer Bestellung oder eine eigene 3D-Druck-Idee? Schreib uns. Übliche Antwortzeit innerhalb von 48 Stunden.">
+<meta name="twitter:title" content="Meine Projekte — Kniff">
+<meta name="twitter:description" content="Der persönliche Bereich für deine individuelle Kniff-Anfrage: Status, Material, Rechnung — und ein abgeschlossenes Projekt in wenigen Klicks erneut beauftragen.">
 <meta name="twitter:image" content="https://kniff.shop/assets/og.jpg?v=5">
 <!-- /og -->
 <link rel="apple-touch-icon" href="assets/apple-touch-icon-180.png?v=5">
@@ -62,64 +63,78 @@
 <main id="inhalt" tabindex="-1">
   <section class="kf-phero" data-sc-act="pin" data-sc-span="1.0">
     <div data-sc-stage class="kf-phero__stage" data-sc-spotlight>
-      <img class="kf-ground kf-ground--full" src="assets/scenes/04-close.jpg?v=2" alt="" aria-hidden="true" width="1920" height="1067" srcset="assets/scenes/04-close-m.jpg?v=2 1200w, assets/scenes/04-close.jpg?v=2 1920w" sizes="100vw">
+      <img class="kf-ground kf-ground--full" src="assets/scenes/13-werkstatt.jpg?v=1" alt="" aria-hidden="true" width="1920" height="1280" srcset="assets/scenes/13-werkstatt.jpg?v=1 1920w" sizes="100vw">
       <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
       <div class="kf-phero__copy" data-sc-cue="0 1 0 0">
-        <p class="kf-eyebrow">Kontakt</p>
-        <h1 class="kf-h1" data-sc-kinetic="lines">Schreib uns.</h1>
-        <p class="kf-lede">Fragen zu einem Produkt, einer Bestellung oder eine eigene Idee für ein 3D-Druck-Projekt? Wir schauen uns jede Nachricht persönlich an.</p>
+        <p class="kf-eyebrow">Kundenbereich</p>
+        <h1 class="kf-h1" data-sc-kinetic="lines">Deine Projekte im Blick.</h1>
+        <p class="kf-lede">Für jede individuelle Anfrage bekommst du von uns einen persönlichen Link zu genau dieser Seite — kein Konto, kein Passwort nötig. Status, Material, Gewicht und die finale Rechnung auf einen Blick, und ein abgeschlossenes Projekt lässt sich mit wenigen Klicks erneut beauftragen.</p>
       </div>
     </div>
   </section>
 
+  <!-- Ohne JS und ohne ?id funktioniert dieses Formular als normaler GET-Redirect
+       auf meine-projekte.html?id=…; das Rendering des Treffers übernimmt JS. -->
   <section class="kf-sec">
     <div class="kf-wrap" data-sc-in data-sc-stagger="50">
-      <div class="kf-contact">
-        <form class="kf-form" name="kontakt" method="POST" action="/danke.html"
-              data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="kontakt">
-          <input type="hidden" name="betreff" value="">
-          <p class="kf-hp"><label>Nicht ausfüllen: <input name="bot-field"></label></p>
-          <div class="kf-field">
-            <label for="k-name">Name</label>
-            <input id="k-name" type="text" name="name" autocomplete="name" required>
-          </div>
-          <div class="kf-field">
-            <label for="k-mail">E-Mail</label>
-            <input id="k-mail" type="email" name="email" autocomplete="email" required>
-          </div>
-          <div class="kf-field">
-            <label for="k-msg">Nachricht</label>
-            <textarea id="k-msg" name="nachricht" required></textarea>
-          </div>
-          <button type="submit" class="kf-cta">Absenden <span class="kf-cta__arrow" aria-hidden="true">→</span></button>
-        </form>
 
-        <aside>
-          <dl>
-            <dt>E-Mail</dt>
-            <dd><a href="mailto:kniffshop@gmail.com">kniffshop@gmail.com</a></dd>
-            <dt>Etsy</dt>
-            <dd><a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener noreferrer">KniffShop auf Etsy</a></dd>
-            <dt>Instagram</dt>
-            <dd><a href="https://instagram.com/kniffshop" target="_blank" rel="noopener noreferrer">@kniffshop</a></dd>
-            <dt>Antwortzeit</dt>
-            <dd>in der Regel innerhalb von 48 Stunden</dd>
-            <dt>Für Custom-Projekte</dt>
-            <dd><a href="3d-druck-auf-anfrage.html">Direkt zum Projekt-Formular</a></dd>
-          </dl>
-        </aside>
-      </div>
+      <form class="kf-mp__lookup" method="GET" action="meine-projekte.html" id="mp-lookup">
+        <div class="kf-field">
+          <label for="mp-code">Projekt-Code</label>
+          <input id="mp-code" type="text" name="id" placeholder="z. B. treiben-horn-24a7" autocomplete="off">
+        </div>
+        <button type="submit" class="kf-cta">Projekt ansehen <span class="kf-cta__arrow" aria-hidden="true">→</span></button>
+        <p class="kf-mp__hint">Den Code findest du in der E-Mail, die wir dir bei Projektstart geschickt haben.</p>
+      </form>
+
+      <div id="mp-app"><p class="kf-mp__hint">Lädt …</p></div>
+
+      <p class="kf-mp__hint" style="margin-top: var(--sc-7)">Noch kein Projekt bei uns?
+        <a href="3d-druck-auf-anfrage.html#anfrage">Jetzt Idee einreichen →</a>
+      </p>
     </div>
   </section>
 </main>
+
+<!-- Projekt-Daten: pro Kunde ein Eintrag, id ist der geheime Teil des Links
+     (nicht erratbar wählen, z. B. Titel + Zufallssuffix). Neue Projekte hier
+     einfach ergänzen — Details siehe Kommentar in js/kniff-bench.js:Projekte(). -->
+<script id="mp-data" type="application/json">
+{
+  "stufen": ["Angefragt", "In Prüfung", "Angebot erstellt", "In Arbeit", "Fertig &amp; versendet"],
+  "projekte": [
+    {
+      "id": "treiben-horn-24a7",
+      "titel": "Treiben Horn",
+      "fuer": "@treiben.sound",
+      "bild": "assets/projekte/treiben-horn-final.jpg",
+      "stufe": 4,
+      "material": "PLA",
+      "notiz": "Hornsegment für die selbstgebaute Audioanlage TREIBEN, sauber gedruckt über mehrere Materialien."
+    },
+    {
+      "id": "beispiel-demo",
+      "titel": "Beispielprojekt (Demo)",
+      "fuer": "",
+      "bild": "",
+      "stufe": 4,
+      "material": "PLA, Mattschwarz",
+      "farbe": "Mattschwarz",
+      "gewicht": "86 g",
+      "druckzeit": "4,1 h",
+      "preis": "34,90 €",
+      "notiz": "Nur zur Ansicht — zeigt, wie ein vollständiger Eintrag mit Gewicht, Preis und Rechnungsposten aussieht. Kein echter Auftrag."
+    }
+  ]
+}
+</script>
 
 <footer class="kf-footer">
   <div class="kf-wrap">
     <div class="kf-footer__grid">
       <div><h4>Kniff</h4><p style="font-size:var(--sc-t-sm); color:var(--sc-ink-soft); max-width:26ch; margin:0">3D-gedruckte Kniffe für Alltag, Haushalt und unterwegs, dazu 3D-Druck auf Anfrage. Gedruckt und geprüft in Berlin.</p></div>
       <div><h4>Angebot</h4><ul><li><a href="3d-druck-auf-anfrage.html">Custom-Druck</a></li><li><a href="shop.html">Shop</a></li><li><a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener noreferrer">Etsy-Shop</a></li><li><a href="https://instagram.com/kniffshop" target="_blank" rel="noopener noreferrer">Instagram</a></li></ul></div>
-      <div><h4>Service</h4><ul><li><a href="versand-zahlung.html">Versand &amp; Zahlung</a></li><li><a href="kontakt.html">Kontakt</a></li><li><a href="widerruf.html">Widerrufsrecht</a></li></ul></div>
+      <div><h4>Service</h4><ul><li><a href="versand-zahlung.html">Versand &amp; Zahlung</a></li><li><a href="meine-projekte.html">Meine Projekte</a></li><li><a href="kontakt.html">Kontakt</a></li><li><a href="widerruf.html">Widerrufsrecht</a></li></ul></div>
       <div><h4>Rechtliches</h4><ul><li><a href="impressum.html">Impressum</a></li><li><a href="datenschutz.html">Datenschutz</a></li><li><a href="agb.html">AGB</a></li></ul></div>
     </div>
     <div class="kf-footer__base"><span>© 2026 Kniff · Berlin</span><span>kniff.shop</span></div>
