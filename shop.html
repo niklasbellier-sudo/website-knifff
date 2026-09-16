@@ -102,15 +102,17 @@
       <article class="kf-prod" id="stiftehalter-auto" data-cat="gadget">
         <div class="kf-gallery" data-sc-tilt="4">
           <div class="kf-gallery__main">
-            <img src="assets/stiftehalter-auto-usecase.jpg" alt="Kniff Stiftehalter, mattschwarz, an der Lüftungsdüse im Auto mit zwei Kugelschreibern" width="1600" height="889" data-gallery-main loading="lazy" decoding="async">
+            <img src="assets/stiftehalter-auto-usecase.jpg" alt="Kniff Stiftehalter, mattschwarz, an der Lüftungsdüse im Auto mit zwei Kugelschreibern" width="1600" height="2133" style="object-position:50% 75%" data-gallery-main loading="lazy" decoding="async">
           </div>
           <div class="kf-gallery__thumbs" role="list" aria-label="Weitere Bilder">
-            <button type="button" class="kf-gallery__thumb is-active" data-src="assets/stiftehalter-auto-usecase.jpg" aria-label="Im Auto anzeigen"><img src="assets/th/stiftehalter-auto-usecase.jpg" alt="" loading="lazy" width="300" height="225"></button>
+            <button type="button" class="kf-gallery__thumb is-active" data-src="assets/stiftehalter-auto-usecase.jpg" data-op="50% 75%" aria-label="Im Auto anzeigen"><img src="assets/th/stiftehalter-auto-usecase.jpg" alt="" loading="lazy" width="240" height="320" style="object-position:50% 75%"></button>
             <button type="button" class="kf-gallery__thumb" data-src="assets/stiftehalter-auto.jpg" aria-label="Bild 1 anzeigen"><img src="assets/th/stiftehalter-auto.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="assets/stiftehalter-auto-2.jpg" aria-label="Bild 2 anzeigen"><img src="assets/th/stiftehalter-auto-2.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="assets/stiftehalter-auto-3.jpg" aria-label="Bild 3 anzeigen"><img src="assets/th/stiftehalter-auto-3.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="assets/stiftehalter-auto-4.jpg" aria-label="Bild 4 anzeigen"><img src="assets/th/stiftehalter-auto-4.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="assets/stiftehalter-auto-5.jpg" aria-label="Bild 5 anzeigen"><img src="assets/th/stiftehalter-auto-5.jpg" alt="" loading="lazy" width="300" height="225"></button>
+            <button type="button" class="kf-gallery__thumb" data-src="assets/stiftehalter-auto-6.jpg" aria-label="Bild 6 anzeigen"><img src="assets/th/stiftehalter-auto-6.jpg" alt="" loading="lazy" width="240" height="320"></button>
+            <button type="button" class="kf-gallery__thumb" data-src="assets/stiftehalter-auto-7.jpg" aria-label="Bild 7 anzeigen"><img src="assets/th/stiftehalter-auto-7.jpg" alt="" loading="lazy" width="240" height="320"></button>
           </div>
         </div>
         <div class="kf-prod__info">
@@ -141,10 +143,10 @@
       <article class="kf-prod" id="spiegel-clip-auto" data-cat="gadget">
         <div class="kf-gallery" data-sc-tilt="4">
           <div class="kf-gallery__main">
-            <img src="assets/spiegel-clip-auto-usecase.jpg" alt="Kniff Sonnenblenden-Clip, schwarz, an der Sonnenblende im Auto mit Zettel und Stift" width="1600" height="889" data-gallery-main loading="lazy" decoding="async">
+            <img src="assets/spiegel-clip-auto-usecase.jpg" alt="Kniff Sonnenblenden-Clip, schwarz, an der Sonnenblende im Auto mit Zettel und Stift" width="1600" height="2133" data-gallery-main loading="lazy" decoding="async">
           </div>
           <div class="kf-gallery__thumbs" role="list" aria-label="Weitere Bilder">
-            <button type="button" class="kf-gallery__thumb is-active" data-src="assets/spiegel-clip-auto-usecase.jpg" aria-label="An der Sonnenblende anzeigen"><img src="assets/th/spiegel-clip-auto-usecase.jpg" alt="" loading="lazy" width="300" height="225"></button>
+            <button type="button" class="kf-gallery__thumb is-active" data-src="assets/spiegel-clip-auto-usecase.jpg" aria-label="An der Sonnenblende anzeigen"><img src="assets/th/spiegel-clip-auto-usecase.jpg" alt="" loading="lazy" width="240" height="320"></button>
             <button type="button" class="kf-gallery__thumb" data-src="assets/spiegel-clip-auto.jpg" aria-label="Bild 1 anzeigen"><img src="assets/th/spiegel-clip-auto.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="assets/spiegel-clip-auto-2.jpg" aria-label="Bild 2 anzeigen"><img src="assets/th/spiegel-clip-auto-2.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="assets/spiegel-clip-auto-3.jpg" aria-label="Bild 3 anzeigen"><img src="assets/th/spiegel-clip-auto-3.jpg" alt="" loading="lazy" width="300" height="225"></button>
@@ -372,7 +374,10 @@
     thumbs.forEach(function (b) {
       b.addEventListener('click', function () {
         var src = b.getAttribute('data-src');
-        if (main && src) main.setAttribute('src', src);
+        if (main && src) {
+          main.setAttribute('src', src);
+          main.style.objectPosition = b.getAttribute('data-op') || '';
+        }
         thumbs.forEach(function (x) { x.classList.remove('is-active'); });
         b.classList.add('is-active');
       });
@@ -409,9 +414,11 @@
     "name": "Kniff Stiftehalter fürs Auto",
     "description": "Ein fester Platz für den Stift im Auto: für Parkschein, Notiz an der Windschutzscheibe oder die schnelle Nummer aufs Papier.",
     "image": [
+     "https://kniff.shop/assets/stiftehalter-auto-usecase.jpg",
      "https://kniff.shop/assets/stiftehalter-auto.jpg",
      "https://kniff.shop/assets/stiftehalter-auto-2.jpg",
-     "https://kniff.shop/assets/stiftehalter-auto-usecase.jpg"
+     "https://kniff.shop/assets/stiftehalter-auto-6.jpg",
+     "https://kniff.shop/assets/stiftehalter-auto-7.jpg"
     ],
     "brand": {
      "@type": "Brand",
