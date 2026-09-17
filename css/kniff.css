@@ -19,6 +19,12 @@
      never in an accent role, never on a control. */
   --sc-accent:      #f2a63b;
   --sc-accent-ink:  #0b0d0e;
+  /* Foreground (text/border/focus-ring) use of the accent. Same as --sc-accent
+     on dark; on the light theme below it repoints to --kf-warm-deep, because
+     #f2a63b only reads ~1.75:1 against a light canvas (WCAG-fails as a focus
+     ring) but ~6.4:1 as the deeper amber. Never use for accent FILLS — those
+     keep --sc-accent + --sc-accent-ink in both themes. */
+  --sc-accent-fg:   var(--sc-accent);
 
   --kf-cool:        #0f8b8b;   /* Kniff teal — atmosphere / instrument lines */
   --kf-cool-deep:   #0a4f52;
@@ -64,6 +70,58 @@
   --kf-vel: 0;
 }
 
+/* Light theme. Warm linen/parchment, not a generic grey/white flip — keeps
+   the same "faint cast, never flat" language as the dark canvas above.
+   Only ground + ink + shadow tint change; accent, teal and every --pla-*
+   swatch stay identical in both themes (brand + real filament colours,
+   not theme colours). html[] beats :root[] on specificity, so the hero
+   dark-scope override below (also html[]) is guaranteed to win regardless
+   of source order. */
+html[data-theme="light"] {
+  --sc-canvas:      #f4ede1;
+  --sc-surface:     #fbf8f2;
+  --sc-ink:         #221c14;
+  --sc-ink-soft:    #55493a;
+  --sc-accent-fg:   var(--kf-warm-deep);
+  --sc-shadow-color: 30 25% 8%;   /* warm umber, not scrollcraft's cool navy default */
+}
+
+/* scrollcraft.js's background-drift feature (data-sc-drift="#hex") writes
+   --sc-canvas as an inline style on <html>, which would beat data-theme.
+   Currently unused sitewide (grep found zero data-sc-drift attributes) so
+   this can't misfire today — flagging for whoever adds it next. */
+
+/* Cinematic scene photography (assets/scenes/*.jpg) is baked-dark; no CSS
+   token can lighten the pixels. These three stages share min-height:100svh
+   in scrollcraft.css and are treated as one family there too — keep them
+   permanently dark regardless of theme rather than showing a washed-out
+   photo on a light page. */
+html[data-theme="light"] .kf-phero__stage,
+html[data-theme="light"] .kf-proc__stage,
+html[data-theme="light"] .kf-close__stage {
+  --sc-canvas:   #0b0d0e;
+  --sc-surface:  #14181a;
+  --sc-ink:      #f3f0ea;
+  --sc-ink-soft: #9ba09f;
+  --sc-accent-fg: var(--sc-accent);
+  /* body { color: var(--sc-ink) } already resolved to the light-theme value
+     by the time it inherits down here — redefining the custom property alone
+     doesn't reach it. Re-assert color so descendants (h1, lede, ...) inherit
+     the right one from this point instead. */
+  color: var(--sc-ink);
+}
+
+/* Grain hides banding on a flat DARK ground; no such problem on light. */
+html[data-theme="light"] .sc-grain { opacity: 0; }
+
+/* The wordmark PNG is pre-rendered light-on-transparent (kniff-wortmarke-hell)
+   — invisible on a light canvas. A matching dark variant already exists in
+   assets/, just never wired up until now. Identical 439x188 px, safe drop-in. */
+html[data-theme="light"] .kf-head__mark img,
+html[data-theme="light"] .kf-boot__mark {
+  content: url("/assets/kniff-wortmarke-dunkel.png?v=3");
+}
+
 /* Kill the old light theme entirely if any old rule leaks in. */
 html { background: var(--sc-canvas); }
 body { background: var(--sc-canvas); color: var(--sc-ink); }
@@ -89,7 +147,7 @@ summary:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--sc-accent);
+  outline: 2px solid var(--sc-accent-fg);
   outline-offset: 3px;
   border-radius: var(--sc-r-sm);
 }
@@ -100,11 +158,11 @@ main:focus { outline: none; }
    instrument underline treatment for links in prose. */
 .kf-prose a {
   color: var(--sc-ink);
-  text-decoration-color: var(--sc-accent);
+  text-decoration-color: var(--sc-accent-fg);
   text-decoration-thickness: 2px;
   text-underline-offset: 0.24em;
 }
-.kf-prose a:hover { color: var(--sc-accent); }
+.kf-prose a:hover { color: var(--sc-accent-fg); }
 
 /* --------------------------------------------------------------- boot ----- */
 /* The load screen: black, one assembling object, a real progress bar. Lifts
@@ -116,7 +174,7 @@ main:focus { outline: none; }
   transition: opacity 620ms var(--sc-ease-out), visibility 620ms;
 }
 html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; }
-.kf-boot__inner { width: min(78vw, 30rem); text-align: left; color: var(--sc-accent); }
+.kf-boot__inner { width: min(78vw, 30rem); text-align: left; color: var(--sc-accent-fg); }
 
 /* the wordmark breathes an amber glow, and a specular highlight sweeps across
    it — the workshop coming to light (ref: ciaoenergy.com loading screen). */
@@ -203,6 +261,13 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 }
 .kf-head__nav a { color: var(--sc-ink-soft); transition: color var(--sc-d-fast); }
 .kf-head__nav a:hover, .kf-head__nav a[aria-current="page"] { color: var(--sc-ink); }
+.kf-head__utility { display: flex; align-items: center; gap: clamp(0.9rem, 2.4vw, 2rem); }
+.kf-theme-toggle {
+  font: inherit; font-size: var(--sc-t-xs); letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--sc-ink-soft); background: none; border: 0; padding: 0; cursor: pointer;
+  transition: color var(--sc-d-fast);
+}
+.kf-theme-toggle:hover { color: var(--sc-ink); }
 .kf-head__cta {
   font-size: var(--sc-t-xs); letter-spacing: 0.1em; text-transform: uppercase;
   border: 1px solid currentColor; padding: 0.5rem 0.9rem; border-radius: var(--sc-r-sm);
@@ -253,9 +318,14 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
     border-top: 1px solid var(--sc-hairline);
   }
   .kf-head__nav a:first-child { border-top: 0; }
+  .kf-head__utility {
+    padding: 0.95rem 0.1rem; font-size: var(--sc-t-sm);
+    border-top: 1px solid var(--sc-hairline);
+  }
+  .kf-theme-toggle { font-size: inherit; }
   .kf-head__cta {
     margin-top: 0.9rem; text-align: center; padding: 0.85rem 0.9rem;
-    border-color: var(--sc-accent); color: var(--sc-ink);
+    border-color: var(--sc-accent-fg); color: var(--sc-ink);
   }
 }
 
@@ -290,7 +360,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   color: var(--sc-ink); text-transform: uppercase; letter-spacing: 0.12em;
   background: none; border: 0; font: inherit; cursor: pointer; padding: 0;
 }
-.kf-hud__name:hover { color: var(--sc-accent); }
+.kf-hud__name:hover { color: var(--sc-accent-fg); }
 .kf-hud__spec { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .kf-hud__spec b { color: var(--sc-ink); font-weight: 500; }
 @media (max-width: 560px) { .kf-hud__spec { display: none; } }
@@ -300,7 +370,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 /* ------------------------------------------------------- shared blocks --- */
 .kf-eyebrow {
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--sc-accent);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--sc-accent-fg);
   margin: 0 0 var(--sc-4);
   display: flex; align-items: center; gap: 0.6em;
 }
@@ -324,7 +394,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
   color: var(--sc-accent-ink); background: var(--sc-accent);
   padding: 0.85rem 1.3rem; border-radius: var(--sc-r-sm);
-  border: 1px solid var(--sc-accent);
+  border: 1px solid var(--sc-accent-fg);
   transition: transform var(--sc-d-fast) var(--sc-ease-out),
               box-shadow var(--sc-d-base) var(--sc-ease-out);
   box-shadow: 0 0 0 0 color-mix(in oklab, var(--sc-accent) 50%, transparent);
@@ -342,7 +412,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   border: 1px solid var(--sc-hairline-strong);
   transition: border-color var(--sc-d-fast), color var(--sc-d-fast);
 }
-.kf-ghost:hover { border-color: var(--sc-accent); color: var(--sc-accent); }
+.kf-ghost:hover { border-color: var(--sc-accent-fg); color: var(--sc-accent-fg); }
 
 .kf-actions { display: flex; flex-wrap: wrap; gap: var(--sc-3); margin-top: var(--sc-5); }
 
@@ -398,8 +468,8 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
    fight the material chip's fill */
 .kf-xtoggle { margin-left: 0.25rem; }
 .kf-xtoggle[aria-pressed="true"] {
-  color: var(--sc-accent) !important; background: transparent !important;
-  border-color: var(--sc-accent) !important;
+  color: var(--sc-accent-fg) !important; background: transparent !important;
+  border-color: var(--sc-accent-fg) !important;
 }
 .kf-xtoggle[aria-pressed="true"]::before {
   content: "■ "; font-size: 0.7em; vertical-align: 0.1em;
@@ -410,7 +480,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   display: flex; align-items: center; gap: 0.5rem;
 }
 .kf-hint::before {
-  content: ""; width: 22px; height: 1px; background: var(--sc-accent);
+  content: ""; width: 22px; height: 1px; background: var(--sc-accent-fg);
 }
 @media (hover: none) { .kf-hint:not(.kf-hint--tap) { display: none; } }
 /* the hint has a hover phrasing and a tap phrasing — show the one that fits */
@@ -450,7 +520,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 }
 .kf-step .n {
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
-  letter-spacing: 0.16em; color: var(--sc-accent);
+  letter-spacing: 0.16em; color: var(--sc-accent-fg);
 }
 .kf-step h3 {
   font-family: var(--sc-font-display); font-weight: 700;
@@ -483,7 +553,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 .kf-obj__cube { position: relative; transform-style: preserve-3d;
   width: 50%; will-change: transform; }
 .kf-card--wide .kf-obj__cube { width: 42%; }
-.kf-obj__face { position: absolute; inset: 0; background: var(--kf-face, #cfc8ba);
+.kf-obj__face { position: absolute; inset: 0; background: var(--kf-face, var(--sc-surface));
   outline: 1px solid rgba(0,0,0,0.28); outline-offset: -1px;
   background-image: repeating-linear-gradient(
     0deg, rgba(255,255,255,0.05) 0 2px, rgba(0,0,0,0.09) 2px 4px);  /* layer lines */
@@ -572,7 +642,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 }
 .kf-card--cta:hover { background: color-mix(in oklab, var(--sc-accent) 16%, transparent); transform: translateY(-2px); }
 .kf-card--cta__h { font-family: var(--sc-font-display); font-weight: 700; font-size: var(--sc-t-xl); }
-.kf-card--cta .kf-cta__arrow { color: var(--sc-accent); font-size: var(--sc-t-lg); }
+.kf-card--cta .kf-cta__arrow { color: var(--sc-accent-fg); font-size: var(--sc-t-lg); }
 
 @media (prefers-reduced-motion: reduce) { .kf-railx { scroll-behavior: auto; } }
 
@@ -603,7 +673,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 }
 .kf-project__body p { color: var(--sc-ink-soft); max-width: 54ch; margin: 0 0 1.1rem; }
 .kf-project__meta { font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); color: var(--sc-ink-soft); }
-.kf-project__meta a { color: var(--sc-accent); text-decoration: none; }
+.kf-project__meta a { color: var(--sc-accent-fg); text-decoration: none; }
 .kf-project__meta a:hover { text-decoration: underline; }
 
 /* ------------------------------------------------ ACT: WAS WIR MACHEN --- */
@@ -611,7 +681,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   gap: clamp(1.5rem, 5vw, 4rem); margin-top: var(--sc-7); }
 @media (max-width: 780px) { .kf-services { grid-template-columns: 1fr; } }
 .kf-services article { display: flex; flex-direction: column; gap: var(--sc-3);
-  padding-top: var(--sc-5); border-top: 2px solid var(--sc-accent); }
+  padding-top: var(--sc-5); border-top: 2px solid var(--sc-accent-fg); }
 .kf-services .kf-h3 { font-size: var(--sc-t-2xl); margin: 0.2rem 0 0; }
 .kf-services p { color: var(--sc-ink-soft); margin: 0; max-width: 46ch; }
 .kf-services .kf-cta { margin-top: var(--sc-4); align-self: start; }
@@ -633,7 +703,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 }
 .kf-trust b::before {
   content: ""; position: absolute; left: 0; top: 0.5em;
-  width: 1rem; height: 1px; background: var(--sc-accent);
+  width: 1rem; height: 1px; background: var(--sc-accent-fg);
 }
 .kf-trust span { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); padding-left: 1.6rem; }
 
@@ -654,10 +724,10 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 }
 .kf-shopfacts b::before {
   content: ""; position: absolute; left: 0; top: 0.5em;
-  width: 1rem; height: 1px; background: var(--sc-accent);
+  width: 1rem; height: 1px; background: var(--sc-accent-fg);
 }
 .kf-shopfacts span { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); padding-left: 1.6rem; }
-.kf-shopfacts a { color: var(--sc-ink); text-decoration-color: var(--sc-accent); }
+.kf-shopfacts a { color: var(--sc-ink); text-decoration-color: var(--sc-accent-fg); }
 @media (max-width: 899px) { .kf-shopfacts a { display: inline-block; padding: 0.35rem 0; } }
 
 /* shop category filter — progressive: without JS all products stay visible */
@@ -671,12 +741,12 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   border: 1px solid var(--sc-hairline-strong);
   transition: color 150ms var(--sc-ease-out), border-color 150ms var(--sc-ease-out), background 150ms var(--sc-ease-out);
 }
-.kf-shopfilter__btn:hover { color: var(--sc-ink); border-color: color-mix(in oklab, var(--sc-accent) 45%, transparent); }
+.kf-shopfilter__btn:hover { color: var(--sc-ink); border-color: color-mix(in oklab, var(--sc-accent-fg) 45%, transparent); }
 .kf-shopfilter__btn.is-active {
-  color: var(--sc-canvas); background: var(--sc-accent);
+  color: var(--sc-accent-ink); background: var(--sc-accent);
   border-color: var(--sc-accent); font-weight: 600;
 }
-.kf-shopfilter__btn:focus-visible { outline: 2px solid var(--sc-accent); outline-offset: 2px; }
+.kf-shopfilter__btn:focus-visible { outline: 2px solid var(--sc-accent-fg); outline-offset: 2px; }
 .kf-prod.is-filtered { display: none; }
 
 /* --------------------------------------------------- ACT: BEWERTUNGEN --- */
@@ -690,14 +760,14 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
   text-decoration: none; color: var(--sc-ink);
   transition: border-color var(--sc-d-fast), background var(--sc-d-fast);
 }
-.kf-proofbar:hover { border-color: var(--sc-accent);
+.kf-proofbar:hover { border-color: var(--sc-accent-fg);
   background: color-mix(in oklab, var(--sc-accent) 14%, transparent); }
-.kf-proofbar__stars { color: var(--sc-accent); letter-spacing: 2px; font-size: var(--sc-t-sm); }
+.kf-proofbar__stars { color: var(--sc-accent-fg); letter-spacing: 2px; font-size: var(--sc-t-sm); }
 .kf-proofbar__txt { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
 .kf-proofbar__txt b { color: var(--sc-ink); font-weight: 600; }
 .kf-proofbar__go { margin-left: auto; font-family: var(--sc-font-mono);
   font-size: var(--sc-t-xs); letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--sc-accent); white-space: nowrap; }
+  color: var(--sc-accent-fg); white-space: nowrap; }
 @media (max-width: 560px) { .kf-proofbar__go { margin-left: 0; } }
 
 .kf-reviews { display: grid; gap: clamp(1rem, 2.5vw, 1.75rem);
@@ -763,7 +833,7 @@ html.kf-booted .kf-boot { opacity: 0; visibility: hidden; pointer-events: none; 
 }
 .kf-foot nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; }
 .kf-foot a { color: var(--sc-ink-soft); text-decoration: none; }
-.kf-foot a:hover { color: var(--sc-accent); }
+.kf-foot a:hover { color: var(--sc-accent-fg); }
 
 /* ---- mobile close act: the stage is locked to 100svh by the engine, and the
    footer is pinned to its floor. Top-align the copy, shrink the headline and
@@ -873,7 +943,7 @@ h1, h2, h3, h4,
   border-bottom: 1px solid var(--sc-hairline); }
 .kf-steps > li:last-child { border-bottom: 0; }
 .kf-steps > li::before { counter-increment: step; content: counter(step, decimal-leading-zero);
-  font-family: var(--sc-font-mono); font-size: var(--sc-t-lg); color: var(--sc-accent);
+  font-family: var(--sc-font-mono); font-size: var(--sc-t-lg); color: var(--sc-accent-fg);
   line-height: 1; }
 .kf-steps p { color: var(--sc-ink-soft); max-width: 54ch; margin: 0; }
 
@@ -884,7 +954,7 @@ h1, h2, h3, h4,
   padding: 0.7rem 0 0.7rem 1.7rem; color: var(--sc-ink-soft);
   border-top: 1px solid var(--sc-hairline); max-width: 60ch; }
 .kf-check li::before { content: "▸"; position: absolute; left: 0; top: 0.7rem;
-  color: var(--sc-accent); }
+  color: var(--sc-accent-fg); }
 .kf-check b { color: var(--sc-ink); font-weight: 500; }
 
 /* ---- the request form: "die Bank" -------------------------------------- */
@@ -899,7 +969,7 @@ h1, h2, h3, h4,
   padding: 0.8rem 0.9rem; width: 100%;
   transition: border-color var(--sc-d-fast); }
 .kf-field input:focus-visible, .kf-field textarea:focus-visible {
-  outline: 2px solid var(--sc-accent); outline-offset: 2px; border-color: var(--sc-accent); }
+  outline: 2px solid var(--sc-accent-fg); outline-offset: 2px; border-color: var(--sc-accent-fg); }
 .kf-field textarea { min-height: 8rem; resize: vertical; }
 .kf-field--hint small { color: var(--sc-ink-soft); font-family: var(--sc-font-mono);
   font-size: var(--sc-t-xs); }
@@ -910,8 +980,8 @@ h1, h2, h3, h4,
   margin: 0; padding: 0.7rem 0.9rem;
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
   letter-spacing: 0.04em; color: var(--sc-ink);
-  background: color-mix(in oklab, var(--sc-accent) 12%, transparent);
-  border: 1px solid color-mix(in oklab, var(--sc-accent) 40%, transparent);
+  background: color-mix(in oklab, var(--sc-accent-fg) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--sc-accent-fg) 40%, transparent);
   border-radius: var(--sc-r-sm);
 }
 .kf-hp { position: absolute; left: -9999px; }
@@ -923,10 +993,10 @@ h1, h2, h3, h4,
   font-family: var(--sc-font-display); font-weight: 600; font-size: var(--sc-t-lg);
   display: flex; justify-content: space-between; gap: 1rem; }
 .kf-faq summary::-webkit-details-marker { display: none; }
-.kf-faq summary::after { content: "+"; color: var(--sc-accent); font-family: var(--sc-font-mono); }
+.kf-faq summary::after { content: "+"; color: var(--sc-accent-fg); font-family: var(--sc-font-mono); }
 .kf-faq details[open] summary::after { content: "–"; }
 .kf-faq details p { color: var(--sc-ink-soft); margin: 0 0 var(--sc-4); max-width: 62ch; }
-.kf-faq a { color: var(--sc-accent); }
+.kf-faq a { color: var(--sc-accent-fg); }
 
 /* -------- full product entries (shop.html) ---------------------------- */
 .kf-prods { display: grid; gap: clamp(2.5rem, 6vw, 5rem); margin-top: var(--sc-7); }
@@ -954,8 +1024,8 @@ h1, h2, h3, h4,
   background: none; transition: border-color var(--sc-d-fast), transform var(--sc-d-fast); }
 .kf-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .kf-gallery__thumb:hover { transform: translateY(-1px); }
-.kf-gallery__thumb.is-active { border-color: var(--sc-accent);
-  box-shadow: 0 0 0 1px var(--sc-accent); }
+.kf-gallery__thumb.is-active { border-color: var(--sc-accent-fg);
+  box-shadow: 0 0 0 1px var(--sc-accent-fg); }
 
 .kf-prod__variant { margin: var(--sc-3) 0 0; font-family: var(--sc-font-mono);
   font-size: var(--sc-t-xs); letter-spacing: 0.04em; color: var(--sc-ink-soft); }
@@ -967,8 +1037,8 @@ h1, h2, h3, h4,
 .kf-prod__soon { position: absolute; inset: 0; display: none; place-items: center;
   font-family: var(--sc-font-mono); font-size: var(--sc-t-sm); letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: color-mix(in oklab, var(--alt-c, #999) 20%, #fff);
-  background: var(--alt-c, #333); }
+  color: var(--sc-ink-soft);
+  background: var(--sc-surface); }
 .kf-prod__media.is-alt > img { visibility: hidden; }
 .kf-prod__media.is-alt .kf-prod__soon { display: grid; }
 
@@ -981,7 +1051,7 @@ h1, h2, h3, h4,
   padding: 0; transition: transform var(--sc-d-fast), box-shadow var(--sc-d-fast); }
 .kf-prod__swatch .dot:hover { transform: translateY(-1px); }
 .kf-prod__swatch .dot[aria-pressed="true"] {
-  box-shadow: 0 0 0 2px var(--sc-canvas), 0 0 0 4px var(--sc-accent); }
+  box-shadow: 0 0 0 2px var(--sc-canvas), 0 0 0 4px var(--sc-accent-fg); }
 
 .kf-tiers { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--sc-4); }
 .kf-tier { display: flex; flex-direction: column; gap: 0.15rem;
@@ -992,8 +1062,8 @@ h1, h2, h3, h4,
   letter-spacing: 0.08em; text-transform: uppercase; }
 .kf-tiers__more { display: inline-block; margin-top: var(--sc-3);
   font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: 0.06em;
-  color: var(--sc-ink-soft); text-decoration-color: var(--sc-accent); }
-.kf-tiers__more:hover { color: var(--sc-accent); }
+  color: var(--sc-ink-soft); text-decoration-color: var(--sc-accent-fg); }
+.kf-tiers__more:hover { color: var(--sc-accent-fg); }
 
 /* touch: keep the swatch dots visually small but give each a finger-sized hit
    area, and pad the "höhere Stückzahl" link into a real target */
@@ -1005,11 +1075,11 @@ h1, h2, h3, h4,
 }
 
 .kf-tip { margin: var(--sc-5) 0 0; padding: var(--sc-4);
-  border-left: 2px solid var(--sc-accent);
+  border-left: 2px solid var(--sc-accent-fg);
   background: color-mix(in oklab, var(--sc-accent) 7%, transparent);
   color: var(--sc-ink-soft); font-size: var(--sc-t-sm); max-width: 56ch; }
 .kf-tip span { display: block; font-family: var(--sc-font-mono); font-size: var(--sc-t-xs);
-  letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-accent);
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-accent-fg);
   margin-bottom: 0.35rem; }
 
 .kf-prod__info .kf-cta { margin-top: var(--sc-6); }
@@ -1029,7 +1099,7 @@ h1, h2, h3, h4,
   letter-spacing: 0.06em; text-transform: uppercase;
   border: 0; padding: 0.4rem 0; color: var(--sc-ink-soft);
 }
-.kf-prod__buy .kf-ghost:hover { color: var(--sc-accent); border: 0; }
+.kf-prod__buy .kf-ghost:hover { color: var(--sc-accent-fg); border: 0; }
 
 /* product grid — asymmetric, never three equal columns */
 .kf-grid { display: grid; gap: clamp(1rem, 3vw, 2rem); margin-top: var(--sc-7);
@@ -1054,7 +1124,7 @@ h1, h2, h3, h4,
 .kf-contact dt { color: var(--sc-ink-soft); letter-spacing: 0.1em; text-transform: uppercase;
   font-size: var(--sc-t-xs); margin-top: var(--sc-4); }
 .kf-contact dd { margin: 0.3rem 0 0; color: var(--sc-ink); }
-.kf-contact dd a { color: var(--sc-accent); }
+.kf-contact dd a { color: var(--sc-accent-fg); }
 @media (max-width: 899px) {
   .kf-contact dd { margin-top: 0.15rem; }
   .kf-contact dd a { display: inline-block; padding: 0.45rem 0; }
@@ -1076,7 +1146,7 @@ h1, h2, h3, h4,
   font-size: var(--sc-t-lg); margin: var(--sc-6) 0 var(--sc-2); color: var(--sc-ink); }
 .kf-longform ul { color: var(--sc-ink-soft); padding-left: 1.2rem; margin: 0 0 var(--sc-4); }
 .kf-longform li { margin-bottom: 0.4rem; }
-.kf-longform a { color: var(--sc-accent); }
+.kf-longform a { color: var(--sc-accent-fg); }
 .kf-longform strong { color: var(--sc-ink); }
 .kf-longform__media { margin: var(--sc-6) 0; }
 .kf-longform__media img {
@@ -1101,7 +1171,7 @@ h1, h2, h3, h4,
   margin: 0 0 var(--sc-3); }
 .kf-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.4rem; }
 .kf-footer a { color: var(--sc-ink-soft); text-decoration: none; font-size: var(--sc-t-sm); }
-.kf-footer a:hover { color: var(--sc-accent); }
+.kf-footer a:hover { color: var(--sc-accent-fg); }
 .kf-footer__base { display: flex; flex-wrap: wrap; justify-content: space-between;
   gap: 0.5rem; margin-top: var(--sc-7); font-family: var(--sc-font-mono);
   font-size: var(--sc-t-xs); color: var(--sc-ink-soft); }
@@ -1112,7 +1182,7 @@ h1, h2, h3, h4,
   border-radius: var(--sc-r-sm); background: color-mix(in oklab, var(--sc-canvas) 55%, transparent); }
 .kf-mp__lookup .kf-field { gap: 0.4rem; }
 .kf-mp__hint { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); max-width: 46ch; }
-.kf-mp__hint a { color: var(--sc-accent); }
+.kf-mp__hint a { color: var(--sc-accent-fg); }
 
 .kf-mp__card { margin-top: var(--sc-7); display: grid; gap: var(--sc-6);
   grid-template-columns: 18rem 1fr; align-items: start; }
@@ -1133,11 +1203,11 @@ h1, h2, h3, h4,
 .kf-mp__status li.is-done { color: var(--sc-ink); }
 .kf-mp__status li.is-done .kf-mp__dot { border-color: var(--sc-accent); background: var(--sc-accent); }
 .kf-mp__status li.is-now { color: var(--sc-ink); font-weight: 600; }
-.kf-mp__status li.is-now .kf-mp__dot { border-color: var(--sc-accent);
-  box-shadow: 0 0 0 3px color-mix(in oklab, var(--sc-accent) 30%, transparent); }
+.kf-mp__status li.is-now .kf-mp__dot { border-color: var(--sc-accent-fg);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--sc-accent-fg) 30%, transparent); }
 
 .kf-mp__preis { margin-top: var(--sc-5); font-size: var(--sc-t-base); }
-.kf-mp__preis b { color: var(--sc-accent); }
+.kf-mp__preis b { color: var(--sc-accent-fg); }
 .kf-mp__notiz { margin-top: var(--sc-4); color: var(--sc-ink-soft); font-size: var(--sc-t-sm); max-width: 54ch; }
 .kf-mp__reorder { margin-top: var(--sc-6); padding-top: var(--sc-5);
   border-top: 1px solid var(--sc-hairline); display: grid; gap: var(--sc-4); max-width: 34rem; }

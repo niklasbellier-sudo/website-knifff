@@ -344,6 +344,36 @@
     else if (wide.addListener) wide.addListener(onWide);
   }
 
+  /* --------------------------------------------------------- theme toggle */
+  // data-theme="light" on <html> (absence = dark, today's default) is set
+  // synchronously by an inline <head> script before first paint — see the
+  // anti-FOUC snippet at the top of every page's <head>. This just wires the
+  // button: flips the attribute, remembers the choice, and keeps the label
+  // + <meta name=theme-color> (mobile browser chrome tint) in sync.
+  function ThemeToggle() {
+    var btn = document.querySelector('[data-kf-theme-toggle]');
+    if (!btn) return;
+    var META_COLOR = { dark: '#0b0d0e', light: '#f4ede1' };
+    var meta = document.querySelector('meta[name="theme-color"]');
+
+    function apply(theme) {
+      if (theme === 'light') root.setAttribute('data-theme', 'light');
+      else root.removeAttribute('data-theme');
+      btn.textContent = theme === 'light' ? 'Dunkel' : 'Hell';
+      btn.setAttribute('aria-label',
+        theme === 'light' ? 'Auf dunkles Design wechseln' : 'Auf helles Design wechseln');
+      if (meta) meta.setAttribute('content', META_COLOR[theme]);
+    }
+
+    var current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    apply(current);   // sync label/meta to whatever the anti-FOUC script already applied
+    btn.addEventListener('click', function () {
+      current = current === 'light' ? 'dark' : 'light';
+      apply(current);
+      try { localStorage.setItem('kf-theme', current); } catch (e) {}
+    });
+  }
+
   /* -------------------------------------------------------- mobile span --- */
   // Pinned/pan acts own several viewport-heights of scroll each; on a phone
   // that stacks into a very long, heavy page. Shorten the spans before the
@@ -515,6 +545,7 @@
   /* --------------------------------------------------------------- go ---- */
   function start() {
     Nav();
+    ThemeToggle();
     ShopFilter();
     Projekte();
     tuneSpans();

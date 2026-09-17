@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+<script>(function(){try{var t=localStorage.getItem('kf-theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#08090b">
@@ -31,7 +32,7 @@
 <meta name="robots" content="noindex, follow">
 <link rel="stylesheet" href="/assets/fonts/kniff-fonts.css">
 <link rel="stylesheet" href="/css/scrollcraft.css">
-<link rel="stylesheet" href="/css/kniff.css?v=126">
+<link rel="stylesheet" href="/css/kniff.css?v=129">
 </head>
 <body>
 <a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
@@ -52,6 +53,9 @@
     <a href="shop.html">Shop</a>
     <a href="meine-projekte.html">Meine Projekte</a>
     <a href="kontakt.html">Kontakt</a>
+    <div class="kf-head__utility">
+      <button type="button" class="kf-theme-toggle" data-kf-theme-toggle aria-label="Auf helles Design wechseln">Hell</button>
+    </div>
     <a href="3d-druck-auf-anfrage.html#anfrage" class="kf-head__cta">Projekt einreichen</a>
   </nav>
 </header>
@@ -82,6 +86,6 @@
 </main>
 
 <script src="/js/scrollcraft.js" defer></script>
-<script src="/js/kniff-bench.js?v=126" defer></script>
+<script src="/js/kniff-bench.js?v=129" defer></script>
 </body>
 </html>
