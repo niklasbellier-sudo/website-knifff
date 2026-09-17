@@ -20,6 +20,9 @@ cp -R css "$OUT"/css
 cp -R js "$OUT"/js
 cp -R assets "$OUT"/assets
 
+# English pages (subdirectory, not picked up by the top-level *.html glob above)
+[ -d en ] && cp -R en "$OUT"/en
+
 # never ship these even if they slipped into a tree
 rm -f  "$OUT"/.env "$OUT"/*/.env "$OUT"/assets/ref-* 2>/dev/null || true
 rm -rf "$OUT"/scripts "$OUT"/scrollcraft "$OUT"/lab "$OUT"/node_modules "$OUT"/assets/products "$OUT"/assets/social "$OUT"/assets/etsy "$OUT"/assets/usecase 2>/dev/null || true
