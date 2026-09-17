@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://kniff.shop/</loc><lastmod>2026-09-04</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://kniff.shop/3d-druck-auf-anfrage.html</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://kniff.shop/shop.html</loc><lastmod>2026-09-04</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://kniff.shop/ueber-uns.html</loc><lastmod>2026-09-04</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://kniff.shop/kontakt.html</loc><lastmod>2026-09-04</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://kniff.shop/</loc><lastmod>2026-09-17</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://kniff.shop/3d-druck-auf-anfrage.html</loc><lastmod>2026-09-17</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kniff.shop/shop.html</loc><lastmod>2026-09-17</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kniff.shop/ueber-uns.html</loc><lastmod>2026-09-17</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://kniff.shop/kontakt.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://kniff.shop/meine-projekte.html</loc><lastmod>2026-09-17</lastmod><changefreq>monthly</changefreq><priority>0.3</priority></url>
   <url><loc>https://kniff.shop/versand-zahlung.html</loc><lastmod>2026-09-04</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://kniff.shop/impressum.html</loc><lastmod>2026-09-04</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://kniff.shop/datenschutz.html</loc><lastmod>2026-09-04</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://kniff.shop/agb.html</loc><lastmod>2026-09-04</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
-  <url><loc>https://kniff.shop/widerruf.html</loc><lastmod>2026-09-04</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://kniff.shop/impressum.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://kniff.shop/datenschutz.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://kniff.shop/agb.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://kniff.shop/widerruf.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+  <url><loc>https://kniff.shop/en/index.html</loc><lastmod>2026-09-17</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kniff.shop/en/3d-druck-auf-anfrage.html</loc><lastmod>2026-09-17</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://kniff.shop/en/shop.html</loc><lastmod>2026-09-17</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://kniff.shop/en/ueber-uns.html</loc><lastmod>2026-09-17</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://kniff.shop/en/kontakt.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://kniff.shop/en/impressum.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.1</priority></url>
+  <url><loc>https://kniff.shop/en/datenschutz.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.1</priority></url>
+  <url><loc>https://kniff.shop/en/agb.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.1</priority></url>
+  <url><loc>https://kniff.shop/en/widerruf.html</loc><lastmod>2026-09-17</lastmod><changefreq>yearly</changefreq><priority>0.1</priority></url>
 </urlset>

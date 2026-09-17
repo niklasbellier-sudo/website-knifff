@@ -2,10 +2,16 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "kniff-local",
+      "name": "kniff-static",
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "4507"],
       "port": 4507
+    },
+    {
+      "name": "kniff-site-build",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4508", "--directory", "_site"],
+      "port": 4508
     }
   ]
 }

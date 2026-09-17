@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" class="kf-booting">
+<head>
+<script>(function(){try{var t=localStorage.getItem('kf-theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#08090b">
+<link rel="icon" href="/assets/favicon.svg?v=5" type="image/svg+xml">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=5">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png?v=5">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/inter-tight-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-800-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-700-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<title>Kniff — Custom 3D Printing from Berlin</title>
+<meta name="description" content="Send us a sketch, measurements or an STL. We check printability and effort and print your part – from a single piece to a small run. Custom 3D printing from Berlin, plus ready-made Kniffe for everyday life.">
+<!-- og -->
+<link rel="canonical" href="https://kniff.shop/en/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kniff">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Kniff — Custom 3D Printing from Berlin">
+<meta property="og:description" content="Send us a sketch, measurements or an STL. We check printability and effort and print your part – from a single piece to a small run. Custom 3D printing from Berlin, plus ready-made Kniffe for everyday life.">
+<meta property="og:url" content="https://kniff.shop/en/index.html">
+<meta property="og:image" content="https://kniff.shop/assets/og.jpg?v=5">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kniff — Custom 3D Printing from Berlin">
+<meta name="twitter:description" content="Send us a sketch, measurements or an STL. We check printability and effort and print your part – from a single piece to a small run. Custom 3D printing from Berlin, plus ready-made Kniffe for everyday life.">
+<meta name="twitter:image" content="https://kniff.shop/assets/og.jpg?v=5">
+<!-- /og -->
+<link rel="alternate" hreflang="de" href="https://kniff.shop/">
+<link rel="alternate" hreflang="en" href="https://kniff.shop/en/index.html">
+<link rel="alternate" hreflang="x-default" href="https://kniff.shop/">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon-180.png?v=5">
+<link rel="stylesheet" href="/assets/fonts/kniff-fonts.css">
+<link rel="stylesheet" href="/css/scrollcraft.css">
+<link rel="stylesheet" href="/css/kniff.css?v=129">
+</head>
+<body>
+<a class="kf-skip" href="#inhalt">Skip to content</a>
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+<div class="kf-room" aria-hidden="true"></div>
+
+<!-- boot: authored silence. The wordmark glows while assets + fonts load. -->
+<div class="kf-boot" role="status" aria-label="Page is loading">
+  <div class="kf-boot__inner" aria-hidden="true">
+    <div class="kf-boot__logo">
+      <img class="kf-boot__mark" src="/assets/kniff-wortmarke-hell.png?v=3" alt="" width="439" height="188">
+    </div>
+    <div class="kf-boot__row"><span>Workbench</span><span><span class="kf-boot__pct">000</span> %</span></div>
+    <div class="kf-boot__track"><div class="kf-boot__bar"></div></div>
+  </div>
+</div>
+<script>
+  /* failsafe: never leave the page hidden if the bench script fails */
+  setTimeout(function () {
+    var h = document.documentElement;
+    if (h.classList.contains('kf-booting')) { h.classList.remove('kf-booting'); h.classList.add('kf-booted'); }
+  }, 6000);
+</script>
+
+<header class="kf-head" data-kf-head>
+  <a href="index.html" class="kf-head__mark" aria-label="Kniff, Home">
+    <img src="/assets/kniff-wortmarke-hell.png?v=3" alt="Kniff">
+  </a>
+  <button type="button" class="kf-head__burger" aria-expanded="false" aria-controls="kf-nav" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="kf-head__nav" id="kf-nav" aria-label="Main navigation">
+    <a href="index.html">Home</a>
+    <a href="3d-druck-auf-anfrage.html">Custom Print</a>
+    <a href="ueber-uns.html">About</a>
+    <a href="shop.html">Shop</a>
+    <a href="../meine-projekte.html">My Projects</a>
+    <a href="kontakt.html">Contact</a>
+    <div class="kf-head__utility">
+      <button type="button" class="kf-theme-toggle" data-kf-theme-toggle aria-label="Switch to light theme">Light</button>
+      <a href="../index.html" class="kf-lang" hreflang="de" lang="de">DE</a>
+    </div>
+    <a href="3d-druck-auf-anfrage.html#anfrage" class="kf-head__cta">Submit a project</a>
+  </nav>
+</header>
+
+<div class="kf-hud" aria-hidden="true">
+  <span class="kf-hud__dot"></span>
+  <button type="button" class="kf-hud__name">Travel Tin</button>
+  <span class="kf-hud__spec"></span>
+</div>
+
+<main id="inhalt" tabindex="-1">
+
+  <!-- ============ ACT 1 — HERO. pin + full-bleed Kniff bulb. PEAK. ======== -->
+  <section class="kf-phero" data-sc-act="pin" data-sc-span="1.05" id="hero"
+           data-kf-obj="Kniff" data-kf-spec="<b>The Kniff idea</b> · put it on the bench">
+    <div data-sc-stage class="kf-phero__stage" data-sc-spotlight>
+      <img class="kf-ground kf-ground--full" src="/assets/scenes/12-home-hero.jpg?v=1" alt="" aria-hidden="true"
+           width="1920" height="1066" fetchpriority="high" decoding="async"
+           srcset="/assets/scenes/12-home-hero-m.jpg?v=1 1200w, /assets/scenes/12-home-hero.jpg?v=1 1920w" sizes="100vw">
+      <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
+
+      <div class="kf-phero__copy" data-sc-cue="0 1 0 0">
+        <p class="kf-eyebrow">3D printing from Berlin</p>
+        <h1 class="kf-h1" data-sc-kinetic="lines">Put your idea on the bench.</h1>
+        <p class="kf-lede">Custom 3D printing. Send us your sketch, measurements or STL, we check printability and effort, and print your part &ndash; from a single piece to a small run.</p>
+        <div class="kf-actions">
+          <a href="3d-druck-auf-anfrage.html" class="kf-cta">
+            Submit a project <span class="kf-cta__arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="shop.html" class="kf-ghost">Browse ready-made Kniffe</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT WE DO. flow intro, two offers. =============== -->
+  <section class="sc-section" data-sc-act="flow" id="was-wir-machen"
+           data-kf-obj="What we do" data-kf-spec="Two paths to your part">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">What we do</p>
+      <h2 class="kf-h2">Two paths to your part.</h2>
+      <p class="kf-lede">Kniff is a 3D-printing service from Berlin. We print pretty much anything a 3D printer can produce: everyday helpers, spare parts, hand-crafted components, models for architecture and planning firms. We adapt models on request. Every part goes through our own inspection before it ships.</p>
+
+      <a class="kf-proofbar" href="#bewertungen">
+        <span class="kf-proofbar__stars" aria-hidden="true">★★★★★</span>
+        <span class="kf-proofbar__txt"><b>Five out of five stars</b> from five customer reviews</span>
+        <span class="kf-proofbar__go">Read reviews <span aria-hidden="true">→</span></span>
+      </a>
+
+      <div class="kf-services">
+        <article>
+          <p class="kf-eyebrow">Custom Print</p>
+          <h3 class="kf-h3">3D printing on request</h3>
+          <p>Have an idea, a sketch, or a finished file? Send it over. We check printability and effort and get back to you with a fixed price before anything goes on the printer. From a single piece to a small run.</p>
+          <a class="kf-cta" href="3d-druck-auf-anfrage.html">How it works <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
+        </article>
+        <article>
+          <p class="kf-eyebrow">Shop</p>
+          <h3 class="kf-h3">Ready-made Kniffe</h3>
+          <p>Thoughtfully designed parts for car, travel, home and office. Chosen, printed, and tested in everyday use. Standard colour matte black, the travel tin also in green and pastel blue, further variants on request. The range keeps growing. All products can be ordered through our Etsy shop.</p>
+          <a class="kf-cta" href="shop.html">Browse the range <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
+        </article>
+      </div>
+
+      <ul class="kf-trust" aria-label="What you can expect">
+        <li><b>Fixed price upfront</b><span>No quote without a concrete number.</span></li>
+        <li><b>Reply within 48&nbsp;hours</b><span>Personal, not a call centre.</span></li>
+        <li><b>Printed in Berlin</b><span>Our own production, every part hand-checked.</span></li>
+        <li><b>Plant-based PLA</b><span>Standard material, low-odour and sturdy.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CUSTOMER PROJECTS. before the shop. -->
+  <section class="sc-section" data-sc-act="flow" id="projekte"
+           data-kf-obj="Customer projects" data-kf-spec="Completed commissions">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Customer projects</p>
+      <h2 class="kf-h2">From the workshop.</h2>
+      <p class="kf-lede">Most Kniffe start as a commission: a component, a spare part, a prototype you just can't buy. One recent example.</p>
+
+      <article class="kf-project">
+        <div class="kf-project__media">
+          <img src="/assets/projekte/treiben-horn-final.jpg"
+               alt="Home-built audio setup with white housings and a red horn, project TREIBEN"
+               width="1536" height="1024"
+               srcset="/assets/projekte/treiben-horn-final-m.jpg 1000w, /assets/projekte/treiben-horn-final.jpg 1536w"
+               sizes="(min-width: 60rem) 60rem, 100vw" loading="lazy" decoding="async">
+          <span class="kf-project__tag">Horn · Home audio build</span>
+        </div>
+        <div class="kf-project__body">
+          <p class="kf-eyebrow">Custom print at Kniff</p>
+          <h3>Treiben Horn</h3>
+          <p>A horn for a home-built audio setup. The shape is large, thin-walled, and genuinely awkward for a printer &ndash; the real work was getting it right: different materials, different printers, until the walls, edges and surface were exactly right.</p>
+          <p class="kf-project__meta">For: <a href="https://www.instagram.com/treiben.sound/" target="_blank" rel="noopener noreferrer">@treiben.sound</a></p>
+        </div>
+      </article>
+
+      <div class="kf-actions">
+        <a href="3d-druck-auf-anfrage.html" class="kf-cta">Submit a project <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
+        <a href="shop.html" class="kf-ghost">Go to Shop</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RANGE. below the projects. Horizontally scrollable row. -->
+  <section class="sc-section" data-sc-act="flow" id="sortiment"
+           data-kf-obj="Range" data-kf-spec="Ready-made Kniffe · order directly">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Range</p>
+      <h2 class="kf-h2">Kniffe for everyday life.</h2>
+      <p class="kf-lede">Not every part has to be a commission. For car, travel, home and office, printed in Berlin. Standard colour matte black, the travel tin also in green and pastel blue, further colour and material variants on request. The range keeps growing.</p>
+      <p class="kf-railx__hint" aria-hidden="true">Swipe sideways for more →</p>
+    </div>
+
+    <div class="kf-railx" role="list" aria-label="Products, scroll sideways">
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4569447066/stiftehalter-furs-auto-o-kugelschreiber" target="_blank" rel="noopener noreferrer"><img src="/assets/stiftehalter-auto-usecase.jpg" alt="Kniff pen holder for the car" width="1600" height="2133" style="object-position:50% 75%" loading="lazy" decoding="async"></a>
+        <div class="kf-card__label">
+          <span class="name">Pen Holder for the Car</span>
+          <span class="row"><span>Car &amp; Bike</span><b>from €15.00</b></span>
+        </div>
+      </article>
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4567296060/rearview-mirror-clip-for-cars-note-and" target="_blank" rel="noopener noreferrer"><img src="/assets/spiegel-clip-auto-usecase.jpg" alt="Kniff sun-visor clip for the car" width="1600" height="2133" loading="lazy" decoding="async"></a>
+        <div class="kf-card__label">
+          <span class="name">Sun-Visor Clip for the Car</span>
+          <span class="row"><span>Car &amp; Bike</span><b>from €12.00</b></span>
+        </div>
+      </article>
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4567533290/a-travel-container-with-a-screw-on-lid" target="_blank" rel="noopener noreferrer"><img src="/assets/reisedose-wattestaebchen-usecase.jpg" alt="Kniff travel tin for cotton swabs" width="1600" height="889" loading="lazy" decoding="async"></a>
+        <div class="kf-card__label">
+          <span class="name">Travel Tin for Cotton Swabs</span>
+          <span class="row"><span>Travel</span><b>from €19.90</b></span>
+        </div>
+      </article>
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4569442836/kartenhalter-fur-10-kartendecks-o" target="_blank" rel="noopener noreferrer"><img src="/assets/kartenhalter-10-decks-usecase.jpg" alt="Kniff card holder for 10 decks" width="1600" height="889" loading="lazy" decoding="async"></a>
+        <div class="kf-card__label">
+          <span class="name">Card Holder for 10 Decks</span>
+          <span class="row"><span>Home</span><b>€42.00</b></span>
+        </div>
+      </article>
+      <article class="kf-card" role="listitem">
+        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4569438710/minimalistischer-handystander-o" target="_blank" rel="noopener noreferrer"><img src="/assets/handystaender-minimal-usecase.jpg" alt="Kniff minimalist phone stand" width="1600" height="889" loading="lazy" decoding="async"></a>
+        <div class="kf-card__label">
+          <span class="name">Minimalist Phone Stand</span>
+          <span class="row"><span>Office &amp; Desk</span><b>from €19.90</b></span>
+        </div>
+      </article>
+      <a class="kf-card kf-card--cta" role="listitem" href="shop.html">
+        <span class="kf-eyebrow">All details</span>
+        <span class="kf-card--cta__h">Go to Shop</span>
+        <span class="kf-cta__arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS. flow, right after the range. ===== -->
+  <section class="sc-section" data-sc-act="flow" id="bewertungen"
+           data-kf-obj="Reviews" data-kf-spec="What customers say">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Reviews</p>
+      <h2 class="kf-h2">What customers say.</h2>
+
+      <div class="kf-reviews" id="kf-reviews" aria-live="polite"></div>
+      <noscript>
+        <div class="kf-reviews">
+          <figure class="kf-review"><blockquote>From the first inquiry to delivery, everything went great. The service felt very personal and my requests were taken into account right away.</blockquote><figcaption>Daniel K.</figcaption></figure>
+          <figure class="kf-review"><blockquote>Really good colour selection and clean finishing. The finished product actually looks better than I imagined.</blockquote><figcaption>Sophie R.</figcaption></figure>
+          <figure class="kf-review"><blockquote>The stated timing was pretty accurate and the order arrived as announced. Communication was easy and friendly too.</blockquote><figcaption>Marcel W.</figcaption></figure>
+        </div>
+      </noscript>
+
+      <p class="kf-reviews__disclaim">All reviews are from customers who received a product or a custom piece from Kniff. Feedback was collected personally, and no review was given in exchange for compensation.</p>
+
+      <script type="application/json" id="kf-reviews-data">
+      [
+        {"name":"Daniel K.","rating":5,"text":"From the first inquiry to delivery, everything went great. The service felt very personal and my requests were taken into account right away."},
+        {"name":"Sophie R.","rating":5,"text":"Really good colour selection and clean finishing. The finished product actually looks better than I imagined."},
+        {"name":"Marcel W.","rating":5,"text":"The stated timing was pretty accurate and the order arrived as announced. Communication was easy and friendly too."},
+        {"name":"Nadine B.","rating":5,"text":"What I especially like is that eco-conscious material is used. The product feels high-quality and the custom touches were done really well."},
+        {"name":"Tobias F.","rating":5,"text":"Everything worked without a hitch. My special requests were taken into account, and I never felt like just an order number."}
+      ]
+      </script>
+    </div>
+  </section>
+
+  <!-- ============ ACT 3 — PROCESS. pin + cross-section reveal. ========= -->
+  <section data-sc-act="pin" data-sc-span="1.2" id="verfahren"
+           data-kf-obj="Process" data-kf-spec="From idea to part · <b>4 steps</b>">
+    <div data-sc-stage class="kf-proc__stage">
+      <img class="kf-ground" src="/assets/scenes/01-process.jpg?v=2" alt="" aria-hidden="true"
+           width="1920" height="1067" srcset="/assets/scenes/01-process-m.jpg?v=2 1200w, /assets/scenes/01-process.jpg?v=2 1920w" sizes="100vw" loading="lazy" decoding="async">
+      <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
+
+      <!-- self-drawing part cross-section: a printed enclosure with wall
+           thickness, a bore and two mounting tabs. Stroke length is driven
+           from the act's --sc-p, so scrolling draws the section, then the
+           dimension lines arrive. -->
+      <svg class="kf-proc__svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="none" stroke="var(--sc-accent)" stroke-width="1.6" opacity="0.92" stroke-linejoin="round">
+          <!-- outer wall -->
+          <path class="kf-draw" d="M360 410 L360 210 Q360 190 380 190 L620 190 Q640 190 640 210 L640 410"/>
+          <!-- inner wall (cavity) -->
+          <path class="kf-draw" d="M388 410 L388 224 Q388 216 396 216 L604 216 Q612 216 612 224 L612 410"/>
+          <!-- floor -->
+          <path class="kf-draw" d="M360 410 L640 410 M388 392 L612 392"/>
+          <!-- mounting tabs + bores -->
+          <path class="kf-draw" d="M300 410 L360 410 M640 410 L700 410 M300 410 L300 392 L360 392 M700 410 L700 392 L640 392"/>
+          <circle class="kf-draw" cx="330" cy="401" r="9"/>
+          <circle class="kf-draw" cx="670" cy="401" r="9"/>
+        </g>
+        <!-- section hatching in the wall -->
+        <g stroke="var(--sc-accent)" stroke-width="1" opacity="0.4">
+          <path class="kf-draw kf-draw--late" d="M362 210 L386 234 M362 250 L386 274 M362 290 L386 314 M362 330 L386 354 M362 370 L386 394
+                                                   M614 234 L638 210 M614 274 L638 250 M614 314 L638 290 M614 354 L638 330 M614 394 L638 370"/>
+        </g>
+        <!-- dimension lines -->
+        <g stroke="var(--kf-hud-line)" stroke-width="1" opacity="0.75">
+          <path class="kf-draw kf-draw--late" d="M300 452 L700 452 M300 444 L300 460 M700 444 L700 460"/>
+          <path class="kf-draw kf-draw--late" d="M732 190 L732 410 M724 190 L740 190 M724 410 L740 410"/>
+          <path class="kf-draw kf-draw--late" d="M388 168 L612 168 M388 160 L388 176 M612 160 L612 176"/>
+        </g>
+      </svg>
+
+      <div class="kf-proc__steps">
+        <div class="kf-step" data-sc-cue="0 0.30 0">
+          <span class="n">01 / Submit</span>
+          <h3>File or sketch</h3>
+          <p>Upload an STL, 3MF or STEP, or briefly describe what you need. Measurements, material and quantity help us assess it.</p>
+        </div>
+        <div class="kf-step" data-sc-cue="0.24 0.54">
+          <span class="n">02 / Review</span>
+          <h3>Is it printable as-is</h3>
+          <p>We look over the model: wall thickness, support structures, print time, material needed. If anything's unclear, we'll get back to you with a suggestion.</p>
+        </div>
+        <div class="kf-step" data-sc-cue="0.48 0.78">
+          <span class="n">03 / Quote</span>
+          <h3>A fixed price, no surprises</h3>
+          <p>Price based on material, print time, finishing and quantity, with an expected delivery time. A personal reply, not a call centre.</p>
+        </div>
+        <div class="kf-step" data-sc-cue="0.72 1">
+          <span class="n">04 / Print</span>
+          <h3>Printed, checked, packaged</h3>
+          <p>Once you confirm, we print in Germany &ndash; single piece or run &ndash; hand-check every part and ship it carefully packaged. Quantity discounts from larger orders.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ORIGIN. flow, calm, the one warm photo. ==== -->
+  <section class="sc-section" data-sc-act="flow" id="entstehung" style="padding-block: var(--sc-7) var(--sc-section);"
+           data-kf-obj="Origin" data-kf-spec="How Kniff got started">
+    <div class="sc-wrap">
+      <div class="kf-story">
+        <div class="kf-prose" data-sc-in data-sc-stagger="70">
+          <p class="kf-eyebrow">How it started</p>
+          <h2>The first Kniff was a coin sorter.</h2>
+          <p>We both knew the problem: always loose change on you, never the right coin to hand. A bit in your pocket, a bit in the centre console, the rest in a bowl by the door. We still had to search every single time.</p>
+          <p>So we built a sorter: eight tubes, one for each euro coin, the value embossed on top. We listed it on eBay, more out of curiosity than any plan. In fourteen days, eighteen sold — all to people we'd never met. That was the first part anyone had ever ordered from us, rather than received as a gift &ndash; and the moment it became clear there was more to it than that.</p>
+          <p><a href="ueber-uns.html">The full story</a></p>
+        </div>
+        <figure data-sc-reveal="left" data-sc-reveal-at="0.12 0.55">
+          <img src="/assets/muenzsortierer-usecase.jpg" alt="3D-printed coin sorter with eight vertical tubes on a wooden table, filled with stacked euro coins, loose coins beside it, warm light" width="1600" height="889" srcset="/assets/muenzsortierer-usecase-m.jpg 1000w, /assets/muenzsortierer-usecase.jpg 1600w" sizes="(min-width: 60rem) 40rem, 100vw" loading="lazy" decoding="async">
+          <figcaption>The sorter that started it all. Eight tubes, one for each euro coin.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ. clear objections before moving on. ========= -->
+  <section class="sc-section" data-sc-act="flow" id="faq"
+           data-kf-obj="FAQ" data-kf-spec="Before you ask">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="50">
+      <p class="kf-eyebrow">Frequently asked questions</p>
+      <h2 class="kf-h2">Before you ask.</h2>
+      <div class="kf-faq">
+        <details>
+          <summary>What does a custom print cost?</summary>
+          <p>That depends on size, material, print time, finishing and quantity. That's why every request gets a personal fixed price instead of a flat rate. The assessment is free and non-binding.</p>
+        </details>
+        <details>
+          <summary>Do I need a finished 3D file?</summary>
+          <p>No. A sketch, a photo with measurements, or a short description is enough to start. If you have a file (STL, 3MF, STEP), it's faster. We can adapt models or design them together with you if needed.</p>
+        </details>
+        <details>
+          <summary>How long does it take?</summary>
+          <p>We usually reply to your request within two business days. Once you approve, print time depends on size and quantity &ndash; the exact delivery time is in the quote. Shipping within Germany via DHL, usually 1&ndash;2 business days.</p>
+        </details>
+        <details>
+          <summary>What materials and colours are available?</summary>
+          <p>Default is matte black PLA, a plant-based material. Over ten further colour and material variants are available on request, including pastel tones, metallic finishes, and PETG for better heat resistance. We print new colours as a sample first.</p>
+        </details>
+        <details>
+          <summary>Who owns the rights to my design?</summary>
+          <p>You do. You remain the owner of the rights to the file you submit. By submitting it, you confirm you're authorised to use it. We only print other people's copyrighted designs with proven permission.</p>
+        </details>
+        <details>
+          <summary>Can I return it if I don't like it?</summary>
+          <p>That depends on what you ordered.</p>
+          <p>As a consumer, you can withdraw from an order for ready-made shop products within 14 days without giving a reason. Choosing an offered colour variant doesn't change that.</p>
+          <p>Parts made individually to your specifications through Custom Print, on the other hand, are legally excluded from the right of withdrawal (§&nbsp;312g(2) no.&nbsp;1 BGB). That's why you get a quote to approve before anything is printed.</p>
+          <p>If there's a defect or a printing error on our part, the statutory warranty applies either way &ndash; just get in touch and we'll find a solution. Details in the <a href="widerruf.html">Right of Withdrawal</a> page.</p>
+        </details>
+      </div>
+      <div class="kf-actions">
+        <a href="3d-druck-auf-anfrage.html#anfrage" class="kf-cta">Submit a project <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
+        <a href="kontakt.html" class="kf-ghost">Ask a quick question first</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KNIFF TIPS. vertical section, horizontally scrollable row. -->
+  <section class="sc-section" data-sc-act="flow" id="tipps"
+           data-kf-obj="Kniff tips" data-kf-spec="Small moves that make a difference">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <p class="kf-eyebrow">Kniff tips</p>
+      <h2 class="kf-h2">Small moves that make a difference.</h2>
+      <p class="kf-lede">There's one for every Kniff. Here's a selection.</p>
+      <p class="kf-railx__hint" aria-hidden="true">Swipe sideways for more →</p>
+    </div>
+
+    <div class="kf-railx kf-railx--quotes" role="list" aria-label="Kniff tips, scroll sideways">
+      <figure class="kf-quote" role="listitem">
+        <blockquote>Insert the pen cap-down into the holder. That way the ink doesn't leak in summer heat inside the car.</blockquote>
+        <figcaption>Pen Holder for the Car</figcaption>
+      </figure>
+      <figure class="kf-quote" role="listitem">
+        <blockquote>Clip your note in sideways rather than lengthways. It blocks less of your view and keeps you compliant with German road-visibility rules (§ 23 StVO).</blockquote>
+        <figcaption>Sun-Visor Clip for the Car</figcaption>
+      </figure>
+      <figure class="kf-quote" role="listitem">
+        <blockquote>The travel tin isn't just for cotton swabs. Earplugs, hair ties, travel pills or spare buttons fit just as well.</blockquote>
+        <figcaption>Travel Tin for Cotton Swabs</figcaption>
+      </figure>
+      <figure class="kf-quote" role="listitem">
+        <blockquote>Sort decks by game rather than looks. Skat on the left, Rummy on the right, keepsakes at the back. When guests are over, you'll grab the right one without looking.</blockquote>
+        <figcaption>Card Holder for 10 Decks</figcaption>
+      </figure>
+      <figure class="kf-quote" role="listitem">
+        <blockquote>Thread the charging cable through the back slot before you set the phone in. It'll already be in the right position when you pick it up.</blockquote>
+        <figcaption>Minimalist Phone Stand</figcaption>
+      </figure>
+    </div>
+
+    <div class="sc-wrap">
+      <div class="kf-actions">
+        <a href="shop.html" class="kf-ghost">All Kniffe in the Shop</a>
+        <a href="3d-druck-auf-anfrage.html" class="kf-ghost">Custom Print</a>
+      </div>
+    </div>
+  </section>
+
+  <section data-sc-act="pin" data-sc-span="1.05" id="dein-zug"
+           data-kf-obj="Your idea" data-kf-spec="The bench is free">
+    <div data-sc-stage class="kf-close__stage" data-sc-spotlight>
+      <img class="kf-ground kf-ground--full" src="/assets/scenes/04-close.jpg?v=2" alt="" aria-hidden="true"
+           width="1920" height="1067" srcset="/assets/scenes/04-close-m.jpg?v=2 1200w, /assets/scenes/04-close.jpg?v=2 1920w" sizes="100vw" loading="lazy" decoding="async">
+      <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
+
+      <div class="kf-close__inner">
+        <h2 data-sc-cue="0.05" data-sc-kinetic="lines">The bench is free. What do we print for you?</h2>
+        <p data-sc-cue="0.05">Send us the file, the sketch, or just the idea. You get an honest assessment and a fixed price before anything is printed.</p>
+        <div class="kf-actions" data-sc-cue="0.05">
+          <a href="3d-druck-auf-anfrage.html" class="kf-cta">
+            Submit a project <span class="kf-cta__arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="kontakt.html" class="kf-ghost">Ask a quick question first</a>
+        </div>
+      </div>
+
+      <footer class="kf-foot">
+        <span>© 2026 Kniff · Berlin · kniff.shop</span>
+        <nav aria-label="Footer">
+          <a href="3d-druck-auf-anfrage.html">Custom Print</a>
+          <a href="shop.html">Shop</a>
+          <a href="ueber-uns.html">About</a>
+          <a href="../versand-zahlung.html">Shipping &amp; Payment</a>
+          <a href="kontakt.html">Contact</a>
+          <a href="https://instagram.com/kniffshop" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener noreferrer">Etsy</a>
+          <a href="impressum.html">Imprint</a>
+          <a href="datenschutz.html">Privacy</a>
+          <a href="agb.html">Terms</a>
+          <a href="widerruf.html">Withdrawal</a>
+        </nav>
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://kniff.shop/en/#organization",
+      "name": "Kniff",
+      "url": "https://kniff.shop/en/",
+      "logo": "https://kniff.shop/assets/apple-touch-icon-180.png?v=5",
+      "image": "https://kniff.shop/assets/og.jpg?v=5",
+      "email": "kniffshop@gmail.com",
+      "description": "Custom 3D printing from Berlin, plus ready-made Kniffe for everyday life.",
+      "founder": { "@type": "Person", "name": "Niklas-Amoah Alotey" },
+      "foundingDate": "2023",
+      "foundingLocation": { "@type": "Place", "name": "Berlin, Germany" },
+      "areaServed": { "@type": "Country", "name": "Germany" },
+      "knowsAbout": ["3D printing", "FDM printing", "Rapid prototyping", "Spare parts", "Small-batch manufacturing", "PLA", "PETG"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Württembergallee 27",
+        "postalCode": "14052",
+        "addressLocality": "Berlin",
+        "addressCountry": "DE"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "kniffshop@gmail.com",
+        "contactType": "customer service",
+        "availableLanguage": ["de", "en"]
+      },
+      "sameAs": [
+        "https://instagram.com/kniffshop",
+        "https://www.etsy.com/shop/KniffShop"
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://kniff.shop/en/#service-3d-druck",
+      "name": "Custom 3D Printing",
+      "serviceType": "3D printing / made-to-order manufacturing",
+      "provider": { "@id": "https://kniff.shop/en/#organization" },
+      "areaServed": { "@type": "Country", "name": "Germany" },
+      "description": "From a single piece to a small run: submit a sketch, measurements or an STL, we check printability and effort and give you a fixed price. Printed and hand-checked in Berlin.",
+      "url": "https://kniff.shop/en/3d-druck-auf-anfrage.html"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://kniff.shop/en/#website",
+      "url": "https://kniff.shop/en/",
+      "name": "Kniff",
+      "inLanguage": "en-US",
+      "publisher": { "@id": "https://kniff.shop/en/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://kniff.shop/en/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "What does a custom print cost?",
+          "acceptedAnswer": { "@type": "Answer", "text": "That depends on size, material, print time, finishing and quantity. Every request gets a personal fixed price instead of a flat rate. The assessment is free and non-binding." } },
+        { "@type": "Question", "name": "Do I need a finished 3D file?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. A sketch, a photo with measurements, or a short description is enough to start. With a file (STL, 3MF, STEP) it's faster. We can adapt models if needed." } },
+        { "@type": "Question", "name": "How long does it take?",
+          "acceptedAnswer": { "@type": "Answer", "text": "We usually reply to a request within two business days. Once approved, print time depends on size and quantity; delivery time is stated in the quote. Shipping within Germany via DHL, usually 1–2 business days." } },
+        { "@type": "Question", "name": "What materials and colours are available?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Default is matte black PLA, a plant-based material. Over ten further colour and material variants are available on request, including pastel tones, metallic finishes, and PETG." } },
+        { "@type": "Question", "name": "Who owns the rights to my design?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You do. You remain the owner of the rights to your file. We only print other people's copyrighted designs with proven permission." } },
+        { "@type": "Question", "name": "Can I return it if I don't like it?",
+          "acceptedAnswer": { "@type": "Answer", "text": "That depends on what you ordered. Ready-made shop products can be withdrawn from within 14 days without giving a reason, as a consumer. Parts made individually to your specifications through Custom Print are legally excluded from the right of withdrawal (§ 312g(2) no. 1 BGB). If there's a defect or a printing error on our part, the statutory warranty applies either way." } }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="/js/scrollcraft.js" defer></script>
+<script src="/js/kniff-bench.js?v=129" defer></script>
+</body>
+</html>

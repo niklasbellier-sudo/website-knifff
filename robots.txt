@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /danke.html
+Disallow: /en/danke.html
 Sitemap: https://kniff.shop/sitemap.xml

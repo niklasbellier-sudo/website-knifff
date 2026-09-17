@@ -18,6 +18,10 @@
   var root = document.documentElement;
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
   var lerp = function (a, b, t) { return a + (b - a) * t; };
+  // The handful of UI strings this file writes itself (everything else lives
+  // in the page's own HTML, translated per-page). <html lang="en"> on the
+  // English pages under /en/ is the single source of truth for which to use.
+  var isEN = function () { return root.lang.indexOf('en') === 0; };
 
   /* ------------------------------------------------------ steered light --- */
   // Desktop: the pointer moves the key light. Touch: scroll velocity swings it,
@@ -314,7 +318,7 @@
     var here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
     if (!here) here = 'index.html';
     links.forEach(function (a) {
-      if (a.classList.contains('kf-head__cta')) return;
+      if (a.classList.contains('kf-head__cta') || a.classList.contains('kf-lang')) return;
       var href = (a.getAttribute('href') || '').split('#')[0].split('/').pop().toLowerCase();
       if (href === here) a.setAttribute('aria-current', 'page');
     });
@@ -326,7 +330,8 @@
       head.classList.toggle('is-open', open);
       root.classList.toggle('kf-nav-open', open);   // locks page scroll (CSS)
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+      burger.setAttribute('aria-label',
+        isEN() ? (open ? 'Close menu' : 'Open menu') : (open ? 'Menü schließen' : 'Menü öffnen'));
     }
     function close() { setOpen(false); }
     burger.addEventListener('click', function () {
@@ -359,9 +364,11 @@
     function apply(theme) {
       if (theme === 'light') root.setAttribute('data-theme', 'light');
       else root.removeAttribute('data-theme');
-      btn.textContent = theme === 'light' ? 'Dunkel' : 'Hell';
-      btn.setAttribute('aria-label',
-        theme === 'light' ? 'Auf dunkles Design wechseln' : 'Auf helles Design wechseln');
+      var en = isEN();
+      btn.textContent = theme === 'light' ? (en ? 'Dark' : 'Dunkel') : (en ? 'Light' : 'Hell');
+      btn.setAttribute('aria-label', theme === 'light'
+        ? (en ? 'Switch to dark theme' : 'Auf dunkles Design wechseln')
+        : (en ? 'Switch to light theme' : 'Auf helles Design wechseln'));
       if (meta) meta.setAttribute('content', META_COLOR[theme]);
     }
 
@@ -409,25 +416,33 @@
     var subject = form.querySelector('input[name="betreff"]');
     var msg = form.querySelector('textarea[name="nachricht"]');
     var ctxLine;
+    var en = isEN();
 
     if (reorder) {
       var name = reorder.replace(/[\r\n\t]+/g, ' ').trim().slice(0, 90);
       if (!name) return;
       var change = (params.get('change') || '').replace(/[\r\n\t]+/g, ' ').trim().slice(0, 400);
-      if (subject) subject.value = 'Wiederholungsauftrag: ' + name;
+      if (subject) subject.value = (en ? 'Repeat order: ' : 'Wiederholungsauftrag: ') + name;
       if (msg && !msg.value) {
-        msg.value = 'Ich möchte folgendes Projekt erneut beauftragen: ' + name + '\n\n'
-          + (change ? 'Änderungswünsche: ' + change + '\n\n' : '');
+        msg.value = (en
+          ? 'I would like to reorder the following project: ' + name + '\n\n'
+            + (change ? 'Requested changes: ' + change + '\n\n' : '')
+          : 'Ich möchte folgendes Projekt erneut beauftragen: ' + name + '\n\n'
+            + (change ? 'Änderungswünsche: ' + change + '\n\n' : ''));
       }
-      ctxLine = 'Deine Anfrage bezieht sich auf: ' + name + ' (Wiederholungsauftrag)';
+      ctxLine = en
+        ? 'Your request refers to: ' + name + ' (repeat order)'
+        : 'Deine Anfrage bezieht sich auf: ' + name + ' (Wiederholungsauftrag)';
     } else {
       var pname = produkt.replace(/[\r\n\t]+/g, ' ').trim().slice(0, 90);
       if (!pname) return;
-      if (subject) subject.value = 'Produktanfrage: ' + pname;
+      if (subject) subject.value = (en ? 'Product inquiry: ' : 'Produktanfrage: ') + pname;
       if (msg && !msg.value) {
-        msg.value = 'Ich interessiere mich für: ' + pname + '\n\nMenge: 1\n\n';
+        msg.value = en
+          ? 'I am interested in: ' + pname + '\n\nQuantity: 1\n\n'
+          : 'Ich interessiere mich für: ' + pname + '\n\nMenge: 1\n\n';
       }
-      ctxLine = 'Deine Anfrage bezieht sich auf: ' + pname;
+      ctxLine = (en ? 'Your request refers to: ' : 'Deine Anfrage bezieht sich auf: ') + pname;
     }
 
     var note = document.createElement('p');
