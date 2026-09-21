@@ -110,17 +110,15 @@
       <article class="kf-prod" id="stiftehalter-auto" data-cat="gadget">
         <div class="kf-gallery" data-sc-tilt="4">
           <div class="kf-gallery__main">
-            <img src="/assets/stiftehalter-auto-usecase.jpg" alt="Kniff pen holder, matte black, on a car's air vent with two ballpoint pens" width="1600" height="2133" style="object-position:50% 75%" data-gallery-main loading="lazy" decoding="async">
+            <img src="/assets/stiftehalter-auto-usecase.jpg?v=2" alt="Kniff pen holder, matte black, on a car's air vent with two ballpoint pens" width="1600" height="889" data-gallery-main loading="lazy" decoding="async">
           </div>
           <div class="kf-gallery__thumbs" role="list" aria-label="More images">
-            <button type="button" class="kf-gallery__thumb is-active" data-src="/assets/stiftehalter-auto-usecase.jpg" data-op="50% 75%" aria-label="Show in car"><img src="/assets/th/stiftehalter-auto-usecase.jpg" alt="" loading="lazy" width="240" height="320" style="object-position:50% 75%"></button>
+            <button type="button" class="kf-gallery__thumb is-active" data-src="/assets/stiftehalter-auto-usecase.jpg?v=2" aria-label="Show in car"><img src="/assets/th/stiftehalter-auto-usecase.jpg?v=2" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="/assets/stiftehalter-auto.jpg" aria-label="Show image 1"><img src="/assets/th/stiftehalter-auto.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="/assets/stiftehalter-auto-2.jpg" aria-label="Show image 2"><img src="/assets/th/stiftehalter-auto-2.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="/assets/stiftehalter-auto-3.jpg" aria-label="Show image 3"><img src="/assets/th/stiftehalter-auto-3.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="/assets/stiftehalter-auto-4.jpg" aria-label="Show image 4"><img src="/assets/th/stiftehalter-auto-4.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="/assets/stiftehalter-auto-5.jpg" aria-label="Show image 5"><img src="/assets/th/stiftehalter-auto-5.jpg" alt="" loading="lazy" width="300" height="225"></button>
-            <button type="button" class="kf-gallery__thumb" data-src="/assets/stiftehalter-auto-6.jpg" aria-label="Show image 6"><img src="/assets/th/stiftehalter-auto-6.jpg" alt="" loading="lazy" width="240" height="320"></button>
-            <button type="button" class="kf-gallery__thumb" data-src="/assets/stiftehalter-auto-7.jpg" aria-label="Show image 7"><img src="/assets/th/stiftehalter-auto-7.jpg" alt="" loading="lazy" width="240" height="320"></button>
           </div>
         </div>
         <div class="kf-prod__info">
@@ -151,10 +149,10 @@
       <article class="kf-prod" id="spiegel-clip-auto" data-cat="gadget">
         <div class="kf-gallery" data-sc-tilt="4">
           <div class="kf-gallery__main">
-            <img src="/assets/spiegel-clip-auto-usecase.jpg" alt="Kniff sun-visor clip, black, on a car's sun visor with a note and a pen" width="1600" height="2133" data-gallery-main loading="lazy" decoding="async">
+            <img src="/assets/spiegel-clip-auto-usecase.jpg?v=2" alt="Kniff sun-visor clip, black, on a car's sun visor with a note and a pen" width="1600" height="889" data-gallery-main loading="lazy" decoding="async">
           </div>
           <div class="kf-gallery__thumbs" role="list" aria-label="More images">
-            <button type="button" class="kf-gallery__thumb is-active" data-src="/assets/spiegel-clip-auto-usecase.jpg" aria-label="Show on sun visor"><img src="/assets/th/spiegel-clip-auto-usecase.jpg" alt="" loading="lazy" width="240" height="320"></button>
+            <button type="button" class="kf-gallery__thumb is-active" data-src="/assets/spiegel-clip-auto-usecase.jpg?v=2" aria-label="Show on sun visor"><img src="/assets/th/spiegel-clip-auto-usecase.jpg?v=2" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="/assets/spiegel-clip-auto.jpg" aria-label="Show image 1"><img src="/assets/th/spiegel-clip-auto.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="/assets/spiegel-clip-auto-2.jpg" aria-label="Show image 2"><img src="/assets/th/spiegel-clip-auto-2.jpg" alt="" loading="lazy" width="300" height="225"></button>
             <button type="button" class="kf-gallery__thumb" data-src="/assets/spiegel-clip-auto-3.jpg" aria-label="Show image 3"><img src="/assets/th/spiegel-clip-auto-3.jpg" alt="" loading="lazy" width="300" height="225"></button>
@@ -383,10 +381,7 @@
     thumbs.forEach(function (b) {
       b.addEventListener('click', function () {
         var src = b.getAttribute('data-src');
-        if (main && src) {
-          main.setAttribute('src', src);
-          main.style.objectPosition = b.getAttribute('data-op') || '';
-        }
+        if (main && src) main.setAttribute('src', src);
         thumbs.forEach(function (x) { x.classList.remove('is-active'); });
         b.classList.add('is-active');
       });
@@ -423,11 +418,9 @@
     "name": "Kniff Pen Holder for the Car",
     "description": "A fixed spot for the pen in your car: for the parking ticket, a note on the windscreen, or a phone number jotted down fast.",
     "image": [
-     "https://kniff.shop/assets/stiftehalter-auto-usecase.jpg",
      "https://kniff.shop/assets/stiftehalter-auto.jpg",
      "https://kniff.shop/assets/stiftehalter-auto-2.jpg",
-     "https://kniff.shop/assets/stiftehalter-auto-6.jpg",
-     "https://kniff.shop/assets/stiftehalter-auto-7.jpg"
+     "https://kniff.shop/assets/stiftehalter-auto-usecase.jpg"
     ],
     "brand": {
      "@type": "Brand",
