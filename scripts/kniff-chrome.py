@@ -32,7 +32,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://kniff.shop'
-CSS_V = '202'   # bei jeder Änderung an css/kniff.css hochzählen
+CSS_V = '203'   # bei jeder Änderung an css/kniff.css hochzählen
 JS_V = '200'    # bei jeder Änderung an js/kniff.js hochzählen
 OG_DEFAULT = {'de': '/assets/og.jpg?v=6', 'en': '/assets/og-en.jpg?v=1'}   # scripts/og-bild.py
 
