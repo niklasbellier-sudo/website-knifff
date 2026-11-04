@@ -20,7 +20,9 @@ cp -R css "$OUT"/css
 cp -R js "$OUT"/js
 cp -R assets "$OUT"/assets
 
-# English pages (subdirectory, not picked up by the top-level *.html glob above)
+# product pages and English pages (subdirectories, not picked up by the
+# top-level *.html glob above)
+[ -d shop ] && cp -R shop "$OUT"/shop
 [ -d en ] && cp -R en "$OUT"/en
 
 # never ship these even if they slipped into a tree
@@ -30,7 +32,7 @@ rm -f "$OUT"/_fotos-index.html 2>/dev/null || true
 find "$OUT" -name '*.mjs' -delete 2>/dev/null || true
 find "$OUT" \( -name '.DS_Store' -o -name 'Thumbs.db' \) -delete 2>/dev/null || true
 
-date -u +"%Y-%m-%d %H:%M UTC  neues Kniff-Design (Commercial-Style, echte PLA-Farben)" > "$OUT/build.txt"
+date -u +"%Y-%m-%d %H:%M UTC  Konzept Zwei Tueren (Druckkopf, Custom dunkel, Shop hell)" > "$OUT/build.txt"
 echo "built $OUT/:"
 find "$OUT" -type f | sort
 du -sh "$OUT"

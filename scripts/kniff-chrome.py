@@ -16,12 +16,15 @@ Was pro Seite anders ist, steht als Attribut am <body>:
   data-k-cta="custom|etsy"                 Button rechts im Kopf (fehlt = keiner)
   data-k-alt="/en/shop.html"               Gegenstück in der anderen Sprache
   data-k-claim="…"                         Zeile neben dem Logo (nur Startseite, als h1)
-  data-k-og="/assets/…"                    Vorschaubild (Standard: /assets/og.jpg)
+  data-k-og="/assets/…"                    Vorschaubild (Standard: og.jpg bzw. og-en.jpg)
   data-k-robots="noindex, follow"          optional
 
-Aufruf nach jeder Änderung an Menü, Fuß oder Versionen:
+Schreibt außerdem sitemap.xml mit allen indexierbaren Seiten.
+
+Aufruf nach jeder Änderung an Menü, Fuß, Versionen oder neuen Seiten:
   python3 scripts/kniff-chrome.py
 """
+import datetime
 import html
 import pathlib
 import re
@@ -31,7 +34,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = 'https://kniff.shop'
 CSS_V = '200'   # bei jeder Änderung an css/kniff.css hochzählen
 JS_V = '200'    # bei jeder Änderung an js/kniff.js hochzählen
-OG_DEFAULT = '/assets/og.jpg?v=6'
+OG_DEFAULT = {'de': '/assets/og.jpg?v=6', 'en': '/assets/og-en.jpg?v=1'}   # scripts/og-bild.py
 
 TXT = {
     'de': {
@@ -111,7 +114,7 @@ def build_meta(f, lang, body, head):
     path = page_path(f)
     alt = attr(body, 'data-k-alt')
     robots = attr(body, 'data-k-robots')
-    og = attr(body, 'data-k-og') or OG_DEFAULT
+    og = attr(body, 'data-k-og') or OG_DEFAULT[lang]
     title = re.search(r'<title>(.*?)</title>', head, re.S).group(1).strip()
     desc_m = re.search(r'<meta name="description" content="([^"]*)"', head)
     desc = desc_m.group(1) if desc_m else ''
@@ -145,10 +148,10 @@ def build_meta(f, lang, body, head):
         f'<meta property="og:description" content="{desc}">',
         f'<meta property="og:url" content="{SITE}{path}">',
         f'<meta property="og:image" content="{img}">',
-        '<meta property="og:image:width" content="1200">',
-        '<meta property="og:image:height" content="630">',
-        '<meta name="twitter:card" content="summary_large_image">',
     ]
+    if og == OG_DEFAULT[lang]:
+        out += ['<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">']
+    out.append('<meta name="twitter:card" content="summary_large_image">')
     return '\n'.join(out)
 
 
@@ -240,8 +243,26 @@ def pages():
         yield from sorted(ROOT.glob(pattern))
 
 
+def sitemap(entries):
+    today = datetime.date.today().isoformat()
+    rows = []
+    for path, alt, lang in sorted(entries, key=lambda e: (e[2] != 'de', e[0] != '/', e[0])):
+        links = ''
+        if alt:
+            de, en = (path, alt) if lang == 'de' else (alt, path)
+            links = (f'\n    <xhtml:link rel="alternate" hreflang="de" href="{SITE}{de}"/>'
+                     f'\n    <xhtml:link rel="alternate" hreflang="en" href="{SITE}{en}"/>')
+        rows.append(f'  <url>\n    <loc>{SITE}{path}</loc>\n    <lastmod>{today}</lastmod>{links}\n  </url>')
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+           + '\n'.join(rows) + '\n</urlset>\n')
+    (ROOT / 'sitemap.xml').write_text(xml, encoding='utf-8')
+    return len(rows)
+
+
 def main():
     changed = 0
+    entries = []
     for f in pages():
         text = f.read_text(encoding='utf-8')
         if '<!-- k:top -->' not in text:
@@ -256,7 +277,10 @@ def main():
         if new != text:
             f.write_text(new, encoding='utf-8')
             changed += 1
-    print(f'{changed} Seite(n) aktualisiert')
+        robots = attr(body, 'data-k-robots') or ''
+        if 'noindex' not in robots:
+            entries.append((page_path(f), attr(body, 'data-k-alt'), lang))
+    print(f'{changed} Seite(n) aktualisiert, sitemap.xml mit {sitemap(entries)} Adressen')
 
 
 if __name__ == '__main__':

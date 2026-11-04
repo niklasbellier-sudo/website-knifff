@@ -15,6 +15,7 @@ Danach immer den Rahmen nachziehen:
 """
 import html
 import json
+import urllib.parse
 import pathlib
 import re
 
@@ -203,7 +204,7 @@ def product_page(p, lang):
       <p class="t-mono t-soft">{L["verfuegbar"]}</p>
       <div class="k-formbtns" id="kaufen">
         {etsy.format(cls="ink", style=' style="flex: 1 1 220px"')}
-        <a href="{t["kontakt"]}?produkt={p["kontakt"]}" class="k-btn k-btn--ghost" style="flex: 1 1 180px">{t["ask"]}</a>
+        <a href="{t["kontakt"]}?produkt={p["kontakt"] if lang == "de" else urllib.parse.quote(strip(L["name"]))}" class="k-btn k-btn--ghost" style="flex: 1 1 180px">{t["ask"]}</a>
       </div>
       <dl class="k-rows">
         {rows}

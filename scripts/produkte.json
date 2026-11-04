@@ -44,7 +44,7 @@
     "reisedose"
    ],
    "kachel": {
-    "src": "/assets/muenzsortierer-neu.jpg",
+    "src": "/assets/kachel/muenzsortierer-neu.jpg",
     "pos": "50% 60%"
    },
    "bilder": [
@@ -189,7 +189,7 @@
     "reisedose"
    ],
    "kachel": {
-    "src": "/assets/stiftehalter-auto-usecase.jpg?v=2",
+    "src": "/assets/kachel/stiftehalter-auto-usecase.jpg",
     "pos": "62% 50%"
    },
    "bilder": [
@@ -362,7 +362,7 @@
     "kartenhalter"
    ],
    "kachel": {
-    "src": "/assets/spiegel-clip-auto-usecase.jpg?v=2",
+    "src": "/assets/kachel/spiegel-clip-auto-usecase.jpg",
     "pos": "56% 50%"
    },
    "bilder": [
@@ -538,7 +538,7 @@
     "stiftehalter-auto"
    ],
    "kachel": {
-    "src": "/assets/reisedose-wattestaebchen-usecase.jpg",
+    "src": "/assets/kachel/reisedose-wattestaebchen-usecase.jpg",
     "pos": "56% 50%"
    },
    "bilder": [
@@ -708,7 +708,7 @@
     "handystaender"
    ],
    "kachel": {
-    "src": "/assets/kartenhalter-10-decks-usecase.jpg",
+    "src": "/assets/kachel/kartenhalter-10-decks-usecase.jpg",
     "pos": "46% 50%"
    },
    "bilder": [
@@ -858,7 +858,7 @@
     "muenzsortierer"
    ],
    "kachel": {
-    "src": "/assets/handystaender-minimal-usecase.jpg",
+    "src": "/assets/kachel/handystaender-minimal-usecase.jpg",
     "pos": "44% 50%"
    },
    "bilder": [

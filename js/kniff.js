@@ -368,7 +368,8 @@
       write: 'write to us', wait: 'Looking up your project …', noCrypto: 'Your browser cannot open this page securely. Please write to us and we will send you the status.',
       example: 'Example project', prev: 'Previous stage', next: 'Next stage', preview: 'Switch stage for the preview',
       reorder: 'Order this project again', change: 'Changes (optional)', changeHint: 'e.g. different colour or quantity …',
-      contact: '/en/kontakt.html', demoNote: 'This is what your project looks like once you enter your code.'
+      contact: '/en/kontakt.html', demoNote: 'This is what your project looks like once you enter your code.',
+      oldLink: 'This link is from our old customer area. Please use the new code from our email, or '
     } : {
       stages: ['Angefragt', 'In Prüfung', 'Angebot erstellt', 'In Arbeit', 'Fertig & versendet'],
       short: ['Angefragt', 'Prüfung', 'Angebot', 'In Arbeit', 'Versendet'],
@@ -378,7 +379,8 @@
       write: 'schreib uns', wait: 'Projekt wird gesucht …', noCrypto: 'Dein Browser kann diese Seite nicht sicher öffnen. Schreib uns kurz, dann schicken wir dir den Stand.',
       example: 'Beispielprojekt', prev: 'Stufe zurück', next: 'Stufe weiter', preview: 'Status zur Vorschau wechseln',
       reorder: 'Projekt erneut beauftragen', change: 'Änderungswünsche (optional)', changeHint: 'z. B. andere Farbe, andere Stückzahl …',
-      contact: '/kontakt.html', demoNote: 'So sieht dein Projekt aus, sobald du deinen Code eingibst.'
+      contact: '/kontakt.html', demoNote: 'So sieht dein Projekt aus, sobald du deinen Code eingibst.',
+      oldLink: 'Dieser Link stammt aus unserem alten Kundenbereich. Nutz bitte den neuen Code aus unserer E-Mail, oder '
     };
     var POS = ['2%', '26%', '50%', '74%', '98%'];
     var input = $('#mp-code');
@@ -528,6 +530,7 @@
 
     var m = location.hash.match(/[#&]c=([^&]+)/);
     var code = m ? decodeURIComponent(m[1]) : '';
+    if (!code && new URLSearchParams(location.search).get('id')) { message(T.oldLink, true); return; }
     if (code) input.value = code;
     lookup(code);
   }

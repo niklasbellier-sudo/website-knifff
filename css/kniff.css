@@ -515,3 +515,7 @@ main:focus { outline: none; }
   .k .k-tile:hover .k-tile__img img, .k-door--r:hover .k-door__art img { transform: none; }
 }
 .k-facts a { text-decoration: underline; text-underline-offset: 3px; }
+.k-codeform { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+@media (max-width: 520px) { .k-codeform { grid-template-columns: 1fr; } }
+/* Türen füllen die Bühne randlos (overflow: hidden): Fokusrahmen nach innen */
+.k .k-door:focus-visible { outline-offset: -6px; }
