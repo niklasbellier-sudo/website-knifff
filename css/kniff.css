@@ -485,7 +485,7 @@ main:focus { outline: none; }
 .k .k-prose ul { list-style: disc; padding-left: 22px; }
 .k .k-prose ol { list-style: decimal; padding-left: 22px; }
 .k .k-prose li { margin-bottom: 6px; }
-.k .k-prose a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.k .k-prose a:not([class]) { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .k-prose table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .k-prose th, .k-prose td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
 

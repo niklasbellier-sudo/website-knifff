@@ -381,7 +381,6 @@
       contact: '/kontakt.html', demoNote: 'So sieht dein Projekt aus, sobald du deinen Code eingibst.'
     };
     var POS = ['2%', '26%', '50%', '74%', '98%'];
-    var head = $('#mp-head');
     var input = $('#mp-code');
 
     function track(stufe) {
@@ -420,6 +419,7 @@
       if (p.bild) { var im = el('img', 'k-mp-img'); im.src = p.bild; im.alt = ''; im.loading = 'lazy'; c.appendChild(im); }
       var top = el('div', 'k-track__label');
       var h = el('h2', 't-h3', demo ? T.example : p.titel); h.style.fontSize = '26px';
+      if (!demo) { h.id = 'mp-title'; h.tabIndex = -1; }
       top.appendChild(h);
       top.appendChild(el('span', 't-mono t-accent', T.stages[stufe]));
       c.appendChild(top);
@@ -489,8 +489,10 @@
     function fromB64(s) { var b = atob(s), u = new Uint8Array(b.length); for (var i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; }
     function toB64(buf) { var u = new Uint8Array(buf), s = ''; for (var i = 0; i < u.length; i++) s += String.fromCharCode(u[i]); return btoa(s); }
 
+    var seq = 0;   // nur das Ergebnis der letzten Suche zählt
     function lookup(raw) {
       var code = norm(raw);
+      var mine = ++seq;
       if (!code) { render(card(JSON.parse(JSON.stringify(data.demo)), true)); return; }
       if (!window.crypto || !crypto.subtle || !window.TextEncoder) { message(T.noCrypto); return; }
       message(T.wait);
@@ -506,18 +508,21 @@
             .then(function (key) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: fromB64(hit.iv) }, key, fromB64(hit.ct)); });
         })
         .then(function (plain) {
+          if (mine !== seq) return;
           var p = JSON.parse(new TextDecoder().decode(plain));
           render(card(p, false));
-          if (head) head.focus();
+          var title = $('#mp-title');
+          if (title) title.focus({ preventScroll: true });
         })
-        .catch(function () { message(T.notFound, true); });
+        .catch(function () { if (mine === seq) message(T.notFound, true); });
     }
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var code = input.value.trim();
+      var code = (norm(input.value).match(/.{1,4}/g) || []).join('-');
+      if (code) input.value = code;
       // Code in den Anker, nicht in die Adresse: Anker gehen nie an den Server.
-      history.replaceState(null, '', code ? '#c=' + encodeURIComponent(code) : location.pathname);
+      history.replaceState(null, '', code ? '#c=' + code : location.pathname);
       lookup(code);
     });
 
