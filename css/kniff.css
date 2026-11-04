@@ -519,3 +519,74 @@ main:focus { outline: none; }
 @media (max-width: 520px) { .k-codeform { grid-template-columns: 1fr; } }
 /* Türen füllen die Bühne randlos (overflow: hidden): Fokusrahmen nach innen */
 .k .k-door:focus-visible { outline-offset: -6px; }
+
+/* Umschalter der Startseite am Handy. Ans Ende von css/kniff.css anhängen. Desktop und Unterseiten bleiben unverändert. */
+
+.k-split__l { background: var(--ink-1); }
+.k-split__r { background: var(--paper-1); }
+.k-nur-handy, .k-switch, .k-wechsel { display: none; }
+
+@media (max-width: 820px) {
+  /* Startseite: immer nur eine Welt. data-welt="idee" oder "shop" steht auf .k-home. */
+  .k-nur-handy { display: inline; }
+  .k-nur-desktop { display: none; }
+  .k-home { transition: background-color 380ms ease, color 380ms ease; }
+  .k-home .k-head h1 { display: block; position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+  .k-switch { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; margin: 14px 16px 0; padding: 4px; border: 1px solid var(--line); border-radius: 12px; }
+  .k-switch button { min-height: 52px; padding: 6px 8px; border: 0; border-radius: 8px; background: transparent; font-size: 15px; font-weight: 600; line-height: 1.2; cursor: pointer; transition: background-color 240ms, color 240ms; }
+  .k-switch button[aria-pressed="true"] { background: var(--amber); color: var(--ink-0); }
+
+  .k-home .k-rail__print { animation: none; transition: width 700ms var(--ease-rail); }
+  .k-home .k-rail__head { animation: none; transition: left 700ms var(--ease-rail); }
+  [data-welt="idee"] .k-rail__print { width: 26%; }
+  [data-welt="idee"] .k-rail__head { left: 26%; }
+  [data-welt="shop"] .k-rail__print { width: 74%; }
+  [data-welt="shop"] .k-rail__head { left: 74%; }
+
+  .k-home .k-doors { display: block; }
+  .k-home .k-door { display: block; min-height: 0; padding: 12px 20px 8px; }
+  .k-home .k-door__art { position: relative; left: auto; right: auto; top: auto; width: 100%; height: 240px; }
+  .k-home .k-door__art img { height: 100%; object-fit: contain; }
+  .k-home .k-sketch { width: 250px; height: 224px; margin-inline: auto; }
+  .k-home .k-tag { display: none; }
+  .k-home .k-door__txt { gap: 10px; max-width: none; padding-top: 12px; }
+  [data-welt="idee"] .k-door--r, [data-welt="idee"] .k-split__r,
+  [data-welt="shop"] .k-door--l, [data-welt="shop"] .k-split__l { display: none; }
+
+  .k-split__l, .k-split__r { background: var(--bg); }
+  .k-home .k-split > * { padding-block: 40px; }
+  .k-home .k-case { background: var(--surface); }
+  .k-home .k-tile__img { background: var(--paper-1); }
+  .k-home details:nth-of-type(2) { border-bottom: 1px solid var(--line); }
+  .k-home .k-band { flex-direction: column; align-items: flex-start; gap: 4px; margin: 0 20px 40px; padding: 18px; border-radius: var(--r-tile); background: var(--surface); color: var(--text); text-align: left; }
+  .k-home .k-band > span:first-child { color: var(--accent-text); }
+  .k-home .k-band a { color: var(--accent-text); font-weight: 600; }
+
+  .k-wechsel { display: block; padding: 0 20px 40px; }
+  .k-wechsel .k-btn { width: 100%; }
+  [data-welt="idee"] .k-wechsel [data-zu="idee"], [data-welt="shop"] .k-wechsel [data-zu="shop"] { display: none; }
+  .k-home .k-foot { padding: 36px 20px 24px; }
+  .k-home .k-foot__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
+  .k-home .k-foot__cols > :first-child { grid-column: 1 / -1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .k-home, .k-switch button, .k-rail__head, .k-rail__print { transition: none !important; }
+}
+
+/* Live-Seite: Anpassungen, damit der Umschalter mit den Ergänzungen oben zusammenspielt */
+.k-head { --soft: var(--cream-soft); }   /* Kopf bleibt dunkel, auch wenn die Startseite per #shop hell wird */
+.k-band .k-stars { color: inherit; }     /* Sterne auf dem Bernstein-Band */
+@media (max-width: 820px) {
+  .k-rail-js .k-home .k-rail__head { opacity: 1; }   /* Fallback-Schiene: Kopf am Handy sofort sichtbar */
+}
+
+/* Fokusrahmen in der Farbe der Fläche dahinter: Bernstein auf dunkel, dunkles
+   Bernstein auf hell (mindestens 3:1). Bisher war er überall Bernstein, auf dem
+   hellen Papierton kam er nur auf etwa 1,9:1. */
+.k :focus-visible { outline-color: var(--focus, var(--accent-text)); }
+.k-top, .k-foot, .k-bar { --focus: var(--amber); }
+.k-band { --focus: var(--ink-0); }
+.k .k-crossband:focus-visible { outline-color: var(--amber-deep); }
+@media (max-width: 820px) { .k-home .k-band { --focus: var(--accent-text); } }

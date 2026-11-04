@@ -15,7 +15,7 @@
 <link rel="preload" href="/assets/fonts/archivo-800-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-tight-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/kniff-fonts.css">
-<link rel="stylesheet" href="/css/kniff.css?v=200">
+<link rel="stylesheet" href="/css/kniff.css?v=202">
 <link rel="canonical" href="https://kniff.shop/">
 <link rel="alternate" hreflang="de" href="https://kniff.shop/">
 <link rel="alternate" hreflang="en" href="https://kniff.shop/en/">
@@ -102,7 +102,7 @@
 }
 </script>
 </head>
-<body class="k k-dark k-home" data-k-claim="3D-Druck aus Berlin: zwei Wege zu deinem Teil." data-k-alt="/en/">
+<body class="k k-dark k-home" data-welt="idee" data-k-claim="3D-Druck aus Berlin: zwei Wege zu deinem Teil." data-k-alt="/en/">
 <!-- k:top -->
 <a class="k-skip" href="#inhalt">Zum Inhalt springen</a>
 <div class="k-top">
@@ -137,6 +137,11 @@
 <!-- /k:top -->
 
 <main id="inhalt" tabindex="-1">
+  <div class="k-switch" role="group" aria-label="Wähle deinen Weg">
+    <button type="button" data-zu="idee" aria-pressed="true">Ich habe eine Idee</button>
+    <button type="button" data-zu="shop" aria-pressed="false">Ich suche etwas Fertiges</button>
+  </div>
+
   <section class="k-stage" aria-label="Wähle deinen Weg">
     <div class="k-bighead" aria-hidden="true">
       <img src="/assets/kopf.webp" alt="" width="511" height="1100">
@@ -176,7 +181,7 @@
         </div>
         <div class="k-door__txt">
           <span class="t-eyebrow">3D-Druck auf Anfrage</span>
-          <h2 class="t-door">Ich habe eine Idee.</h2>
+          <h2 class="t-door"><span class="k-nur-desktop">Ich habe eine Idee.</span><span class="k-nur-handy">Du bringst die Idee, wir drucken sie.</span></h2>
           <p class="t-lead">Skizze, Maße oder STL reichen. Du bekommst einen Festpreis, bevor irgendetwas auf den Drucker geht.</p>
           <span class="k-door__cta">
             <span class="k-btn k-btn--amber">Projekt einreichen →</span>
@@ -192,8 +197,8 @@
         </div>
         <div class="k-door__txt">
           <span class="t-eyebrow">Fertige Kniffe</span>
-          <h2 class="t-door">Ich suche etwas Fertiges.</h2>
-          <p class="t-lead">Durchdachte Teile für Auto, Reise, Zuhause und Büro, gedruckt in Berlin und im Alltag getestet.</p>
+          <h2 class="t-door"><span class="k-nur-desktop">Ich suche etwas Fertiges.</span><span class="k-nur-handy">Durchdacht, gedruckt, getestet.</span></h2>
+          <p class="t-lead"><span class="k-nur-desktop">Durchdachte Teile für Auto, Reise, Zuhause und Büro, gedruckt in Berlin und im Alltag getestet.</span><span class="k-nur-handy">Teile für Auto, Reise, Zuhause und Büro, gedruckt in Berlin. <!-- k:preis:ab-satz -->Ab 8,90 €<!-- /k:preis:ab-satz -->.</span></p>
           <span class="k-door__cta">
             <span class="k-btn k-btn--ink">Zum Shop →</span>
             <span class="t-mono t-soft"><!-- k:preis:ab -->ab 8,90 €<!-- /k:preis:ab --></span>
@@ -204,7 +209,7 @@
   </section>
 
   <section class="k-split">
-    <div class="k-dark" style="background: var(--ink-1)">
+    <div class="k-dark k-split__l">
       <div>
         <h2 class="t-h2" style="margin-bottom: 22px">So läuft Custom-Druck</h2>
         <ol class="k-steps">
@@ -214,7 +219,7 @@
           <li><span>04</span><span><strong>Druck.</strong> Gedruckt, von Hand geprüft und sorgfältig verpackt.</span></li>
         </ol>
       </div>
-      <div>
+      <div class="k-nur-desktop">
         <h3 class="t-h3" style="margin-bottom: 14px">Damit kommen Kunden zu uns</h3>
         <ul class="k-chips">
           <li><a href="/3d-druck-auf-anfrage.html#typisch" class="k-chip">Ersatz- und Passteile</a></li>
@@ -243,14 +248,14 @@
           <summary>Brauche ich eine fertige 3D-Datei?</summary>
           <p>Nein. Eine Skizze, ein Foto mit Maßen oder eine kurze Beschreibung reichen für den Anfang.</p>
         </details>
-        <details>
+        <details class="k-nur-desktop">
           <summary>Welche Materialien und Farben gibt es?</summary>
           <p>Standard ist mattschwarzes PLA. Über zehn weitere Farb- und Materialvarianten sind auf Anfrage möglich, darunter Pastelltöne, Metallic und PETG.</p>
         </details>
       </div>
     </div>
 
-    <div class="k-light" style="background: var(--paper-1)">
+    <div class="k-light k-split__r">
       <div>
         <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 22px">
           <h2 class="t-h2">Kniffe für den Alltag</h2>
@@ -293,11 +298,16 @@
   </section>
 
   <section class="k-band" aria-label="Kundenrückmeldungen">
-    <span class="k-stars" style="color: inherit" aria-hidden="true">★★★★★</span>
+    <span class="k-stars" aria-hidden="true">★★★★★</span>
     <strong>Fünf von fünf Sternen aus fünf Kundenrückmeldungen.</strong>
-    <span>„Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.“ Sophie R.</span>
+    <span class="k-nur-desktop">„Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.“ Sophie R.</span>
     <a href="/3d-druck-auf-anfrage.html#bewertungen">Alle fünf lesen →</a>
   </section>
+
+  <div class="k-wechsel">
+    <button type="button" class="k-btn k-btn--ghost" data-zu="shop">Lieber etwas Fertiges? →</button>
+    <button type="button" class="k-btn k-btn--ghost" data-zu="idee">Lieber eine eigene Idee? →</button>
+  </div>
 </main>
 
 <!-- k:foot -->
@@ -312,5 +322,6 @@
 </footer>
 <script src="/js/kniff.js?v=200" defer></script>
 <!-- /k:foot -->
+<script src="/js/kniff-welt.js?v=1"></script>
 </body>
 </html>
