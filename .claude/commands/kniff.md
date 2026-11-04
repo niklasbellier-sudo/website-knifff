@@ -14,7 +14,7 @@ Diese Dateien werden automatisch geladen; bei Bedarf gezielt nachschlagen.
 - Repo: `~/Desktop/Kniff/website` (statische HTML/CSS/JS, kein Framework, kein Node-Build). Dorthin `cd`.
 - Deploy: **Ich committe lokal** (Autor `niklasbellier-sudo <niklasbellier@gmail.com>`), **Niklas pusht** über GitHub Desktop → Netlify baut `bash scripts/netlify-build.sh` → live auf `kniff.shop`. Ich habe KEINE Push-Rechte.
 - Grafik-Pipeline: `out-brand/gen.py` (alle Marken-/Social-/Print-Grafiken, gitignored); `scripts/kie.sh still "<prompt>" out.png --ar 16:9 --ref <foto>` (KIE, ~14 Credits/Bild, Key in `~/.config/kniff/.env`). Renders IMMER mit echtem Produktfoto als `--ref`. SVG→PNG immer bei 2048 rendern, dann per `sips` runterskalieren.
-- Nur `sips` + `qlmanage` fürs Bildhandling (kein ImageMagick/PIL). Vor `git status` einmal `git update-index --refresh`. HTML-only-Änderung braucht keinen `?v=`-Bump; CSS/JS schon (in 12 Dateien, gemeinsame Version).
+- Nur `sips` + `qlmanage` fürs Bildhandling (kein ImageMagick/PIL). Vor `git status` einmal `git update-index --refresh`. CSS/JS-Änderung: `CSS_V`/`JS_V` in `scripts/kniff-chrome.py` hochzählen und das Skript laufen lassen.
 
 ## Lebende Übersichten (unabhängig vom Chat, auf claude.ai)
 - **Projektplan + Budget + Monatscheck:** https://claude.ai/code/artifact/29912519-8021-40e3-9a10-15de577fd1c3
@@ -22,6 +22,8 @@ Diese Dateien werden automatisch geladen; bei Bedarf gezielt nachschlagen.
 Zum Aktualisieren: Artifact `action:"read"` mit der URL → Änderungen mergen → gleichen `file_path` neu publishen. WICHTIG: in `buildDoc()` NIE `document.head.innerHTML` verwenden (CSS geht dann verloren) — den Head als JS-Konstante selbst zusammensetzen.
 
 ## Aktueller Arbeitsstand
+**Website-Umbau "Zwei Türen" (seit 04.11.2026, Branch `konzept-zwei-tueren`):** Konzept + Übergabe in `~/Claude/Kniff/website-konzept/` (HANDOFF.md, PROTOKOLL.md). Neuer Aufbau: `css/kniff.css` (Designsystem oben unverändert, Ergänzungen unten), `js/kniff.js`, Rahmen per `python3 scripts/kniff-chrome.py` (Kopf/Fuß/Meta/Sitemap, CSS_V/JS_V dort hochzählen), Produkte nur in `scripts/produkte.json` → `python3 scripts/kniff-produkte.py`, Mein Projekt verschlüsselt → `node scripts/projekt-codes.js` (Klartext in `~/Desktop/Kniff/projekte-privat/`). Live erst nach Nikis Freigabe der Netlify-Vorschau (PR).
+
 Website, Etsy-Shop und Marke stehen und sind live. In Arbeit / als Nächstes:
 1. **Sortiment im September auf 15 Produkte hochskalieren** — Portfolio-Ansatz: breit starten, nach 4–8 Wochen 2–3 Gewinner identifizieren, jeden Gewinner als eigene Linie skalieren (Varianten, eigene Fotos, dedizierte Ads). **Engpass = Lizenz**: nur CC0/CC-BY/CC-BY-SA-Modelle oder eigene Designs (MakerWorld-Standardlizenz verbietet Wiederverkauf; Printables oft besser). Pro Produkt: 1 Render + Etsy-Listing aus Vorlage.
 2. **Rechtliche Pflichten (nur Niklas):** Verpackungslizenz duales System (~39 €/J, LUCID allein reicht nicht), Produkthaftpflicht (~150 €/J), Rechtstexte fachkundig prüfen lassen.

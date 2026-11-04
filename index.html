@@ -1,487 +1,37 @@
 <!DOCTYPE html>
-<html lang="de" class="kf-booting">
+<html lang="de">
 <head>
-<script>(function(){try{var t=localStorage.getItem('kf-theme')||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark');if(t==='light')document.documentElement.setAttribute('data-theme','light');}catch(e){}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#08090b">
+<title>Kniff — 3D-Druck auf Anfrage aus Berlin</title>
+<meta name="description" content="Schick uns Skizze, Maße oder STL. Wir prüfen Druckbarkeit und Aufwand und drucken dein Teil – vom Einzelstück bis zur Serie. 3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.">
+<!-- k:meta -->
+<meta name="theme-color" content="#0b0d0e">
 <link rel="icon" href="/assets/favicon.svg?v=5" type="image/svg+xml">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png?v=5">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png?v=5">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon-180.png?v=5">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="preload" href="/assets/fonts/inter-tight-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/archivo-800-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="/assets/fonts/archivo-700-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
-<title>Kniff — 3D-Druck auf Anfrage aus Berlin</title>
-<meta name="description" content="Schick uns Skizze, Maße oder STL. Wir prüfen Druckbarkeit und Aufwand und drucken dein Teil – vom Einzelstück bis zur Serie. 3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.">
-<!-- og -->
+<link rel="preload" href="/assets/fonts/inter-tight-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts/kniff-fonts.css">
+<link rel="stylesheet" href="/css/kniff.css?v=200">
 <link rel="canonical" href="https://kniff.shop/">
+<link rel="alternate" hreflang="de" href="https://kniff.shop/">
+<link rel="alternate" hreflang="en" href="https://kniff.shop/en/">
+<link rel="alternate" hreflang="x-default" href="https://kniff.shop/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kniff">
 <meta property="og:locale" content="de_DE">
 <meta property="og:title" content="Kniff — 3D-Druck auf Anfrage aus Berlin">
 <meta property="og:description" content="Schick uns Skizze, Maße oder STL. Wir prüfen Druckbarkeit und Aufwand und drucken dein Teil – vom Einzelstück bis zur Serie. 3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.">
 <meta property="og:url" content="https://kniff.shop/">
-<meta property="og:image" content="https://kniff.shop/assets/og.jpg?v=5">
+<meta property="og:image" content="https://kniff.shop/assets/og.jpg?v=6">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kniff — 3D-Druck auf Anfrage aus Berlin">
-<meta name="twitter:description" content="Schick uns Skizze, Maße oder STL. Wir prüfen Druckbarkeit und Aufwand und drucken dein Teil – vom Einzelstück bis zur Serie. 3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.">
-<meta name="twitter:image" content="https://kniff.shop/assets/og.jpg?v=5">
-<!-- /og -->
-<link rel="alternate" hreflang="de" href="https://kniff.shop/">
-<link rel="alternate" hreflang="en" href="https://kniff.shop/en/index.html">
-<link rel="alternate" hreflang="x-default" href="https://kniff.shop/">
-<link rel="apple-touch-icon" href="/assets/apple-touch-icon-180.png?v=5">
-<link rel="stylesheet" href="/assets/fonts/kniff-fonts.css">
-<link rel="stylesheet" href="/css/scrollcraft.css">
-<link rel="stylesheet" href="/css/kniff.css?v=129">
-</head>
-<body>
-<a class="kf-skip" href="#inhalt">Zum Inhalt springen</a>
-
-<span data-sc-progress></span>
-<div class="sc-grain" aria-hidden="true"></div>
-<div class="kf-room" aria-hidden="true"></div>
-
-<!-- boot: authored silence. The wordmark glows while assets + fonts load. -->
-<div class="kf-boot" role="status" aria-label="Seite wird geladen">
-  <div class="kf-boot__inner" aria-hidden="true">
-    <div class="kf-boot__logo">
-      <img class="kf-boot__mark" src="/assets/kniff-wortmarke-hell.png?v=3" alt="" width="439" height="188">
-    </div>
-    <div class="kf-boot__row"><span>Werkbank</span><span><span class="kf-boot__pct">000</span> %</span></div>
-    <div class="kf-boot__track"><div class="kf-boot__bar"></div></div>
-  </div>
-</div>
-<script>
-  /* failsafe: never leave the page hidden if the bench script fails */
-  setTimeout(function () {
-    var h = document.documentElement;
-    if (h.classList.contains('kf-booting')) { h.classList.remove('kf-booting'); h.classList.add('kf-booted'); }
-  }, 6000);
-</script>
-
-<header class="kf-head" data-kf-head>
-  <a href="index.html" class="kf-head__mark" aria-label="Kniff, Startseite">
-    <img src="/assets/kniff-wortmarke-hell.png?v=3" alt="Kniff">
-  </a>
-  <button type="button" class="kf-head__burger" aria-expanded="false" aria-controls="kf-nav" aria-label="Menü öffnen">
-    <span></span><span></span><span></span>
-  </button>
-  <nav class="kf-head__nav" id="kf-nav" aria-label="Hauptnavigation">
-    <a href="index.html">Home</a>
-    <a href="3d-druck-auf-anfrage.html">Custom-Druck</a>
-    <a href="ueber-uns.html">Über uns</a>
-    <a href="shop.html">Shop</a>
-    <a href="meine-projekte.html">Meine Projekte</a>
-    <a href="kontakt.html">Kontakt</a>
-    <div class="kf-head__utility">
-      <button type="button" class="kf-theme-toggle" data-kf-theme-toggle aria-label="Auf helles Design wechseln">Hell</button>
-      <a href="en/index.html" class="kf-lang" hreflang="en" lang="en">EN</a>
-    </div>
-    <a href="3d-druck-auf-anfrage.html#anfrage" class="kf-head__cta">Projekt einreichen</a>
-  </nav>
-</header>
-
-<div class="kf-hud" aria-hidden="true">
-  <span class="kf-hud__dot"></span>
-  <button type="button" class="kf-hud__name">Reisedose</button>
-  <span class="kf-hud__spec"></span>
-</div>
-
-<main id="inhalt" tabindex="-1">
-
-  <!-- ============ ACT 1 — HERO. pin + full-bleed Kniff bulb. PEAK. ======== -->
-  <section class="kf-phero" data-sc-act="pin" data-sc-span="1.05" id="hero"
-           data-kf-obj="Kniff" data-kf-spec="<b>Die Kniff-Idee</b> · leg sie auf die Bank">
-    <div data-sc-stage class="kf-phero__stage" data-sc-spotlight>
-      <img class="kf-ground kf-ground--full" src="/assets/scenes/12-home-hero.jpg?v=1" alt="" aria-hidden="true"
-           width="1920" height="1066" fetchpriority="high" decoding="async"
-           srcset="/assets/scenes/12-home-hero-m.jpg?v=1 1200w, /assets/scenes/12-home-hero.jpg?v=1 1920w" sizes="100vw">
-      <div class="sc-scrim sc-scrim--lead" aria-hidden="true"></div>
-
-      <div class="kf-phero__copy" data-sc-cue="0 1 0 0">
-        <p class="kf-eyebrow">3D-Druck aus Berlin</p>
-        <h1 class="kf-h1" data-sc-kinetic="lines">Leg deine Idee auf die Bank.</h1>
-        <p class="kf-lede">3D-Druck auf Anfrage. Du schickst deine Skizze, Maße oder STL, wir prüfen Druckbarkeit und Aufwand und drucken dein Teil &ndash; vom Einzelstück bis zur Serie.</p>
-        <div class="kf-actions">
-          <a href="3d-druck-auf-anfrage.html" class="kf-cta">
-            Projekt einreichen <span class="kf-cta__arrow" aria-hidden="true">→</span>
-          </a>
-          <a href="shop.html" class="kf-ghost">Fertige Kniffe ansehen</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ WAS WIR MACHEN. flow intro, two offers. =============== -->
-  <section class="sc-section" data-sc-act="flow" id="was-wir-machen"
-           data-kf-obj="Was wir machen" data-kf-spec="Zwei Wege zu deinem Teil">
-    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
-      <p class="kf-eyebrow">Was wir machen</p>
-      <h2 class="kf-h2">Zwei Wege zu deinem Teil.</h2>
-      <p class="kf-lede">Kniff ist ein 3D-Druck-Service aus Berlin. Wir drucken so ziemlich alles, was ein 3D-Drucker hergibt: Alltagshelfer, Ersatzteile, handwerkliche Bauteile, Modelle für Architektur- und Planungsbüros. Auf Wunsch passen wir Modelle an. Jedes Teil geht einzeln durch unsere Kontrolle, bevor es verschickt wird.</p>
-
-      <a class="kf-proofbar" href="#bewertungen">
-        <span class="kf-proofbar__stars" aria-hidden="true">★★★★★</span>
-        <span class="kf-proofbar__txt"><b>Fünf von fünf Sternen</b> aus fünf Kundenrückmeldungen</span>
-        <span class="kf-proofbar__go">Rückmeldungen lesen <span aria-hidden="true">→</span></span>
-      </a>
-
-      <div class="kf-services">
-        <article>
-          <p class="kf-eyebrow">Custom-Druck</p>
-          <h3 class="kf-h3">3D-Druck auf Anfrage</h3>
-          <p>Du hast eine Idee, eine Skizze oder eine fertige Datei? Schick sie uns. Wir prüfen Druckbarkeit und Aufwand und melden uns mit einem Festpreis, bevor irgendetwas auf den Drucker geht. Vom Einzelstück bis zur Serie.</p>
-          <a class="kf-cta" href="3d-druck-auf-anfrage.html">So funktioniert's <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
-        </article>
-        <article>
-          <p class="kf-eyebrow">Shop</p>
-          <h3 class="kf-h3">Fertige Kniffe</h3>
-          <p>Durchdachte Teile für Auto, Reise, Zuhause und Büro. Ausgewählt, gedruckt und im Alltag getestet. Standardfarbe Mattschwarz, die Reisedose zusätzlich in Grün und Pastellblau, weitere Varianten auf Anfrage. Das Sortiment wächst laufend. Alle Produkte sind im Etsy-Shop bestellbar.</p>
-          <a class="kf-cta" href="shop.html">Zum Sortiment <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
-        </article>
-      </div>
-
-      <ul class="kf-trust" aria-label="Das kannst du erwarten">
-        <li><b>Festpreis vorab</b><span>Kein Angebot ohne konkrete Zahl.</span></li>
-        <li><b>Antwort in 48&nbsp;Stunden</b><span>Persönlich, kein Callcenter.</span></li>
-        <li><b>Gedruckt in Berlin</b><span>Eigene Fertigung, jedes Teil von Hand geprüft.</span></li>
-        <li><b>Pflanzenbasiertes PLA</b><span>Standardmaterial, geruchsarm und stabil.</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ============ KUNDENPROJEKTE. Abgeschlossene Aufträge stehen vor dem Shop. -->
-  <section class="sc-section" data-sc-act="flow" id="projekte"
-           data-kf-obj="Kundenprojekte" data-kf-spec="Abgeschlossene Aufträge">
-    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
-      <p class="kf-eyebrow">Kundenprojekte</p>
-      <h2 class="kf-h2">Aus der Werkstatt.</h2>
-      <p class="kf-lede">Die meisten Kniffe entstehen als Auftrag: ein Bauteil, ein Ersatzteil, ein Prototyp, den es so nicht zu kaufen gibt. Ein aktuelles Beispiel.</p>
-
-      <article class="kf-project">
-        <div class="kf-project__media">
-          <img src="/assets/projekte/treiben-horn-final.jpg"
-               alt="Selbstgebaute Audioanlage mit weißen Gehäusen und rotem Horn, Projekt TREIBEN"
-               width="1536" height="1024"
-               srcset="/assets/projekte/treiben-horn-final-m.jpg 1000w, /assets/projekte/treiben-horn-final.jpg 1536w"
-               sizes="(min-width: 60rem) 60rem, 100vw" loading="lazy" decoding="async">
-          <span class="kf-project__tag">Horn · Audio-Selbstbau</span>
-        </div>
-        <div class="kf-project__body">
-          <p class="kf-eyebrow">Auftragsdruck bei Kniff</p>
-          <h3>Treiben Horn</h3>
-          <p>Ein Horn für eine selbstgebaute Audioanlage. Die Form ist groß, dünnwandig und für einen Drucker eigentlich unbequem &ndash; die Arbeit steckte darin, sie sauber hinzubekommen: verschiedene Materialien, verschiedene Drucker, bis Wände, Kanten und Oberfläche gestimmt haben.</p>
-          <p class="kf-project__meta">Für: <a href="https://www.instagram.com/treiben.sound/" target="_blank" rel="noopener noreferrer">@treiben.sound</a></p>
-        </div>
-      </article>
-
-      <div class="kf-actions">
-        <a href="3d-druck-auf-anfrage.html" class="kf-cta">Projekt einreichen <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
-        <a href="shop.html" class="kf-ghost">Zum Shop</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SORTIMENT. Fertige Kniffe, unter den Projekten. Seitlich scrollbare Reihe. -->
-  <section class="sc-section" data-sc-act="flow" id="sortiment"
-           data-kf-obj="Sortiment" data-kf-spec="Fertige Kniffe · direkt bestellbar">
-    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
-      <p class="kf-eyebrow">Sortiment</p>
-      <h2 class="kf-h2">Kniffe für den Alltag.</h2>
-      <p class="kf-lede">Nicht jedes Teil muss ein Auftrag sein. Für Auto, Reise, Zuhause und Büro, gedruckt in Berlin. Standardfarbe Mattschwarz, die Reisedose zusätzlich in Grün und Pastellblau, weitere Farb- und Materialvarianten auf Anfrage. Das Sortiment wächst laufend.</p>
-      <p class="kf-railx__hint" aria-hidden="true">Seitlich wischen für mehr →</p>
-    </div>
-
-    <div class="kf-railx" role="list" aria-label="Produkte, seitlich scrollbar">
-      <article class="kf-card" role="listitem">
-        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4603059940/munzsortierer-fur-alle-8-euro-munzen-mit" target="_blank" rel="noopener noreferrer"><span class="kf-badge-neu">Neu</span><img src="/assets/muenzsortierer-neu.jpg" alt="Kniff Münzsortierer für alle 8 Euro-Münzen" width="1600" height="1200" loading="lazy" decoding="async"></a>
-        <div class="kf-card__label">
-          <span class="name">Münzsortierer</span>
-          <span class="row"><span>Zuhause</span><b>24,90 €</b></span>
-        </div>
-      </article>
-      <article class="kf-card" role="listitem">
-        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4569447066/stiftehalter-furs-auto-o-kugelschreiber" target="_blank" rel="noopener noreferrer"><img src="/assets/stiftehalter-auto-usecase.jpg?v=2" alt="Kniff Stiftehalter fürs Auto" width="1600" height="889" loading="lazy" decoding="async"></a>
-        <div class="kf-card__label">
-          <span class="name">Stiftehalter fürs Auto</span>
-          <span class="row"><span>Auto &amp; Fahrrad</span><b>ab 9,90 €</b></span>
-        </div>
-      </article>
-      <article class="kf-card" role="listitem">
-        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4567296060/rearview-mirror-clip-for-cars-note-and" target="_blank" rel="noopener noreferrer"><img src="/assets/spiegel-clip-auto-usecase.jpg?v=2" alt="Kniff Sonnenblenden-Clip fürs Auto" width="1600" height="889" loading="lazy" decoding="async"></a>
-        <div class="kf-card__label">
-          <span class="name">Sonnenblenden-Clip fürs Auto</span>
-          <span class="row"><span>Auto &amp; Fahrrad</span><b>ab 8,90 €</b></span>
-        </div>
-      </article>
-      <article class="kf-card" role="listitem">
-        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4567533290/a-travel-container-with-a-screw-on-lid" target="_blank" rel="noopener noreferrer"><img src="/assets/reisedose-wattestaebchen-usecase.jpg" alt="Kniff Reisedose für Wattestäbchen" width="1600" height="889" loading="lazy" decoding="async"></a>
-        <div class="kf-card__label">
-          <span class="name">Reisedose für Wattestäbchen</span>
-          <span class="row"><span>Urlaub &amp; Reisen</span><b>ab 19,90 €</b></span>
-        </div>
-      </article>
-      <article class="kf-card" role="listitem">
-        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4569442836/kartenhalter-fur-10-kartendecks-o" target="_blank" rel="noopener noreferrer"><img src="/assets/kartenhalter-10-decks-usecase.jpg" alt="Kniff Kartenhalter für 10 Kartendecks" width="1600" height="889" loading="lazy" decoding="async"></a>
-        <div class="kf-card__label">
-          <span class="name">Kartenhalter für 10 Decks</span>
-          <span class="row"><span>Zuhause</span><b>42,00 €</b></span>
-        </div>
-      </article>
-      <article class="kf-card" role="listitem">
-        <a class="kf-card__view" data-sc-tilt="6" href="https://www.etsy.com/listing/4569438710/minimalistischer-handystander-o" target="_blank" rel="noopener noreferrer"><img src="/assets/handystaender-minimal-usecase.jpg" alt="Kniff minimalistischer Handyständer" width="1600" height="889" loading="lazy" decoding="async"></a>
-        <div class="kf-card__label">
-          <span class="name">Minimalistischer Handyständer</span>
-          <span class="row"><span>Büro &amp; Organisation</span><b>ab 19,90 €</b></span>
-        </div>
-      </article>
-      <a class="kf-card kf-card--cta" role="listitem" href="shop.html">
-        <span class="kf-eyebrow">Alle Details</span>
-        <span class="kf-card--cta__h">Zum Shop</span>
-        <span class="kf-cta__arrow" aria-hidden="true">→</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- ============ BEWERTUNGEN. flow, direkt nach dem Sortiment. ===== -->
-  <section class="sc-section" data-sc-act="flow" id="bewertungen"
-           data-kf-obj="Bewertungen" data-kf-spec="Was Kundinnen und Kunden sagen">
-    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
-      <p class="kf-eyebrow">Rückmeldungen</p>
-      <h2 class="kf-h2">Was Kundinnen und Kunden sagen.</h2>
-
-      <div class="kf-reviews" id="kf-reviews" aria-live="polite"></div>
-      <noscript>
-        <div class="kf-reviews">
-          <figure class="kf-review"><blockquote>Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt.</blockquote><figcaption>Daniel K.</figcaption></figure>
-          <figure class="kf-review"><blockquote>Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.</blockquote><figcaption>Sophie R.</figcaption></figure>
-          <figure class="kf-review"><blockquote>Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich.</blockquote><figcaption>Marcel W.</figcaption></figure>
-        </div>
-      </noscript>
-
-      <p class="kf-reviews__disclaim">Alle Bewertungen stammen von Kundinnen und Kunden, die ein Produkt oder eine individuelle Anfertigung bei Kniff erhalten haben. Die Rückmeldungen wurden persönlich eingeholt und keiner Bewertung liegt eine Gegenleistung zugrunde.</p>
-
-      <script type="application/json" id="kf-reviews-data">
-      [
-        {"name":"Daniel K.","rating":5,"text":"Von der ersten Anfrage bis zur Lieferung lief alles super. Die Betreuung war sehr persönlich und meine Wünsche wurden direkt berücksichtigt."},
-        {"name":"Sophie R.","rating":5,"text":"Richtig gute Farbauswahl und eine saubere Verarbeitung. Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte."},
-        {"name":"Marcel W.","rating":5,"text":"Die angegebene Zeit war ziemlich genau und die Bestellung kam wie angekündigt an. Auch die Kommunikation war unkompliziert und freundlich."},
-        {"name":"Nadine B.","rating":5,"text":"Besonders gut finde ich, dass umweltbewusstes Material verwendet wird. Das Produkt wirkt hochwertig und die individuelle Gestaltung wurde sehr schön umgesetzt."},
-        {"name":"Tobias F.","rating":5,"text":"Hat alles problemlos funktioniert. Auf meine Sonderwünsche wurde eingegangen und man hatte nicht das Gefühl, einfach nur eine Bestellnummer zu sein."}
-      ]
-      </script>
-    </div>
-  </section>
-
-  <!-- ============ ACT 3 — VERFAHREN. pin + cross-section reveal. ========= -->
-  <section data-sc-act="pin" data-sc-span="1.2" id="verfahren"
-           data-kf-obj="Verfahren" data-kf-spec="Von der Idee bis zum Teil · <b>4 Schritte</b>">
-    <div data-sc-stage class="kf-proc__stage">
-      <img class="kf-ground" src="/assets/scenes/01-process.jpg?v=2" alt="" aria-hidden="true"
-           width="1920" height="1067" srcset="/assets/scenes/01-process-m.jpg?v=2 1200w, /assets/scenes/01-process.jpg?v=2 1920w" sizes="100vw" loading="lazy" decoding="async">
-      <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
-
-      <!-- self-drawing part cross-section: a printed enclosure with wall
-           thickness, a bore and two mounting tabs. Stroke length is driven
-           from the act's --sc-p, so scrolling draws the section, then the
-           dimension lines arrive. -->
-      <svg class="kf-proc__svg" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <g fill="none" stroke="var(--sc-accent)" stroke-width="1.6" opacity="0.92" stroke-linejoin="round">
-          <!-- outer wall -->
-          <path class="kf-draw" d="M360 410 L360 210 Q360 190 380 190 L620 190 Q640 190 640 210 L640 410"/>
-          <!-- inner wall (cavity) -->
-          <path class="kf-draw" d="M388 410 L388 224 Q388 216 396 216 L604 216 Q612 216 612 224 L612 410"/>
-          <!-- floor -->
-          <path class="kf-draw" d="M360 410 L640 410 M388 392 L612 392"/>
-          <!-- mounting tabs + bores -->
-          <path class="kf-draw" d="M300 410 L360 410 M640 410 L700 410 M300 410 L300 392 L360 392 M700 410 L700 392 L640 392"/>
-          <circle class="kf-draw" cx="330" cy="401" r="9"/>
-          <circle class="kf-draw" cx="670" cy="401" r="9"/>
-        </g>
-        <!-- section hatching in the wall -->
-        <g stroke="var(--sc-accent)" stroke-width="1" opacity="0.4">
-          <path class="kf-draw kf-draw--late" d="M362 210 L386 234 M362 250 L386 274 M362 290 L386 314 M362 330 L386 354 M362 370 L386 394
-                                                   M614 234 L638 210 M614 274 L638 250 M614 314 L638 290 M614 354 L638 330 M614 394 L638 370"/>
-        </g>
-        <!-- dimension lines -->
-        <g stroke="var(--kf-hud-line)" stroke-width="1" opacity="0.75">
-          <path class="kf-draw kf-draw--late" d="M300 452 L700 452 M300 444 L300 460 M700 444 L700 460"/>
-          <path class="kf-draw kf-draw--late" d="M732 190 L732 410 M724 190 L740 190 M724 410 L740 410"/>
-          <path class="kf-draw kf-draw--late" d="M388 168 L612 168 M388 160 L388 176 M612 160 L612 176"/>
-        </g>
-      </svg>
-
-      <div class="kf-proc__steps">
-        <div class="kf-step" data-sc-cue="0 0.30 0">
-          <span class="n">01 / Einreichen</span>
-          <h3>Datei oder Skizze</h3>
-          <p>STL, 3MF oder STEP hochladen, oder kurz beschreiben, was du brauchst. Maße, Material und Stückzahl helfen bei der Einschätzung.</p>
-        </div>
-        <div class="kf-step" data-sc-cue="0.24 0.54">
-          <span class="n">02 / Prüfung</span>
-          <h3>Ist das so druckbar</h3>
-          <p>Wir schauen uns das Modell an: Wandstärken, Stützstrukturen, Druckzeit, Materialbedarf. Wenn etwas klemmt, melden wir uns mit einem Vorschlag.</p>
-        </div>
-        <div class="kf-step" data-sc-cue="0.48 0.78">
-          <span class="n">03 / Angebot</span>
-          <h3>Ein Festpreis, keine Überraschung</h3>
-          <p>Preis auf Basis von Material, Druckzeit, Nachbearbeitung und Stückzahl, mit voraussichtlicher Lieferzeit. Persönliche Rückmeldung, kein Callcenter.</p>
-        </div>
-        <div class="kf-step" data-sc-cue="0.72 1">
-          <span class="n">04 / Druck</span>
-          <h3>Gedruckt, geprüft, verpackt</h3>
-          <p>Nach deiner Freigabe drucken wir in Deutschland &ndash; Einzelstück oder Serie &ndash; prüfen jedes Teil von Hand und verschicken sorgfältig verpackt. Mengenrabatt ab größeren Stückzahlen.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ ACT 4 — ENTSTEHUNG. flow, calm, the one warm photo. ==== -->
-  <section class="sc-section" data-sc-act="flow" id="entstehung" style="padding-block: var(--sc-7) var(--sc-section);"
-           data-kf-obj="Entstehung" data-kf-spec="Wie Kniff angefangen hat">
-    <div class="sc-wrap">
-      <div class="kf-story">
-        <div class="kf-prose" data-sc-in data-sc-stagger="70">
-          <p class="kf-eyebrow">Wie es anfing</p>
-          <h2>Der erste Kniff war ein Münzsortierer.</h2>
-          <p>Das Problem kannten wir beide: immer Kleingeld dabei und nie die richtige Münze zur Hand. Ein bisschen in der Hosentasche, ein bisschen in der Mittelkonsole, der Rest in einer Schale neben der Tür. Gesucht haben wir trotzdem jedes Mal.</p>
-          <p>Also haben wir uns einen Sortierer gebaut: acht Röhren, für jede Euro-Münze eine, der Wert oben eingeprägt. Wir haben ihn auf eBay gestellt, mehr aus Neugier als aus Plan. In vierzehn Tagen gingen achtzehn Stück weg, alle an Leute, die wir nicht kannten. Das war das erste Teil, das jemand bei uns bestellt hat, statt es geschenkt zu bekommen &ndash; und der Moment, in dem klar wurde, dass da mehr drinsteckt.</p>
-          <p><a href="ueber-uns.html">Die ganze Geschichte</a></p>
-        </div>
-        <figure data-sc-reveal="left" data-sc-reveal-at="0.12 0.55">
-          <img src="/assets/muenzsortierer-usecase.jpg" alt="3D-gedruckter Münzsortierer mit acht senkrechten Röhren auf einem Holztisch, gefüllt mit gestapelten Euro-Münzen, daneben lose Münzen, warmes Licht" width="1600" height="889" srcset="/assets/muenzsortierer-usecase-m.jpg 1000w, /assets/muenzsortierer-usecase.jpg 1600w" sizes="(min-width: 60rem) 40rem, 100vw" loading="lazy" decoding="async">
-          <figcaption>Der Sortierer, mit dem alles anfing. Acht Röhren, für jede Euro-Münze eine.</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FAQ. Einwände ausräumen, bevor es weitergeht. ========= -->
-  <section class="sc-section" data-sc-act="flow" id="faq"
-           data-kf-obj="Häufige Fragen" data-kf-spec="Bevor du fragst">
-    <div class="sc-wrap" data-sc-in data-sc-stagger="50">
-      <p class="kf-eyebrow">Häufige Fragen</p>
-      <h2 class="kf-h2">Bevor du fragst.</h2>
-      <div class="kf-faq">
-        <details>
-          <summary>Was kostet ein individueller Druck?</summary>
-          <p>Das hängt von Größe, Material, Druckzeit, Nachbearbeitung und Stückzahl ab. Deshalb bekommst du für jede Anfrage einen persönlichen Festpreis, statt eines pauschalen Tarifs. Die Einschätzung ist kostenlos und unverbindlich.</p>
-        </details>
-        <details>
-          <summary>Brauche ich eine fertige 3D-Datei?</summary>
-          <p>Nein. Eine Skizze, ein Foto mit Maßen oder eine kurze Beschreibung reichen für den Anfang. Wenn eine Datei da ist (STL, 3MF, STEP), geht es schneller. Bei Bedarf passen wir Modelle an oder gestalten sie mit dir.</p>
-        </details>
-        <details>
-          <summary>Wie lange dauert es?</summary>
-          <p>Auf deine Anfrage antworten wir in der Regel innerhalb von zwei Werktagen. Nach deiner Freigabe hängt die Druckzeit von Größe und Stückzahl ab &ndash; die konkrete Lieferzeit steht im Angebot. Versand innerhalb Deutschlands per DHL, meist 1&ndash;2 Werktage.</p>
-        </details>
-        <details>
-          <summary>Welche Materialien und Farben gibt es?</summary>
-          <p>Standard ist mattschwarzes PLA, ein pflanzenbasiertes Material. Über zehn weitere Farb- und Materialvarianten sind auf Anfrage möglich, darunter Pastelltöne, Metallic und PETG für mehr Hitzebeständigkeit. Neue Farben drucken wir vorab als Muster.</p>
-        </details>
-        <details>
-          <summary>Wem gehören die Rechte an meinem Design?</summary>
-          <p>Dir. Du bleibst Inhaber:in der Rechte an deiner eingereichten Datei. Mit der Einreichung bestätigst du, dass du zur Nutzung berechtigt bist. Fremde, urheberrechtlich geschützte Designs drucken wir nur mit nachgewiesener Erlaubnis.</p>
-        </details>
-        <details>
-          <summary>Kann ich zurückgeben, wenn es mir nicht gefällt?</summary>
-          <p>Das kommt darauf an, was du bestellt hast.</p>
-          <p>Fertige Produkte aus dem Shop kannst du als Verbraucher:in innerhalb von 14 Tagen ohne Angabe von Gründen widerrufen. Die Auswahl einer angebotenen Farbvariante ändert daran nichts.</p>
-          <p>Individuell nach deinen Vorgaben angefertigte Teile aus dem Custom-Druck sind dagegen gesetzlich vom Widerrufsrecht ausgenommen (§&nbsp;312g Abs.&nbsp;2 Nr.&nbsp;1 BGB). Deshalb bekommst du vorher ein Angebot und gibst es frei, bevor irgendetwas gedruckt wird.</p>
-          <p>Bei Mängeln oder Druckfehlern unsererseits gilt in beiden Fällen die gesetzliche Gewährleistung &ndash; melde dich einfach, dann finden wir eine Lösung. Details in der <a href="widerruf.html">Widerrufsbelehrung</a>.</p>
-        </details>
-      </div>
-      <div class="kf-actions">
-        <a href="3d-druck-auf-anfrage.html#anfrage" class="kf-cta">Projekt einreichen <span class="kf-cta__arrow" aria-hidden="true">→</span></a>
-        <a href="kontakt.html" class="kf-ghost">Erst kurz fragen</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ KNIFF-TIPPS. vertikale Sektion, seitlich scrollbare Reihe. -->
-  <section class="sc-section" data-sc-act="flow" id="tipps"
-           data-kf-obj="Kniff-Tipps" data-kf-spec="Kleine Handgriffe, die etwas bringen">
-    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
-      <p class="kf-eyebrow">Kniff-Tipps</p>
-      <h2 class="kf-h2">Kleine Handgriffe, die etwas bringen.</h2>
-      <p class="kf-lede">Zu jedem Kniff gibt es einen. Hier eine Auswahl.</p>
-      <p class="kf-railx__hint" aria-hidden="true">Seitlich wischen für mehr →</p>
-    </div>
-
-    <div class="kf-railx kf-railx--quotes" role="list" aria-label="Kniff-Tipps, seitlich scrollbar">
-      <figure class="kf-quote" role="listitem">
-        <blockquote>Steck den Stift mit der Kappe nach unten in den Halter. So läuft die Mine bei Sommerhitze im Auto nicht aus.</blockquote>
-        <figcaption>Stiftehalter fürs Auto</figcaption>
-      </figure>
-      <figure class="kf-quote" role="listitem">
-        <blockquote>Zettel quer statt längs einklemmen. So verdeckt er weniger vom Sichtfeld, und du erfüllst die Sichtfreiheit nach § 23 StVO.</blockquote>
-        <figcaption>Sonnenblenden-Clip fürs Auto</figcaption>
-      </figure>
-      <figure class="kf-quote" role="listitem">
-        <blockquote>Die Reisedose ist nicht nur für Wattestäbchen gut. Ohrstöpsel, Haargummis, Tabletten oder Ersatzknöpfe finden darin genauso Platz.</blockquote>
-        <figcaption>Reisedose für Wattestäbchen</figcaption>
-      </figure>
-      <figure class="kf-quote" role="listitem">
-        <blockquote>Sortier die Decks nach Spiel statt nach Optik. Skat links, Rommé rechts, Sammlerstücke hinten. Wenn Besuch da ist, greifst du blind zum richtigen.</blockquote>
-        <figcaption>Kartenhalter für 10 Decks</figcaption>
-      </figure>
-      <figure class="kf-quote" role="listitem">
-        <blockquote>Steck das Ladekabel durch den hinteren Schlitz, bevor du das Handy einsetzt. Dann liegt es beim Abnehmen schon richtig.</blockquote>
-        <figcaption>Minimalistischer Handyständer</figcaption>
-      </figure>
-    </div>
-
-    <div class="sc-wrap">
-      <div class="kf-actions">
-        <a href="shop.html" class="kf-ghost">Alle Kniffe im Shop</a>
-        <a href="3d-druck-auf-anfrage.html" class="kf-ghost">Custom-Druck</a>
-      </div>
-    </div>
-  </section>
-
-  <section data-sc-act="pin" data-sc-span="1.05" id="dein-zug"
-           data-kf-obj="Deine Idee" data-kf-spec="Die Bank ist frei">
-    <div data-sc-stage class="kf-close__stage" data-sc-spotlight>
-      <img class="kf-ground kf-ground--full" src="/assets/scenes/04-close.jpg?v=2" alt="" aria-hidden="true"
-           width="1920" height="1067" srcset="/assets/scenes/04-close-m.jpg?v=2 1200w, /assets/scenes/04-close.jpg?v=2 1920w" sizes="100vw" loading="lazy" decoding="async">
-      <div class="sc-scrim sc-scrim--band" aria-hidden="true"></div>
-
-      <div class="kf-close__inner">
-        <h2 data-sc-cue="0.05" data-sc-kinetic="lines">Die Bank ist frei. Was drucken wir für dich?</h2>
-        <p data-sc-cue="0.05">Schick uns die Datei, die Skizze oder nur den Gedanken. Du bekommst eine ehrliche Einschätzung und einen Festpreis, bevor irgendetwas gedruckt wird.</p>
-        <div class="kf-actions" data-sc-cue="0.05">
-          <a href="3d-druck-auf-anfrage.html" class="kf-cta">
-            Projekt einreichen <span class="kf-cta__arrow" aria-hidden="true">→</span>
-          </a>
-          <a href="kontakt.html" class="kf-ghost">Erst kurz fragen</a>
-        </div>
-      </div>
-
-      <footer class="kf-foot">
-        <span>© 2026 Kniff · Berlin · kniff.shop</span>
-        <nav aria-label="Fußzeile">
-          <a href="3d-druck-auf-anfrage.html">Custom-Druck</a>
-          <a href="shop.html">Shop</a>
-          <a href="ueber-uns.html">Über uns</a>
-          <a href="versand-zahlung.html">Versand &amp; Zahlung</a>
-          <a href="kontakt.html">Kontakt</a>
-          <a href="https://instagram.com/kniffshop" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener noreferrer">Etsy</a>
-          <a href="impressum.html">Impressum</a>
-          <a href="datenschutz.html">Datenschutz</a>
-          <a href="agb.html">AGB</a>
-          <a href="widerruf.html">Widerruf</a>
-        </nav>
-      </footer>
-    </div>
-  </section>
-
-</main>
-
+<!-- /k:meta -->
+<link rel="preload" href="/assets/kopf.webp" as="image" type="image/webp">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -492,7 +42,7 @@
       "name": "Kniff",
       "url": "https://kniff.shop/",
       "logo": "https://kniff.shop/assets/apple-touch-icon-180.png?v=5",
-      "image": "https://kniff.shop/assets/og.jpg?v=5",
+      "image": "https://kniff.shop/assets/og.jpg?v=6",
       "email": "kniffshop@gmail.com",
       "description": "3D-Druck auf Anfrage aus Berlin, plus fertige Kniffe für den Alltag.",
       "founder": { "@type": "Person", "name": "Niklas-Amoah Alotey" },
@@ -541,24 +91,226 @@
       "@id": "https://kniff.shop/#faq",
       "mainEntity": [
         { "@type": "Question", "name": "Was kostet ein individueller Druck?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Das hängt von Größe, Material, Druckzeit, Nachbearbeitung und Stückzahl ab. Für jede Anfrage gibt es einen persönlichen Festpreis statt eines Pauschaltarifs. Die Einschätzung ist kostenlos und unverbindlich." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "Das hängt von Größe, Material, Druckzeit, Nachbearbeitung und Stückzahl ab. Die Einschätzung ist kostenlos und unverbindlich." } },
         { "@type": "Question", "name": "Brauche ich eine fertige 3D-Datei?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Nein. Eine Skizze, ein Foto mit Maßen oder eine kurze Beschreibung reichen für den Anfang. Mit Datei (STL, 3MF, STEP) geht es schneller. Bei Bedarf passen wir Modelle an." } },
-        { "@type": "Question", "name": "Wie lange dauert es?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Antwort auf die Anfrage in der Regel innerhalb von zwei Werktagen. Nach Freigabe richtet sich die Druckzeit nach Größe und Stückzahl; die Lieferzeit steht im Angebot. Versand innerhalb Deutschlands per DHL, meist 1–2 Werktage." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "Nein. Eine Skizze, ein Foto mit Maßen oder eine kurze Beschreibung reichen für den Anfang." } },
         { "@type": "Question", "name": "Welche Materialien und Farben gibt es?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Standard ist mattschwarzes PLA, ein pflanzenbasiertes Material. Über zehn weitere Farb- und Materialvarianten sind auf Anfrage möglich, darunter Pastelltöne, Metallic und PETG." } },
-        { "@type": "Question", "name": "Wem gehören die Rechte an meinem Design?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Dir. Du bleibst Inhaber:in der Rechte an deiner Datei. Fremde, urheberrechtlich geschützte Designs drucken wir nur mit nachgewiesener Erlaubnis." } },
-        { "@type": "Question", "name": "Kann ich zurückgeben, wenn es mir nicht gefällt?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Das kommt darauf an, was du bestellt hast. Fertige Produkte aus dem Shop kannst du als Verbraucher:in innerhalb von 14 Tagen ohne Angabe von Gründen widerrufen. Individuell nach deinen Vorgaben angefertigte Teile aus dem Custom-Druck sind dagegen gesetzlich vom Widerrufsrecht ausgenommen (§ 312g Abs. 2 Nr. 1 BGB). Bei Mängeln oder Druckfehlern unsererseits gilt in beiden Fällen die gesetzliche Gewährleistung." } }
+          "acceptedAnswer": { "@type": "Answer", "text": "Standard ist mattschwarzes PLA. Über zehn weitere Farb- und Materialvarianten sind auf Anfrage möglich, darunter Pastelltöne, Metallic und PETG." } }
       ]
     }
   ]
 }
 </script>
+</head>
+<body class="k k-dark k-home" data-k-claim="3D-Druck aus Berlin: zwei Wege zu deinem Teil." data-k-alt="/en/">
+<!-- k:top -->
+<a class="k-skip" href="#inhalt">Zum Inhalt springen</a>
+<div class="k-top">
+  <header class="k-head">
+      <a href="/" class="k-logo" aria-label="Kniff, Startseite"><img src="/assets/kniff-wortmarke-hell.png?v=3" alt="" width="439" height="188"></a>
+      <h1 class="t-mono t-soft k-nav__wide k-claim">3D-Druck aus Berlin: zwei Wege zu deinem Teil.</h1>
+      <nav class="k-nav" aria-label="Hauptnavigation">
+        <a href="/3d-druck-auf-anfrage.html">Custom-Druck</a>
+        <a href="/shop.html">Shop</a>
+        <a href="/ueber-uns.html" class="k-nav__wide">Über uns</a>
+        <a href="/meine-projekte.html" class="k-nav__wide">Mein Projekt</a>
+      </nav>
+      <button type="button" class="k-menu" aria-expanded="false" aria-controls="k-menu" aria-label="Menü öffnen">
+        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M0 1h22M0 8h22M0 15h22"/></svg>
+      </button>
+  </header>
+  <div class="k-rail" aria-hidden="true">
+    <div class="k-rail__print"></div>
+    <img class="k-rail__head" src="/assets/kopf-mini.svg" alt="" width="26" height="40">
+  </div>
+  <nav class="k-drawer k-dark" id="k-menu" aria-label="Menü" hidden>
+    <ul>
+        <li><a href="/3d-druck-auf-anfrage.html">Custom-Druck</a></li>
+        <li><a href="/shop.html">Shop</a></li>
+        <li><a href="/ueber-uns.html">Über uns</a></li>
+        <li><a href="/meine-projekte.html">Mein Projekt</a></li>
+        <li><a href="/kontakt.html">Kontakt</a></li>
+    </ul>
+    <p class="k-drawer__small"><a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener noreferrer">Etsy-Shop <span aria-hidden="true">↗</span><span class="k-sr"> (öffnet neuen Tab)</span></a><a href="https://instagram.com/kniffshop" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span><span class="k-sr"> (öffnet neuen Tab)</span></a><a href="/en/" hreflang="en" lang="en">English</a></p>
+  </nav>
+</div>
+<!-- /k:top -->
 
-<script src="/js/scrollcraft.js" defer></script>
-<script src="/js/kniff-bench.js?v=129" defer></script>
+<main id="inhalt" tabindex="-1">
+  <section class="k-stage" aria-label="Wähle deinen Weg">
+    <div class="k-bighead" aria-hidden="true">
+      <img src="/assets/kopf.webp" alt="" width="511" height="1100">
+      <i></i>
+    </div>
+    <div class="k-doors">
+      <a href="/3d-druck-auf-anfrage.html" class="k-door k-door--l k-dark">
+        <div class="k-door__art" aria-hidden="true">
+          <div class="k-sketch">
+            <svg viewBox="0 0 300 268" fill="none" focusable="false">
+              <defs>
+                <pattern id="k-layers" width="6" height="6" patternUnits="userSpaceOnUse">
+                  <rect width="6" height="6" fill="#f2a63b"></rect>
+                  <rect width="6" height="2" fill="#a96a18"></rect>
+                </pattern>
+              </defs>
+              <g class="k-sketch__fill">
+                <path d="M28 268V48h64v152h180v68z" fill="url(#k-layers)"></path>
+                <circle cx="60" cy="96" r="11" fill="#0b0d0e"></circle>
+                <circle cx="60" cy="156" r="11" fill="#0b0d0e"></circle>
+                <circle cx="214" cy="234" r="11" fill="#0b0d0e"></circle>
+              </g>
+              <g stroke="#f2a63b" stroke-width="1.6" stroke-dasharray="7 6">
+                <path d="M28 268V48h64v152h180v68z"></path>
+                <circle cx="60" cy="96" r="11"></circle>
+                <circle cx="60" cy="156" r="11"></circle>
+                <circle cx="214" cy="234" r="11"></circle>
+              </g>
+              <g stroke="#a9adac" stroke-width="1">
+                <path d="M28 30h64M28 24v12M92 24v12"></path>
+                <path d="M110 180h162M110 174v12M272 174v12"></path>
+              </g>
+              <text x="60" y="16" text-anchor="middle" fill="#c9ccca" font-family="IBM Plex Mono, monospace" font-size="13">32 mm</text>
+              <text x="191" y="168" text-anchor="middle" fill="#c9ccca" font-family="IBM Plex Mono, monospace" font-size="13">90 mm</text>
+            </svg>
+          </div>
+        </div>
+        <div class="k-door__txt">
+          <span class="t-eyebrow">3D-Druck auf Anfrage</span>
+          <h2 class="t-door">Ich habe eine Idee.</h2>
+          <p class="t-lead">Skizze, Maße oder STL reichen. Du bekommst einen Festpreis, bevor irgendetwas auf den Drucker geht.</p>
+          <span class="k-door__cta">
+            <span class="k-btn k-btn--amber">Projekt einreichen →</span>
+            <span class="t-mono t-soft">Antwort in 2 Werktagen</span>
+          </span>
+        </div>
+      </a>
+
+      <a href="/shop.html" class="k-door k-door--r k-light">
+        <div class="k-door__art">
+          <span class="k-tag">Münzsortierer <!-- k:preis:muenzsortierer -->24,90 €<!-- /k:preis:muenzsortierer --></span>
+          <img src="/assets/muenzsortierer-freigestellt.webp" alt="Münzsortierer, schwarz mit orangem Deckel" width="1500" height="1113">
+        </div>
+        <div class="k-door__txt">
+          <span class="t-eyebrow">Fertige Kniffe</span>
+          <h2 class="t-door">Ich suche etwas Fertiges.</h2>
+          <p class="t-lead">Durchdachte Teile für Auto, Reise, Zuhause und Büro, gedruckt in Berlin und im Alltag getestet.</p>
+          <span class="k-door__cta">
+            <span class="k-btn k-btn--ink">Zum Shop →</span>
+            <span class="t-mono t-soft"><!-- k:preis:ab -->ab 8,90 €<!-- /k:preis:ab --></span>
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="k-split">
+    <div class="k-dark" style="background: var(--ink-1)">
+      <div>
+        <h2 class="t-h2" style="margin-bottom: 22px">So läuft Custom-Druck</h2>
+        <ol class="k-steps">
+          <li><span>01</span><span><strong>Einreichen.</strong> STL, 3MF oder STEP hochladen oder kurz beschreiben, was du brauchst.</span></li>
+          <li><span>02</span><span><strong>Prüfung.</strong> Wandstärken, Stützstrukturen, Druckzeit, Materialbedarf.</span></li>
+          <li><span>03</span><span><strong>Angebot.</strong> Ein Festpreis, keine Überraschung, mit voraussichtlicher Lieferzeit.</span></li>
+          <li><span>04</span><span><strong>Druck.</strong> Gedruckt, von Hand geprüft und sorgfältig verpackt.</span></li>
+        </ol>
+      </div>
+      <div>
+        <h3 class="t-h3" style="margin-bottom: 14px">Damit kommen Kunden zu uns</h3>
+        <ul class="k-chips">
+          <li><a href="/3d-druck-auf-anfrage.html#typisch" class="k-chip">Ersatz- und Passteile</a></li>
+          <li><a href="/3d-druck-auf-anfrage.html#typisch" class="k-chip">Halterungen</a></li>
+          <li><a href="/3d-druck-auf-anfrage.html#typisch" class="k-chip">Prototypen</a></li>
+          <li><a href="/3d-druck-auf-anfrage.html#typisch" class="k-chip">Aufbewahrung nach Maß</a></li>
+          <li><a href="/3d-druck-auf-anfrage.html#typisch" class="k-chip">Modelle</a></li>
+          <li><a href="/3d-druck-auf-anfrage.html#typisch" class="k-chip">Kleinserien</a></li>
+        </ul>
+      </div>
+      <div class="k-case">
+        <img class="k-case__photo" src="/assets/projekte/treiben-horn-detail.jpg" alt="Rotes 3D-gedrucktes Horn auf einem weißen Lautsprechergehäuse" width="470" height="400" loading="lazy" decoding="async">
+        <div>
+          <span class="t-mono t-accent" style="font-size: 13px">Aus der Werkstatt</span>
+          <h3 class="t-h3" style="margin: 2px 0 4px">Treiben Horn</h3>
+          <p class="t-small t-soft">Ein Horn für eine selbstgebaute Audioanlage, groß und dünnwandig. Für <a href="https://www.instagram.com/treiben.sound/" target="_blank" rel="noopener noreferrer">@treiben.sound</a>.</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="t-h3" style="margin-bottom: 8px">Bevor du fragst</h3>
+        <details open>
+          <summary>Was kostet ein individueller Druck?</summary>
+          <p>Das hängt von Größe, Material, Druckzeit, Nachbearbeitung und Stückzahl ab. Die Einschätzung ist kostenlos und unverbindlich.</p>
+        </details>
+        <details>
+          <summary>Brauche ich eine fertige 3D-Datei?</summary>
+          <p>Nein. Eine Skizze, ein Foto mit Maßen oder eine kurze Beschreibung reichen für den Anfang.</p>
+        </details>
+        <details>
+          <summary>Welche Materialien und Farben gibt es?</summary>
+          <p>Standard ist mattschwarzes PLA. Über zehn weitere Farb- und Materialvarianten sind auf Anfrage möglich, darunter Pastelltöne, Metallic und PETG.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="k-light" style="background: var(--paper-1)">
+      <div>
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 22px">
+          <h2 class="t-h2">Kniffe für den Alltag</h2>
+          <a href="/shop.html" class="k-link">Alle ansehen →</a>
+        </div>
+        <div class="k-grid k-grid--2">
+<!-- k:kacheln:start -->
+<a href="/shop/muenzsortierer.html" class="k-tile">
+  <div class="k-tile__img k-tile__img--photo" style="--pos: 50% 60%"><img src="/assets/kachel/muenzsortierer-neu.jpg" alt="" loading="lazy" decoding="async"></div>
+  <div class="k-tile__meta"><strong>Münzsortierer</strong><span>24,90 €</span></div>
+</a>
+<a href="/shop/stiftehalter-auto.html" class="k-tile">
+  <div class="k-tile__img k-tile__img--photo" style="--pos: 62% 50%"><img src="/assets/kachel/stiftehalter-auto-usecase.jpg" alt="" loading="lazy" decoding="async"></div>
+  <div class="k-tile__meta"><strong>Stiftehalter fürs Auto</strong><span>ab 9,90 €</span></div>
+</a>
+<a href="/shop/sonnenblenden-clip.html" class="k-tile">
+  <div class="k-tile__img k-tile__img--photo" style="--pos: 56% 50%"><img src="/assets/kachel/spiegel-clip-auto-usecase.jpg" alt="" loading="lazy" decoding="async"></div>
+  <div class="k-tile__meta"><strong>Sonnenblenden-Clip fürs Auto</strong><span>ab 8,90 €</span></div>
+</a>
+<a href="/shop/reisedose.html" class="k-tile">
+  <div class="k-tile__img k-tile__img--photo" style="--pos: 56% 50%"><img src="/assets/kachel/reisedose-wattestaebchen-usecase.jpg" alt="" loading="lazy" decoding="async"></div>
+  <div class="k-tile__meta"><strong>Reisedose für Wattestäbchen</strong><span>ab 19,90 €</span></div>
+</a>
+<a href="/shop/kartenhalter.html" class="k-tile">
+  <div class="k-tile__img k-tile__img--photo" style="--pos: 46% 50%"><img src="/assets/kachel/kartenhalter-10-decks-usecase.jpg" alt="" loading="lazy" decoding="async"></div>
+  <div class="k-tile__meta"><strong>Kartenhalter für 10 Decks</strong><span>42,00 €</span></div>
+</a>
+<a href="/shop/handystaender.html" class="k-tile">
+  <div class="k-tile__img k-tile__img--photo" style="--pos: 44% 50%"><img src="/assets/kachel/handystaender-minimal-usecase.jpg" alt="" loading="lazy" decoding="async"></div>
+  <div class="k-tile__meta"><strong>Minimalistischer Handyständer</strong><span>ab 19,90 €</span></div>
+</a>
+<!-- /k:kacheln:start -->
+        </div>
+      </div>
+      <dl class="k-rows">
+        <div><dt>Versand per DHL</dt><dd>4,19–6,19 €, Lieferung 1–2 Werktage nach Versand</dd></div>
+        <div><dt>Zahlung</dt><dd>Karte, Apple Pay, Google Pay</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="k-band" aria-label="Kundenrückmeldungen">
+    <span class="k-stars" style="color: inherit" aria-hidden="true">★★★★★</span>
+    <strong>Fünf von fünf Sternen aus fünf Kundenrückmeldungen.</strong>
+    <span>„Das fertige Produkt sieht sogar besser aus, als ich es mir vorgestellt hatte.“ Sophie R.</span>
+    <a href="/3d-druck-auf-anfrage.html#bewertungen">Alle fünf lesen →</a>
+  </section>
+</main>
+
+<!-- k:foot -->
+<footer class="k-foot">
+    <div class="k-foot__cols">
+      <div><h4>Kniff</h4><p class="t-soft">3D-gedruckte Kniffe für Alltag, Haushalt und unterwegs, dazu 3D-Druck auf Anfrage. Gedruckt und geprüft in Berlin.</p></div>
+      <div><h4>Angebot</h4><ul><li><a href="/3d-druck-auf-anfrage.html">Custom-Druck</a></li><li><a href="/shop.html">Shop</a></li><li><a href="https://www.etsy.com/shop/KniffShop" target="_blank" rel="noopener noreferrer">Etsy-Shop <span aria-hidden="true">↗</span><span class="k-sr"> (öffnet neuen Tab)</span></a></li><li><a href="https://instagram.com/kniffshop" target="_blank" rel="noopener noreferrer">Instagram <span aria-hidden="true">↗</span><span class="k-sr"> (öffnet neuen Tab)</span></a></li></ul></div>
+      <div><h4>Service</h4><ul><li><a href="/meine-projekte.html">Mein Projekt</a></li><li><a href="/versand-zahlung.html">Versand &amp; Zahlung</a></li><li><a href="/kontakt.html">Kontakt</a></li><li><a href="/widerruf.html">Widerrufsrecht</a></li></ul></div>
+      <div><h4>Rechtliches</h4><ul><li><a href="/impressum.html">Impressum</a></li><li><a href="/datenschutz.html">Datenschutz</a></li><li><a href="/agb.html">AGB</a></li><li><a href="/shop.html#produktsicherheit">Produktsicherheit</a></li></ul></div>
+    </div>
+    <div class="k-foot__end"><span>© 2026 Kniff · Berlin</span><a href="/en/" hreflang="en" lang="en"><span aria-hidden="true">EN</span><span class="k-sr">English</span></a></div>
+</footer>
+<script src="/js/kniff.js?v=200" defer></script>
+<!-- /k:foot -->
 </body>
 </html>

@@ -1,0 +1,1017 @@
+{
+ "_hinweis": "Einzige Quelle für Produkte. Nach Änderungen: python3 scripts/kniff-produkte.py && python3 scripts/kniff-chrome.py",
+ "kategorien": {
+  "zuhause": {
+   "de": "Zuhause",
+   "en": "Home"
+  },
+  "auto": {
+   "de": "Auto & Fahrrad",
+   "en": "Car & bike"
+  },
+  "reise": {
+   "de": "Urlaub & Reisen",
+   "en": "Travel"
+  },
+  "buero": {
+   "de": "Büro & Organisation",
+   "en": "Office & organisation"
+  }
+ },
+ "produktsicherheit": {
+  "de": {
+   "titel": "Herstellerangaben &amp; Hinweise",
+   "html": "<p>Hersteller und verantwortliche Person nach der EU-Produktsicherheitsverordnung (Verordnung (EU)&nbsp;2023/988, GPSR): Niklas-Amoah Alotey, handelnd unter &#8222;Kniff&#8220;, Württembergallee&nbsp;27, 14052&nbsp;Berlin, Deutschland &#8211; <a href=\"mailto:kniffshop@gmail.com\">kniffshop@gmail.com</a>. Siehe auch das <a href=\"/impressum.html\">Impressum</a>.</p>\n<p>Alle Artikel werden von uns in Berlin aus PLA (Polymilchsäure, pflanzenbasiert) im FDM-Verfahren gedruckt und vor dem Versand von Hand geprüft.</p>\n<ul>\n<li><b>Kein Lebensmittelkontakt.</b> Die Teile sind nicht lebensmittelecht und nicht für die Aufbewahrung offener Lebensmittel geeignet.</li>\n<li><b>Nicht hitzebeständig.</b> PLA erweicht ab etwa 50&nbsp;°C &#8211; nicht dauerhaft in praller Sonne (z.&nbsp;B. hinter der Windschutzscheibe), auf Heizkörpern oder in der Spülmaschine lagern.</li>\n<li><b>Kein Spielzeug.</b> Enthält teils kleine Teile &#8211; von Kindern unter 3&nbsp;Jahren fernhalten.</li>\n<li><b>Von offener Flamme fernhalten.</b> PLA ist brennbar.</li>\n<li>Bei sichtbaren Rissen oder sprödem Material den Artikel nicht weiterverwenden.</li>\n</ul>\n<p>Reinigung: mit lauwarmem Wasser und mildem Spülmittel von Hand, keine Scheuermittel, nicht in der Spülmaschine.</p>\n<p>Modell&#8209;/Typenbezeichnungen: Münzsortierer für alle 8 Euro&#8209;Münzen <b>KNF&#8209;MZS&#8209;01</b> · Stiftehalter fürs Auto <b>KNF&#8209;STA&#8209;01</b> · Sonnenblenden&#8209;Clip fürs Auto <b>KNF&#8209;SPC&#8209;01</b> · Reisedose für Wattestäbchen <b>KNF&#8209;RWD&#8209;01</b> · Kartenhalter für 10&nbsp;Decks <b>KNF&#8209;KH10&#8209;01</b> · Minimalistischer Handyständer <b>KNF&#8209;HST&#8209;01</b>. Herkunftsland Deutschland.</p>"
+  },
+  "en": {
+   "titel": "Manufacturer information &amp; notes",
+   "html": "<p class=\"t-small\"><em>English summary for convenience — the <a href=\"/shop.html#produktsicherheit\">German version</a> is authoritative.</em></p>\n<p>Manufacturer and person responsible under the EU General Product Safety Regulation ((EU) 2023/988, GPSR): Niklas-Amoah Alotey, trading as \"Kniff\", Württembergallee 27, 14052 Berlin, Germany &#8211; <a href=\"mailto:kniffshop@gmail.com\">kniffshop@gmail.com</a>. See also the <a href=\"/en/impressum.html\">Legal Notice</a>.</p>\n<p>All items are printed by us in Berlin from PLA (polylactic acid, plant-based) using FDM printing, and hand-checked before shipping.</p>\n<ul>\n<li><b>Not food-safe.</b> These parts are not food-safe and not suitable for storing open food.</li>\n<li><b>Not heat-resistant.</b> PLA softens from around 50&nbsp;°C — do not store long-term in direct sun (e.g. behind a windscreen), on radiators, or in the dishwasher.</li>\n<li><b>Not a toy.</b> Some items contain small parts — keep away from children under 3&nbsp;years.</li>\n<li><b>Keep away from open flame.</b> PLA is flammable.</li>\n<li>Stop using an item if it shows visible cracks or brittle material.</li>\n</ul>\n<p>Cleaning: by hand with lukewarm water and mild dish soap, no abrasives, not dishwasher-safe.</p>\n<p>Model/type designations: Coin Sorter for All 8 Euro Coins <b>KNF&#8209;MZS&#8209;01</b> · Pen Holder for the Car <b>KNF&#8209;STA&#8209;01</b> · Sun-Visor Clip for the Car <b>KNF&#8209;SPC&#8209;01</b> · Travel Tin for Cotton Swabs <b>KNF&#8209;RWD&#8209;01</b> · Card Holder for 10&nbsp;Decks <b>KNF&#8209;KH10&#8209;01</b> · Minimalist Phone Stand <b>KNF&#8209;HST&#8209;01</b>. Country of origin: Germany.</p>"
+  }
+ },
+ "produkte": [
+  {
+   "slug": "muenzsortierer",
+   "anker": "muenzsortierer",
+   "kategorie": "zuhause",
+   "neu": true,
+   "modell": "KNF&#8209;MZS&#8209;01",
+   "etsy": "https://www.etsy.com/listing/4603059940/munzsortierer-fur-alle-8-euro-munzen-mit",
+   "kontakt": "M%C3%BCnzsortierer",
+   "farben": [],
+   "passt": [
+    "kartenhalter",
+    "handystaender",
+    "reisedose"
+   ],
+   "kachel": {
+    "src": "/assets/kachel/muenzsortierer-neu.jpg",
+    "pos": "50% 60%"
+   },
+   "bilder": [
+    {
+     "src": "/assets/muenzsortierer-neu.jpg",
+     "th": "/assets/th/muenzsortierer-neu.jpg"
+    },
+    {
+     "src": "/assets/muenzsortierer-neu-2.jpg",
+     "th": "/assets/th/muenzsortierer-neu-2.jpg"
+    },
+    {
+     "src": "/assets/muenzsortierer-neu-3.jpg",
+     "th": "/assets/th/muenzsortierer-neu-3.jpg"
+    },
+    {
+     "src": "/assets/muenzsortierer-neu-4.jpg",
+     "th": "/assets/th/muenzsortierer-neu-4.jpg"
+    }
+   ],
+   "video": {
+    "src": "/assets/muenzsortierer-sortiert.mp4",
+    "poster": "/assets/muenzsortierer-sortiert-poster.jpg"
+   },
+   "de": {
+    "name": "Münzsortierer für alle 8 Euro-Münzen",
+    "kurz": "Münzsortierer",
+    "eyebrow": "Neu · Zuhause",
+    "badge": "Neu · Eigene Konstruktion",
+    "lead": "Münze oben einwerfen, der Rest passiert von selbst.",
+    "wie": "So funktioniert er.",
+    "text": [
+     "Münze oben einwerfen, der Rest passiert von selbst: Sie rollt eine schräge Schiene hinab und fällt durch das Fenster, das genau zu ihr passt. Von 1&nbsp;Cent bis 2&nbsp;Euro landet jede Sorte in ihrer eigenen Röhre.",
+     "Jede Röhre zeigt dir, wann eine Bankrolle voll ist. Dann ziehst du sie heraus, stülpst das Rollenpapier darüber und bringst das Kleingeld zur Bank. Im Test landete jede Münzsorte zehnmal von zehn im richtigen Fach. Die Münzen werden einzeln eingeworfen.",
+     "Aufgebaut 28&nbsp;×&nbsp;7&nbsp;×&nbsp;20&nbsp;cm. Gedruckt aus PLA, schwarz mit orangem Deckel."
+    ],
+    "farbnamen": [],
+    "staffel": [
+     [
+      "1 Stück",
+      "24,90 €"
+     ]
+    ],
+    "staffel_mehr": null,
+    "verfuegbar": "Vorrätig, versandbereit in 1&ndash;2 Werktagen.",
+    "tipp": "Stell ihn in den Flur neben den Schlüsselhaken. Wer abends die Hosentaschen leert, hat nach ein paar Wochen die erste volle Rolle.",
+    "lizenz": "Eigene Konstruktion von Kniff",
+    "alt": "Kniff Münzsortierer, schwarz mit orangem Deckel, acht Röhren für die acht Euro-Münzen",
+    "bildlabels": [
+     "Vorderansicht anzeigen",
+     "Bild 2 anzeigen",
+     "Bild 3 anzeigen",
+     "Bild 4 anzeigen"
+    ],
+    "videolabel": "Video: Münzen werden eingeworfen und landen in ihrer Röhre",
+    "zeilen": [
+     [
+      "Maße",
+      "Aufgebaut 28&nbsp;×&nbsp;7&nbsp;×&nbsp;20&nbsp;cm"
+     ],
+     [
+      "Material",
+      "PLA, schwarz mit orangem Deckel"
+     ],
+     [
+      "Im Test",
+      "Jede Sorte 10 von 10 Mal im richtigen Fach"
+     ],
+     [
+      "Versand",
+      "DHL, Lieferung 1&ndash;2 Werktage nach Versand"
+     ],
+     [
+      "Modell",
+      "KNF&#8209;MZS&#8209;01"
+     ]
+    ],
+    "ld": "Münze oben einwerfen, der Rest passiert von selbst: Sie rollt eine schräge Schiene hinab und fällt durch das Fenster, das genau zu ihr passt. Von 1 Cent bis 2 Euro landet jede Sorte in ihrer eigenen Röhre."
+   },
+   "en": {
+    "name": "Coin Sorter for All 8 Euro Coins",
+    "kurz": "Coin sorter",
+    "eyebrow": "New · Home",
+    "badge": "New · Original design",
+    "lead": "Drop a coin in at the top and it does the rest.",
+    "wie": "How it works.",
+    "text": [
+     "Drop a coin in at the top and it does the rest: it rolls down a sloped rail and falls through the window that fits it exactly. From 1&nbsp;cent to 2&nbsp;euros, every coin lands in its own tube.",
+     "Each tube shows you when a bank roll is full. Pull it out, slip the coin wrapper over it and take your change to the bank. In testing, every coin type landed in the right tube ten times out of ten. Coins are dropped in one at a time.",
+     "Assembled size 28&nbsp;×&nbsp;7&nbsp;×&nbsp;20&nbsp;cm. Printed in PLA, black with an orange lid."
+    ],
+    "farbnamen": [],
+    "staffel": [
+     [
+      "1 piece",
+      "€24.90"
+     ]
+    ],
+    "staffel_mehr": null,
+    "verfuegbar": "In stock, ready to ship in 1&ndash;2 business days.",
+    "tipp": "Put it in the hallway next to the key hooks. Empty your pockets there every evening and the first roll is full within a few weeks.",
+    "lizenz": "Original design by Kniff",
+    "alt": "Kniff coin sorter, black with an orange lid, eight tubes for the eight euro coins",
+    "bildlabels": [
+     "Show front view",
+     "Show image 2",
+     "Show image 3",
+     "Show image 4"
+    ],
+    "videolabel": "Video: coins are dropped in and land in their tube",
+    "zeilen": [
+     [
+      "Size",
+      "Assembled 28&nbsp;×&nbsp;7&nbsp;×&nbsp;20&nbsp;cm"
+     ],
+     [
+      "Material",
+      "PLA, black with an orange lid"
+     ],
+     [
+      "Tested",
+      "Every coin type 10 out of 10 times in the right tube"
+     ],
+     [
+      "Shipping",
+      "DHL, delivery 1&ndash;2 business days after dispatch"
+     ],
+     [
+      "Model",
+      "KNF&#8209;MZS&#8209;01"
+     ]
+    ],
+    "ld": "Drop a coin in at the top and it does the rest: it rolls down a sloped rail and falls through the window that fits it exactly. From 1 cent to 2 euros, every coin lands in its own tube."
+   }
+  },
+  {
+   "slug": "stiftehalter-auto",
+   "anker": "stiftehalter-auto",
+   "kategorie": "auto",
+   "neu": false,
+   "modell": "KNF&#8209;STA&#8209;01",
+   "etsy": "https://www.etsy.com/listing/4569447066/stiftehalter-furs-auto-o-kugelschreiber",
+   "kontakt": "Stiftehalter%20f%C3%BCrs%20Auto",
+   "farben": [
+    "--pla-mattschwarz"
+   ],
+   "passt": [
+    "sonnenblenden-clip",
+    "handystaender",
+    "reisedose"
+   ],
+   "kachel": {
+    "src": "/assets/kachel/stiftehalter-auto-usecase.jpg",
+    "pos": "62% 50%"
+   },
+   "bilder": [
+    {
+     "src": "/assets/stiftehalter-auto-usecase.jpg?v=2",
+     "th": "/assets/th/stiftehalter-auto-usecase.jpg?v=2"
+    },
+    {
+     "src": "/assets/stiftehalter-auto.jpg",
+     "th": "/assets/th/stiftehalter-auto.jpg"
+    },
+    {
+     "src": "/assets/stiftehalter-auto-2.jpg",
+     "th": "/assets/th/stiftehalter-auto-2.jpg"
+    },
+    {
+     "src": "/assets/stiftehalter-auto-3.jpg",
+     "th": "/assets/th/stiftehalter-auto-3.jpg"
+    },
+    {
+     "src": "/assets/stiftehalter-auto-4.jpg",
+     "th": "/assets/th/stiftehalter-auto-4.jpg"
+    },
+    {
+     "src": "/assets/stiftehalter-auto-5.jpg",
+     "th": "/assets/th/stiftehalter-auto-5.jpg"
+    }
+   ],
+   "video": null,
+   "de": {
+    "name": "Stiftehalter fürs Auto",
+    "kurz": "Stiftehalter fürs Auto",
+    "eyebrow": "Gadget · Auto",
+    "badge": null,
+    "lead": "Ein fester Platz für den Stift im Auto: für Parkschein, Notiz an der Windschutzscheibe oder die schnelle Nummer aufs Papier.",
+    "wie": "Im Alltag.",
+    "text": [
+     "Ein Stift im Auto ist immer da, nur nie dann, wenn du ihn brauchst. Für den Parkschein, die Notiz an der Windschutzscheibe, die schnelle Nummer aufs Papier. Dieser Halter gibt ihm einen festen Platz, statt ihn zwischen Sitz und Mittelkonsole verschwinden zu lassen.",
+     "Gedruckt aus PLA in Mattschwarz. Weitere Farben und Materialien auf Anfrage."
+    ],
+    "farbnamen": [
+     "Mattschwarz"
+    ],
+    "staffel": [
+     [
+      "1 Stück",
+      "9,90 €"
+     ],
+     [
+      "2 Stück",
+      "17,80 €"
+     ],
+     [
+      "3 Stück",
+      "25,20 €"
+     ]
+    ],
+    "staffel_mehr": "Höhere Stückzahl auf Anfrage",
+    "verfuegbar": "Auf Bestellung gedruckt, Bearbeitungszeit 3&ndash;5 Werktage.",
+    "tipp": "Steck den Stift mit der Kappe nach unten rein. So läuft die Mine bei Sommerhitze im Auto nicht aus.",
+    "lizenz": "Design: Catana (MakerWorld), lizenziert unter CC BY 4.0",
+    "alt": "Kniff Stiftehalter, mattschwarz, an der Lüftungsdüse im Auto mit zwei Kugelschreibern",
+    "bildlabels": [
+     "Im Auto anzeigen",
+     "Bild 1 anzeigen",
+     "Bild 2 anzeigen",
+     "Bild 3 anzeigen",
+     "Bild 4 anzeigen",
+     "Bild 5 anzeigen"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Farbe",
+      "Aktuell nur in <b>Mattschwarz</b>. Weitere Farb- und Materialvarianten auf Anfrage."
+     ],
+     [
+      "Material",
+      "PLA, im FDM-Verfahren gedruckt"
+     ],
+     [
+      "Versand",
+      "DHL, Lieferung 1&ndash;2 Werktage nach Versand"
+     ],
+     [
+      "Modell",
+      "KNF&#8209;STA&#8209;01"
+     ]
+    ],
+    "ld": "Ein fester Platz für den Stift im Auto: für Parkschein, Notiz an der Windschutzscheibe oder die schnelle Nummer aufs Papier."
+   },
+   "en": {
+    "name": "Pen Holder for the Car",
+    "kurz": "Pen holder for the car",
+    "eyebrow": "Gadget · Car",
+    "badge": null,
+    "lead": "A fixed spot for the pen in your car: for the parking ticket, a note on the windscreen, or a phone number jotted down fast.",
+    "wie": "In everyday use.",
+    "text": [
+     "A pen in the car is always there — just never when you need it. For the parking ticket, the note on the windscreen, the phone number scribbled down fast. This holder gives it a fixed spot instead of letting it vanish between the seat and the centre console.",
+     "Printed in PLA, matte black. Other colours and materials on request."
+    ],
+    "farbnamen": [
+     "Matte black"
+    ],
+    "staffel": [
+     [
+      "1 piece",
+      "€9.90"
+     ],
+     [
+      "2 pieces",
+      "€17.80"
+     ],
+     [
+      "3 pieces",
+      "€25.20"
+     ]
+    ],
+    "staffel_mehr": "Higher quantities on request",
+    "verfuegbar": "Printed on order, processing time 3&ndash;5 business days.",
+    "tipp": "Insert the pen cap-down. That way the ink doesn't leak in summer heat inside the car.",
+    "lizenz": "Design: Catana (MakerWorld), licensed under CC BY 4.0",
+    "alt": "Kniff pen holder, matte black, on a car's air vent with two ballpoint pens",
+    "bildlabels": [
+     "Show in car",
+     "Show image 1",
+     "Show image 2",
+     "Show image 3",
+     "Show image 4",
+     "Show image 5"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Colour",
+      "Currently only in <b>matte black</b>. Further colour and material variants on request."
+     ],
+     [
+      "Material",
+      "PLA, FDM-printed"
+     ],
+     [
+      "Shipping",
+      "DHL, delivery 1&ndash;2 business days after dispatch"
+     ],
+     [
+      "Model",
+      "KNF&#8209;STA&#8209;01"
+     ]
+    ],
+    "ld": "A fixed spot for the pen in your car: for the parking ticket, a note on the windscreen, or a phone number jotted down fast."
+   }
+  },
+  {
+   "slug": "sonnenblenden-clip",
+   "anker": "spiegel-clip-auto",
+   "kategorie": "auto",
+   "neu": false,
+   "modell": "KNF&#8209;SPC&#8209;01",
+   "etsy": "https://www.etsy.com/listing/4567296060/rearview-mirror-clip-for-cars-note-and",
+   "kontakt": "Sonnenblenden-Clip%20f%C3%BCrs%20Auto",
+   "farben": [
+    "--pla-mattschwarz",
+    "--pla-weiss"
+   ],
+   "passt": [
+    "stiftehalter-auto",
+    "handystaender",
+    "kartenhalter"
+   ],
+   "kachel": {
+    "src": "/assets/kachel/spiegel-clip-auto-usecase.jpg",
+    "pos": "56% 50%"
+   },
+   "bilder": [
+    {
+     "src": "/assets/spiegel-clip-auto-usecase.jpg?v=2",
+     "th": "/assets/th/spiegel-clip-auto-usecase.jpg?v=2"
+    },
+    {
+     "src": "/assets/spiegel-clip-auto.jpg",
+     "th": "/assets/th/spiegel-clip-auto.jpg"
+    },
+    {
+     "src": "/assets/spiegel-clip-auto-2.jpg",
+     "th": "/assets/th/spiegel-clip-auto-2.jpg"
+    },
+    {
+     "src": "/assets/spiegel-clip-auto-3.jpg",
+     "th": "/assets/th/spiegel-clip-auto-3.jpg"
+    },
+    {
+     "src": "/assets/spiegel-clip-auto-4.jpg",
+     "th": "/assets/th/spiegel-clip-auto-4.jpg"
+    },
+    {
+     "src": "/assets/spiegel-clip-auto-5.jpg",
+     "th": "/assets/th/spiegel-clip-auto-5.jpg"
+    }
+   ],
+   "video": null,
+   "de": {
+    "name": "Sonnenblenden-Clip fürs Auto",
+    "kurz": "Sonnenblenden-Clip fürs Auto",
+    "eyebrow": "Gadget · Auto",
+    "badge": null,
+    "lead": "Schiebt sich auf die Sonnenblende und hält Notizen, Parkschein oder Einkaufsliste im Blickfeld. Seitliche Halterung für einen Stift.",
+    "wie": "Im Alltag.",
+    "text": [
+     "Einkaufsliste, Parkschein, der Zettel mit der Adresse: Im Auto landen Notizen meistens auf dem Beifahrersitz und rutschen beim ersten Bremsen runter. Dieser Clip schiebt sich auf die Sonnenblende und hält alles im Blickfeld. Die seitliche Halterung nimmt zusätzlich einen Stift auf.",
+     "Gedruckt aus PLA in Schwarz und Weiß. Weitere Farben und Materialien auf Anfrage."
+    ],
+    "farbnamen": [
+     "Schwarz",
+     "Weiß"
+    ],
+    "staffel": [
+     [
+      "1 Stück",
+      "8,90 €"
+     ],
+     [
+      "2 Stück",
+      "16,00 €"
+     ],
+     [
+      "3 Stück",
+      "22,60 €"
+     ]
+    ],
+    "staffel_mehr": "Höhere Stückzahl auf Anfrage",
+    "verfuegbar": "Auf Bestellung gedruckt, Bearbeitungszeit 3&ndash;5 Werktage.",
+    "tipp": "Zettel quer statt längs einklemmen. So verdeckt er weniger vom Sichtfeld und du erfüllst die Sichtfreiheit nach § 23 StVO.",
+    "lizenz": "Design: Bagel_Smagel (MakerWorld), freigegeben unter CC0 1.0",
+    "alt": "Kniff Sonnenblenden-Clip, schwarz, an der Sonnenblende im Auto mit Zettel und Stift",
+    "bildlabels": [
+     "An der Sonnenblende anzeigen",
+     "Bild 1 anzeigen",
+     "Bild 2 anzeigen",
+     "Bild 3 anzeigen",
+     "Bild 4 anzeigen",
+     "Bild 5 anzeigen"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Farbe",
+      "Verfügbar in <b>Schwarz</b> und <b>Weiß</b>. Weitere Farb- und Materialvarianten auf Anfrage."
+     ],
+     [
+      "Material",
+      "PLA, im FDM-Verfahren gedruckt"
+     ],
+     [
+      "Versand",
+      "DHL, Lieferung 1&ndash;2 Werktage nach Versand"
+     ],
+     [
+      "Modell",
+      "KNF&#8209;SPC&#8209;01"
+     ]
+    ],
+    "ld": "Schiebt sich auf die Sonnenblende und hält Notizen, Parkschein oder Einkaufsliste im Blickfeld. Seitliche Halterung für einen Stift."
+   },
+   "en": {
+    "name": "Sun-Visor Clip for the Car",
+    "kurz": "Sun-visor clip for the car",
+    "eyebrow": "Gadget · Car",
+    "badge": null,
+    "lead": "Slides onto the sun visor and keeps notes, parking tickets or a shopping list in view. Side mount for a pen.",
+    "wie": "In everyday use.",
+    "text": [
+     "Shopping list, parking ticket, the note with an address: in the car, these usually end up on the passenger seat and slide off at the first hard brake. This clip slides onto the sun visor and keeps everything in view. The side mount also holds a pen.",
+     "Printed in PLA, black and white. Other colours and materials on request."
+    ],
+    "farbnamen": [
+     "Black",
+     "White"
+    ],
+    "staffel": [
+     [
+      "1 piece",
+      "€8.90"
+     ],
+     [
+      "2 pieces",
+      "€16.00"
+     ],
+     [
+      "3 pieces",
+      "€22.60"
+     ]
+    ],
+    "staffel_mehr": "Higher quantities on request",
+    "verfuegbar": "Printed on order, processing time 3&ndash;5 business days.",
+    "tipp": "Clip your note in sideways rather than lengthways. It blocks less of your view and keeps you compliant with German road-visibility rules (§ 23 StVO).",
+    "lizenz": "Design: Bagel_Smagel (MakerWorld), released under CC0 1.0",
+    "alt": "Kniff sun-visor clip, black, on a car's sun visor with a note and a pen",
+    "bildlabels": [
+     "Show on sun visor",
+     "Show image 1",
+     "Show image 2",
+     "Show image 3",
+     "Show image 4",
+     "Show image 5"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Colour",
+      "Available in <b>black</b> and <b>white</b>. Further colour and material variants on request."
+     ],
+     [
+      "Material",
+      "PLA, FDM-printed"
+     ],
+     [
+      "Shipping",
+      "DHL, delivery 1&ndash;2 business days after dispatch"
+     ],
+     [
+      "Model",
+      "KNF&#8209;SPC&#8209;01"
+     ]
+    ],
+    "ld": "Slides onto the sun visor and keeps notes, parking tickets or a shopping list in view. Side mount for a pen."
+   }
+  },
+  {
+   "slug": "reisedose",
+   "anker": "reisedose-wattestaebchen",
+   "kategorie": "reise",
+   "neu": false,
+   "modell": "KNF&#8209;RWD&#8209;01",
+   "etsy": "https://www.etsy.com/listing/4567533290/a-travel-container-with-a-screw-on-lid",
+   "kontakt": "Reisedose%20f%C3%BCr%20Wattest%C3%A4bchen",
+   "farben": [
+    "--pla-wiesengruen",
+    "--pla-pastelblau",
+    "--pla-mattschwarz"
+   ],
+   "passt": [
+    "muenzsortierer",
+    "kartenhalter",
+    "stiftehalter-auto"
+   ],
+   "kachel": {
+    "src": "/assets/kachel/reisedose-wattestaebchen-usecase.jpg",
+    "pos": "56% 50%"
+   },
+   "bilder": [
+    {
+     "src": "/assets/reisedose-wattestaebchen-usecase.jpg",
+     "th": "/assets/th/reisedose-wattestaebchen-usecase.jpg"
+    },
+    {
+     "src": "/assets/reisedose-wattestaebchen-6.jpg",
+     "th": "/assets/th/reisedose-wattestaebchen-6.jpg"
+    },
+    {
+     "src": "/assets/reisedose-wattestaebchen-2.jpg",
+     "th": "/assets/th/reisedose-wattestaebchen-2.jpg"
+    },
+    {
+     "src": "/assets/reisedose-wattestaebchen.jpg",
+     "th": "/assets/th/reisedose-wattestaebchen.jpg"
+    },
+    {
+     "src": "/assets/reisedose-wattestaebchen-3.jpg",
+     "th": "/assets/th/reisedose-wattestaebchen-3.jpg"
+    }
+   ],
+   "video": null,
+   "de": {
+    "name": "Reisedose für Wattestäbchen",
+    "kurz": "Reisedose für Wattestäbchen",
+    "eyebrow": "Aufbewahrung · Reise",
+    "badge": null,
+    "lead": "Dose mit Schraubdeckel, hält Wattestäbchen und Kleinkram im Necessaire sauber, trocken und an einem Ort.",
+    "wie": "Im Alltag.",
+    "text": [
+     "Wattestäbchen im Kulturbeutel sind nach dem ersten Flug entweder zerdrückt oder überall verteilt. Diese Dose mit Schraubdeckel hält sie sauber, trocken und an einem Ort. Die geriffelte Oberfläche liegt griffig in der Hand, die schlanke Form nimmt im Necessaire kaum Platz weg.",
+     "Gedruckt aus PLA in Grün, Pastellblau und Schwarz. Weitere Farb- und Materialvarianten auf Anfrage."
+    ],
+    "farbnamen": [
+     "Grün",
+     "Pastellblau",
+     "Schwarz"
+    ],
+    "staffel": [
+     [
+      "1 Stück",
+      "19,90 €"
+     ],
+     [
+      "3 Stück",
+      "52,40 €"
+     ],
+     [
+      "6 Stück",
+      "79,80 €"
+     ]
+    ],
+    "staffel_mehr": "Höhere Stückzahl auf Anfrage",
+    "verfuegbar": "Auf Bestellung gedruckt, Bearbeitungszeit 3&ndash;5 Werktage.",
+    "tipp": "Die Dose ist nicht nur für Wattestäbchen gut. Ohrstöpsel, Haargummis, Tabletten für unterwegs oder Ersatzknöpfe finden darin genauso Platz, überall da, wo Kleinkram sonst im Rucksack verschwindet.",
+    "lizenz": "Design: Maliz 03 (MakerWorld), lizenziert unter CC BY 4.0",
+    "alt": "Kniff Reisedose in Grün auf einem Badregal, geöffnet mit Wattestäbchen, geriffelte 3D-gedruckte Dose mit Schraubdeckel",
+    "bildlabels": [
+     "Im Bad anzeigen",
+     "Bild 1 anzeigen",
+     "Bild 2 anzeigen",
+     "Bild 3 anzeigen",
+     "Bild 4 anzeigen"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Farbe",
+      "Verfügbar in <b>Grün</b>, <b>Pastellblau</b> und <b>Schwarz</b>. Weitere Farb- und Materialvarianten auf Anfrage."
+     ],
+     [
+      "Material",
+      "PLA, im FDM-Verfahren gedruckt"
+     ],
+     [
+      "Versand",
+      "DHL, Lieferung 1&ndash;2 Werktage nach Versand"
+     ],
+     [
+      "Modell",
+      "KNF&#8209;RWD&#8209;01"
+     ]
+    ],
+    "ld": "Dose mit Schraubdeckel, hält Wattestäbchen und Kleinkram im Necessaire sauber, trocken und an einem Ort."
+   },
+   "en": {
+    "name": "Travel Tin for Cotton Swabs",
+    "kurz": "Travel tin for cotton swabs",
+    "eyebrow": "Storage · Travel",
+    "badge": null,
+    "lead": "Screw-lid tin that keeps cotton swabs and small items in a wash bag clean, dry and in one place.",
+    "wie": "In everyday use.",
+    "text": [
+     "Cotton swabs in a wash bag are either crushed or scattered everywhere after the first flight. This screw-lid tin keeps them clean, dry, and in one place. The ribbed surface sits securely in your hand, and the slim shape barely takes up space in your toiletry bag.",
+     "Printed in PLA, green, pastel blue and black. Further colour and material variants on request."
+    ],
+    "farbnamen": [
+     "Green",
+     "Pastel blue",
+     "Black"
+    ],
+    "staffel": [
+     [
+      "1 piece",
+      "€19.90"
+     ],
+     [
+      "3 pieces",
+      "€52.40"
+     ],
+     [
+      "6 pieces",
+      "€79.80"
+     ]
+    ],
+    "staffel_mehr": "Higher quantities on request",
+    "verfuegbar": "Printed on order, processing time 3&ndash;5 business days.",
+    "tipp": "It's not just for cotton swabs. Earplugs, hair ties, travel pills or spare buttons fit just as well — anywhere small items usually go missing in a bag.",
+    "lizenz": "Design: Maliz 03 (MakerWorld), licensed under CC BY 4.0",
+    "alt": "Kniff travel tin in green on a bathroom shelf, open with cotton swabs, ribbed 3D-printed tin with screw lid",
+    "bildlabels": [
+     "Show in bathroom",
+     "Show image 1",
+     "Show image 2",
+     "Show image 3",
+     "Show image 4"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Colour",
+      "Available in <b>green</b>, <b>pastel blue</b> and <b>black</b>. Further colour and material variants on request."
+     ],
+     [
+      "Material",
+      "PLA, FDM-printed"
+     ],
+     [
+      "Shipping",
+      "DHL, delivery 1&ndash;2 business days after dispatch"
+     ],
+     [
+      "Model",
+      "KNF&#8209;RWD&#8209;01"
+     ]
+    ],
+    "ld": "Screw-lid tin that keeps cotton swabs and small items in a wash bag clean, dry and in one place."
+   }
+  },
+  {
+   "slug": "kartenhalter",
+   "anker": "kartenhalter-10-decks",
+   "kategorie": "zuhause",
+   "neu": false,
+   "modell": "KNF&#8209;KH10&#8209;01",
+   "etsy": "https://www.etsy.com/listing/4569442836/kartenhalter-fur-10-kartendecks-o",
+   "kontakt": "Kartenhalter%20f%C3%BCr%2010%20Kartendecks",
+   "farben": [
+    "--pla-mattschwarz"
+   ],
+   "passt": [
+    "muenzsortierer",
+    "reisedose",
+    "handystaender"
+   ],
+   "kachel": {
+    "src": "/assets/kachel/kartenhalter-10-decks-usecase.jpg",
+    "pos": "46% 50%"
+   },
+   "bilder": [
+    {
+     "src": "/assets/kartenhalter-10-decks-usecase.jpg",
+     "th": "/assets/th/kartenhalter-10-decks-usecase.jpg"
+    },
+    {
+     "src": "/assets/kartenhalter-10-decks.jpg",
+     "th": "/assets/th/kartenhalter-10-decks.jpg"
+    },
+    {
+     "src": "/assets/kartenhalter-10-decks-2.jpg",
+     "th": "/assets/th/kartenhalter-10-decks-2.jpg"
+    },
+    {
+     "src": "/assets/kartenhalter-10-decks-3.jpg",
+     "th": "/assets/th/kartenhalter-10-decks-3.jpg"
+    },
+    {
+     "src": "/assets/kartenhalter-10-decks-4.jpg",
+     "th": "/assets/th/kartenhalter-10-decks-4.jpg"
+    }
+   ],
+   "video": null,
+   "de": {
+    "name": "Kartenhalter für 10 Kartendecks",
+    "kurz": "Kartenhalter für 10 Decks",
+    "eyebrow": "Aufbewahrung · Zuhause",
+    "badge": null,
+    "lead": "Nimmt bis zu zehn Kartendecks in Standardgröße auf, jedes bleibt greifbar. Passt flach in die Schublade oder steht im Regal.",
+    "wie": "Im Alltag.",
+    "text": [
+     "Wer Kartendecks sammelt, kennt das Problem: Sie liegen in der Schublade verstreut, verrutschen und die Schachteln knicken. Dieser Halter nimmt bis zu zehn Decks in Standardgröße auf und lässt genug von jedem sichtbar, um es direkt zu greifen. Er passt flach in eine Schublade oder steht aufrecht im Regal.",
+     "Gedruckt aus PLA in Mattschwarz. Weitere Farben und Materialien auf Anfrage."
+    ],
+    "farbnamen": [
+     "Mattschwarz"
+    ],
+    "staffel": [
+     [
+      "1 Stück",
+      "42,00 €"
+     ]
+    ],
+    "staffel_mehr": "Höhere Stückzahl auf Anfrage",
+    "verfuegbar": "Auf Bestellung gedruckt, Bearbeitungszeit 3&ndash;5 Werktage.",
+    "tipp": "Sortier die Decks nach Spiel statt nach Optik, Skat links, Rommé rechts, Sammlerstücke hinten. Wenn Besuch da ist, greifst du blind zum richtigen.",
+    "lizenz": "Design: Jose – FindMyPrints (MakerWorld), Remix eines Entwurfs von Dante Lorenso, freigegeben unter CC0 1.0",
+    "alt": "Kniff Kartenhalter, mattschwarz, im Regal mit mehreren Kartendecks",
+    "bildlabels": [
+     "Im Regal anzeigen",
+     "Bild 1 anzeigen",
+     "Bild 2 anzeigen",
+     "Bild 3 anzeigen",
+     "Bild 4 anzeigen"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Farbe",
+      "Aktuell nur in <b>Mattschwarz</b>. Weitere Farb- und Materialvarianten auf Anfrage."
+     ],
+     [
+      "Material",
+      "PLA, im FDM-Verfahren gedruckt"
+     ],
+     [
+      "Versand",
+      "DHL, Lieferung 1&ndash;2 Werktage nach Versand"
+     ],
+     [
+      "Modell",
+      "KNF&#8209;KH10&#8209;01"
+     ]
+    ],
+    "ld": "Nimmt bis zu zehn Kartendecks in Standardgröße auf, jedes bleibt greifbar. Passt flach in die Schublade oder steht im Regal."
+   },
+   "en": {
+    "name": "Card Holder for 10 Decks",
+    "kurz": "Card holder for 10 decks",
+    "eyebrow": "Storage · Home",
+    "badge": null,
+    "lead": "Holds up to ten standard-size card decks, each one kept graspable. Sits flat in a drawer or stands on a shelf.",
+    "wie": "In everyday use.",
+    "text": [
+     "Anyone who collects card decks knows the problem: they end up scattered in a drawer, sliding around, boxes getting crushed. This holder takes up to ten standard-size decks and keeps enough of each visible to grab it right away. It sits flat in a drawer or stands upright on a shelf.",
+     "Printed in PLA, matte black. Other colours and materials on request."
+    ],
+    "farbnamen": [
+     "Matte black"
+    ],
+    "staffel": [
+     [
+      "1 piece",
+      "€42.00"
+     ]
+    ],
+    "staffel_mehr": "Higher quantities on request",
+    "verfuegbar": "Printed on order, processing time 3&ndash;5 business days.",
+    "tipp": "Sort decks by game rather than looks — Skat on the left, Rummy on the right, keepsakes at the back. When guests are over, you'll grab the right one without looking.",
+    "lizenz": "Design: Jose – FindMyPrints (MakerWorld), remix of a design by Dante Lorenso, released under CC0 1.0",
+    "alt": "Kniff card holder, matte black, on a shelf with several decks of cards",
+    "bildlabels": [
+     "Show on shelf",
+     "Show image 1",
+     "Show image 2",
+     "Show image 3",
+     "Show image 4"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Colour",
+      "Currently only in <b>matte black</b>. Further colour and material variants on request."
+     ],
+     [
+      "Material",
+      "PLA, FDM-printed"
+     ],
+     [
+      "Shipping",
+      "DHL, delivery 1&ndash;2 business days after dispatch"
+     ],
+     [
+      "Model",
+      "KNF&#8209;KH10&#8209;01"
+     ]
+    ],
+    "ld": "Holds up to ten standard-size card decks, each one kept graspable. Sits flat in a drawer or stands on a shelf."
+   }
+  },
+  {
+   "slug": "handystaender",
+   "anker": "handystaender-minimal",
+   "kategorie": "buero",
+   "neu": false,
+   "modell": "KNF&#8209;HST&#8209;01",
+   "etsy": "https://www.etsy.com/listing/4569438710/minimalistischer-handystander-o",
+   "kontakt": "Minimalistischer%20Handyst%C3%A4nder",
+   "farben": [
+    "--pla-mattschwarz"
+   ],
+   "passt": [
+    "stiftehalter-auto",
+    "kartenhalter",
+    "muenzsortierer"
+   ],
+   "kachel": {
+    "src": "/assets/kachel/handystaender-minimal-usecase.jpg",
+    "pos": "44% 50%"
+   },
+   "bilder": [
+    {
+     "src": "/assets/handystaender-minimal-usecase.jpg",
+     "th": "/assets/th/handystaender-minimal-usecase.jpg"
+    },
+    {
+     "src": "/assets/handystaender-minimal.jpg",
+     "th": "/assets/th/handystaender-minimal.jpg"
+    },
+    {
+     "src": "/assets/handystaender-minimal-2.jpg",
+     "th": "/assets/th/handystaender-minimal-2.jpg"
+    },
+    {
+     "src": "/assets/handystaender-minimal-3.jpg",
+     "th": "/assets/th/handystaender-minimal-3.jpg"
+    },
+    {
+     "src": "/assets/handystaender-minimal-4.jpg",
+     "th": "/assets/th/handystaender-minimal-4.jpg"
+    },
+    {
+     "src": "/assets/handystaender-minimal-5.jpg",
+     "th": "/assets/th/handystaender-minimal-5.jpg"
+    }
+   ],
+   "video": null,
+   "de": {
+    "name": "Minimalistischer Handyständer",
+    "kurz": "Minimalistischer Handyständer",
+    "eyebrow": "Gadget · Schreibtisch",
+    "badge": null,
+    "lead": "Fester 60°-Neigungswinkel, breite Basis gegen Kippen, Kabelschlitz auf der Rückseite. Für Hoch- und Querformat.",
+    "wie": "Im Alltag.",
+    "text": [
+     "Ein Ständer, der nicht auffallen will. Der feste Neigungswinkel von 60° hält dein Handy stabil, im Hoch- wie im Querformat, für Videocalls genauso wie fürs Rezept beim Kochen. Die breite Basis verhindert das Kippen, und durch den Schlitz auf der Rückseite läuft das Ladekabel sauber nach hinten weg.",
+     "Gedruckt aus PLA in Mattschwarz. Weitere Farben und Materialien auf Anfrage."
+    ],
+    "farbnamen": [
+     "Mattschwarz"
+    ],
+    "staffel": [
+     [
+      "1 Stück",
+      "19,90 €"
+     ],
+     [
+      "3 Stück",
+      "49,90 €"
+     ]
+    ],
+    "staffel_mehr": "Höhere Stückzahl auf Anfrage",
+    "verfuegbar": "Auf Bestellung gedruckt, Bearbeitungszeit 3&ndash;5 Werktage.",
+    "tipp": "Steck das Ladekabel durch den hinteren Schlitz, bevor du das Handy einsetzt. Dann liegt es beim Abnehmen schon richtig und du fummelst nicht jedes Mal neu.",
+    "lizenz": "Design: alainpoli147 (MakerWorld), lizenziert unter CC BY-SA 4.0",
+    "alt": "Kniff minimalistischer Handyständer, mattschwarz, auf dem Schreibtisch mit Handy im Querformat",
+    "bildlabels": [
+     "Auf dem Schreibtisch anzeigen",
+     "Bild 1 anzeigen",
+     "Bild 2 anzeigen",
+     "Bild 3 anzeigen",
+     "Bild 4 anzeigen",
+     "Bild 5 anzeigen"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Farbe",
+      "Aktuell nur in <b>Mattschwarz</b>. Weitere Farb- und Materialvarianten auf Anfrage."
+     ],
+     [
+      "Material",
+      "PLA, im FDM-Verfahren gedruckt"
+     ],
+     [
+      "Versand",
+      "DHL, Lieferung 1&ndash;2 Werktage nach Versand"
+     ],
+     [
+      "Modell",
+      "KNF&#8209;HST&#8209;01"
+     ]
+    ],
+    "ld": "Fester 60°-Neigungswinkel, breite Basis gegen Kippen, Kabelschlitz auf der Rückseite. Für Hoch- und Querformat."
+   },
+   "en": {
+    "name": "Minimalist Phone Stand",
+    "kurz": "Minimalist phone stand",
+    "eyebrow": "Gadget · Desk",
+    "badge": null,
+    "lead": "Fixed 60° angle, wide base against tipping, cable slot at the back. Fits portrait and landscape phones.",
+    "wie": "In everyday use.",
+    "text": [
+     "A stand that doesn't try to stand out. The fixed 60° angle holds your phone steady, in portrait or landscape, for video calls or a recipe while you cook. The wide base stops it tipping, and a slot at the back routes the charging cable neatly out of sight.",
+     "Printed in PLA, matte black. Other colours and materials on request."
+    ],
+    "farbnamen": [
+     "Matte black"
+    ],
+    "staffel": [
+     [
+      "1 piece",
+      "€19.90"
+     ],
+     [
+      "3 pieces",
+      "€49.90"
+     ]
+    ],
+    "staffel_mehr": "Higher quantities on request",
+    "verfuegbar": "Printed on order, processing time 3&ndash;5 business days.",
+    "tipp": "Thread the charging cable through the back slot before you set the phone in. It'll already be in the right position when you pick the phone up, so you're not fumbling with it every time.",
+    "lizenz": "Design: alainpoli147 (MakerWorld), licensed under CC BY-SA 4.0",
+    "alt": "Kniff minimalist phone stand, matte black, on a desk with a phone in landscape orientation",
+    "bildlabels": [
+     "Show on desk",
+     "Show image 1",
+     "Show image 2",
+     "Show image 3",
+     "Show image 4",
+     "Show image 5"
+    ],
+    "videolabel": null,
+    "zeilen": [
+     [
+      "Colour",
+      "Currently only in <b>matte black</b>. Further colour and material variants on request."
+     ],
+     [
+      "Material",
+      "PLA, FDM-printed"
+     ],
+     [
+      "Shipping",
+      "DHL, delivery 1&ndash;2 business days after dispatch"
+     ],
+     [
+      "Model",
+      "KNF&#8209;HST&#8209;01"
+     ]
+    ],
+    "ld": "Fixed 60° angle, wide base against tipping, cable slot at the back. Fits portrait and landscape phones."
+   }
+  }
+ ]
+}
