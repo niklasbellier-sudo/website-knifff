@@ -74,9 +74,14 @@
   const leerZustand = () => { gedruckt(BODEN); neu.setAttribute('width', 0); kopfNach(PARK[0], PARK[1], false); };
   const fertigZustand = () => { gedruckt(OBEN); neu.setAttribute('width', 0); kopfNach(PARK[0], PARK[1], false); };
 
-  let start = 0, laeuft = 0;
+  // Eigene Uhr statt Wanduhr: Sie läuft nur in Bildern, die der Browser auch
+  // zeichnet. In einem Hintergrund-Tab pausiert der Druck also und geht beim
+  // Hinschauen dort weiter, statt schon fertig zu sein.
+  let uhr = 0, zuletzt = 0, laeuft = 0;
   const bild = (jetzt) => {
-    const z = (jetzt - start) / 1000;
+    uhr += zuletzt ? Math.min(jetzt - zuletzt, 50) / 1000 : 0;
+    zuletzt = jetzt;
+    const z = uhr;
     if (z >= GESAMT) { fertigZustand(); laeuft = 0; return; }
     const s = plan.find((p) => z < p.t + p.d) || plan[plan.length - 1];
     const p = Math.min(1, Math.max(0, (z - s.t) / s.d));
@@ -97,7 +102,7 @@
   const drucke = () => {
     cancelAnimationFrame(laeuft);
     leerZustand();
-    start = performance.now();
+    uhr = 0; zuletzt = 0;
     laeuft = requestAnimationFrame(bild);
   };
   const halt = () => { cancelAnimationFrame(laeuft); laeuft = 0; fertigZustand(); };
