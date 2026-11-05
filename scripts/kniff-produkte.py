@@ -7,6 +7,7 @@
   <!-- k:ld:shop -->                        JSON-LD ItemList im Shop
   <!-- k:gpsr -->                           Produktsicherheit im Shop
   <!-- k:preis:<slug> -->, <!-- k:preis:ab -->  einzelne Preise im Fließtext
+  <!-- k:preis:ab-satz -->                  dasselbe am Satzanfang ("Ab 8,90 €")
 
 Preise, Staffeln, Tipps und Lizenzen stehen damit an genau einer Stelle.
 Danach immer den Rahmen nachziehen:
@@ -306,6 +307,8 @@ def main():
                 new = put_inline(new, 'preis:' + p['slug'], price_label(p, lang))
             cheapest = min(PRODS, key=lambda p: float(price_number(p)))
             new = put_inline(new, 'preis:ab', T[lang]['from'].format(p=cheapest[lang]['staffel'][0][1]))
+            satz = T[lang]['from'].format(p=cheapest[lang]['staffel'][0][1])
+            new = put_inline(new, 'preis:ab-satz', satz[0].upper() + satz[1:])
             if new != text:
                 page.write_text(new, encoding='utf-8')
     print(f'{len(PRODS) * 2} Produktseiten geschrieben')
