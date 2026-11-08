@@ -40,7 +40,7 @@
     if (geladen || !handy.matches) return;
     geladen = true;
     box.classList.add('k-ph--laedt');      // Standbild ausblenden, bis der Druck startet
-    import('/js/kniff-druck3d.js?v=3')
+    import('/js/kniff-druck3d.js?v=4')
       .then((m) => m.starte(box, { debug: /[?&]druckdebug\b/.test(location.search) }))
       .catch(() => box.classList.remove('k-ph--laedt'));
   };
