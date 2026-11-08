@@ -15,7 +15,7 @@
 <link rel="preload" href="/assets/fonts/archivo-800-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-tight-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/kniff-fonts.css">
-<link rel="stylesheet" href="/css/kniff.css?v=200">
+<link rel="stylesheet" href="/css/kniff.css?v=203">
 <link rel="canonical" href="https://kniff.shop/en/">
 <link rel="alternate" hreflang="de" href="https://kniff.shop/">
 <link rel="alternate" hreflang="en" href="https://kniff.shop/en/">
@@ -60,7 +60,7 @@
 }
 </script>
 </head>
-<body class="k k-dark k-home" data-k-claim="3D printing from Berlin: two ways to your part." data-k-alt="/">
+<body class="k k-dark k-home" data-welt="idee" data-k-claim="3D printing from Berlin: two ways to your part." data-k-alt="/">
 <!-- k:top -->
 <a class="k-skip" href="#inhalt">Skip to content</a>
 <div class="k-top">
@@ -95,6 +95,11 @@
 <!-- /k:top -->
 
 <main id="inhalt" tabindex="-1">
+  <div class="k-switch" role="group" aria-label="Choose your way">
+    <button type="button" data-zu="idee" aria-pressed="true">I have an idea</button>
+    <button type="button" data-zu="shop" aria-pressed="false">I want it ready-made</button>
+  </div>
+
   <section class="k-stage" aria-label="Choose your way">
     <div class="k-bighead" aria-hidden="true">
       <img src="/assets/kopf.webp" alt="" width="511" height="1100">
@@ -103,7 +108,7 @@
     <div class="k-doors">
       <a href="/en/3d-druck-auf-anfrage.html" class="k-door k-door--l k-dark">
         <div class="k-door__art" aria-hidden="true">
-          <div class="k-sketch">
+          <div class="k-sketch k-nur-desktop">
             <svg viewBox="0 0 300 268" fill="none" focusable="false">
               <defs>
                 <pattern id="k-layers" width="6" height="6" patternUnits="userSpaceOnUse">
@@ -131,10 +136,13 @@
               <text x="191" y="168" text-anchor="middle" fill="#c9ccca" font-family="IBM Plex Mono, monospace" font-size="13">90 mm</text>
             </svg>
           </div>
+          <div class="k-printhero k-nur-handy" data-k-print>
+            <img class="k-ph__poster" src="/assets/druck3d-k.webp" alt="" width="700" height="480" decoding="async">
+          </div>
         </div>
         <div class="k-door__txt">
           <span class="t-eyebrow">3D printing on request</span>
-          <h2 class="t-door">I have an idea.</h2>
+          <h2 class="t-door"><span class="k-nur-desktop">I have an idea.</span><span class="k-nur-handy">You bring the idea, we print it.</span></h2>
           <p class="t-lead">A sketch, measurements or an STL is enough. You get a fixed price before anything goes on the printer.</p>
           <span class="k-door__cta">
             <span class="k-btn k-btn--amber">Submit a project →</span>
@@ -150,8 +158,8 @@
         </div>
         <div class="k-door__txt">
           <span class="t-eyebrow">Ready-made Kniffe</span>
-          <h2 class="t-door">I want it ready-made.</h2>
-          <p class="t-lead">Well-thought-out parts for car, travel, home and office, printed in Berlin and tested in everyday use.</p>
+          <h2 class="t-door"><span class="k-nur-desktop">I want it ready-made.</span><span class="k-nur-handy">Thought through, printed, tested.</span></h2>
+          <p class="t-lead"><span class="k-nur-desktop">Well-thought-out parts for car, travel, home and office, printed in Berlin and tested in everyday use.</span><span class="k-nur-handy">Parts for car, travel, home and office, printed in Berlin. <!-- k:preis:ab-satz -->From €8.90<!-- /k:preis:ab-satz -->.</span></p>
           <span class="k-door__cta">
             <span class="k-btn k-btn--ink">To the shop →</span>
             <span class="t-mono t-soft"><!-- k:preis:ab -->from €8.90<!-- /k:preis:ab --></span>
@@ -162,7 +170,7 @@
   </section>
 
   <section class="k-split">
-    <div class="k-dark" style="background: var(--ink-1)">
+    <div class="k-dark k-split__l">
       <div>
         <h2 class="t-h2" style="margin-bottom: 22px">How custom printing works</h2>
         <ol class="k-steps">
@@ -172,7 +180,7 @@
           <li><span>04</span><span><strong>Print.</strong> Printed, checked by hand and carefully packed.</span></li>
         </ol>
       </div>
-      <div>
+      <div class="k-nur-desktop">
         <h3 class="t-h3" style="margin-bottom: 14px">What customers come to us for</h3>
         <ul class="k-chips">
           <li><a href="/en/3d-druck-auf-anfrage.html#typisch" class="k-chip">Spare and replacement parts</a></li>
@@ -201,14 +209,14 @@
           <summary>Do I need a finished 3D file?</summary>
           <p>No. A sketch, a photo with measurements or a short description is enough to start.</p>
         </details>
-        <details>
+        <details class="k-nur-desktop">
           <summary>Which materials and colours are available?</summary>
           <p>Standard is matte black PLA. More than ten other colour and material options are available on request, including pastel shades, metallic and PETG.</p>
         </details>
       </div>
     </div>
 
-    <div class="k-light" style="background: var(--paper-1)">
+    <div class="k-light k-split__r">
       <div>
         <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin-bottom: 22px">
           <h2 class="t-h2">Kniffe for everyday life</h2>
@@ -251,11 +259,16 @@
   </section>
 
   <section class="k-band" aria-label="Customer feedback">
-    <span class="k-stars" style="color: inherit" aria-hidden="true">★★★★★</span>
+    <span class="k-stars" aria-hidden="true">★★★★★</span>
     <strong>Five out of five stars from five customer reviews.</strong>
-    <span>“The finished product actually looks better than I imagined.” Sophie R.</span>
+    <span class="k-nur-desktop">“The finished product actually looks better than I imagined.” Sophie R.</span>
     <a href="/en/3d-druck-auf-anfrage.html#bewertungen">Read all five →</a>
   </section>
+
+  <div class="k-wechsel">
+    <button type="button" class="k-btn k-btn--ghost" data-zu="shop">Rather something ready-made? →</button>
+    <button type="button" class="k-btn k-btn--ghost" data-zu="idee">Got your own idea? →</button>
+  </div>
 </main>
 
 <!-- k:foot -->
@@ -270,5 +283,6 @@
 </footer>
 <script src="/js/kniff.js?v=200" defer></script>
 <!-- /k:foot -->
+<script src="/js/kniff-welt.js?v=5"></script>
 </body>
 </html>
