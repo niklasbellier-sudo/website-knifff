@@ -1,0 +1,7 @@
+{
+  "name": "kniff-druck3d",
+  "private": true,
+  "description": "3D-Startbild der Ideen-Welt am Handy. Quelle für js/kniff-druck3d.js",
+  "scripts": { "build": "esbuild src/kniff-druck3d.js --bundle --format=esm --minify --target=es2020,safari15 --legal-comments=none --outfile=../../js/kniff-druck3d.js" },
+  "devDependencies": { "esbuild": "0.24.0", "three": "0.170.0" }
+}
