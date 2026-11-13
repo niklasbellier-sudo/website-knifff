@@ -1,22 +1,22 @@
 /* Startbild der Ideen-Welt am Handy, in 3D: der Kniff-Druckkopf druckt das
-   Kniff-Monogramm Bahn für Bahn – Balken, Bein, Arm, Punkt, vier Lagen hin und
-   zurück –, danach richtet sich das K mit dem Bernstein-Punkt zur Kamera auf.
-   Einheiten: Millimeter, Druckbett auf y = 0. Wird von js/kniff-welt.js nur am
-   Handy nachgeladen; ohne WebGL 2 oder bei "Bewegung reduzieren" bleibt das
-   Standbild (assets/druck3d-k.webp). */
+   Kniff-Monogramm Raupe für Raupe, wie ein echter Drucker – drei Lagen, jede
+   Raupe wächst genau dort, wo die Düse gerade ist. Danach richtet sich das K mit
+   dem Bernstein-Punkt zur Kamera auf. Einheiten: Millimeter, Druckbett auf y = 0.
+   Wird von js/kniff-welt.js nur am Handy nachgeladen; ohne WebGL 2 oder bei
+   "Bewegung reduzieren" bleibt das Standbild (assets/druck3d-k.webp). */
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
-import { TessellateModifier } from 'three/examples/jsm/modifiers/TessellateModifier.js';
 
 const F = { amber: 0xf2a63b, amberHi: 0xffbb62, amberTief: 0x7a4a17, creme: 0xf3f0ea };
 
 // Zeitplan in Sekunden: anfahren, drucken, wegfahren; danach richtet sich das K auf
-const T_AN = 1.5, T_DRUCK = 9.5, T_AB = 1.4;
+const T_AN = 1.5, T_DRUCK = 12.5, T_AB = 1.4;
 const T_ENDE = T_AN + T_DRUCK;
 const T_AUF = T_AB * 0.7, D_AUF = 2.2, D_PENDEL = 5;
 const T_FERTIG = T_ENDE + T_AUF + D_AUF + D_PENDEL;
-const LAGEN = 4;                     // so oft fährt der Kopf das K ab, abwechselnd hin und zurück
+const LAGEN = 3;          // Lagen, abwechselnd hin und zurück gedruckt
+const RAUPEN = 11;        // Druckbahnen je Lage: Balken 3, Bein 3, Arm 2, Punkt 3
 
 const clamp01 = (x) => Math.min(1, Math.max(0, x));
 const weich = (p) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
@@ -25,8 +25,8 @@ const mix = (a, b, t) => a + (b - a) * t;
 
 /* ---------- Material mit Schichtlinien, Druckfortschritt und Glut ----------
    Wie hoch das K an einer Stelle schon steht, rechnet der Shader aus: jede Stelle
-   gehört zur nächstgelegenen Bahn (Balken, Bein, Arm, Punkt) und ist in der
-   laufenden Lage fertig, sobald der Kopf dort vorbei ist. */
+   gehört zur nächstgelegenen Druckbahn und wächst in der laufenden Lage, sobald
+   die Düse dort ist – vorne mit runder Spitze wie eine echte Raupe. */
 function uniformSatz(lh) {
   return {
     uTop: { value: 1e4 },
@@ -35,38 +35,77 @@ function uniformSatz(lh) {
     uHot: { value: new THREE.Color(F.amberHi) },
     uHeiss: { value: 0 },
     uOben: { value: new THREE.Vector3(0, 1, 0) },
-    uSeg: { value: [0, 1, 2, 3].map(() => new THREE.Vector4()) },
-    uSegU: { value: [0, 0, 0, 0] },
+    uLin: { value: Array.from({ length: RAUPEN }, () => new THREE.Vector4()) },
+    uLinU: { value: new Array(RAUPEN).fill(0) },
     uLage: { value: 0 },
     uVor: { value: 1 },
     uUKopf: { value: -100 },
+    uLinie: { value: -1 },
     uStufe: { value: 1 },
     uHMax: { value: 1e4 },
     uFertig: { value: 0 },
+    uPoly: { value: Array.from({ length: 11 }, () => new THREE.Vector2()) },
+    uPunkt: { value: new THREE.Vector4() },     // Mitte x, z, halbe Kante, Eckradius
+    uFarbe2: { value: new THREE.Color(F.amber) },
   };
 }
 
 const GLSL_KOPF = `
+#define RAUPEN ${RAUPEN}
 varying vec3 vLokal;
-uniform float uTop, uLH, uHeiss, uLage, uVor, uUKopf, uStufe, uHMax, uFertig;
-uniform vec3 uKopf, uHot, uOben;
-uniform vec4 uSeg[4];
-uniform float uSegU[4];
+uniform float uTop, uLH, uHeiss, uLage, uVor, uUKopf, uLinie, uStufe, uHMax, uFertig;
+uniform vec3 uKopf, uHot, uOben, uFarbe2;
+uniform vec4 uLin[RAUPEN];
+uniform float uLinU[RAUPEN];
+uniform vec2 uPoly[11];
+uniform vec4 uPunkt;
+float kFertig(vec2 p, float u, float wer) {
+  float vorbei = (uVor > 0.5 ? uUKopf - u : u - uUKopf) + 0.6;
+  float f = smoothstep(-0.35, 0.35, vorbei);
+  if (abs(wer - uLinie) < 0.5) {             // runde Spitze direkt unter der Düse
+    float dk = length(p - uKopf.xz);
+    f = max(f, 1.0 - smoothstep(1.6, 2.3, dk));
+  }
+  return f;
+}
 float kHoehe(vec2 p) {
   if (uFertig > 0.5) return 1e4;
-  float best = 1e9, u = 0.0;
-  for (int i = 0; i < 4; i++) {
-    vec2 a = uSeg[i].xy, ab = uSeg[i].zw - a;
+  // die zwei nächsten Bahnen: dazwischen geht die Raupe weich in die Nachbarraupe über
+  float d1 = 1e9, d2 = 1e9, u1 = 0.0, u2 = 0.0, w1 = -1.0, w2 = -1.0;
+  for (int i = 0; i < RAUPEN; i++) {
+    vec2 a = uLin[i].xy, ab = uLin[i].zw - a;
     float t = clamp(dot(p - a, ab) / dot(ab, ab), 0.0, 1.0);
     float d = length(p - a - ab * t);
-    if (d < best) { best = d; u = uSegU[i] + t * length(ab); }
+    float uu = uLinU[i] + t * length(ab);
+    if (d < d1) { d2 = d1; u2 = u1; w2 = w1; d1 = d; u1 = uu; w1 = float(i); }
+    else if (d < d2) { d2 = d; u2 = uu; w2 = float(i); }
   }
-  float vorbei = uVor > 0.5 ? uUKopf - u : u - uUKopf;
-  return uStufe * (uLage + smoothstep(-1.8, 1.8, vorbei));
+  float b = 0.5 + 0.5 * smoothstep(0.0, 0.9, d2 - d1);
+  float f = mix(kFertig(p, u2, w2), kFertig(p, u1, w1), b);
+  return uStufe * (uLage + f);
+}
+bool imK(vec2 p) {
+  bool c = false;
+  for (int i = 0; i < 11; i++) {
+    vec2 a = uPoly[i], b = uPoly[(i + 10) % 11];
+    if (((a.y > p.y) != (b.y > p.y)) && (p.x < (b.x - a.x) * (p.y - a.y) / (b.y - a.y) + a.x)) c = !c;
+  }
+  return c;
+}
+float imPunkt(vec2 p) {
+  vec2 q = abs(p - uPunkt.xy) - vec2(uPunkt.z) + uPunkt.w;
+  return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - uPunkt.w;
 }`;
 
+const VERT_DECKEL = `#include <begin_vertex>
+  #ifdef K_DECKEL
+    vKH = kHoehe(transformed.xz);
+    transformed.y = min(vKH, uHMax) - 0.03;
+  #endif
+  vLokal = transformed;`;
+
 function druckStoff(u, farbe, { rau = 0.55, glanz = 1, art = 'kopf' } = {}) {
-  // art: 'kopf' (nichts abschneiden), 'wand' (K-Körper), 'deckel' (offene Oberseite)
+  // art: 'kopf' (nichts abschneiden), 'wand' (Körper des K), 'deckel' (offene Oberseite)
   const m = new THREE.MeshStandardMaterial({
     color: farbe, roughness: rau, metalness: 0, envMapIntensity: glanz, flatShading: art === 'deckel',
   });
@@ -75,18 +114,15 @@ function druckStoff(u, farbe, { rau = 0.55, glanz = 1, art = 'kopf' } = {}) {
     Object.assign(sh.uniforms, u);
     sh.vertexShader = sh.vertexShader
       .replace('#include <common>', '#include <common>' + GLSL_KOPF + '\nvarying float vKH;')
-      .replace('#include <begin_vertex>', `#include <begin_vertex>
-  #ifdef K_DECKEL
-    vKH = kHoehe(transformed.xz);
-    transformed.y = min(vKH, uHMax) - 0.03;
-  #endif
-  vLokal = transformed;`);
+      .replace('#include <begin_vertex>', VERT_DECKEL);
     sh.fragmentShader = sh.fragmentShader
       .replace('#include <common>', '#include <common>' + GLSL_KOPF + '\nvarying float vKH;')
       .replace('void main() {', `void main() {
   #if defined(K_DECKEL)
     float kH = vKH;
     if (kH < 0.02 || kH > uHMax - 0.01) discard;
+    bool kImPunkt = imPunkt(vLokal.xz) < 0.0;
+    if (!kImPunkt && !imK(vLokal.xz)) discard;
   #elif defined(K_WAND)
     float kH = kHoehe(vLokal.xz);
     if (kH < 0.02 || vLokal.y > kH + 0.02) discard;
@@ -99,6 +135,9 @@ function druckStoff(u, farbe, { rau = 0.55, glanz = 1, art = 'kopf' } = {}) {
   float kF = fract(kLin) * 2.0 - 1.0;
   float kWulst = sqrt(max(1.0 - kF * kF, 0.0));`)
       .replace('#include <color_fragment>', `#include <color_fragment>
+  #ifdef K_DECKEL
+    if (kImPunkt) diffuseColor.rgb = uFarbe2;
+  #endif
   diffuseColor.rgb *= mix(1.0, mix(0.72, 1.0, kWulst), kSicht);
   #ifdef K_DECKEL
     // Füllmuster der offenen Lage: diagonale Bahnen, Richtung wechselt je Lage
@@ -106,7 +145,7 @@ function druckStoff(u, farbe, { rau = 0.55, glanz = 1, art = 'kopf' } = {}) {
     float kB = (vLokal.x + kRicht * vLokal.z) / 1.15;
     float kBS = 1.0 - smoothstep(0.25, 0.5, fwidth(kB));
     float kBF = abs(fract(kB) - 0.5) * 2.0;
-    diffuseColor.rgb *= mix(1.0, mix(0.8, 1.0, smoothstep(0.0, 0.6, kBF)), kBS);
+    diffuseColor.rgb *= mix(1.0, mix(0.82, 1.0, smoothstep(0.0, 0.6, kBF)), kBS);
   #endif`)
       .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
   float kSeite = 1.0 - abs(dot(normal, uOben));
@@ -115,7 +154,7 @@ function druckStoff(u, farbe, { rau = 0.55, glanz = 1, art = 'kopf' } = {}) {
       .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
   float kNah = 1.0 - smoothstep(0.0, uLH * 1.6, kH - vLokal.y);
   vec2 kD = vLokal.xz - uKopf.xz;
-  totalEmissiveRadiance += uHot * uHeiss * kNah * (0.05 + 1.6 * exp(-dot(kD, kD) / 36.0));`);
+  totalEmissiveRadiance += uHot * uHeiss * kNah * (0.04 + 1.7 * exp(-dot(kD, kD) / 22.0));`);
   };
   return m;
 }
@@ -128,17 +167,13 @@ function tiefenStoff(u, art) {
     Object.assign(sh.uniforms, u);
     sh.vertexShader = sh.vertexShader
       .replace('#include <common>', '#include <common>' + GLSL_KOPF + '\nvarying float vKH;')
-      .replace('#include <begin_vertex>', `#include <begin_vertex>
-  #ifdef K_DECKEL
-    vKH = kHoehe(transformed.xz);
-    transformed.y = min(vKH, uHMax) - 0.03;
-  #endif
-  vLokal = transformed;`);
+      .replace('#include <begin_vertex>', VERT_DECKEL);
     sh.fragmentShader = sh.fragmentShader
       .replace('#include <common>', '#include <common>' + GLSL_KOPF + '\nvarying float vKH;')
       .replace('void main() {', `void main() {
   #ifdef K_DECKEL
     if (vKH < 0.02 || vKH > uHMax - 0.01) discard;
+    if (imPunkt(vLokal.xz) >= 0.0 && !imK(vLokal.xz)) discard;
   #else
     float kH = kHoehe(vLokal.xz);
     if (kH < 0.02 || vLokal.y > kH + 0.02) discard;
@@ -280,7 +315,7 @@ function achse() {
 
 /* ---------- Kniff-Monogramm und Fahrplan des Kopfes ---------- */
 function monogramm(u, kipp) {
-  const S = 2.6, CX = 18.6, CY = 15.55, TIEFE = 7.6, FASE = 0.7;
+  const S = 2.6, CX = 18.6, CY = 15.55, TIEFE = 6.4, FASE = 0.7;
   const H = TIEFE + 2 * FASE;
   const STUFE = H / LAGEN;
   const P = [[8.8, 4.6], [13.4, 4.6], [13.4, 13.356], [19.4, 9.7], [21.9, 11.9], [16.3, 16.5],
@@ -293,11 +328,12 @@ function monogramm(u, kipp) {
 
   const punkt = new THREE.Shape();
   const [px, py] = zuForm([23, 3.7]), w = 5.4 * S, rr = 1.7 * S;
+  const H2 = Math.PI / 2;
   punkt.moveTo(px + rr, py);
-  punkt.lineTo(px + w - rr, py); punkt.quadraticCurveTo(px + w, py, px + w, py - rr);
-  punkt.lineTo(px + w, py - w + rr); punkt.quadraticCurveTo(px + w, py - w, px + w - rr, py - w);
-  punkt.lineTo(px + rr, py - w); punkt.quadraticCurveTo(px, py - w, px, py - w + rr);
-  punkt.lineTo(px, py - rr); punkt.quadraticCurveTo(px, py, px + rr, py);
+  punkt.lineTo(px + w - rr, py); punkt.absarc(px + w - rr, py - rr, rr, H2, 0, true);
+  punkt.lineTo(px + w, py - w + rr); punkt.absarc(px + w - rr, py - w + rr, rr, 0, -H2, true);
+  punkt.lineTo(px + rr, py - w); punkt.absarc(px + rr, py - w + rr, rr, -H2, -Math.PI, true);
+  punkt.lineTo(px, py - rr); punkt.absarc(px + rr, py - rr, rr, Math.PI, H2, true);
 
   const extr = (form) => {
     const geo = new THREE.ExtrudeGeometry(form, {
@@ -306,15 +342,8 @@ function monogramm(u, kipp) {
     geo.rotateX(-Math.PI / 2); geo.translate(0, FASE, 0);
     return geo;
   };
-  // Oberseite der offenen Lage: fein unterteilt, damit sie der Druckkante folgen kann
-  const flaeche = (form) => {
-    const geo = new THREE.ShapeGeometry(form, 12);
-    geo.rotateX(-Math.PI / 2);
-    geo.deleteAttribute('uv');
-    return new TessellateModifier(0.9, 11).modify(geo);
-  };
 
-  // Die Wände sitzen um die Fase (0,6 mm) weiter außen als der Umriss; der Deckel auch
+  // Umriss für die offene Oberseite: um die Fase (0,6 mm) nach außen versetzt wie die Wände
   const versetzt = (pkt, d) => {
     let fl = 0;
     pkt.forEach((a, i) => { const b = pkt[(i + 1) % pkt.length]; fl += a[0] * b[1] - b[0] * a[1]; });
@@ -329,16 +358,9 @@ function monogramm(u, kipp) {
       return [c[0] + mx * f, c[1] + my * f];
     });
   };
-  const kDeckel = new THREE.Shape();
-  versetzt(P.map(zuForm), 0.6).forEach(([x, y], i) => (i ? kDeckel.lineTo(x, y) : kDeckel.moveTo(x, y)));
-  kDeckel.closePath();
-  const pGeoDeckel = (() => {
-    const g = new THREE.ShapeGeometry(punkt, 12);
-    const fx = px + w / 2, fy = py - w / 2, f = (w + 1.2) / w;
-    g.translate(-fx, -fy, 0); g.scale(f, f, 1); g.translate(fx, fy, 0);
-    g.rotateX(-Math.PI / 2); g.deleteAttribute('uv');
-    return new TessellateModifier(0.9, 11).modify(g);
-  })();
+  versetzt(P.map(lokal), 0.6).forEach(([x, z], i) => u.uPoly.value[i].set(x, z));
+  const pm = lokal([25.7, 6.4]);
+  u.uPunkt.value.set(pm[0], pm[1], 2.7 * S + 0.6, rr + 0.6);
 
   const traeger = new THREE.Group();
   const objekt = new THREE.Group();
@@ -350,83 +372,98 @@ function monogramm(u, kipp) {
   };
   stueck(extr(k), F.creme, 'wand');
   stueck(extr(punkt), F.amber, 'wand');
-  const deckel = [stueck(flaeche(kDeckel), F.creme, 'deckel'), stueck(pGeoDeckel, F.amber, 'deckel')];
+  // offene Oberseite: feines Gitter, das der Shader auf die gedruckte Höhe hebt
+  const gitter = new THREE.PlaneGeometry(53, 64, 118, 142);
+  gitter.rotateX(-Math.PI / 2);
+  const deckel = stueck(gitter, F.creme, 'deckel');
   objekt.position.y = -H / 2;
   traeger.add(objekt); traeger.position.y = H / 2;
 
-  // Bahnen (Mittellinien) und Leerfahrten einer Lage, vorwärts:
-  // Balken von oben nach unten, rüber zum Bein, Bein hoch, Arm raus, rüber zum Punkt, Punkt
-  const b1 = lokal([11.1, 4.6]), b0 = lokal([11.1, 27.4]);
-  const l1 = lokal([20.85, 27.4]), l0 = lokal([14.85, 18.15]);
-  const a0 = lokal([14.85, 14.93]), a1 = lokal([20.65, 10.8]);
-  const d0 = lokal([23.0, 6.4]), d1 = lokal([28.4, 6.4]);
-  const vor = [[b1, b0, true], [b0, l1, false], [l1, l0, true], [l0, a0, false], [a0, a1, true], [a1, d0, false], [d0, d1, true]];
+  // Druckbahnen einer Lage in Vorwärtsrichtung (Einheiten des Monogramms):
+  // Balken runter-hoch-runter, Bein hoch-runter-hoch, Arm raus-zurück, Punkt hin-her-hin
+  const BAHNEN = [
+    [[9.567, 5.35], [9.567, 26.65]], [[11.1, 26.65], [11.1, 5.35]], [[12.633, 5.35], [12.633, 26.65]],
+    [[18.87, 26.77], [13.99, 19.41]], [[14.96, 18.32], [20.44, 26.77]], [[22.0, 26.77], [15.93, 17.22]],
+    [[14.64, 15.39], [20.76, 11.66]], [[19.51, 10.56], [13.81, 14.03]],
+    [[23.75, 8.2], [27.65, 8.2]], [[27.65, 6.4], [23.75, 6.4]], [[23.75, 4.6], [27.65, 4.6]],
+  ].map(([a, b]) => [lokal(a), lokal(b)]);
   let U = 0;
-  const bahnen = [];
-  for (const s of vor) {
-    s.l = Math.hypot(s[1][0] - s[0][0], s[1][1] - s[0][1]);
-    s.u0 = U; if (s[2]) { bahnen.push(s); U += s.l; } s.u1 = U;
-  }
-  bahnen.forEach((s, i) => { u.uSeg.value[i].set(s[0][0], s[0][1], s[1][0], s[1][1]); u.uSegU.value[i] = s.u0; });
+  const bahn = BAHNEN.map(([a, b], i) => {
+    const l = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    const r = { a, b, l, u0: U, u1: U + l, i };
+    U += l;
+    u.uLin.value[i].set(a[0], a[1], b[0], b[1]);
+    u.uLinU.value[i] = r.u0;
+    return r;
+  });
   u.uStufe.value = STUFE; u.uHMax.value = H;
 
-  // Ganzer Fahrweg: Lage 0 vorwärts, Lage 1 rückwärts, ...
-  const weg = [];
-  let L = 0;
+  // Fahrplan: Druckbahnen und Leerfahrten, je Lage hin oder zurück, dazwischen eine Lage höher
+  const A = 0.07, DZ = 0.25;                  // Beschleunigungszeit je Fahrt, Lagenwechsel
+  const plan = [];
+  let ende = null;
   for (let lage = 0; lage < LAGEN; lage++) {
-    const r = lage % 2 === 1;
-    const folge = r ? [...vor].reverse() : vor;
-    for (const s of folge) {
-      weg.push({ a: r ? s[1] : s[0], b: r ? s[0] : s[1], druck: s[2], l: s.l, s: L, lage, vor: !r,
-        u0: r ? s.u1 : s.u0, u1: r ? s.u0 : s.u1 });
-      L += s.l;
+    const vor = lage % 2 === 0;
+    const folge = vor ? bahn : [...bahn].reverse();
+    const y = STUFE * (lage + 1);
+    if (lage > 0) plan.push({ art: 'z', a: ende, b: ende, ya: y - STUFE, yb: y, l: 0, lage, vor, uk: vor ? 0 : U });
+    for (const q of folge) {
+      const a = vor ? q.a : q.b, b = vor ? q.b : q.a;
+      if (ende && (lage === 0 || q !== folge[0])) {
+        const uk = vor ? q.u0 : q.u1;
+        plan.push({ art: 'leer', a: ende, b: a, ya: y, yb: y, l: Math.hypot(a[0] - ende[0], a[1] - ende[1]), lage, vor, uk });
+      }
+      plan.push({ art: 'druck', a, b, ya: y, yb: y, l: q.l, lage, vor, linie: q.i, u0: vor ? q.u0 : q.u1, u1: vor ? q.u1 : q.u0 });
+      ende = b;
     }
   }
-  const RAMPE = 0.7, TEMPO = L / (T_DRUCK - RAMPE);
-  const strecke = (t) => {                    // sanft anfahren und abbremsen
-    const v = (x) => (x < RAMPE ? (x * x) / (2 * RAMPE) : x - RAMPE / 2);
-    const tt = clamp01(t / T_DRUCK) * T_DRUCK;
-    const e = Math.max(0, tt - (T_DRUCK - RAMPE));
-    return TEMPO * (v(tt) - (e * e) / (2 * RAMPE));
-  };
-  const roh = (s) => {
-    s = Math.min(Math.max(s, 0), L - 1e-6);
-    const q = weg.find((x) => s < x.s + x.l) || weg[weg.length - 1];
-    const p = clamp01((s - q.s) / q.l);
-    const hub = q.druck ? 0 : 0.9 * Math.sin(Math.PI * p);       // kleiner Hub bei Leerfahrten
-    return { x: mix(q.a[0], q.b[0], p), z: mix(q.a[1], q.b[1], p), y: STUFE * (q.lage + 1) + hub, q, p };
+  const wege = plan.reduce((s, q) => s + q.l, 0);
+  const fest = plan.reduce((s, q) => s + (q.art === 'z' ? DZ : A), 0);
+  const V = wege / (T_DRUCK - fest);
+  let T = 0;
+  for (const q of plan) { q.d = q.art === 'z' ? DZ : q.l / V + A; q.t = T; T += q.d; }
+  const trapez = (tau, d, l) => {             // anfahren, gleichmäßig fahren, abbremsen
+    if (l <= 0) return 0;
+    const vmax = l / (d - A);
+    if (tau < A) return 0.5 * vmax * tau * tau / A;
+    if (tau < d - A) return vmax * (tau - A / 2);
+    const r = Math.max(0, d - tau);
+    return l - 0.5 * vmax * r * r / A;
   };
   const kopf = new THREE.Vector3();
-  const N = 9, RUND = 3.5;
 
   return {
     objekt: traeger, H, kamZiel: 6, kamWeit: 1,
-    start: () => { const r = roh(0); return [r.x, r.y, r.z]; },
+    start: () => [plan[0].a[0], plan[0].ya, plan[0].a[1]],
     // Druckstand zur Zeit t (Sekunden seit Druckbeginn); liefert die Düsenposition
     drucke(t) {
-      const s = strecke(t);
-      let x = 0, y = 0, z = 0;
-      for (let i = 0; i < N; i++) {           // gleitender Mittelwert: runde Ecken, weiche Wenden
-        const r = roh(s + ((i / (N - 1)) * 2 - 1) * RUND);
-        x += r.x; y += r.y; z += r.z;
+      const tt = Math.min(Math.max(t, 0), T - 1e-6);
+      const q = plan.find((x) => tt < x.t + x.d) || plan[plan.length - 1];
+      const tau = tt - q.t;
+      if (q.art === 'z') {
+        kopf.set(q.a[0], mix(q.ya, q.yb, sanft(tau / q.d)), q.a[1]);
+        u.uUKopf.value = q.uk; u.uLinie.value = -1;
+      } else {
+        const s = trapez(tau, q.d, q.l), p = q.l > 0 ? s / q.l : 1;
+        const hub = q.art === 'leer' ? 0.9 * Math.sin(Math.PI * p) : 0;
+        kopf.set(mix(q.a[0], q.b[0], p), q.ya + hub, mix(q.a[1], q.b[1], p));
+        if (q.art === 'druck') { u.uUKopf.value = mix(q.u0, q.u1, p); u.uLinie.value = q.linie; } else { u.uUKopf.value = q.uk; u.uLinie.value = -1; }
       }
-      const { q, p } = roh(s);
       u.uLage.value = q.lage;
       u.uVor.value = q.vor ? 1 : 0;
-      u.uUKopf.value = q.druck ? mix(q.u0, q.u1, p) : q.u0;
       u.uFertig.value = 0;
-      for (const d of deckel) d.visible = true;
-      return kopf.set(x / N, y / N, z / N);
+      deckel.visible = true;
+      return kopf;
     },
     leer() {
-      u.uLage.value = 0; u.uVor.value = 1; u.uUKopf.value = -100; u.uFertig.value = 0;
-      for (const d of deckel) d.visible = false;
+      u.uLage.value = 0; u.uVor.value = 1; u.uUKopf.value = -100; u.uLinie.value = -1; u.uFertig.value = 0;
+      deckel.visible = false;
     },
     fertig() {
       u.uFertig.value = 1;
-      for (const d of deckel) d.visible = false;
+      deckel.visible = false;
     },
-    anteil(t) { return clamp01(strecke(t) / L); },
+    anteil(t) { return clamp01(t / T_DRUCK); },
     schluss(t) {
       const p = sanft((t - T_AUF) / D_AUF);
       traeger.position.y = H / 2 + p * 24;
@@ -436,6 +473,7 @@ function monogramm(u, kipp) {
       traeger.rotation.y = Math.sin(q * Math.PI * 2) * 0.16 * (1 - q);
       return p;
     },
+    info: { V, wege, T },
   };
 }
 
@@ -476,7 +514,7 @@ export function starte(box, { debug = false } = {}) {
   const KAM_WINKEL = THREE.MathUtils.degToRad(18);
 
   // Teil
-  const uTeil = uniformSatz(1.125);
+  const uTeil = uniformSatz(1.3);
   const teil = monogramm(uTeil, Math.PI / 2 - KAM_HOEHE);
   szene.add(teil.objekt);
 

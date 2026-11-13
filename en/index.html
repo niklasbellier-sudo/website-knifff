@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="k-booting">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -15,7 +15,7 @@
 <link rel="preload" href="/assets/fonts/archivo-800-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-tight-400-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/kniff-fonts.css">
-<link rel="stylesheet" href="/css/kniff.css?v=203">
+<link rel="stylesheet" href="/css/kniff.css?v=205">
 <link rel="canonical" href="https://kniff.shop/en/">
 <link rel="alternate" hreflang="de" href="https://kniff.shop/">
 <link rel="alternate" hreflang="en" href="https://kniff.shop/en/">
@@ -61,6 +61,15 @@
 </script>
 </head>
 <body class="k k-dark k-home" data-welt="idee" data-k-claim="3D printing from Berlin: two ways to your part." data-k-alt="/">
+<!-- Ladeanzeige: Wortmarke glüht, Balken füllt mit Bildern und Schriften -->
+<div class="k-boot" role="status" aria-label="Page is loading">
+  <div class="k-boot__inner" aria-hidden="true">
+    <div class="k-boot__logo"><img class="k-boot__mark" src="/assets/kniff-wortmarke-hell.png?v=3" alt="" width="439" height="188"></div>
+    <div class="k-boot__row"><span>Workbench</span><span><span class="k-boot__pct">000</span> %</span></div>
+    <div class="k-boot__track"><div class="k-boot__bar"></div></div>
+  </div>
+</div>
+<script>setTimeout(function(){var h=document.documentElement;if(h.classList.contains('k-booting')){h.classList.remove('k-booting');h.classList.add('k-booted');}},5000);</script>
 <!-- k:top -->
 <a class="k-skip" href="#inhalt">Skip to content</a>
 <div class="k-top">
@@ -137,7 +146,7 @@
             </svg>
           </div>
           <div class="k-printhero k-nur-handy" data-k-print>
-            <img class="k-ph__poster" src="/assets/druck3d-k.webp" alt="" width="700" height="480" decoding="async">
+            <video class="k-ph__video" src="/assets/druck-k.mp4?v=1" poster="/assets/druck3d-k.webp?v=3" width="1088" height="800" muted playsinline preload="metadata" aria-hidden="true"></video>
           </div>
         </div>
         <div class="k-door__txt">
@@ -283,6 +292,6 @@
 </footer>
 <script src="/js/kniff.js?v=200" defer></script>
 <!-- /k:foot -->
-<script src="/js/kniff-welt.js?v=5"></script>
+<script src="/js/kniff-welt.js?v=7"></script>
 </body>
 </html>
