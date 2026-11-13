@@ -595,10 +595,40 @@ main:focus { outline: none; }
 .k-printhero { display: none; }
 @media (max-width: 820px) {
   .k-home .k-printhero { display: block; position: relative; width: 100%; height: 100%; }
-  .k-printhero .k-ph__poster { display: block; width: 100%; height: 100%; object-fit: contain; transition: opacity 300ms ease; }
-  .k-printhero .k-ph__canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%;
-    -webkit-mask-image: radial-gradient(ellipse 66% 74% at 50% 40%, #000 62%, transparent 100%);
-    mask-image: radial-gradient(ellipse 66% 74% at 50% 40%, #000 62%, transparent 100%); }
-  .k-ph--laedt .k-ph__poster { opacity: 0; }
-  .k-ph--3d .k-ph__poster { display: none; }
+  .k-printhero .k-ph__video { display: block; width: 100%; height: 100%; object-fit: cover;
+    -webkit-mask-image: radial-gradient(ellipse 66% 74% at 50% 42%, #000 62%, transparent 100%);
+    mask-image: radial-gradient(ellipse 66% 74% at 50% 42%, #000 62%, transparent 100%); }
+}
+}
+
+/* ---- Ladeanzeige der Startseite: Wortmarke mit Glühen und Lichtstreifen, Balken mit echtem Fortschritt ---- */
+.k-boot { position: fixed; inset: 0; z-index: 200; background: var(--ink-0); display: grid; place-items: center;
+  transition: opacity 620ms ease, visibility 620ms; }
+html.k-booted .k-boot { opacity: 0; visibility: hidden; pointer-events: none; }
+html.k-booting body { overflow: hidden; }
+.k-boot__inner { width: min(78vw, 30rem); color: var(--amber); }
+.k-boot__logo { position: relative; width: min(62vw, 17rem); }
+.k-boot__mark { display: block; width: 100%; height: auto;
+  filter: drop-shadow(0 0 5px rgba(242, 166, 59, .22)); animation: k-boot-glow 2.6s ease-in-out infinite; }
+@keyframes k-boot-glow {
+  0%, 100% { filter: drop-shadow(0 0 5px rgba(242, 166, 59, .22)) drop-shadow(0 0 1px rgba(242, 166, 59, .4)); }
+  50% { filter: drop-shadow(0 0 26px rgba(242, 166, 59, .6)) drop-shadow(0 0 8px rgba(242, 166, 59, .75)); }
+}
+.k-boot__logo::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 40%, #f8d19a 47%, rgba(255, 255, 255, .92) 50%, #f8d19a 53%, transparent 60%);
+  -webkit-mask: url(../assets/kniff-wortmarke-hell.png?v=3) no-repeat 0 0 / 100% 100%;
+  mask: url(../assets/kniff-wortmarke-hell.png?v=3) no-repeat 0 0 / 100% 100%;
+  mix-blend-mode: screen; transform: translateX(-130%); opacity: 0; animation: k-boot-sweep 2.9s ease-in-out infinite; }
+@keyframes k-boot-sweep {
+  0%, 52% { transform: translateX(-130%); opacity: 0; }
+  56%, 78% { opacity: 1; }
+  82%, 100% { transform: translateX(130%); opacity: 0; }
+}
+.k-boot__row { display: flex; justify-content: space-between; align-items: baseline; margin-top: 28px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--cream-mute); }
+.k-boot__track { margin-top: 10px; height: 2px; width: 100%; background: var(--steel); overflow: hidden; }
+.k-boot__bar { height: 100%; width: 0%; background: var(--amber); transition: width 180ms linear; }
+@media (prefers-reduced-motion: reduce) {
+  .k-boot__mark { animation: none; filter: drop-shadow(0 0 14px rgba(242, 166, 59, .42)); }
+  .k-boot__logo::after { display: none; }
 }
